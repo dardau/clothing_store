@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Контакты магазина [НАЗВАНИЕ МАГАЗИНА] и форма записи на примерку.">
+  <meta name="author" content="[ИМЯ СТУДЕНТА 3]">
+  <title>Контакты и примерка — [НАЗВАНИЕ МАГАЗИНА]</title>
+</head>
+<body>
+  <!-- Автор страницы: [ИМЯ СТУДЕНТА 3] -->
+  <!-- Комментарий: форма записи на примерку ничего не отправляет — серверная часть
+       появится позже в курсе, здесь только фронтенд-разметка. -->
+
+  <header>
+    <h1>[НАЗВАНИЕ МАГАЗИНА]</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="colophon.html">Об этом сайте</a></li>
+      <li><a href="assortment.html">Ассортимент</a></li>
+      <li><a href="order.html">Оформить заказ</a></li>
+      <li><a href="brands.html">Бренды и поставщики</a></li>
+      <li><a href="delivery.html">Доставка и оплата</a></li>
+      <li><a href="reviews.html">Отзывы</a></li>
+      <li><a href="contacts.html">Контакты и примерка</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Контакты и запись на примерку</h2>
+
+    <p>
+      [TODO — ЗАМЕНИТЕ: 150–250 слов собственного текста о том, как удобнее всего связаться
+      с магазином, где именно он находится (ориентиры), какой у него режим работы и почему
+      стоит записаться на примерку заранее, а не приходить без записи.]
+    </p>
+
+    <section>
+      <h3>Как нас найти</h3>
+
+      <article>
+        <h4>Адрес и часы работы</h4>
+        <p>
+          Адрес: <strong>[TODO: реальный адрес]</strong>. Часы работы: <em>[TODO: например, 10:00&ndash;20:00, без выходных]</em>.
+        </p>
+      </article>
+
+      <aside>
+        <h4>Как добраться</h4>
+        <p>Ближайшая остановка общественного транспорта &mdash; <mark>[TODO: название остановки]</mark>, 3&nbsp;минуты пешком.</p>
+      </aside>
+
+      <figure>
+        <img src="images/TODO-facade.jpg" alt="[TODO: реальное фото фасада/входа в магазин, сделанное вами]">
+        <figcaption>Вход в магазин со стороны улицы.</figcaption>
+      </figure>
+    </section>
+
+    <section id="rezhim">
+      <h3>Режим работы по дням</h3>
+      <table>
+        <caption>Режим работы магазина [НАЗВАНИЕ МАГАЗИНА]</caption>
+        <thead>
+          <tr>
+            <th scope="col">День недели</th>
+            <th scope="col">Время работы</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Пн&ndash;Пт</th>
+            <td>[TODO]</td>
+          </tr>
+          <tr>
+            <th scope="row">Сб&ndash;Вс</th>
+            <td>[TODO]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ol>
+        <li>Выберите удобное время в форме ниже</li>
+        <li>Дождитесь подтверждения по телефону</li>
+        <li>Приходите на примерку с документом, удостоверяющим личность<sup>1</sup></li>
+      </ol>
+
+      <ul>
+        <li>Контакты
+          <ul>
+            <li>Телефон отдела продаж</li>
+            <li>Email для оптовых клиентов</li>
+          </ul>
+        </li>
+      </ul>
+
+      <dl>
+        <dt>Примерка</dt>
+        <dd>Бесплатная услуга, доступная по предварительной записи.</dd>
+        <dt>Резерв товара</dt>
+        <dd>Удержание выбранной вещи на складе в течение 24 часов.</dd>
+      </dl>
+    </section>
+
+    <p>
+      <sup>1</sup><abbr title="документ, удостоверяющий личность">Уд. личности</abbr> нужен только для
+      примерки эксклюзивных моделей &mdash; для обычной примерки достаточно записи. Найти нас можно
+      также на <a href="https://maps.google.com/TODO" target="_blank" rel="noopener noreferrer">Google Картах</a>.
+    </p>
+
+    <p>
+      Напишите нам на <a href="mailto:TODO@example.com">TODO@example.com</a> или позвоните
+      по номеру <a href="tel:+7000000000">+7&nbsp;(000)&nbsp;000&nbsp;00&nbsp;00</a> &mdash;
+      <b>мы всегда рады помочь</b> с выбором, <i>даже если вы не уверены в размере</i>.
+      <span title="обычно в течение 15 минут в рабочее время">Отвечаем быстро</span>.
+    </p>
+    <!-- Комментарий: span используется только чтобы прикрепить title-подсказку к
+         короткой фразе внутри абзаца — отдельного семантического тега для этого нет. -->
+
+    <form action="#" method="post">
+      <p><small>Форма учебная: запись на примерку никуда не отправляется, сервера нет.</small></p>
+
+      <fieldset>
+        <legend>Запись на примерку</legend>
+
+        <p>
+          <label for="c-name">Имя*</label><br>
+          <input type="text" id="c-name" name="c-name" placeholder="Введите имя" required>
+        </p>
+
+        <p>
+          <label for="c-email">Email*</label><br>
+          <input type="email" id="c-email" name="c-email" placeholder="example@mail.com" required>
+        </p>
+
+        <p>
+          <label for="c-phone">Телефон*</label><br>
+          <input type="tel" id="c-phone" name="c-phone" placeholder="+7 700 000 00 00" required>
+        </p>
+
+        <p>
+          <label for="c-date">Дата примерки</label><br>
+          <input type="date" id="c-date" name="c-date">
+        </p>
+
+        <p>
+          <label for="c-guests">Количество человек</label><br>
+          <input type="number" id="c-guests" name="c-guests" min="1" max="5" value="1">
+        </p>
+
+        <p>
+          <label for="c-category">Категория одежды</label><br>
+          <select id="c-category" name="c-category">
+            <option value="men">Мужская</option>
+            <option value="women">Женская</option>
+            <option value="kids">Детская</option>
+          </select>
+        </p>
+
+        <fieldset>
+          <legend>Предпочтительное время</legend>
+          <p>
+            <input type="radio" id="time-morning" name="time-slot" value="morning" checked>
+            <label for="time-morning">Утро</label>
+          </p>
+          <p>
+            <input type="radio" id="time-evening" name="time-slot" value="evening">
+            <label for="time-evening">Вечер</label>
+          </p>
+        </fieldset>
+
+        <p>
+          <input type="checkbox" id="c-agree" name="c-agree" required>
+          <label for="c-agree">Согласен(-на) на обработку персональных данных*</label>
+        </p>
+
+        <p>
+          <label for="c-comment">Пожелания к примерке</label><br>
+          <textarea id="c-comment" name="c-comment" placeholder="Например: интересует конкретная модель платья"></textarea>
+        </p>
+      </fieldset>
+
+      <p>
+        <button type="submit">Записаться</button>
+        <button type="reset">Очистить форму</button>
+      </p>
+    </form>
+
+    <p><a href="#rezhim">&uarr; К режиму работы</a> &nbsp;|&nbsp; <a href="index.html">&uarr; На главную</a></p>
+  </main>
+
+  <footer>
+    <p>Адрес: [TODO: реальный адрес] &mdash; Телефон: <a href="tel:+7000000000">[TODO: реальный телефон]</a></p>
+    <p>&copy; 2026 [НАЗВАНИЕ МАГАЗИНА]. Все права защищены.</p>
+  </footer>
+</body>
+</html>
