@@ -2,24 +2,6 @@
 
 ## Обязательные на каждой странице
 
-| Тег/атрибут | Файл | Строка | Автор |
-|---|---|---|---|
-| doctype | index.html | 1 | TODO |
-| lang | index.html | 2 | TODO |
-| charset | index.html | 4 | TODO |
-| viewport | index.html | 5 | TODO |
-| meta description | index.html | 6 | TODO |
-| meta author | index.html | 7 | TODO |
-| title (уникальный) | index.html | 8 | TODO |
-| h1 (один на страницу) | index.html | TODO | TODO |
-| header | index.html | TODO | TODO |
-| nav | index.html | TODO | TODO |
-| main | index.html | TODO | TODO |
-| footer | index.html | TODO | TODO |
-| 2 комментария "почему" | index.html | TODO | TODO |
-
-*(повторите эту секцию для каждого из 8 файлов — doctype/lang/charset/viewport/meta/title/h1/header/nav/main/footer/комментарии обязательны на всех страницах)*
-
 |Tag/attribute              |File        |Line          |Author  |
 |---------------------------|------------|--------------|--------|
 |doctype                    |catalog.html|1             |Zhansaya|
@@ -177,34 +159,3 @@
 |div + comment                      |about.html |168, 171–172     |Dariya |
 |4 different HTML entities          |about.html |106 (&mdash;), 125 (&ndash;/&#8376;), 143 (&nbsp;), 165 (&rsquo;)|Dariya|
 
-## Отзывы и контакты — [ИМЯ СТУДЕНТА 3]
-
-| Тег | Файл | Строка | Автор |
-|---|---|---|---|
-| section / article / aside / figure+figcaption | reviews.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| table + caption + thead + tbody + th scope | reviews.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| вложенный список / ol / dl | reviews.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| внешняя ссылка target+rel | reviews.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| 2 ссылки на id на одной странице | reviews.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| 3 изображения с alt | reviews.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| strong / em / mark / sup / sub | reviews.html / contacts.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| 2 abbr с title | reviews.html / contacts.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| div + span + комментарии | reviews.html / contacts.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| 4 разные HTML-сущности | reviews.html / contacts.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| b / i | contacts.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| blockquote (реальная цитата) + cite / inline q | reviews.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| mailto / tel | contacts.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| form (полная спецификация, см. order.html) | contacts.html | TODO | [ИМЯ СТУДЕНТА 3] |
-| комментарий "форма не отправляет данные" | contacts.html | TODO | [ИМЯ СТУДЕНТА 3] |
-
-## Colophon (общая страница)
-
-| Тег | Файл | Строка | Автор |
-|---|---|---|---|
-| code | colophon.html | TODO | TODO |
-| pre | colophon.html | TODO | TODO |
-| kbd | colophon.html | TODO | TODO |
-| samp | colophon.html | TODO | TODO |
-| hr | colophon.html | TODO | TODO |
-| br | colophon.html | TODO | TODO |
-| table (распределение работы) | colophon.html | TODO | TODO |
