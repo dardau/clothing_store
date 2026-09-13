@@ -1,7 +1,4 @@
-# Чек-лист тегов — Assignment 1
 
-Заполните таблицу: файл, номер строки, кто написал. Отсутствующий или неверный номер строки = пункт не засчитан.
-Номера строк ниже условные (TODO) — обновите их после того, как впишете реальный текст и данные (текст меняет нумерацию строк!).
 
 ## Обязательные на каждой странице
 
@@ -23,47 +20,96 @@
 
 *(повторите эту секцию для каждого из 8 файлов — doctype/lang/charset/viewport/meta/title/h1/header/nav/main/footer/комментарии обязательны на всех страницах)*
 
-## Ассортимент и заказ — [ИМЯ СТУДЕНТА 1]
+|Tag/attribute              |File        |Line          |Author  |
+|---------------------------|------------|--------------|--------|
+|doctype                    |catalog.html|1             |Zhansaya|
+|lang                       |catalog.html|2             |Zhansaya|
+|charset                    |catalog.html|4             |Zhansaya|
+|viewport                   |catalog.html|5             |Zhansaya|
+|meta description           |catalog.html|6             |Zhansaya|
+|meta author                |catalog.html|7             |Zhansaya|
+|title (unique)             |catalog.html|8             |Zhansaya|
+|h1                         |catalog.html|16            |Zhansaya|
+|header                     |catalog.html|15            |Zhansaya|
+|nav                        |catalog.html|19            |Zhansaya|
+|main                       |catalog.html|33            |Zhansaya|
+|footer                     |catalog.html|182           |Zhansaya|
+|2 comments explaining "why"|catalog.html|11–13, 173–174|Zhansaya|
+|Tag                                       |File        |Line                              |Author  |
+|------------------------------------------|------------|----------------------------------|--------|
+|section (id="categories")                 |catalog.html|85                                |Zhansaya|
+|article                                   |catalog.html|87                                |Zhansaya|
+|nested list                               |catalog.html|89–102                            |Zhansaya|
+|aside                                     |catalog.html|106                               |Zhansaya|
+|figure + figcaption                       |catalog.html|111, 113                          |Zhansaya|
+|2 images with alt                         |catalog.html|112, 117                          |Zhansaya|
+|table + caption + thead + tbody + th scope|catalog.html|124–132                           |Zhansaya|
+|ol with attribute (start)                 |catalog.html|153                               |Zhansaya|
+|abbr with title                           |catalog.html|154                               |Zhansaya|
+|link to order.html                        |catalog.html|156                               |Zhansaya|
+|dl                                        |catalog.html|159                               |Zhansaya|
+|external link target+rel                  |catalog.html|169                               |Zhansaya|
+|em / strong                               |catalog.html|170                               |Zhansaya|
+|div + comment                             |catalog.html|173–177                           |Zhansaya|
+|2 links to an id on the same page         |catalog.html|83, 179                           |Zhansaya|
+|mark                                      |catalog.html|108                               |Zhansaya|
+|4 different HTML entities                 |catalog.html|129 (₸), 108 (—), 179 (↑), 184 (©)|Zhansaya|
 
-| Тег | Файл | Строка | Автор |
-|---|---|---|---|
-| section | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| article | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| aside | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| figure + figcaption | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| table + caption + thead + tbody + th scope | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| вложенный список | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| ol с атрибутом (start) | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| dl (список определений) | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| внешняя ссылка target+rel | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| 2 ссылки на id на одной странице | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| 3 изображения с alt (2 на этой стр. + 1 на order.html) | assortment.html / order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| strong / em / mark | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| sub или sup | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| 2 abbr с title | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| div + комментарий | assortment.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| 4 разные HTML-сущности | assortment.html / order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| b / i / small | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| blockquote (реальная цитата) + cite | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| inline q | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| mailto ссылка | order.html / index.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| tel ссылка | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| span + комментарий | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| form: method, action | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| fieldset + legend | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| label + id | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| input text/email/tel/number/date | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| radio group | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| checkbox | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| select с options | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| textarea | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| required / placeholder | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| submit / reset | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-| комментарий "форма не отправляет данные" | order.html | TODO | [ИМЯ СТУДЕНТА 1] |
-
+|Tag/attribute              |File         |Line        |Author  |
+|---------------------------|-------------|------------|--------|
+|doctype                    |contacts.html|1           |Zhansaya|
+|lang                       |contacts.html|2           |Zhansaya|
+|charset                    |contacts.html|4           |Zhansaya|
+|viewport                   |contacts.html|5           |Zhansaya|
+|meta description           |contacts.html|6           |Zhansaya|
+|meta author                |contacts.html|7           |Zhansaya|
+|title (unique)             |contacts.html|8           |Zhansaya|
+|h1                         |contacts.html|16          |Zhansaya|
+|header                     |contacts.html|15          |Zhansaya|
+|nav                        |contacts.html|18          |Zhansaya|
+|main                       |contacts.html|32          |Zhansaya|
+|footer                     |contacts.html|241         |Zhansaya|
+|2 comments explaining "why"|contacts.html|11–13, 56–57|Zhansaya|
+|Tag                               |File         |Line            |Author  |
+|----------------------------------|-------------|----------------|--------|
+|2 links to an id on the same page |contacts.html|34, 238         |Zhansaya|
+|section                           |contacts.html|35              |Zhansaya|
+|article                           |contacts.html|38              |Zhansaya|
+|aside                             |contacts.html|46              |Zhansaya|
+|figure + figcaption               |contacts.html|51, 53          |Zhansaya|
+|div + comment                     |contacts.html|56–58           |Zhansaya|
+|mailto                            |contacts.html|61              |Zhansaya|
+|tel                               |contacts.html|60              |Zhansaya|
+|external link target+rel          |contacts.html|62, 118         |Zhansaya|
+|hr                                |contacts.html|67              |Zhansaya|
+|table + caption + thead + tbody   |contacts.html|71–73, 79       |Zhansaya|
+|ol with attribute (start)         |contacts.html|92              |Zhansaya|
+|sup                               |contacts.html|95, 116         |Zhansaya|
+|dl                                |contacts.html|107             |Zhansaya|
+|abbr with title                   |contacts.html|116             |Zhansaya|
+|blockquote + cite                 |contacts.html|120, 123        |Zhansaya|
+|inline q                          |contacts.html|126             |Zhansaya|
+|b / i                             |contacts.html|127             |Zhansaya|
+|span + comment                    |contacts.html|128             |Zhansaya|
+|main text sections (150–250 words)|contacts.html|130–163         |Zhansaya|
+|form: method, action              |contacts.html|169             |Zhansaya|
+|comment "form does not submit"    |contacts.html|11–12           |Zhansaya|
+|fieldset + legend                 |contacts.html|172–173, 209–210|Zhansaya|
+|label + id (name)                 |contacts.html|176             |Zhansaya|
+|input text                        |contacts.html|177             |Zhansaya|
+|input email                       |contacts.html|182             |Zhansaya|
+|input tel                         |contacts.html|187             |Zhansaya|
+|input date                        |contacts.html|192             |Zhansaya|
+|input number                      |contacts.html|197             |Zhansaya|
+|select with options               |contacts.html|202             |Zhansaya|
+|radio group                       |contacts.html|212, 216        |Zhansaya|
+|checkbox                          |contacts.html|222             |Zhansaya|
+|textarea                          |contacts.html|228             |Zhansaya|
+|required / placeholder            |contacts.html|177             |Zhansaya|
+|submit / reset                    |contacts.html|233–234         |Zhansaya|
 ## Бренды и доставка — [ИМЯ СТУДЕНТА 2]
 
-*(та же структура пунктов, что и выше, применительно к brands.html / delivery.html — заполните файлы и строки)*
+
 
 | Тег | Файл | Строка | Автор |
 |---|---|---|---|
