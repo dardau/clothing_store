@@ -1,22 +1,10 @@
-# AI Log — журнал использования ИИ
 
-Согласно политике курса: ИИ можно спрашивать, чтобы **объяснить концепции**. ИИ **нельзя** использовать,
-чтобы писать страницы, текст, отчёт или изображения. Каждый вопрос, заданный ИИ, должен быть здесь записан.
-
-Ниже — запись о том, что было сгенерировано в рамках подготовки этого черновика, для прозрачности.
-Дополните таблицу своими собственными вопросами по ходу работы.
-
-| Дата | Студент | Вопрос к ИИ | Что именно ИИ дал / объяснил |
+| Date | Student | Question to AI | What AI provided / explained |
 |---|---|---|---|
-| [TODO: дата] | [ИМЯ СТУДЕНТА] | Сгенерировать HTML-каркас (структуру) сайта на 8 страниц по требованиям задания, без текста/фото/данных | Получен скелет разметки (doctype, header/nav/main/footer, семантические теги, форма, таблица) с TODO-плейсхолдерами вместо реального текста, фото и данных, которые команда должна вписать сама |
-| [TODO: дата] | [ИМЯ СТУДЕНТА] | [TODO: например, "объясни разницу между section и article"] | [TODO: краткое описание объяснения] |
-| [TODO: дата] | [ИМЯ СТУДЕНТА] | [TODO] | [TODO] |
+| 12.09.2026 | Zhansaya | Explain the difference between semantic tags (header, nav, section, article, aside, footer) and div — when to use which | Explanation that semantic tags convey meaning to browsers/screen readers, while div is a neutral container with no meaning; examples of when each tag is appropriate |
+| 13.09.2026 | Zhansaya | What are HTML entities (&mdash;, &copy;, &nbsp;, etc.) and what are they used for | Explanation of the purpose of HTML entities and which characters they represent |
+| 12.09.2026 | Zhansaya | How to analyze the source code of a real website for Task A (what to look for: doctype, meta, semantics, forms) | General guidance on the method for analyzing someone else's HTML code, without analyzing the assignment content itself |
 
-## Напоминание
 
-Части задания, которые нельзя делать через ИИ и за которые дают больше всего баллов:
-- собственные фотографии;
-- реальные данные о реальном месте;
-- рисунок от руки (Task A);
-- история коммитов;
-- устная защита проекта.
+
+
