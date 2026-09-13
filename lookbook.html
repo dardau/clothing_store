@@ -172,6 +172,38 @@
 
     <p><a href="#razmery">&uarr; Back to the size chart</a> &nbsp;|&nbsp; <a href="index.html">&uarr; Back to Home</a>
     </p>
+    <section>
+      <h3>Ask About an Item</h3>
+      <form method="post" action="#">
+        <fieldset>
+          <legend>Check availability</legend>
+          <label for="item-name">Item name</label>
+          <input type="text" id="item-name" name="item-name" placeholder="e.g. grey mini skirt" required>
+
+          <label for="size-select">Size</label>
+          <select id="size-select" name="size-select">
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+          </select>
+          <label for="color">Preferred color</label>
+          <input type="text" id="color" name="color" placeholder="e.g. grey">
+
+          <p>Notify me by:</p>
+          <input type="radio" id="notify-email" name="notify" value="email">
+          <label for="notify-email">Email</label>
+          <input type="radio" id="notify-phone" name="notify" value="phone">
+          <label for="notify-phone">Phone</label>
+          <label for="customer-email">Your email</label>
+          <input type="email" id="customer-email" name="customer-email" required>
+
+          <label for="comment">Comment</label>
+          <textarea id="comment" name="comment" placeholder="Anything else you'd like to add"></textarea>
+          <button type="submit">Send request</button>
+          <button type="reset">Clear</button>
+        </fieldset>
+      </form>
+    </section>
   </main>
 
   <footer>
@@ -179,38 +211,7 @@
         href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
-  <section>
-    <h3>Ask About an Item</h3>
-    <form method="post" action="#">
-      <fieldset>
-        <legend>Check availability</legend>
-        <label for="item-name">Item name</label>
-        <input type="text" id="item-name" name="item-name" placeholder="e.g. grey mini skirt" required>
 
-        <label for="size-select">Size</label>
-        <select id="size-select" name="size-select">
-          <option value="s">S</option>
-          <option value="m">M</option>
-          <option value="l">L</option>
-        </select>
-        <label for="color">Preferred color</label>
-        <input type="text" id="color" name="color" placeholder="e.g. grey">
-
-        <p>Notify me by:</p>
-        <input type="radio" id="notify-email" name="notify" value="email">
-        <label for="notify-email">Email</label>
-        <input type="radio" id="notify-phone" name="notify" value="phone">
-        <label for="notify-phone">Phone</label>
-        <label for="customer-email">Your email</label>
-        <input type="email" id="customer-email" name="customer-email" required>
-
-        <label for="comment">Comment</label>
-        <textarea id="comment" name="comment" placeholder="Anything else you'd like to add"></textarea>
-        <button type="submit">Send request</button>
-        <button type="reset">Clear</button>
-      </fieldset>
-    </form>
-  </section>
 </body>
 
 </html>
