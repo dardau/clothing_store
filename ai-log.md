@@ -9,6 +9,7 @@
 | 13.09.2026 | Dariya | What is the difference between `<blockquote>` and inline `<q>`; what is `<cite>` inside a `<blockquote>` supposed to indicate | Explanation that `<blockquote>` marks a longer quoted passage as someone else's words while `<q>` is for a short inline quote, and that `<cite>` names the source/title being quoted from |
 | 13.09.2026 | Dariya | What actually happens when a form is submitted with `action="#"` and no server behind it | Explanation that `action="#"` just points back to the current page, so the browser tries to send the data but there is no real recipient — the page just reloads itself and nothing is actually saved or sent anywhere |
 | 13.09.2026 | Alina | Why did you use `<div>` elements in this part of the website instead of semantic HTML tags? | Explanation that `<div>` is used as a general-purpose container for grouping content when no specific semantic HTML tag fits; in this case the extra `<div>` wrapper around the menu doesn't add any semantic meaning on its own |
+| 13.09.2026 | Alina | Why did you use semantic tags such as `<section>`, `<article>`, and `<aside>` instead of using only `<div>` elements? | Explanation that semantic tags describe the meaning and purpose of the content — in lookbook.html, `<section>` groups the product categories, `<article>` is used for separate categories, and `<aside>` holds additional sizing information, which makes the page structure clearer |
 
 
 
