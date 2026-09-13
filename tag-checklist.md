@@ -107,27 +107,75 @@
 |textarea                          |contacts.html|228             |Zhansaya|
 |required / placeholder            |contacts.html|177             |Zhansaya|
 |submit / reset                    |contacts.html|233–234         |Zhansaya|
-## Бренды и доставка — [ИМЯ СТУДЕНТА 2]
 
+## Order and About — Dariya
 
+|Tag/attribute              |File       |Line  |Author |
+|---------------------------|-----------|------|-------|
+|doctype                    |order.html |1     |Dariya |
+|lang                       |order.html |2     |Dariya |
+|charset                    |order.html |4     |Dariya |
+|viewport                   |order.html |5     |Dariya |
+|meta description           |order.html |6     |Dariya |
+|meta author                |order.html |7     |Dariya |
+|title (unique)             |order.html |8     |Dariya |
+|h1                         |order.html |16    |Dariya |
+|header                     |order.html |15    |Dariya |
+|nav                        |order.html |19    |Dariya |
+|main                       |order.html |31    |Dariya |
+|footer                     |order.html |159   |Dariya |
+|2 comments explaining "why"|order.html |12, 74|Dariya |
+|doctype                    |about.html |1     |Dariya |
+|lang                       |about.html |2     |Dariya |
+|charset                    |about.html |4     |Dariya |
+|viewport                   |about.html |5     |Dariya |
+|meta description           |about.html |6     |Dariya |
+|meta author                |about.html |7     |Dariya |
+|title (unique)             |about.html |8     |Dariya |
+|h1                         |about.html |16    |Dariya |
+|header                     |about.html |15    |Dariya |
+|nav                        |about.html |19    |Dariya |
+|main                       |about.html |31    |Dariya |
+|footer                     |about.html |177   |Dariya |
+|2 comments explaining "why"|about.html |12    |Dariya |
 
-| Тег | Файл | Строка | Автор |
-|---|---|---|---|
-| section / article / aside / figure+figcaption | brands.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| table + caption + thead + tbody + th scope | brands.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| вложенный список / ol reversed / dl | brands.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| внешняя ссылка target+rel | brands.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| 2 ссылки на id на одной странице | brands.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| 3 изображения с alt | brands.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| strong / em / mark / sup | brands.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| 2 abbr с title | brands.html / delivery.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| div + span + комментарии | brands.html / delivery.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| 4 разные HTML-сущности | brands.html / delivery.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| b / i / small | delivery.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| blockquote (реальная цитата) + cite / inline q | delivery.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| mailto / tel | delivery.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| form (полная спецификация, см. order.html) | delivery.html | TODO | [ИМЯ СТУДЕНТА 2] |
-| комментарий "форма не отправляет данные" | delivery.html | TODO | [ИМЯ СТУДЕНТА 2] |
+|Tag                                |File       |Line             |Author|
+|------------------------------------|-----------|-----------------|-------|
+|figure + figcaption (order)        |order.html |61, 63           |Dariya |
+|3 images with alt (1 order + 2 about)|order.html / about.html|62, 81, 86|Dariya|
+|mailto                             |order.html |67               |Dariya |
+|tel                                |order.html |68, 160          |Dariya |
+|blockquote (real quote) + cite attr|order.html |52               |Dariya |
+|cite element                       |order.html |53               |Dariya |
+|inline q                           |order.html |56               |Dariya |
+|hr                                  |order.html |59               |Dariya |
+|b / i                              |order.html |69               |Dariya |
+|small                               |order.html |77               |Dariya |
+|abbr with title                    |order.html |71               |Dariya |
+|span + comment                     |order.html |151, 154–156     |Dariya |
+|form: method, action               |order.html |76               |Dariya |
+|comment "form does not submit"     |order.html |12–13            |Dariya |
+|fieldset + legend                  |order.html |79–80, 121–122   |Dariya |
+|label + id                         |order.html |83, 88, 93       |Dariya |
+|input text/email/tel/number/date   |order.html |84, 89, 94, 103, 108|Dariya|
+|radio group                        |order.html |124, 128         |Dariya |
+|checkbox                           |order.html |139              |Dariya |
+|select with options                |order.html |113              |Dariya |
+|textarea                           |order.html |135              |Dariya |
+|required / placeholder             |order.html |84               |Dariya |
+|submit / reset                     |order.html |145–146          |Dariya |
+|section / article / aside          |about.html |56, 59, 75       |Dariya |
+|figure + figcaption (about, x2)    |about.html |80, 82, 85, 87   |Dariya |
+|table + caption + thead + tbody + th scope|about.html|102–106, 110|Dariya|
+|nested list                        |about.html |131–143          |Dariya |
+|ol with attribute (start)          |about.html |145              |Dariya |
+|dl                                  |about.html |151              |Dariya |
+|external link target+rel           |about.html |121, 160         |Dariya |
+|2 links to an id on the same page  |about.html |42, 174          |Dariya |
+|strong / em                        |about.html |67, 69           |Dariya |
+|mark                                |about.html |77               |Dariya |
+|div + comment                      |about.html |168, 171–172     |Dariya |
+|4 different HTML entities          |about.html |106 (&mdash;), 125 (&ndash;/&#8376;), 143 (&nbsp;), 165 (&rsquo;)|Dariya|
 
 ## Отзывы и контакты — [ИМЯ СТУДЕНТА 3]
 
