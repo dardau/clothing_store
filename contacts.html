@@ -31,14 +31,42 @@
   <main>
     <h2>Contacts and reservation</h2>
     <p><a href="#hours">&darr;Jump to opening hours</a></p>
-    
+    <p>
+        The easiest way to reach us is by phone, especially if you need a quick 
+        answer about a product or a reservation. If you prefer messaging over
+        phone calls, you can also write to us on Instagram. We recommend calling
+        if you need to check the availability of a specific item or size. During
+        business hours, we try to respond to questions as quickly as possible.
+    </p>
+    <p>
+        Our store is located at 5/5 Ryskulov Street, Office 3. If you're getting
+        here by public transport, the nearest stop is "City Hospital No. 2" —
+        it's only a three-minute walk from there to the store. The entrance is
+        directly from the street, so you won't need to search for it inside
+        another building. Once you arrive, look for the storefront window and
+        the glass door.
+    </p>
+    <p>
+        The store is open every day from 11:00 to 21:00, with no days off.
+        This makes it easy to plan a visit — you can come by during the day
+        or in the evening, after school or work. You can pick whatever time
+        works best for you, without having to wait for the weekend.
+    </p>
+    <p>
+        We recommend reserving an item in advance, since our store is small
+        and some items are only available in limited quantities. The model
+        or size you like could be sold before you arrive. A reservation gives
+        you the confidence that the item will be waiting for you. This is
+        especially convenient if you already know your size and don't want
+        to make a trip for nothing.
+    </p>
     <section>
       <h3>How to find us</h3>
 
       <article>
         <h4>Address and opening hours</h4>
         <p>
-          Address: <strong>5/5 Ryskulov Street, Office 3</strong>. 
+          Address: <strong>5/5 Ryskulov Street, Office 3</strong>. <br>
           Opening hours: <em>11:00-21:00, every day</em>.
         </p>
       </article>
@@ -52,15 +80,151 @@
         <img src="images/facade.jpg" alt="Storefront entrance of Instyle.zh2 clothing store with a glass door and shop sign">
         <figcaption>The entrance to the store is from the street</figcaption>
       </figure>
-
+      <!-- Comment: div is used here only to group the contact block for future
+     layout - no semantic tag fit a plain wrapper with no meaning of its own -->
       <div>
         <p>
-        Call us: <a href="tel: +77012540203">+7 (701) 254 02 03</a>
+        Call us: <a href="tel:+77012540203">+7 (701) 254 02 03</a><br>
+        Email us: <a href="mailto:instylezh2@example.com">instylezh2@example.com</a><br>
+        Follow us on <a href="https://www.instagram.com/instyle.zh2?stkn=bjZ5am0zMjN5Yml3" target="_blank" rel="noopener noreferrer">Instagram</a>
         </p>
       </div>
 
     </section>
     <hr>
+
+        <section id="hours">
+      <h3>Opening hours by day</h3>
+      <table>
+        <caption>Instyle.zh2 opening hours</caption>
+        <thead>
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Mon-Fri</th>
+            <td>11:00-21:00</td>
+          </tr>
+          <tr>
+            <th scope="row">Sat-Sun</th>
+            <td>11:00-21:00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>How reservation works</h4>
+      <ol start="1">
+        <li>Fill in the form below, including the size you need</li>
+        <li>Wait for a confirmation call</li>
+        <li>Pick up the item in store within 24 hours<sup>1</sup></li>
+      </ol>
+
+      <ul>
+        <li>Contacts
+          <ul>
+            <li>Phone for questions</li>
+            <li>Instagram for quick messages</li>
+          </ul>
+        </li>
+      </ul>
+
+      <dl>
+        <dt>Reservation</dt>
+        <dd>The chosen item is held in store until the end of the reservation day.</dd>
+        <dt>Pick up</dt>
+        <dd>Collect the item in person at the address above.</dd>
+      </dl>
+    </section>
+
+    <p>
+      <sup>1</sup><abbr title="within 24 hours">within 24h</abbr>- after that the 
+      reservation is released automatically. You can also find us on
+       <a href="https://2gis.kz/astana/geo/70000001079925695" target="_blank" rel="noopener noreferrer">2GIS</a>.
+    </p>
+    <blockquote>
+      <p>"We've been on the market for 5 years, and we have 3 branches in Astana." </p>
+    </blockquote>
+    <p>-<cite>Altynai</cite>,<small>September 12, 2026</small></p>
+
+    <p>
+      As one salesperson put it, <q>we often get asked about our size range- most items come in S, M and L, and some are also available in XS</q>- 
+      <b>we are always happy to help</b> you choose, <i>even if you're unsure about the size</i>. 
+      <span title="usually within 15 minutes during business hours">We reply fast</span>. 
+    </p>
+
+        <form action="#" method="post">
+      <p><small>This is a class exercise: the reservation is not actually sent, there is no server.</small></p>
+
+      <fieldset>
+        <legend>Reserve an item</legend>
+
+        <p>
+          <label for="c-name">Name*</label><br>
+          <input type="text" id="c-name" name="c-name" placeholder="Enter your name" required>
+        </p>
+
+        <p>
+          <label for="c-email">Email*</label><br>
+          <input type="email" id="c-email" name="c-email" placeholder="example@mail.com" required>
+        </p>
+
+        <p>
+          <label for="c-phone">Phone*</label><br>
+          <input type="tel" id="c-phone" name="c-phone" placeholder="+7 700 000 00 00" required>
+        </p>
+
+        <p>
+          <label for="c-date">Hold reservation until</label><br>
+          <input type="date" id="c-date" name="c-date">
+        </p>
+
+        <p>
+          <label for="c-qty">Quantity</label><br>
+          <input type="number" id="c-qty" name="c-qty" min="1" max="5" value="1">
+        </p>
+
+        <p>
+          <label for="c-category">Clothing category</label><br>
+          <select id="c-category" name="c-category">
+            <option value="dresses">Dresses</option>
+            <option value="blouses">Blouses</option>
+            <option value="pants">Pants</option>
+          </select>
+        </p>
+
+        <fieldset>
+          <legend>Pickup method</legend>
+          <p>
+            <input type="radio" id="pickup" name="delivery" value="pickup" checked>
+            <label for="pickup">Store pickup</label>
+          </p>
+          <p>
+            <input type="radio" id="courier" name="delivery" value="courier">
+            <label for="courier">Ask about delivery</label>
+          </p>
+        </fieldset>
+
+        <p>
+          <input type="checkbox" id="c-agree" name="c-agree" required>
+          <label for="c-agree">I agree to the processing of my personal data*</label>
+        </p>
+
+        <p>
+          <label for="c-comment">Comment</label><br>
+          <textarea id="c-comment" name="c-comment" placeholder="E.g. please check if this color is available"></textarea>
+        </p>
+      </fieldset>
+
+      <p>
+        <button type="submit">Submit reservation</button>
+        <button type="reset">Clear form</button>
+      </p>
+    </form>
+
+    <p><a href="#hours">&uarr; Back to opening hours</a> &nbsp;|&nbsp; <a href="index.html">&uarr; Back to home</a></p>
 
   </main>
 
