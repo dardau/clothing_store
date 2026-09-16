@@ -7,19 +7,19 @@
   <meta name="description" content="About the Instyle.zh2 store (instyle.zh2): history, locations and contacts.">
   <meta name="author" content="Daria">
   <title>About Us — Instyle.zh2</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/dariya.css">
 </head>
 
 <body>
-  <!-- Page author: Daria -->
-  <!-- Comment: aside is separated from article because it's an extra "by the way"
-       fact, not part of the main story about the store. -->
 
-  <header>
+
+  <header class="site-header">
     <h1>Instyle.zh2</h1>
   </header>
 
   <nav>
-    <ul>
+    <ul class="main-nav">
       <li><a href="index.html">Home</a></li>
       <li><a href="colophon.html">About This Site</a></li>
       <li><a href="catalog.html">Catalog</a></li>
@@ -30,8 +30,8 @@
       <li><a href="contacts.html">Contacts</a></li>
     </ul>
   </nav>
-  <main>
-    <h2>About the Store</h2>
+  <main id="about-page">
+    <h2 class="page-title">About the Store</h2>
 
     <p>
       Instyle.zh2 (on Instagram &mdash; @instyle.zh2, the brand is also known as ZH2 store) is a
@@ -55,10 +55,10 @@
       send photos after receiving their order.
     </p>
 
-    <section>
+    <section class="story-section">
       <h3>How It All Began</h3>
 
-      <article>
+      <article class="story-card">
         <h4>The story so far</h4>
         <p>
           Instyle.zh2 started out as a small women&rsquo;s clothing showroom in Astana and over
@@ -74,33 +74,35 @@
         </p>
       </article>
 
-      <aside>
+      <aside class="fun-fact">
         <h4>Did you know</h4>
         <p>The store&rsquo;s Instagram name is <mark>instyle.zh2</mark>, and there is no public explanation of what
           &ldquo;zh2&rdquo; stands for.</p>
       </aside>
 
-      <figure>
-        <img src="images/magazin.jpg" alt="Storefront entrance of ZH2 Concept Store with a glass door and shop sign">
-        <figcaption>The store entrance.</figcaption>
-      </figure>
+      <div class="gallery">
+        <figure class="store-photo">
+          <img src="images/magazin.jpg" alt="Storefront entrance of ZH2 Concept Store with a glass door and shop sign">
+          <figcaption>The store entrance.</figcaption>
+        </figure>
 
-      <figure>
-        <img src="images/tovar.jpg" alt="Mannequins dressed in the store's autumn collection">
-        <figcaption>Current collection on display.</figcaption>
-      </figure>
+        <figure class="store-photo">
+          <img src="images/tovar.jpg" alt="Mannequins dressed in the store's autumn collection">
+          <figcaption>Current collection on display.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <p>Here&rsquo;s what a customer shared with the store:</p>
-    <blockquote cite="https://www.instagram.com/instyle.zh2">
+    <blockquote class="testimonial" cite="https://www.instagram.com/instyle.zh2">
 
       <p>&ldquo;Thank you for the consultation, everything arrived the right size, the quality is amazing 👍👍👍&rdquo;
         &mdash; from a conversation with a customer, published in the instyle.zh2 &ldquo;reviews&rdquo; highlight,
         &asymp; November 2025.</p>
 
       <p>&ldquo;Thank you for the consultation, everything arrived the right size, the quality is amazing 👍👍👍&rdquo;
-        &mdash; from a conversation with a customer, published in the <cite>instyle.zh2 &ldquo;reviews&rdquo;
-          highlight</cite>, &asymp; November 2025.</p>
+        &mdash; from a conversation with a customer, published in the instyle.zh2 &ldquo;reviews&rdquo;
+          highlight, &asymp; November 2025.</p>
 
     </blockquote>
     <hr>
@@ -110,7 +112,7 @@
 
     <section id="kontakty-tablitsa">
       <h3>Key Information</h3>
-      <table>
+      <table class="info-table">
         <caption>Real data about the Instyle.zh2 store</caption>
         <thead>
           <tr>
@@ -182,14 +184,13 @@
       <p><small>The contact info above should be double-checked against the current Instagram bio or direct
           messages.</small></p>
     </div>
-    <!-- Comment: div is just a wrapper for a small technical note here,
-         it's not a separate page section (section) or a secondary column (aside). -->
+    
 
-    <p><a href="#kontakty-tablitsa">&uarr; Back to the info table</a> &nbsp;|&nbsp; <a href="index.html">&uarr; Back to
+    <p class="back-links"><a href="#kontakty-tablitsa">&uarr; Back to the info table</a> &nbsp;|&nbsp; <a href="index.html">&uarr; Back to
         Home</a></p>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <p>Address: Ryskulov St. 5/5, office 3, Astana &mdash; Instagram: <a href="https://www.instagram.com/instyle.zh2"
         target="_blank" rel="noopener noreferrer">instyle.zh2</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
