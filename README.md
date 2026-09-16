@@ -1,68 +1,44 @@
-# [НАЗВАНИЕ МАГАЗИНА] — сайт (Assignment 1)
+# Instyle.zh2 — website (Assignment 1)
 
-Учебный проект по курсу «Introduction to Web Technologies». Сайт посвящён реальному
-магазину одежды: [TODO: название, город, адрес].
+A class project for the "Introduction to Web Technologies" course. The site is built
+around a real clothing store: Instyle.zh2, Astana, 5/5 Ryskulov Street, Office 3.
 
-## Как открыть сайт
+## How to open the site
 
-Никакой установки не требуется. Скачайте/склонируйте репозиторий и откройте `index.html`
-напрямую в браузере (двойной клик по файлу или `Ctrl+O` в браузере). Домен не покупался,
-хостинг не использовался — это набор локальных файлов.
+No installation required. Download or clone the repository and open `index.html`
+directly in a browser (double-click the file, or `Ctrl+O` in the browser). No domain
+was purchased and no hosting was used — this is a set of local files.
 
-## Структура файлов
+## File structure
 
 ```
 .
-├── index.html          — главная страница (общая)
-├── colophon.html        — как сделан сайт (общая страница)
-├── catalog.html          — каталог (Жансая)
-├── contacts.html         — контакты, форма записи на примерку (Жансая)
-├── lookbook.html         — лукбук (Алина)
-├── reviews.html          — отзывы покупателей (Алина)
-├── order.html            — форма заказа (Дария)
-├── about.html            — о магазине (Дария)
-├── delivery.html         — доставка и оплата, форма — TODO: закреплена ли эта страница за кем-то?
-├── images/               — фотографии, сделанные командой лично
-├── tag-checklist.md      — чек-лист обязательных тегов с номерами строк
-├── ai-log.md             — журнал использования ИИ (только объяснение концепций)
-└── report.pdf            — TODO: отчёт по Task A и Task B со скриншотами (см. ниже)
+├── index.html          — home page (shared)
+├── colophon.html        — how the site was built (shared page)
+├── catalog.html          — catalog (Zhansaya)
+├── contacts.html         — contacts, item reservation form (Zhansaya)
+├── lookbook.html         — lookbook (Alina)
+├── reviews.html          — customer reviews (Alina)
+├── order.html            — order form (Dariya)
+├── about.html            — about the store (Dariya)
+├── images/               — photos taken by the team in person
+├── tag-checklist.md      — required tags checklist with line numbers
+├── ai-log.md             — log of AI usage 
+└── report.pdf            — Task A and Task B report with screenshots
 ```
 
-## Команда
+## Team
 
-| Студент | Страницы |
+| Student | Pages |
 |---|---|
-| Жансая | catalog.html, contacts.html |
-| Алина | lookbook.html, reviews.html |
-| Дария | order.html, about.html |
+| Zhansaya | catalog.html, contacts.html |
+| Alina | lookbook.html, reviews.html |
+| Dariya | order.html, about.html |
 
-index.html и colophon.html — совместно, с пометкой в комментариях, кто что вносил.
+index.html и colophon.html — were built jointly
 
-## Что ещё нужно сделать перед сдачей (TODO)
 
-1. **Заменить все `[НАЗВАНИЕ МАГАЗИНА]`, `[ИМЯ СТУДЕНТА N]`, `[TODO: ...]`** на реальные данные —
-   поиск по проекту по строке `TODO` покажет все места.
-2. **Вписать настоящий текст** 150–250 слов на каждой из 8 страниц (собственными словами, без ИИ).
-3. **Сделать минимум 3 собственные фотографии** магазина/товара и положить их в `images/`,
-   заменить пути `images/TODO-*.jpg` и написать содержательный `alt` для каждой.
-4. **Собрать реальные данные**: адрес, часы работы, цены/размеры, минимум одну реальную
-   цитату (с именем и датой) от сотрудника или покупателя.
-5. **Task A** — разобрать похожий реальный сайт (doctype, meta, семантика, где использован div
-   вместо семантического тега), нарисовать структуру страницы от руки на бумаге, сфотографировать,
-   подписать и датировать, назвать 3 структурные ошибки у них и как вы их избежали у себя.
-6. **Task B** — 150–200 слов о том, из чего состоит веб-страница и как браузер превращает HTML
-   в то, что видно на экране; указать 3 конкретных места в СВОИХ файлах, где выбран семантический
-   тег вместо div, и объяснить, что происходит при нажатии кнопки "Отправить" сегодня (ничего не
-   отправляется — нет сервера).
-7. Собрать Task A + Task B в один PDF-отчёт со всеми скриншотами.
-8. Заполнить `tag-checklist.md` реальными номерами строк (после того как впишете финальный текст!).
-9. Заполнить `ai-log.md`.
-10. Проверить все 8 страниц на **W3C Validator** (https://validator.w3.org/) — должно быть 0 ошибок.
-11. Сделать минимум 4 коммита от каждого участника (со своего аккаунта), распределённых
-    минимум на 3 разных дня.
+## Constraints
 
-## Ограничения (важно!)
-
-Никакого CSS, никакого JavaScript, никаких фреймворков/конструкторов сайтов — страницы должны
-быть неоформленными. Никакого lorem ipsum, никаких стоковых или сгенерированных ИИ изображений —
-только реальные фото, сделанные командой.
+No CSS, no JavaScript, no frameworks or site builders — pages must remain unstyled.
+No lorem ipsum, no stock or AI-generated images — only real photos taken by the team.
