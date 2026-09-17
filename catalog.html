@@ -8,6 +8,8 @@
     content="Instyle.zh2 clothing catalog: product categories, price examples and a link to the full assortment on Instagram.">
   <meta name="author" content="Zhansaya">
   <title>Catalog — Instyle.zh2</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/zhansaya.css">
 </head>
 
 <body>
@@ -33,9 +35,35 @@
   </nav>
 
   <main>
-    <h2>Catalog</h2>
+
+    <section class="hero">
+      <img src="images/css_catalog.jpg" alt="store window Instyle.zh2">
+      <div class="hero-text">
+        <h2>Catalog</h2>
+        <p>New season, real prices, real fit. </p>
+      </div>
+    </section>
+    
+    <section class="category-grid">
+      <a href="#tops" class="category-card">
+        <img src="images/tops.jpg" alt="Tops category preview">
+        <span>Tops</span>
+      </a>
+      <a href="#bottoms" class="category-card">
+        <img src="images/bottoms.jpg" alt="Bottoms category preview">
+        <span>Bottoms</span>
+      </a>
+      <a href="#outerwear" class="category-card">
+        <img src="images/outerwear.jpg" alt="Outerwear category preview">
+        <span>Outerwear</span>
+      </a>
+      <a href="#accessories" class="category-card">
+        <img src="images/accessories.jpg" alt="Accessories category preview">
+        <span>Accessories</span>
+      </a>
+    </section>
     <section>
-      <h3>What categories are available</h3>
+        <h3>What categories are available</h3>
       <p>
         The Instyle.zh2 catalog covers a mix of everyday clothing, including jackets,
         skirts, long-sleeves, and T-shirts, so there's usually something for both
@@ -80,10 +108,11 @@
         directly rather than relying only on what's shown here.
       </p>
     </section>
-
-    <p>
-      Jump straight to <a href="#price">price examples</a> if you like.
-    </p>
+    <nav class="category-nav" aria-label="Quick Jump">
+      <a href="#categories">Categories</a>
+      <a href="#price">Prices</a>
+      <a href="#ask">Ask about an item</a>
+    </nav>
     <section id="categories">
       <h3>Product Categories</h3>
       <article>
