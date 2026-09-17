@@ -1,76 +1,207 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* TEAM PALETTE (five colours maximum)
+   #000000 — readable text and strong navigation contrast.
+   #FFFFFF — keeps long pages calm and easy to scan.
+   #C0C0C0 — silver separates cards and supports the fashion-store aesthetic.
+   rgba(0, 0, 0, 0.14) — translucent black creates subtle borders. */
+:root {
+  --ink: #000000;
+  --paper: #ffffff;
+  --surface: #c0c0c0;
+  --accent: #c0c0c0;
+  --line: rgba(0, 0, 0, 0.14);
+  --body-font: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+  --heading-font: Georgia, "Times New Roman", serif;
 }
 
+/* Universal selector: declared widths include padding and borders. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-    font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: 0.01em;
-    color: #1a1a1a;
-    background-color: #ffffff;
+  margin: 0;
+  padding-top: 81px;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--body-font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
 }
-
-h1,
-h2,
-h3,
-h4 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    line-height: 1.2;
+h1, h2, h3, h4 {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
 }
+p { margin: 0 0 1rem; }
+/* Adjacent sibling selector: consecutive paragraphs receive extra rhythm. */
+p + p { margin-top: 0.75rem; }
+a { color: var(--accent); }
+a:hover, a:focus { text-decoration-thickness: 2px; }
 
-header {
-    padding: 24px 32px;
-    border-bottom: 1px solid rgba(26, 26, 26, 0.08);
-
+/* The shared masthead stays visible while every page is scrolled. */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 81px;
+  padding: 22px 32px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  text-align: center;
 }
-
-header h1 {
-    font-size: 2rem;
+.site-header::before {
+  content: "⌕  Search";
+  position: absolute;
+  left: 132px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
-
-
-nav ul {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 24px;
-    list-style: none;
-    padding: 16px 32px;
-    background-color: #1a1a1a;
+.site-header::after {
+  content: "Contact us";
+  position: absolute;
+  right: 32px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
-
-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+.site-title {
+  position: static; /* Static keeps the logo in the header's normal Flex-free flow. */
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
 }
-
-nav a:hover,
-nav a:focus {
-    color: #d6b98c;
-    text-decoration: underline;
+/* The shared navigation is a CSS-only hamburger: hover and focus-within reveal it. */
+.site-nav {
+  position: fixed;
+  top: 22px;
+  left: 32px;
+  z-index: 55;
+  color: var(--ink);
 }
-
+.site-nav::before {
+  content: "☰ Menu";
+  display: block;
+  padding: 4px 0 36px; /* Invisible hover bridge reaches the fixed side panel. */
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+/* Flexbox suits the menu list; its items form one vertical sequence. */
+.site-nav ul {
+  position: fixed;
+  top: 81px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 14px;
+  width: 320px;
+  height: calc(100vh - 81px);
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: #c0c0c0;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: opacity 0.2s ease, transform 0.25s ease, visibility 0.2s ease;
+}
+.site-nav:hover ul,
+.site-nav:focus-within ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+/* Child selector: only links directly inside navigation list items. */
+.site-nav li > a {
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.site-nav li > a:hover,
+.site-nav li > a:focus,
+.site-nav li > a[aria-current="page"] {
+  color: var(--ink);
+  text-decoration: underline;
+}
+/* Attribute selector and pseudo-element: mark links opening a new tab. */
+a[target="_blank"]::after { content: " ↗"; font-size: 0.8em; }
 main {
-    padding: 32px;
-    max-width: 1200px;
-    margin: 0 auto;
+  width: min(1200px, 92%);
+  margin: 0 auto; /* Centering 1: auto margins fit a maximum-width content area. */
+  padding: 48px 32px;
 }
-
-
+.home-hero {
+  position: relative;
+  min-height: 620px;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.08)),
+    url("../images/magazin.jpg") center / cover;
+  color: var(--paper);
+}
+.home-hero-content { max-width: 560px; margin-left: 8%; padding: 32px; }
+.home-hero-content h2 { margin: 0 0 12px; font-size: 3rem; }
+.home-hero-content a { color: var(--paper); font-weight: 700; }
+main > h2:first-child { margin-top: 0; text-align: center; }
+section { margin-top: 40px; }
+img { max-width: 100%; height: auto; border-radius: 4px; }
+table { width: 100%; margin: 24px 0; border-collapse: collapse; }
+th, td { padding: 12px; border: 1px solid var(--line); text-align: left; }
+th { background: var(--surface); }
+input, select, textarea, button { font: inherit; }
+input, select, textarea { max-width: 100%; padding: 9px 11px; border: 1px solid var(--line); }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  outline: 2px solid rgba(0, 0, 0, 0.25);
+}
+button {
+  padding: 10px 18px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: white; /* named colour required by the assignment */
+  cursor: pointer;
+}
+button:hover, button:focus { background: #c0c0c0; color: var(--ink); }
+fieldset { margin: 24px 0; padding: 24px; border: 1px solid var(--line); }
 footer {
-    padding: 24px 32px;
-    margin-top: 48px;
-    border-top: 1px solid rgba(26, 26, 26, 0.08);
-    font-size: 0.85rem;
-    color: rgb(120, 120, 120);
-    text-align: center;
+  margin-top: 48px;
+  padding: 24px 32px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.85rem;
+  text-align: center;
 }
+/* fixed keeps the shortcut available while long pages scroll. */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  display: grid;
+  place-items: center; /* Centering 2: Grid centres the icon in both axes. */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+}
+/* Margin-collapse note: main padding prevents its first heading's margin from
+   collapsing outside the content area, keeping top spacing predictable. */

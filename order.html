@@ -7,6 +7,8 @@
   <meta name="description" content="Placing an order at Instyle.zh2: the order form.">
   <meta name="author" content="Daria">
   <title>Order — Instyle.zh2</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/dariya.css">
 </head>
 
 <body>
@@ -14,22 +16,8 @@
   <!-- Comment: the form doesn't submit anywhere — at this stage of the course there's
        no server-side processing yet, so the action attribute points "nowhere" for now. -->
 
-  <header>
-    <h1>Instyle.zh2</h1>
-  </header>
-
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="colophon.html">About This Site</a></li>
-      <li><a href="catalog.html">Catalog</a></li>
-      <li><a href="lookbook.html">Lookbook</a></li>
-      <li><a href="order.html">Order</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="reviews.html">Reviews</a></li>
-      <li><a href="contacts.html">Contacts</a></li>
-    </ul>
-  </nav>
+  <header class="site-header" id="page-top"><h1 class="site-title">Instyle.zh2</h1></header>
+  <nav class="site-nav" aria-label="Primary navigation"><ul><li><a href="index.html">Home</a></li><li><a href="colophon.html">About This Site</a></li><li><a href="catalog.html">Catalog</a></li><li><a href="lookbook.html">Lookbook</a></li><li><a href="order.html" aria-current="page">Order</a></li><li><a href="about.html">About Us</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contacts.html">Contacts</a></li></ul></nav>
   <main>
     <h2>Placing an Order</h2>
 
@@ -66,7 +54,7 @@
     </p>
     <hr>
 
-    <figure>
+    <figure class="order-photo">
       <img src="images/kassa.jpg" alt="Checkout counter with bags, sunglasses and jewelry on display">
       <figcaption>The order desk in the store.</figcaption>
     </figure>
@@ -81,7 +69,8 @@
 
     <!-- Comment: form is the right tag here (not a div/span question), but fieldset
          groups fields by meaning inside it — fulfillment method vs. customer details. -->
-    <form action="#" method="post">
+    <!-- Only inline style: cascade demo overriding the external form border. -->
+    <form class="order-form" action="#" method="post" style="border-top: 3px solid #c0c0c0;">
       <p><small>This is a learning form: it doesn&rsquo;t submit anywhere, there&rsquo;s no server behind it
           yet.</small></p>
 
@@ -170,6 +159,7 @@
         href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
+  <a class="back-to-top" href="#page-top" aria-label="Back to top">↑</a>
 </body>
 
 </html>
