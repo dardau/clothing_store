@@ -1,4 +1,5 @@
 header h1 {
+  margin-bottom: 0;
   text-align: center;
 }
 
@@ -8,8 +9,9 @@ nav ul {
 
 .style-categories-section {
   background-color: #a7a699;
-  padding: 12px 0 0;
-  margin: 40px 0;
+  padding: 0 0 40px;
+  margin-top: -50px;
+  margin-bottom: 0;
   /* фото должны идти во всю ширину экрана, а не только внутри main —
      поэтому вылезаю за пределы паддингов main через 100vw и отрицательный margin */
   width: 100vw;
@@ -21,7 +23,8 @@ nav ul {
   font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 0 32px 8px;
+  padding: 20px 33px 20px;
+  margin: 0;
 }
 
 .style-categories {
@@ -39,7 +42,7 @@ nav ul {
   text-decoration: none;
   color: inherit;
   overflow: hidden;
-  height: 650px;
+  height: 550px;
 }
 
 .style-category-card img {
@@ -83,4 +86,136 @@ nav ul {
   white-space: nowrap;
   border: 0;
   margin: -1px;
+}
+
+.look-section {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: #ffffff;
+  align-items: stretch;
+}
+
+.look-main-image {
+  height: 700px;
+  overflow: hidden;
+}
+
+.look-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.look-products {
+  padding: 5px 35px 50px;
+}
+
+.look-products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.look-products-header h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.look-products-header span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #777;
+}
+
+.look-products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px 12px;
+}
+
+.look-product {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.look-product-image {
+  position: relative;
+  width: 100%;
+  height: 485px;
+  background-color: #f5f5f7;
+  overflow: hidden;
+}
+
+.look-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.look-product-image button {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: #ffffff;
+  font-size: 16px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.look-product h4 {
+  margin: 12px 10px 3px;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  font-weight: 700;
+  min-height: 52px;
+}
+
+.look-product p {
+  margin: 0 10px 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.look-add-button {
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  height: 43px;
+  border: none;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.look-add-button:hover {
+  background-color: #333333;
+}
+
+@media (max-width: 800px) {
+  .look-section {
+    grid-template-columns: 1fr;
+  }
+
+  .look-main-image {
+    height: 650px;
+  }
+
+  .look-products {
+    padding: 30px 20px;
+  }
+
+  .look-product-image {
+    height: 300px;
+  }
 }
