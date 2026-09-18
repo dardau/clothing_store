@@ -10,7 +10,7 @@
 | 13.09.2026 | Dariya | What actually happens when a form is submitted with `action="#"` and no server behind it | Explanation that `action="#"` just points back to the current page, so the browser tries to send the data but there is no real recipient — the page just reloads itself and nothing is actually saved or sent anywhere |
 | 13.09.2026 | Alina | Why did you use `<div>` elements in this part of the website instead of semantic HTML tags? | Explanation that `<div>` is used as a general-purpose container for grouping content when no specific semantic HTML tag fits; in this case the extra `<div>` wrapper around the menu doesn't add any semantic meaning on its own |
 | 13.09.2026 | Alina | Why did you use semantic tags such as `<section>`, `<article>`, and `<aside>` instead of using only `<div>` elements? | Explanation that semantic tags describe the meaning and purpose of the content — in lookbook.html, `<section>` groups the product categories, `<article>` is used for separate categories, and `<aside>` holds additional sizing information, which makes the page structure clearer |
-
+| 17.09.2026 | Dariya | How can the Assignment 1 pages be styled for Assignment 2 without JavaScript or a CSS framework? | Helped reorganize the existing navigation as a semantic Flexbox row; explained and demonstrated selectors, Grid, Flexbox, positioning, float/clear, three centering methods, specificity, cascade order, and the required CSS checklist. |
 
 
 

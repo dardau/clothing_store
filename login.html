@@ -1,69 +1,102 @@
-<form action="#" method="post">
-  <p><small>This is a class exercise: the sign-up is not actually sent, there is no server.</small></p>
+<!DOCTYPE html>
+<html lang="en">
 
-  <fieldset>
-    <legend>Create Your Account</legend>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create an Instyle.zh2 customer account.">
+  <title>Create Account — Instyle.zh2</title>
+  <link rel="stylesheet" href="css/base.css">
+</head>
 
-    <p>
-      <label for="acc-name">Full name*</label><br>
-      <input type="text" id="acc-name" name="acc-name" placeholder="Enter your full name" required>
-    </p>
+<body>
+  <header class="site-header" id="page-top">
+    <h1 class="site-title">Instyle.zh2</h1>
+  </header>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="colophon.html">About This Site</a></li>
+      <li><a href="catalog.html">Catalog</a></li>
+      <li><a href="lookbook.html">Lookbook</a></li>
+      <li><a href="order.html">Order</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contacts.html">Contacts</a></li>
+    </ul>
+  </nav>
 
-    <p>
-      <label for="acc-email">Email*</label><br>
-      <input type="email" id="acc-email" name="acc-email" placeholder="example@mail.com" required>
-    </p>
+  <main>
+    <form action="#" method="post">
+      <p><small>This is a class exercise: the sign-up is not actually sent, there is no server.</small></p>
 
-    <p>
-      <label for="acc-phone">Phone*</label><br>
-      <input type="tel" id="acc-phone" name="acc-phone" placeholder="+7 700 000 00 00" required>
-    </p>
+      <fieldset>
+        <legend>Create Your Account</legend>
 
-    <p>
-      <label for="acc-birthdate">Date of birth</label><br>
-      <input type="date" id="acc-birthdate" name="acc-birthdate">
-    </p>
+        <p>
+          <label for="acc-name">Full name*</label><br>
+          <input type="text" id="acc-name" name="acc-name" placeholder="Enter your full name" required>
+        </p>
 
-    <p>
-      <label for="acc-size">Usual clothing size</label><br>
-      <input type="number" id="acc-size" name="acc-size" min="36" max="52" step="2" value="42">
-    </p>
+        <p>
+          <label for="acc-email">Email*</label><br>
+          <input type="email" id="acc-email" name="acc-email" placeholder="example@mail.com" required>
+        </p>
 
-    <p>
-      <label for="acc-referral">How did you hear about us?</label><br>
-      <select id="acc-referral" name="acc-referral">
-        <option value="instagram">Instagram</option>
-        <option value="friend">A friend</option>
-        <option value="walked-by">Walked by the store</option>
-      </select>
-    </p>
+        <p>
+          <label for="acc-phone">Phone*</label><br>
+          <input type="tel" id="acc-phone" name="acc-phone" placeholder="+7 700 000 00 00" required>
+        </p>
 
-    <fieldset>
-      <legend>Preferred contact method</legend>
+        <p>
+          <label for="acc-birthdate">Date of birth</label><br>
+          <input type="date" id="acc-birthdate" name="acc-birthdate">
+        </p>
+
+        <p>
+          <label for="acc-size">Usual clothing size</label><br>
+          <input type="number" id="acc-size" name="acc-size" min="36" max="52" step="2" value="42">
+        </p>
+
+        <p>
+          <label for="acc-referral">How did you hear about us?</label><br>
+          <select id="acc-referral" name="acc-referral">
+            <option value="instagram">Instagram</option>
+            <option value="friend">A friend</option>
+            <option value="walked-by">Walked by the store</option>
+          </select>
+        </p>
+
+        <fieldset>
+          <legend>Preferred contact method</legend>
+          <p>
+            <input type="radio" id="acc-contact-email" name="acc-contact" value="email" checked>
+            <label for="acc-contact-email">Email</label>
+          </p>
+          <p>
+            <input type="radio" id="acc-contact-phone" name="acc-contact" value="phone">
+            <label for="acc-contact-phone">Phone</label>
+          </p>
+        </fieldset>
+
+        <p>
+          <input type="checkbox" id="acc-agree" name="acc-agree" required>
+          <label for="acc-agree">I agree to the processing of my personal data*</label>
+        </p>
+
+        <p>
+          <label for="acc-notes">Anything else we should know</label><br>
+          <textarea id="acc-notes" name="acc-notes"
+            placeholder="E.g. favorite styles, sizes that run small on you"></textarea>
+        </p>
+      </fieldset>
+
       <p>
-        <input type="radio" id="acc-contact-email" name="acc-contact" value="email" checked>
-        <label for="acc-contact-email">Email</label>
+        <button type="submit">Create account</button>
+        <button type="reset">Clear form</button>
       </p>
-      <p>
-        <input type="radio" id="acc-contact-phone" name="acc-contact" value="phone">
-        <label for="acc-contact-phone">Phone</label>
-      </p>
-    </fieldset>
+    </form>
+  </main>
+</body>
 
-    <p>
-      <input type="checkbox" id="acc-agree" name="acc-agree" required>
-      <label for="acc-agree">I agree to the processing of my personal data*</label>
-    </p>
-
-    <p>
-      <label for="acc-notes">Anything else we should know</label><br>
-      <textarea id="acc-notes" name="acc-notes" placeholder="E.g. favorite styles, sizes that run small on you"></textarea>
-    </p>
-  </fieldset>
-
-  <p>
-    <button type="submit">Create account</button>
-    <button type="reset">Clear form</button>
-  </p>
-</form>
-
+</html>

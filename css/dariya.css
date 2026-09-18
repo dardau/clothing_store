@@ -1,54 +1,134 @@
-* {
+box-sizing {
   box-sizing: border-box;
 }
 
-/* TYPE selector */
-p {
-  line-height: 1.7;
-  color: #2b2b2b;
-}
-
-/* TYPE selector */
-img {
-  max-width: 100%;
-  display: block;
-}
-
+/* Dariya — personal stylesheet for about.html and order.html. */
+/* ID selector: #about-page is unique because it is the single About main region. */
 #about-page {
-  max-width: 960px;
-  margin-inline: auto;
-  padding: 40px 20px;
-  position: static;
+  padding-top: 120px;
 }
 
-.site-header {
+/* About already has its own checkbox-controlled hamburger. */
+.about-page>.site-nav {
+  display: none;
+}
+
+.about-page {
+  padding-top: 0;
+}
+
+.menu-toggle {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+
+}
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 24px 0;
-  background-color: #1c1c1c;
+  justify-content: space-between;
+  width: 100%;
+  padding: 22px 32px;
+  background: #ffffff;
+  color: #000000;
 }
 
-.site-header h1 {
-  color: #fff;
-  letter-spacing: 0.12em;
+.top-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex: 1;
+}
+
+.top-nav-control,
+.top-nav-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.bars {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 20px;
+}
+
+.bars span {
+  height: 2px;
+  background: currentColor;
+}
+
+.glass {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+.glass::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  bottom: -5px;
+  width: 2px;
+  height: 8px;
+  background: currentColor;
+  transform: rotate(-45deg);
+}
+
+.top-nav-logo {
+  flex: 1;
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  text-align: center;
   text-transform: uppercase;
-  margin: 0;
 }
 
-
-.main-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-  list-style: none;
-  padding: 14px 0;
-  margin: 0;
-  background-color: #f2f0eb;
+.top-nav-right {
+  flex: 1;
+  text-align: right;
 }
 
+.top-nav-right a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  width: 320px;
+  max-width: 85vw;
+  height: 100%;
+  padding: 26px 30px;
+  overflow-y: auto;
+  background: #c0c0c0;
+  color: #000000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
 
 .main-nav a {
   text-decoration: none;
@@ -145,25 +225,109 @@ hr {
   margin: 40px 0;
 }
 
+.menu-toggle:checked~.menu-overlay {
+  opacity: 1;
+  visibility: visible;
+}
 
+.menu-toggle:checked~.side-menu {
+  transform: translateX(0);
+}
+
+.side-menu-close {
+  float: right;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.side-menu-title {
+  margin: 6px 0 30px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.side-menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.side-menu-nav a {
+  color: #000000;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.side-menu-nav a:hover,
+.side-menu-nav a:focus {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.side-menu-divider {
+  margin: 26px 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.side-menu-footer a {
+  display: block;
+  margin-bottom: 12px;
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Grid beats Flexbox here: photos form equal columns and one spans both. */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin: 30px 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
+
 
 
 .gallery>figure {
   margin: 0;
+
+  .store-photo:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .store-photo {
+    position: relative;
+    margin: 0;
+  }
+
+  .store-photo figcaption {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+
+  }
 }
 
+/* Reused on About and Order; items wrap and grow or shrink as space changes. */
+.content-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+}
 
-.store-photo img {
-  border-radius: 6px;
-  height: 240px;
-  object-fit: cover;
-  width: 100%;
+.content-cards>* {
+  flex: 1 1 280px;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: #c0c0c0;
 }
 
 
@@ -253,4 +417,69 @@ body::after {
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   z-index: 10;
+}
+
+.story-card+.fun-fact {
+  border-left: 4px solid #000000;
+}
+
+/* Float puts a real order photo inside the flow of Dariya's explanatory text. */
+.order-photo {
+  float: left;
+  width: 42%;
+  margin: 0 24px 16px 0;
+}
+
+/* Without clear, the form could rise beside the floated photo. */
+.order-form {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  /* Order fields need aligned two-dimensional tracks, so Grid fits. */
+}
+
+.order-form>p:first-child,
+.order-form>fieldset:first-of-type {
+  grid-column: 1 / -1;
+}
+
+.order-form fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.order-form [required] {
+  border-left: 3px solid #c0c0c0;
+}
+
+.order-form button:nth-child(2) {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Five competing rules for Task A; specificity rises on each line. */
+h2 {
+  color: #000000;
+}
+
+/* (0,0,1) */
+.page-title {
+  color: #c0c0c0;
+}
+
+/* (0,1,0) */
+main .page-title {
+  color: #000000;
+}
+
+/* (0,1,1) */
+#about-page h2 {
+  color: #c0c0c0;
+}
+
+/* (1,0,1) */
+#about-page>.page-title {
+  color: #000000;
 }
