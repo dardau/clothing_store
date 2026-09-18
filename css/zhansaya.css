@@ -1,21 +1,22 @@
+main {
+  position: static;
+}
 
-figcaption {        
-  color: rgb(120, 120, 120);
+figcaption {
+  color: var(--muted);
 }
 
 h4 {
   margin: 4px 0 6px;
   font-size: 1rem;
 }
+
 h3 + p {
   margin-top: 0;
 }
 
-main {
-  position: static;
-}
 .hero {
-  position: relative;  
+  position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
@@ -34,38 +35,43 @@ main {
 }
 
 .hero-text {
-  position: absolute; 
+  position: absolute;
   bottom: 20px;
   left: 24px;
   color: #ffffff;
 }
 
 .hero-text h2 {
+  color: var(--paper);
   font-size: 1.8rem;
   margin: 0 0 4px;
 }
 
 .hero-text p {
+  color: var(--paper);
   font-size: 0.9rem;
   margin: 0;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: #d8d8d8;
+  
 }
+
+/* Centering with absolute positioning and transform. */
 .hero-scroll {
   position: absolute;
   bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
-  color: #ffffff;
+  color: var(--paper);
   font-size: 1.2rem;
 }
+
 .intro-photo {
   float: left;
   width: 160px;
   margin: 4px 20px 12px 0;
   border-radius: 2px;
-  border: 1px solid #b0b0b0;
+  border: 1px solid var(--line);
 }
 
 main > section:not(.category-grid):has(> h3) {
@@ -73,34 +79,31 @@ main > section:not(.category-grid):has(> h3) {
   margin: 24px auto;
   clear: both;
 }
-#outerwear {
-  max-width: none;
-  margin: 24px 0 48px;
-}
-#tops {
-  max-width: none;
-  margin: 24px 0 48px;
-}
-#bottoms {
-  max-width: none;
-  margin: 24px 0 48px;
-}
+
+#outerwear,
+#tops,
+#bottoms,
 #accessories {
   max-width: none;
   margin: 24px 0 48px;
 }
+
 main > section h3 {
   font-size: 1.1rem;
-  border-bottom: 2px solid #b0b0b0;
+  border-bottom: 2px solid var(--surface);
   padding-bottom: 6px;
   margin-bottom: 10px;
 }
 
 main > section p {
-  color: #333333;
+  color: var(--ink);
   line-height: 1.6;
 }
 
+/*
+  Grid is better than flexbox here because the cards need
+  control over both rows and columns.
+*/
 .category-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -142,22 +145,35 @@ main > section p {
   position: absolute;
   bottom: 16px;
   left: 16px;
-  color: #504e4e;
+  color: var(--ink);
   background-color: rgba(255, 255, 255, 0.85);
   padding: 6px 14px;
   text-transform: uppercase;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
 }
+
+/* Pseudo-element adds an arrow without an extra HTML element. */
 .category-card span::before {
-  content: "→ ";
+  content: "->" ;
 }
 
-/* 
-   Grid was chosen over flexbox here because every row needs to line up
-   in both directions at once (equal card widths AND aligned rows across
-   the full set), which is what a fixed grid track list guarantees;
-   flexbox would only guarantee alignment along a single axis. */
+/*
+  Specificity: .product-card figcaption = 0-1-1.
+  This rule loses the conflict.
+*/
+.product-card figcaption {
+  color: var(--muted);
+}
+
+/*
+  Specificity: .product-grid .product-card figcaption = 0-2-1.
+  This rule wins because it has higher specificity.
+*/
+.product-grid .product-card figcaption {
+  color: var(--ink);
+}
+
 .product-grid {
   list-style: none;
   display: grid;
@@ -175,7 +191,7 @@ main > section p {
 .product-card figure {
   margin: 0;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--paper);
 }
 
 .product-card img {
@@ -188,7 +204,6 @@ main > section p {
 
 .product-card figcaption {
   padding: 12px 4px 20px;
-  color: #1a1a1a;
   font-size: 0.82rem;
   line-height: 1.4;
 }
@@ -198,40 +213,36 @@ main > section p {
 }
 
 .product-grid .product-card:nth-child(even) figcaption {
-  background-color: #f7f7f7;
+  background-color: var(--surface);
 }
 
 .sizes {
   display: block;
   margin-top: 6px;
   font-size: 0.72rem;
-  color: rgb(120, 120, 120);
+  color: var(--muted);
   letter-spacing: 0.04em;
 }
 
 a[href^="#"] {
-  color: #1a1a1a;
+  color: var(--ink);
 }
 
 .badge {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: linear-gradient(135deg, #e0e0e0, #b0b0b0, #d8d8d8);
-  color: #1a1a1a;
+  background-color: var(--surface);
+  color: var(--ink);
   font-size: 0.65rem;
   letter-spacing: 0.05em;
   padding: 4px 10px;
   text-transform: uppercase;
   border-radius: 2px;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 1px 1px var(--line);
 }
 
-.badge--sale {
-  background-color: firebrick;
-  color: #ffffff;
-}
-
+/* Centering with flexbox. */
 .back-to-top {
   position: fixed;
   bottom: 24px;
@@ -239,34 +250,69 @@ a[href^="#"] {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: var(--ink);
+  color: var(--paper);
   text-decoration: none;
-  display: flex;  
+  display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
-  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.3);
+  box-shadow: 0 2px 8px var(--line);
   transition: background-color 0.2s, color 0.2s;
 }
 
 .back-to-top:hover {
-  background: linear-gradient(135deg, #e0e0e0, #b0b0b0, #d8d8d8);
-  color: #1a1a1a;
+  background-color: var(--surface);
+  color: var(--ink);
 }
 
+/* Centering with margin: auto. */
 .info-card {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto 48px;
-  padding: 20px 24px;
+  padding: 24px 28px;
   border-radius: 4px;
-  background-color: #f7f7f7;
-  border: 1px solid rgba(26, 26, 26, 0.08);
+  background-color: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 14px var(--line);
 }
 
-.info-card ul {
+.info-card h4 {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.info-card > ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  list-style: none;
   margin: 0;
-  padding-left: 18px;
+  padding: 0;
+}
+
+.info-card > ul > li {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  border-top: 2px solid var(--surface);
+  padding-top: 10px;
+}
+
+.info-card > ul > li > ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  font-weight: 400;
+}
+
+.info-card > ul > li > ul > li {
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding: 3px 0;
 }
 
 .details-panel {
@@ -279,7 +325,7 @@ a[href^="#"] {
 }
 
 #price {
-  background-color: #ffffff;
+  background-color: var(--paper);
 }
 
 .details-col {
@@ -303,11 +349,11 @@ a[href^="#"] {
 .details-col td {
   padding: 8px 12px;
   text-align: left;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+  border-bottom: 1px solid var(--line);
 }
 
 .details-col thead th {
-  border-bottom: 2px solid #1a1a1a;
+  border-bottom: 2px solid var(--ink);
   text-transform: uppercase;
   font-size: 0.7rem;
   letter-spacing: 0.05em;
@@ -324,8 +370,8 @@ a[href^="#"] {
 .tip-banner {
   padding: 16px 20px;
   border-radius: 4px;
-  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-  border-left: 4px solid #b0b0b0;
+  background-color: var(--surface);
+  border-left: 4px solid var(--ink);
 }
 
 .tip-banner p {
