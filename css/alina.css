@@ -1,0 +1,86 @@
+header h1 {
+  text-align: center;
+}
+
+nav ul {
+  justify-content: center;
+}
+
+.style-categories-section {
+  background-color: #a7a699;
+  padding: 12px 0 0;
+  margin: 40px 0;
+  /* фото должны идти во всю ширину экрана, а не только внутри main —
+     поэтому вылезаю за пределы паддингов main через 100vw и отрицательный margin */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.style-categories-section h3 {
+  color: #ffffff;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 32px 8px;
+}
+
+.style-categories {
+  display: flex;
+  gap: 0;
+  /* специально без отступов — на референсе карточки стоят впритык друг к другу */
+  margin: 0;
+}
+
+.style-category-card {
+  position: relative;
+  /* чтобы название стиля можно было прибить поверх фото через absolute */
+  flex: 1 1 0;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  height: 650px;
+}
+
+.style-category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* чтобы фото не сплющивалось и всегда заполняло карточку */
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* анимацию увеличения повесила на img, а не на саму карточку —
+   если зумить всю карточку, между соседними появляется щель и ряд "разъезжается",
+   а так фото растёт внутри, а рамка карточки не двигается */
+.style-category-card:hover img {
+  transform: scale(1.06);
+}
+
+.style-category-card h4 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: #f7f3f3;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+  /* без тени белый текст сливается со светлыми фото, особенно на casual */
+}
+
+.style-category-card ul {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  margin: -1px;
+}
