@@ -26,10 +26,11 @@
       <img src="images/css_catalog.jpg" alt="store window Instyle.zh2">
       <div class="hero-text">
         <h2>Catalog</h2>
-        <p>New season, real prices, real fit. </p>
+        <p>New season, real prices, real fit.</p>
       </div>
+      <span class="hero-scroll">&darr;</span>
     </section>
-    
+
     <section class="category-grid">
       <a href="#tops" class="category-card">
         <img src="images/tops.jpg" alt="Tops category preview">
@@ -48,9 +49,11 @@
         <span>Accessories</span>
       </a>
     </section>
+
     <section>
-        <h3>What categories are available</h3>
+      <h3>What categories are available</h3>
       <p>
+        <img src="images/textphoto.jpg" alt="A stylish photo featuring the store's collection" class="intro-photo">
         The Instyle.zh2 catalog covers a mix of everyday clothing, including jackets,
         skirts, long-sleeves, and T-shirts, so there's usually something for both
         casual and slightly dressier looks. Beyond clothing, the store also carries
@@ -94,93 +97,278 @@
         directly rather than relying only on what's shown here.
       </p>
     </section>
-    <nav class="category-nav" aria-label="Quick Jump">
-      <a href="#categories">Categories</a>
-      <a href="#price">Prices</a>
-      <a href="#ask">Ask about an item</a>
-    </nav>
+
     <section id="categories">
-      <h3>Product Categories</h3>
-      <article>
+      <article class="info-card">
         <h4>Main Categories</h4>
         <ul>
           <li>Outerwear
             <ul>
               <li>Jackets</li>
-              <li>Vests</li>
+              <li>Parka</li>
+              <li>Coats</li>
+              <li>Bombers</li>
+              <li>Leather jackets</li>
             </ul>
           </li>
-          <li>Longsleeves and T-shirts</li>
           <li>Accessories
             <ul>
               <li>Caps</li>
               <li>Bags</li>
+              <li>Glasses</li>
+              <li>Belts</li>
+              <li>Pendants</li>
+            </ul>
+          </li>
+          <li>Tops
+            <ul>
+              <li>T-shirts</li>
+              <li>Long-sleeves</li>
+              <li>Sweaters</li>
+              <li>Shirts</li>
+              <li>Tank tops</li>
+            </ul>
+          </li>
+          <li>Bottoms
+            <ul>
+              <li>Trousers</li>
+              <li>Shorts</li>
+              <li>Skirts</li>
+              <li>Jeans</li>
+              <li>Culottes</li>
             </ul>
           </li>
         </ul>
       </article>
-
-      <aside>
-        <h4>Tip Before Ordering</h4>
-        <p>Confirm the availability of a specific model via WhatsApp &mdash; <mark>the Instagram feed updates faster
-            than the stockroom</mark>.</p>
-      </aside>
-
-      <figure>
-        <img src="images/catalog1.jpg"
-          alt="Beige boucle-texture blazer with dark buttons, hanging on a ZH2 branded hanger">
-        <figcaption>A beige textured blazer from the outerwear collection</figcaption>
-      </figure>
-
-      <figure>
-        <img src="images/catalog2.jpg" alt="Dark navy skirt with a ZH2 brand tag, hanging on a ZH2 branded hanger">
-        <figcaption>A navy skirt from the current assortment</figcaption>
-      </figure>
     </section>
 
-    <section id="price">
-      <h3>Price Examples</h3>
-      <table>
-        <caption>Example prices for Instyle.zh2 products</caption>
-        <thead>
-          <tr>
-            <th scope="col">Item</th>
-            <th scope="col">Price, &#8376;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Blazer</th>
-            <td>41,000</td>
-          </tr>
-          <tr>
-            <th scope="row">Skirt</th>
-            <td>9,900</td>
-          </tr>
-          <tr>
-            <th scope="row">Leather jacket</th>
-            <td>42,000</td>
-          </tr>
-          <tr>
-            <th scope="row">Culottes</th>
-            <td>19,000</td>
-          </tr>
-        </tbody>
-      </table>
+    <section id="tops">
+      <h3>Tops</h3>
+      <ul class="product-grid">
+        <li class="product-card">
+          <figure>
+            <img src="images/tops1.jpg" alt="Long-sleeve top paired with a lightweight top made of semi-sheer fabric">
+            <figcaption>
+              Long-sleeve top paired with a lightweight top made of semi-sheer fabric &mdash; 12.000kzt&nbsp;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/tops2.jpg" alt="Long-sleeve top with ribbons">
+            <figcaption>
+              Long-sleeve top with ribbons &mdash; 12.500kzt&nbsp;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/tops3.jpg" alt="Warm sweater in a soft turquoise color">
+            <figcaption>
+              Warm sweater in a soft turquoise color &mdash; 9.000kzt&nbsp;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/tops4.jpg" alt="Denim shirt">
+            <figcaption>
+              Denim shirt &mdash; 18.000kzt&nbsp;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
 
-      <h3>How to Use the Catalog</h3>
-      <ol start="1">
-        <li>Check the latest photos on the official Instagram <abbr title="official brand account">profile</abbr>.</li>
-        <li>Confirm size and availability via WhatsApp.</li>
-        <li>Place your order on the <a href="order.html">order page</a>.</li>
-      </ol>
+    <section id="bottoms">
+      <h3>Bottoms</h3>
+      <ul class="product-grid">
+        <li class="product-card">
+          <figure>
+            <img src="images/bottoms1.jpg" alt="Denim bermuda shorts">
+            <figcaption>
+              Denim bermuda shorts &mdash; 18.000kzt&nbsp;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/bottoms2.jpg" alt="Light-colored jeans">
+            <figcaption>
+              Light-colored jeans &mdash; 20.500kzt&nbsp;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/bottoms3.jpg" alt="Oversized joggers with an elastic waistband">
+            <figcaption>
+              Oversized joggers with an elastic waistband &mdash; 13.000kzt&nbsp;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/bottoms4.jpg" alt="White lace skirt">
+            <figcaption>
+              White lace skirt &mdash; 12.500kzt&nbsp;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
 
-      <dl>
-        <dt>Drop</dt>
-        <dd>The release of a new batch of stock &mdash; usually announced in stories beforehand.</dd>
-        <dt>Pre-order</dt>
-        <dd>Reserving an item before it physically arrives in stock.</dd>
-      </dl>
+    <section id="outerwear">
+      <h3>Outerwear</h3>
+      <ul class="product-grid">
+        <li class="product-card">
+          <figure>
+            <span class="badge">New</span>
+            <img src="images/outerwear1.jpg" alt="Black jacket made of soft eco-leather">
+            <figcaption>
+              Black oversized jacket in soft eco-leather &mdash; 42.000&nbsp;&#8376;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/outerwear2.jpg" alt="Black bomber jacket in soft eco-leather">
+            <figcaption>
+              Black bomber jacket in soft eco-leather &mdash; 36.000&nbsp;&#8376;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/outerwear3.jpg" alt="Faux suede jacket with patch pockets">
+            <figcaption>
+              Faux suede jacket with patch pockets &mdash; 39.500&nbsp;&#8376;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/outerwear4.jpg" alt="Oversized belted coat">
+            <figcaption>
+              Oversized belted coat &mdash; 42.000&nbsp;&#8376;
+              <span class="sizes">Sizes: S · M · L</span>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+    <section id="accessories">
+      <h3>Accessories</h3>
+      <ul class="product-grid">
+        <li class="product-card">
+          <figure>
+            <img src="images/access1.jpg" alt="Striped tie">
+            <figcaption>
+              Striped tie &mdash; 4.000kzt&nbsp;
+              <span class="sizes">One size</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/access2.jpg" alt="Spacious beige eco-leather bag">
+            <figcaption>
+              Spacious beige eco-leather bag &mdash; 15.000kzt&nbsp;
+              <span class="sizes">One size</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/access3.jpg" alt="Stylish pendant with a black stone">
+            <figcaption>
+              Stylish pendant with a black stone &mdash; 6.500kzt&nbsp;
+              <span class="sizes">One size</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="product-card">
+          <figure>
+            <img src="images/access4.jpg" alt="Small bag made of mixed materials">
+            <figcaption>
+              Small bag made of mixed materials &mdash; 11.000kzt&nbsp;
+              <span class="sizes">One size</span>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Comment: this section is laid out as two flex columns (details-panel) —
+         left holds price/instruction data, right holds the ordering tip and a
+         photo, so related "before you order" information sits side by side
+         instead of stacking as separate full-width blocks. -->
+    <section id="price" class="details-panel">
+      <div class="details-col">
+        <h3>Price Ranges by Category</h3>
+        <table>
+          <caption>Approximate price range per category, Instyle.zh2</caption>
+          <thead>
+            <tr>
+              <th scope="col">Category</th>
+              <th scope="col">Price range, &#8376;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Tops</th>
+              <td>6,000&ndash;15,000</td>
+            </tr>
+            <tr>
+              <th scope="row">Bottoms</th>
+              <td>8,000&ndash;20,000</td>
+            </tr>
+            <tr>
+              <th scope="row">Outerwear</th>
+              <td>36,000&ndash;45,000</td>
+            </tr>
+            <tr>
+              <th scope="row">Accessories</th>
+              <td>3,000&ndash;12,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>How to Use the Catalog</h4>
+        <ol start="1">
+          <li>Check the latest photos on the official Instagram <abbr title="official brand account">profile</abbr>.</li>
+          <li>Confirm size and availability via WhatsApp.</li>
+          <li>Place your order on the <a href="order.html">order page</a>.</li>
+        </ol>
+
+        <dl>
+          <dt>Drop</dt>
+          <dd>The release of a new batch of stock &mdash; usually announced in stories beforehand.</dd>
+          <dt>Pre-order</dt>
+          <dd>Reserving an item before it physically arrives in stock.</dd>
+        </dl>
+      </div>
+
+      <div class="details-col">
+        <img src="images/imgcatalog.jpg" alt="details photo" class="details-photo">
+        <aside class="tip-banner">
+          <h4>Tip Before Ordering</h4>
+          <p>Confirm the availability of a specific model via WhatsApp &mdash; <mark>the Instagram feed updates faster
+              than the stockroom</mark>.</p>
+        </aside>
+      </div>
     </section>
 
     <p>
@@ -197,8 +385,10 @@
     </div>
 
     <p><a href="#categories">&uarr; Back to categories</a> &nbsp;|&nbsp; <a href="#price">&uarr; Back to price
-        examples</a></p>
+        ranges</a></p>
   </main>
+
+  <a href="#page-top" class="back-to-top" aria-label="Back to top">&uarr;</a>
 
   <footer>
     <p>Address: Ryskulov St. 5/5, office 3, Astana &mdash; Phone: <a
