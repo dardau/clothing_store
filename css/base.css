@@ -103,7 +103,7 @@ a:focus {
 .bars { display: inline-flex; flex-direction: column; gap: 4px; width: 20px; }
 .bars span { height: 2px; background: currentColor; }
 .top-nav-logo { flex: 1; margin: 0; font-size: 1.5rem; letter-spacing: 0.14em; text-align: center; text-transform: uppercase; }
-.top-nav-right { flex: 1; text-align: right; }
+.top-nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 20px; flex: 1; text-align: right; }
 .top-nav-right a { color: inherit; text-decoration: none; }
 
 .menu-overlay {
