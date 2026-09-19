@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Placing an order at Instyle.zh2: the order form.">
-  <meta name="author" content="Daria">
+  <meta name="author" content="Dariya">
   <title>Order — Instyle.zh2</title>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/dariya.css">
 </head>
 
-<body>
-  <!-- Page author: Daria -->
+<body class="order-page">
+  <!-- Page author: Dariya -->
   <!-- Comment: the form doesn't submit anywhere — at this stage of the course there's
        no server-side processing yet, so the action attribute points "nowhere" for now. -->
 
@@ -34,37 +34,26 @@
   <main>
     <h2>Placing an Order</h2>
 
-    <p>
-      Ordering from Instyle.zh2 is simple and involves almost no extra steps. First, you message
-      WhatsApp at +7&nbsp;701&nbsp;254&nbsp;02&nbsp;03 (the same link is in the Instagram profile
-      header) or Instagram Direct @instyle.zh2 &mdash; this is usually where size, color, and
-      availability of a specific model get confirmed. Once the manager confirms that the item is
-      in stock and fits, the pickup or delivery method is arranged: pickup from one of three
-      locations (Nexpo City residential complex, Respublika Avenue, or Severnoye Siyanie
-      residential complex, open daily from 11:00 to 21:00) or courier delivery around Astana.
-      Judging by the conversations the store publishes in its &ldquo;reviews&rdquo; story
-      highlight, customers usually message the manager again after receiving their order to share
-      their impression. Payment can be made in cash, by bank card, or via Kaspi QR right at the
-      store; there&rsquo;s no separate online fitting before payment &mdash; the decision is based
-      on photos and measurements the seller sends. The store doesn&rsquo;t have a separate website
-      or shopping-cart catalog &mdash; the whole ordering process relies on messaging and personal
-      contact with the sales consultant.
-    </p>
+    <section class="order-introduction">
+      <p class="order-introduction-label">How ordering works</p>
+      <h3 class="order-introduction-lead">A personal and simple way to order from Instyle.zh2.</h3>
+      <p>
+        Message us through WhatsApp at <strong>+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</strong> or Instagram Direct
+        <strong>@instyle.zh2</strong>. A consultant will confirm the model, colour, size, and availability,
+        then help you choose the most suitable option.
+      </p>
+      <p>
+        Collect your order from one of our three Astana locations or arrange courier delivery.
+        Payment is available in cash, by bank card, or through Kaspi QR. Before confirming the order,
+        the consultant can send additional photographs and measurements of the item.
+      </p>
+    </section>
 
     <p>As one of our customers wrote to the store:</p>
-    <blockquote cite="https://www.instagram.com/instyle.zh2">
-
-      <p>&ldquo;Hello, I received the bag. I really liked it, thank you so much 🙏&rdquo; &mdash; from a conversation
-        published in the instyle.zh2 &ldquo;reviews&rdquo; highlight, &asymp; early October 2025.</p>
-
-      <p>&ldquo;Hello, I received the bag. I really liked it, thank you so much 🙏&rdquo; &mdash; from a conversation
-        published in the <cite>instyle.zh2 &ldquo;reviews&rdquo; highlight</cite>, &asymp; early October 2025.</p>
-
+    <blockquote class="order-testimonial" cite="https://www.instagram.com/instyle.zh2">
+      <p>&ldquo;Hello, I received the bag. I really liked it, thank you so much 🙏&rdquo;</p>
+      <footer>Customer review · <cite>instyle.zh2 highlights</cite>, October 2025</footer>
     </blockquote>
-    <p>
-      As she put it herself, <q>I really liked it</q> &mdash; a common reaction judging by the
-      highlight.
-    </p>
     <hr>
 
     <figure class="order-photo">
@@ -72,7 +61,7 @@
       <figcaption>The order desk in the store.</figcaption>
     </figure>
 
-    <p>
+    <p class="order-contact-line">
       Contact us by email at <a href="mailto:zhan.ideas@mail.ru">zhan.ideas@mail.ru</a> or
       by phone at <a href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a> if you
       have questions before filling out the form <i>below</i> &mdash; we reply <b>within the
@@ -83,44 +72,47 @@
     <!-- Comment: form is the right tag here (not a div/span question), but fieldset
          groups fields by meaning inside it — fulfillment method vs. customer details. -->
     <!-- Only inline style: cascade demo overriding the external form border. -->
-    <form class="order-form" action="#" method="post" style="border-top: 3px solid #c0c0c0;">
-      <p><small>This is a learning form: it doesn&rsquo;t submit anywhere, there&rsquo;s no server behind it
-          yet.</small></p>
+    <form class="order-form" action="#" method="post" style="border-top: 3px solid #111111;">
+      <header class="order-form-heading">
+        <h3>Reserve an item</h3>
+        <span>Fields marked * are required</span>
+      </header>
+      <p class="order-form-note"><small>This is a learning form: it doesn&rsquo;t submit anywhere, there&rsquo;s no server behind it yet.</small></p>
 
-      <fieldset>
+      <fieldset class="order-field-row">
         <legend>Contact Details</legend>
 
-        <p>
-          <label for="name">Name*</label><br>
+        <p class="order-field">
+          <label for="name">Name*</label>
           <input type="text" id="name" name="name" placeholder="Enter your name" required>
         </p>
 
-        <p>
-          <label for="email">Email*</label><br>
+        <p class="order-field">
+          <label for="email">Email*</label>
           <input type="email" id="email" name="email" placeholder="example@mail.com" required>
         </p>
 
-        <p>
-          <label for="phone">Phone*</label><br>
+        <p class="order-field order-field-wide">
+          <label for="phone">Phone*</label>
           <input type="tel" id="phone" name="phone" placeholder="+7 700 000 00 00" required>
         </p>
       </fieldset>
 
-      <fieldset>
+      <fieldset class="order-field-row">
         <legend>Order Details</legend>
 
-        <p>
-          <label for="qty">Quantity</label><br>
+        <p class="order-field">
+          <label for="qty">Quantity</label>
           <input type="number" id="qty" name="qty" min="1" value="1">
         </p>
 
-        <p>
-          <label for="pickup-date">Desired pickup date</label><br>
+        <p class="order-field">
+          <label for="pickup-date">Desired pickup date</label>
           <input type="date" id="pickup-date" name="pickup-date">
         </p>
 
-        <p>
-          <label for="size">Size</label><br>
+        <p class="order-field order-field-wide">
+          <label for="size">Size</label>
           <select id="size" name="size">
             <option value="s">S</option>
             <option value="m">M</option>
@@ -129,32 +121,32 @@
           </select>
         </p>
 
-        <fieldset>
+        <fieldset class="order-choices">
           <legend>Fulfillment Method</legend>
-          <p>
+          <label class="order-choice" for="pickup">
             <input type="radio" id="pickup" name="delivery-method" value="pickup" checked>
-            <label for="pickup">Pickup</label>
-          </p>
-          <p>
+            <span>Pickup</span>
+          </label>
+          <label class="order-choice" for="courier">
             <input type="radio" id="courier" name="delivery-method" value="courier">
-            <label for="courier">Courier</label>
-          </p>
+            <span>Courier</span>
+          </label>
         </fieldset>
 
-        <p>
-          <label for="comment">Order comment</label><br>
+        <p class="order-field order-field-wide">
+          <label for="comment">Order comment</label>
           <textarea id="comment" name="comment" placeholder="For example: gift wrapping needed"></textarea>
         </p>
 
-        <p>
+        <p class="order-consent order-field-wide">
           <input type="checkbox" id="agree" name="agree" required>
           <label for="agree">I agree to the data processing terms*</label>
         </p>
       </fieldset>
 
-      <p>
-        <button type="submit">Submit Order</button>
-        <button type="reset">Clear Form</button>
+      <p class="order-actions">
+        <button class="order-submit" type="submit">Submit Order</button>
+        <button class="order-clear" type="reset">Clear Form</button>
       </p>
     </form>
 
