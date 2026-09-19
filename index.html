@@ -5,27 +5,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Homepage of the Instyle.zh2 clothing store website — catalog, lookbook, delivery, reviews and contacts.">
-  <meta name="author" content="Daria, Alina, Zhansaya">
+    content="Homepage of the Instyle.zh2 clothing store website — catalog, lookbook, reviews and contacts.">
+  <meta name="author" content="Dariya, Alina, Zhansaya">
   <title>Instyle.zh2 — Clothing Store</title>
   <link rel="stylesheet" href="css/base.css">
 </head>
 
-<body>
+<body class="home-page">
   <!-- Comment (why, not what): we use header/nav/main/footer instead of div,
        because these are semantically meaningful, "real" sections of every page on
        the site, not faceless containers — this way the browser, search engine and
        screen reader all understand the page structure. -->
-  <!-- Shared page: intro text drafted by Daria from verified store data; navigation
+  <!-- Shared page: intro text drafted by Dariya from verified store data; navigation
        and structure agreed on by the whole team. -->
 
-  <header class="site-header" id="page-top"><h1 class="site-title">Instyle.zh2</h1><p>Everyday clothing at prices that make sense.</p></header>
+  <header class="site-header" id="page-top"><h1 class="site-title">Instyle.zh2</h1></header>
   <nav class="site-nav" aria-label="Primary navigation"><ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="colophon.html">About This Site</a></li><li><a href="catalog.html">Catalog</a></li><li><a href="lookbook.html">Lookbook</a></li><li><a href="order.html">Order</a></li><li><a href="about.html">About Us</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contacts.html">Contacts</a></li></ul></nav>
 
   <section class="home-hero">
     <div class="home-hero-content">
       <h2>Instyle.zh2</h2>
-      <p>Everyday women&rsquo;s clothing in Astana.</p>
+      <p>Everyday clothing at prices that make sense.</p>
       <a href="catalog.html">Explore the catalog</a>
     </div>
   </section>
@@ -33,7 +33,7 @@
   <main>
     <h2>Welcome</h2>
 
-    <p>
+    <p class="home-overview">
       Instyle.zh2 is a small chain of women&rsquo;s clothing boutiques in Astana, known on
       Instagram as @instyle.zh2. The store runs three locations across the city &mdash; in the
       Nexpo City residential complex, on Respublika Avenue, and in the Severnoye Siyanie
@@ -47,11 +47,15 @@
       of shopping rather than an anonymous storefront.
     </p>
 
-    <p>
-      Here&rsquo;s a quick overview of the site&rsquo;s sections: <a href="lookbook.html">lookbook</a>,
-      <a href="catalog.html">catalog</a>, <a href="delivery.html">delivery terms</a> and
-      <a href="reviews.html">customer reviews</a>.
-    </p>
+    <section class="home-links" aria-labelledby="explore-title">
+      <p class="home-links-label">Quick navigation</p>
+      <h2 id="explore-title">Explore Instyle.zh2</h2>
+      <nav class="home-links-grid" aria-label="Featured sections">
+        <a href="lookbook.html"><strong>Lookbook</strong><span>Discover styled outfits</span></a>
+        <a href="catalog.html"><strong>Catalog</strong><span>Browse the collection</span></a>
+        <a href="reviews.html"><strong>Reviews</strong><span>See customer feedback</span></a>
+      </nav>
+    </section>
   </main>
 
   <footer>

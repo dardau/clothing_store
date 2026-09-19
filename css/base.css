@@ -12,7 +12,7 @@
 
 :root {
   --ink: #000000;
-  --paper: while;
+  --paper: #ffffff;
   --surface: #d4d4d4;
   --line: rgba(0, 0, 0, 0.14);
   --muted: rgb(120,120,120);
@@ -202,7 +202,7 @@ main {
       rgba(0, 0, 0, 0.72),
       rgba(0, 0, 0, 0.08)
     ),
-    url("../images/magazin.jpg") center / cover;
+    url("../images/store.jpeg") center / cover;
 
   color: var(--paper);
 }
@@ -223,6 +223,45 @@ main {
   font-weight: 700;
 }
 
+.home-overview,
+.home-overview a { color: var(--ink); }
+.home-overview a { font-weight: 700; text-decoration-color: var(--ink); }
+.home-page .site-header,
+.home-page .site-nav ul { background: #ffffff; }
+.home-links {
+  margin: 56px 0 10px;
+  padding: 38px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+.home-links-label {
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.home-links > h2 { margin: 0 0 26px; font-size: 2rem; }
+.home-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.home-links-grid a {
+  display: flex;
+  flex-direction: column;
+  min-height: 125px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.home-links-grid a::after { content: "→"; margin-top: auto; font-size: 1.2rem; }
+.home-links-grid a:hover,
+.home-links-grid a:focus { background: var(--ink); color: var(--paper); transform: translateY(-3px); }
+.home-links-grid strong { font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.home-links-grid span { margin-top: 5px; font-size: 0.82rem; }
 main > h2:first-child {
   margin-top: 0;
   text-align: center;
@@ -336,4 +375,8 @@ footer {
 .back-to-top:focus {
   background: var(--surface);
   color: var(--ink);
+}
+@media (max-width: 700px) {
+  .home-links { padding: 26px 18px; }
+  .home-links-grid { grid-template-columns: 1fr 1fr; }
 }
