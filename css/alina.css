@@ -110,32 +110,31 @@ nav ul {
 }
 
 .look-products {
-  padding: 5px 35px 50px;
+  padding: 20px 55px 70px;
 }
 
 .look-products-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 35px;
 }
 
 .look-products-header h3 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
 .look-products-header span {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
   color: #777;
 }
 
 .look-products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 50px 12px;
+  gap: 70px 14px;
 }
 
 .look-product {
@@ -147,7 +146,7 @@ nav ul {
 .look-product-image {
   position: relative;
   width: 100%;
-  height: 485px;
+  height: 330px;
   background-color: #f5f5f7;
   overflow: hidden;
 }
@@ -161,39 +160,39 @@ nav ul {
 
 .look-product-image button {
   position: absolute;
-  right: 12px;
-  bottom: 12px;
-  width: 32px;
-  height: 32px;
+  right: 10px;
+  bottom: 10px;
+  width: 35px;
+  height: 35px;
   border: none;
   background-color: #ffffff;
-  font-size: 16px;
+  font-size: 21px;
   padding: 0;
   cursor: pointer;
 }
 
 .look-product h4 {
-  margin: 12px 10px 3px;
-  font-size: 0.95rem;
+  margin: 12px 10px 4px;
+  font-size: 0.9rem;
   line-height: 1.35;
   font-weight: 700;
-  min-height: 52px;
+  min-height: 42px;
 }
 
 .look-product p {
   margin: 0 10px 12px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
 .look-add-button {
   width: calc(100% - 20px);
   margin: 0 10px;
-  height: 43px;
+  height: 40px;
   border: none;
   background-color: #000000;
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
 }
@@ -218,4 +217,123 @@ nav ul {
   .look-product-image {
     height: 300px;
   }
+}
+
+#razmery {
+  padding: 40px 50px 60px;
+}
+
+#razmery>h3 {
+  margin-bottom: 30px;
+}
+
+
+/* TABLE + MEASUREMENT IMAGE */
+
+.size-measurement {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+
+/* SIZE TABLE */
+
+.size-chart table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.size-chart caption {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.size-chart th,
+.size-chart td {
+  border: 1px solid #ccc;
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.size-chart thead th {
+  background-color: #d3d3d3;
+}
+
+.size-chart tbody th {
+  background-color: #d3d3d3;
+}
+
+
+/* HOW TO MEASURE */
+
+.measure-guide h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.measure-guide img {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+}
+
+
+/* OVERSIZE + SLIM FIT */
+
+.fit-information {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  max-width: 1300px;
+  margin: 45px auto 0;
+  padding-top: 25px;
+  border-top: 1px solid #ddd;
+}
+
+.fit-item h3 {
+  margin: 0 0 8px;
+}
+
+.fit-item p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* ADDITIONAL INFORMATION */
+
+.size-notes {
+  max-width: 1300px;
+  margin: 30px auto 0;
+}
+
+.size-notes p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  .size-measurement {
+    grid-template-columns: 1fr;
+  }
+
+  .fit-information {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  #razmery {
+    padding: 30px 20px;
+  }
+
 }
