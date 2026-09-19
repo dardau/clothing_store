@@ -392,10 +392,9 @@ a[href^="#"] {
 }
 .contacts-page a { color: inherit; text-decoration: none; }
 .contacts-page .site-header { background: var(--contact-white); }
-.contacts-page .site-nav ul { background: var(--contact-white); }
 .contacts-page .site-nav li > a:hover,
 .contacts-page .site-nav li > a:focus,
-.contacts-page .site-nav li > a[aria-current="page"] { opacity: 0.5; text-decoration: none; }
+.contacts-page .site-nav li > a[aria-current="page"] { color: #c0c0c0; opacity: 1; text-decoration: none; }
 .contacts-main { width: min(1200px, 94%); padding: 56px 24px 80px; }
 .contacts-hero {
   display: grid;

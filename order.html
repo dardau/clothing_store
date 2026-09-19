@@ -16,21 +16,37 @@
   <!-- Comment: the form doesn't submit anywhere — at this stage of the course there's
        no server-side processing yet, so the action attribute points "nowhere" for now. -->
 
-  <header class="site-header" id="page-top">
-    <h1 class="site-title">Instyle.zh2</h1>
+  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-label="Open navigation menu">
+
+  <header class="top-nav" id="page-top">
+    <div class="top-nav-left">
+      <label class="top-nav-control" for="menu-toggle">
+        <span class="bars"><span></span><span></span><span></span></span>
+        Menu
+      </label>
+    </div>
+    <h1 class="top-nav-logo">Instyle.zh2</h1>
+    <div class="top-nav-right"><a href="contacts.html">Contact us</a></div>
   </header>
-  <nav class="site-nav" aria-label="Primary navigation">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="colophon.html">About This Site</a></li>
-      <li><a href="catalog.html">Catalog</a></li>
-      <li><a href="lookbook.html">Lookbook</a></li>
-      <li><a href="order.html" aria-current="page">Order</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="reviews.html">Reviews</a></li>
-      <li><a href="contacts.html">Contacts</a></li>
-    </ul>
-  </nav>
+
+  <label class="menu-overlay" for="menu-toggle"></label>
+  <aside class="side-menu" aria-label="Menu panel">
+    <label class="side-menu-close" for="menu-toggle">×</label>
+    <p class="side-menu-title">Instyle.zh2</p>
+    <nav aria-label="Side navigation">
+      <ul class="side-menu-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="lookbook.html">Lookbook</a></li>
+        <li><a href="order.html" aria-current="page">Order</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contacts.html">Contacts</a></li>
+      </ul>
+    </nav>
+    <hr class="side-menu-divider">
+    <p class="side-menu-footer"><a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a><a href="mailto:zhan.ideas@mail.ru">Email us</a><a href="tel:+77012540203">WhatsApp</a></p>
+  </aside>
   <main>
     <h2>Placing an Order</h2>
 
