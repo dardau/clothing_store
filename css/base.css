@@ -2,7 +2,7 @@
   Colour palette:
   #000000 — primary text and strong borders for clear contrast.
   #ffffff — main page background and light text.
-  #c0c0c0 — navigation and secondary surfaces.
+  #d4d4d4 — navigation and secondary surfaces.
   rgba(0, 0, 0, 0.14) — subtle borders and separators.
   white — button text on dark buttons.
 
@@ -12,7 +12,7 @@
 
 :root {
   --ink: #000000;
-  --paper: #ffffff;
+  --paper: white;
   --surface: #d4d4d4;
   --line: rgba(0, 0, 0, 0.14);
   --muted: rgb(120,120,120);
