@@ -2,7 +2,7 @@
   Colour palette:
   #000000 — primary text and strong borders for clear contrast.
   #ffffff — main page background and light text.
-  #c0c0c0 — navigation and secondary surfaces.
+  #d4d4d4 — navigation and secondary surfaces.
   rgba(0, 0, 0, 0.14) — subtle borders and separators.
   white — button text on dark buttons.
 
@@ -12,10 +12,10 @@
 
 :root {
   --ink: #000000;
-  --paper: #ffffff;
+  --paper: white;
   --surface: #d4d4d4;
   --line: rgba(0, 0, 0, 0.14);
-  --muted: rgb(120,120,120);
+  --muted: #d4d4d4;
 
   --body-font: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
   --heading-font: Georgia, "Times New Roman", serif;
@@ -103,7 +103,7 @@ a:focus {
 .bars { display: inline-flex; flex-direction: column; gap: 4px; width: 20px; }
 .bars span { height: 2px; background: currentColor; }
 .top-nav-logo { flex: 1; margin: 0; font-size: 1.5rem; letter-spacing: 0.14em; text-align: center; text-transform: uppercase; }
-.top-nav-right { flex: 1; text-align: right; }
+.top-nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 20px; flex: 1; text-align: right; }
 .top-nav-right a { color: inherit; text-decoration: none; }
 
 .menu-overlay {
@@ -127,7 +127,7 @@ a:focus {
   padding: 26px 30px;
   overflow-y: auto;
   background: var(--ink);
-  color: #ffffff;
+  color: var(--paper);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
 }
@@ -137,168 +137,14 @@ a:focus {
 .side-menu-close { float: right; font-size: 1.7rem; line-height: 1; cursor: pointer; }
 .side-menu-title { margin: 6px 0 30px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 .side-menu-nav { display: flex; flex-direction: column; gap: 22px; margin: 0; padding: 0; list-style: none; }
-.side-menu-nav a { color: #ffffff; font-size: 1.15rem; font-weight: 600; text-decoration: none; }
+.side-menu-nav a { color: var(--paper); font-size: 1.15rem; font-weight: 600; text-decoration: none; }
 .side-menu-nav a:hover,
 .side-menu-nav a:focus,
-.side-menu-nav a[aria-current="page"] { color: #c0c0c0; text-decoration: none; }
-.side-menu-divider { margin: 26px 0; border: 0; border-top: 1px solid #333333; }
-.side-menu-footer a { display: block; margin-bottom: 12px; color: #ffffff; text-decoration: none; }
+.side-menu-nav a[aria-current="page"] { color: var(--surface); text-decoration: none; }
+.side-menu-divider { margin: 26px 0; border: 0; border-top: 1px solid var(--line); }
+.side-menu-footer a { display: block; margin-bottom: 12px; color: var(--paper); text-decoration: none; }
 .side-menu-footer a:hover,
-.side-menu-footer a:focus { color: #c0c0c0; }
-
-@media (max-width: 700px) {
-  .top-nav { padding: 18px; }
-  .top-nav-logo { font-size: 1.05rem; }
-  .top-nav-right { font-size: 0.8rem; }
-}
-
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 81px;
-  padding: 22px 32px;
-  border-bottom: 1px solid var(--line);
-  background: #ffffff;
-  text-align: center;
-}
-
-.site-header::after {
-  content: "Contact us";
-  position: absolute;
-  right: 32px;
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-}
-
-.site-title {
-  position: static;
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
-
-.site-nav {
-  position: fixed;
-  top: 22px;
-  left: 32px;
-  z-index: 55;
-  color: var(--ink);
-}
-
-.site-nav::before {
-  content: "☰ Menu";
-  display: block;
-  padding: 4px 0 36px;
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-}
-
-.site-nav ul {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: 22px;
-  width: 320px;
-  max-width: 85vw;
-  height: 100vh;
-  margin: 0;
-  padding: 26px 30px;
-  border: 1px solid #000000;
-  background: #000000;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
-  list-style: none;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(-100%);
-  transition:
-    opacity 0.2s ease,
-    transform 0.25s ease,
-    visibility 0.2s ease;
-}
-
-.site-nav ul::before {
-  content: "Instyle.zh2";
-  display: block;
-  margin: 6px 0 8px;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.site-nav:hover ul,
-.site-nav:focus-within ul {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-}
-
-.site-nav-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 56;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 320px;
-  max-width: 85vw;
-  margin: 0;
-  padding: 22px 30px 26px;
-  border-top: 1px solid #333333;
-  background: #000000;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(-100%);
-  transition: opacity 0.2s ease, transform 0.25s ease, visibility 0.2s ease;
-}
-
-.site-nav:hover .site-nav-footer,
-.site-nav:focus-within .site-nav-footer {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-}
-
-.site-nav .site-nav-footer a {
-  color: #ffffff;
-  font-size: 0.92rem;
-  text-decoration: none;
-}
-
-.site-nav .site-nav-footer a:hover,
-.site-nav .site-nav-footer a:focus { color: #c0c0c0; }
-
-.site-nav li > a {
-  color: #ffffff;
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-decoration: none;
-}
-
-.site-nav li > a:hover,
-.site-nav li > a:focus,
-.site-nav li > a[aria-current="page"] {
-  color: #c0c0c0;
-  text-decoration: none;
-}
+.side-menu-footer a:focus { color: var(--surface); }
 
 a[target="_blank"]::after {
   content: " ↗";
@@ -310,6 +156,9 @@ main {
   margin: 0 auto;
   padding: 48px 32px;
 }
+
+/* Static is intentional here: the footer remains in normal document flow. */
+.site-footer { position: static; }
 
 .home-hero {
   position: relative;
@@ -350,7 +199,6 @@ main {
 .home-overview,
 .home-overview a { color: var(--ink); }
 .home-overview a { font-weight: 700; text-decoration-color: var(--ink); }
-.home-page .site-header { background: #ffffff; }
 .home-links {
   margin: 56px 0 10px;
   padding: 38px;
@@ -498,8 +346,4 @@ footer {
 .back-to-top:focus {
   background: var(--surface);
   color: var(--ink);
-}
-@media (max-width: 700px) {
-  .home-links { padding: 26px 18px; }
-  .home-links-grid { grid-template-columns: 1fr 1fr; }
 }

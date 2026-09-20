@@ -19,6 +19,7 @@ was purchased and no hosting was used — this is a set of local files.
 ├── contacts.html         — contacts, item reservation form (Zhansaya)
 ├── lookbook.html         — lookbook (Alina)
 ├── reviews.html          — customer reviews (Alina)
+├── login.html            — account registration page (Zhansaya)
 ├── order.html            — order form (Dariya)
 ├── about.html            — about the store (Dariya)
 ├── css/base.css           — shared palette, typography and page structure
@@ -39,7 +40,8 @@ was purchased and no hosting was used — this is a set of local files.
 | Alina | lookbook.html, reviews.html |
 | Dariya | order.html, about.html |
 
-index.html и colophon.html — were built jointly
+index.html и colophon.html — were built jointly. `login.html` was retained from
+Assignment 1 as the account page; it is not a new theme or replacement page.
 
 
 ## Assignment 2 constraints

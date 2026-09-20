@@ -1,5 +1,12 @@
 
 
+## Login — Zhansaya
+
+`login.html` is the retained account page from Assignment 1. It contains the
+shared document metadata and navigation plus the registration form with labels,
+text/email/tel/date/number inputs, select, radio buttons, checkbox, textarea,
+required fields, placeholders, and submit/reset controls.
+
 ## Обязательные на каждой странице
 
 |Tag/attribute              |File        |Line          |Author  |
@@ -355,4 +362,3 @@
 | hr | colophon.html | TODO | TODO |
 | br | colophon.html | TODO | TODO |
 | table (распределение работы) | colophon.html | TODO | TODO |
-
