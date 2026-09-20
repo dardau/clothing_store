@@ -1,10 +1,12 @@
-figcaption {
-  color: var(--surface);
+/* position: static is the default flow behaviour, kept here on purpose as
+   the baseline that the fixed back-to-top button and the absolutely
+   positioned badges/labels are compared against. */
+main {
+  position: static;
 }
 
 h4 {
   margin: 4px 0 6px;
-  font-size: 1rem;
 }
 
 /* Adjacent sibling selector (+): matches a <p> immediately after an <h3>.
@@ -22,7 +24,6 @@ h3 + p {
   margin-top: 0;
   margin-bottom: 32px;
   overflow: hidden;
-  box-shadow: none;
 }
 
 /* Descendant selector: matches an <img> anywhere inside .hero. */
@@ -75,11 +76,13 @@ h3 + p {
 }
 
 /*
-  Child combinator (>) with :not() and :has() selects the text sections
-  directly inside main. clear: both stops the next section from wrapping
-  around the floated image; without it, the image could extend beside it.
+  Child combinator (>): matches only .text-section elements that are direct
+  children of <main> (the four text blocks at the top of the catalog).
+  clear: both moves the section below the floated .intro-photo. Without it
+  the photo, which is taller than the paragraph, would stick out under the
+  first section and the next heading and text would wrap around it.
 */
-main > section:not(.category-grid):has(> h3) {
+main > .text-section {
   max-width: 720px;
   margin: 24px auto;
   clear: both;
@@ -92,7 +95,6 @@ main > section:not(.category-grid):has(> h3) {
 #tops,
 #bottoms,
 #accessories {
-  max-width: none;
   margin: 24px 0 48px;
 }
 
@@ -104,7 +106,6 @@ main > section h3 {
 }
 
 main > section p {
-  color: var(--ink);
   line-height: 1.6;
 }
 
@@ -117,11 +118,16 @@ main > section p {
   margin: 0 0 48px;
 }
 
+/* :first-child and :last-child match the first and the last category card
+   (Tops and Accessories); they span two columns so every grid row stays full. */
 .category-card:first-child,
 .category-card:last-child {
   grid-column: span 2;
 }
 
+
+/* position: relative makes each card the containing block for its
+   absolutely positioned label <span>. */
 .category-card {
   position: relative;
   display: block;
@@ -130,9 +136,7 @@ main > section p {
   transition: opacity 0.3s ease;
 }
 
-/* :has() + :hover: while one card is hovered, every other card in the grid
-   fades out. */
-.category-grid:has(.category-card:hover) .category-card:not(:hover) {
+.category-grid:hover .category-card:not(:hover) {
   opacity: 0.45;
 }
 
@@ -164,25 +168,27 @@ main > section p {
 /* Pseudo-element ::before adds an arrow before every label without an extra
    HTML element. */
 .category-card span::before {
-  content: "->";
+  content: "→ ";
 }
 
 /*
-  Specificity experiment.
-  Specificity: .product-card figcaption = 0-1-1.
-  This rule loses the conflict.
-*/
-.product-card figcaption {
-  color: var(--surface);
-}
-
-/*
-  Specificity: .product-grid .product-card figcaption = 0-2-1.
-  This rule wins because it has higher specificity (two classes beat one),
-  so no important-flag hack is needed.
+  Specificity experiment: two rules target the same <figcaption>.
+  Specificity of this rule: .product-grid .product-card figcaption = 0-2-1
+  (two classes + one type). It WINS, although it is written first, because
+  the browser compares specificity before source order. The conflict is
+  resolved with a more specific selector, not with !important.
 */
 .product-grid .product-card figcaption {
   color: var(--ink);
+}
+
+/*
+  Specificity of this rule: .product-card figcaption = 0-1-1
+  (one class + one type). It LOSES to the rule above even though it comes
+  later in the file: 0-1-1 is lower than 0-2-1.
+*/
+.product-card figcaption {
+  color: var(--muted);
 }
 
 .product-grid {
@@ -232,13 +238,23 @@ main > section p {
   display: block;
   margin-top: 6px;
   font-size: 0.72rem;
-  color: var(--surface);
+  color: var(--ink);
   letter-spacing: 0.04em;
 }
 
-/* Attribute selector: matches links whose href starts with "#", that is
-   the in-page links (category cards, "Back to categories"). */
-a[href^="#"] {
+.price {
+  white-space: nowrap;
+}
+
+.catalog-back-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+/* Attribute selector: matches links inside <main> whose href starts with
+   "#", i.e. the in-page links (category cards, "Back to categories"). */
+main a[href^="#"] {
   color: var(--ink);
 }
 
@@ -256,8 +272,13 @@ a[href^="#"] {
   box-shadow: inset 0 1px 1px var(--line);
 }
 
-/* Centering with flexbox: justify-content and align-items center the arrow
-   inside the fixed-size button. */
+/*
+  position: fixed takes the button out of the flow and pins it to the
+  viewport, so it stays in the corner while the page scrolls.
+  Centering with flexbox: justify-content and align-items center the arrow
+  inside the fixed-size button. base.css centres it with grid; this file is
+  linked second, so its display: flex wins the cascade on my pages.
+*/
 .back-to-top {
   position: fixed;
   bottom: 24px;
@@ -285,7 +306,7 @@ a[href^="#"] {
    the max-width card. */
 .info-card {
   max-width: 1000px;
-  margin: 0 auto 48px;
+  margin: 40px auto 48px;
   padding: 24px 28px;
   border-radius: 4px;
   background-color: var(--paper);
@@ -297,7 +318,7 @@ a[href^="#"] {
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
-  color: var(--surface);
+  color: var(--muted);
   margin-bottom: 16px;
 }
 
@@ -313,7 +334,6 @@ a[href^="#"] {
 .info-card > ul > li {
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--ink);
   border-top: 2px solid var(--surface);
   padding-top: 10px;
 }
@@ -327,7 +347,7 @@ a[href^="#"] {
 
 .info-card > ul > li > ul > li {
   font-size: 0.82rem;
-  color: var(--surface);
+  color: var(--muted);
   padding: 3px 0;
 }
 
@@ -351,9 +371,7 @@ a[href^="#"] {
 }
 
 .details-col table {
-  width: 100%;
   max-width: 480px;
-  border-collapse: collapse;
   margin: 12px 0 20px;
 }
 
@@ -366,8 +384,6 @@ a[href^="#"] {
 .details-col th,
 .details-col td {
   padding: 8px 12px;
-  text-align: left;
-  border-bottom: 1px solid var(--line);
 }
 
 .details-col thead th {
@@ -381,7 +397,6 @@ a[href^="#"] {
   width: 100%;
   max-height: 220px;
   object-fit: cover;
-  border-radius: 4px;
   margin-bottom: 16px;
 }
 
@@ -397,19 +412,7 @@ a[href^="#"] {
   font-size: 0.9rem;
 }
 
-.contacts-page,
-.login-page {
-  --page-serif: Georgia, "Times New Roman", serif;
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.login-page {
-  background: var(--paper);
-}
-
-.contacts-page a,
-.login-page a {
+.contacts-page a {
   color: inherit;
   text-decoration: none;
 }
@@ -418,10 +421,8 @@ a[href^="#"] {
   display: flex;
   flex-wrap: wrap;
   column-gap: 20px;
-  box-sizing: border-box;
   width: 94%;
   max-width: 1200px;
-  margin: 0 auto;
   padding: 56px 24px 80px;
 }
 
@@ -458,28 +459,29 @@ a[href^="#"] {
   justify-self: start;
 }
 
-
-
 .contacts-hero h2 {
   margin: 10px 0 18px;
-  color: inherit;
-  font-family: var(--page-serif);
   font-size: 6rem;
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.03em;
 }
 
+.contacts-kicker {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .contacts-hero > p:not(.contacts-kicker) {
   max-width: 560px;
   margin: 0 0 28px;
-  color: var(--paper);
   font-size: 1.05rem;
   line-height: 1.6;
 }
 
 .contacts-page .contacts-button {
-  display: inline-block;
   padding: 14px 30px;
   border: 1px solid var(--paper);
   background: var(--paper);
@@ -513,10 +515,7 @@ a[href^="#"] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
   gap: 20px;
-  width: 100%;
-  max-width: none;
   margin: 64px 0;
-  box-sizing: border-box;
 }
 
 .contacts-main > .visit-section > h3 {
@@ -524,7 +523,6 @@ a[href^="#"] {
   margin: 0 0 8px;
   padding: 0;
   border: 0;
-  font-family: var(--page-serif);
   font-size: 2.2rem;
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -532,7 +530,6 @@ a[href^="#"] {
 
 .contact-detail,
 .contact-links {
-  box-sizing: border-box;
   min-height: 230px;
   margin: 0;
   padding: 28px;
@@ -544,20 +541,17 @@ a[href^="#"] {
 .contact-detail h4,
 .contact-links h4 {
   margin: 0 0 18px;
-  font-family: var(--page-serif);
   font-size: 1.35rem;
   font-weight: 400;
 }
 
 .contact-detail p {
   margin: 0;
-  color: var(--ink);
   line-height: 1.7;
 }
 
 .contact-detail strong {
-  color: var(--ink);
-  font-family: var(--page-serif);
+  font-family: var(--heading-font);
   font-size: 1.15rem;
   font-weight: 400;
 }
@@ -571,33 +565,24 @@ a[href^="#"] {
 .contacts-main .contact-links {
   display: flex;
   flex-direction: column;
-  border-color: var(--line);
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.contacts-main .contact-links h4 {
-  color: var(--ink);
 }
 
 .contact-links address {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin: 0;
   font-style: normal;
 }
 
 .contacts-main .contact-links p {
   margin: 0;
-  color: var(--surface);
+  color: var(--muted);
   line-height: 1.5;
 }
 
 .contact-label {
   display: block;
   margin-bottom: 4px;
-  color: var(--surface);
   font-size: 0.8rem;
 }
 
@@ -614,18 +599,17 @@ a[href^="#"] {
 }
 
 .contacts-page .contact-links .contact-phone {
-  color: var(--ink);
-  font-family: var(--page-serif);
+  font-family: var(--heading-font);
   font-size: 1.5rem;
   letter-spacing: 0.01em;
 }
+
 /* This unique section is an in-page link target, so an id is appropriate. */
 #how-to-reach {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 20px;
   row-gap: 32px;
-  max-width: none;
   margin: 72px 0 0;
   padding: 56px;
   border: 1px solid var(--line);
@@ -637,7 +621,6 @@ a[href^="#"] {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family: var(--page-serif);
   font-size: 2.2rem;
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -646,7 +629,6 @@ a[href^="#"] {
 #how-to-reach > ol {
   grid-column: 1 / -1;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 20px;
   margin: 0;
@@ -667,8 +649,7 @@ a[href^="#"] {
   content: counter(step);
   display: block;
   margin-bottom: 14px;
-  color: var(--ink);
-  font-family: var(--page-serif);
+  font-family: var(--heading-font);
   font-size: 2.6rem;
   line-height: 1;
 }
@@ -679,7 +660,7 @@ a[href^="#"] {
   padding: 32px 0 0;
   border-top: 1px solid var(--line);
   list-style: none;
-  font-family: var(--page-serif);
+  font-family: var(--heading-font);
   font-size: 1.25rem;
 }
 
@@ -688,8 +669,7 @@ a[href^="#"] {
   padding: 0 0 0 16px;
   border-left: 2px solid var(--surface);
   list-style: none;
-  color: var(--surface);
-  font-family: inherit;
+  color: var(--muted);
   font-size: 0.95rem;
 }
 
@@ -713,19 +693,17 @@ a[href^="#"] {
 
 #how-to-reach dd {
   margin: 0;
-  color: var(--ink);
   line-height: 1.6;
 }
 
 .contacts-main > .footnote {
   margin: 14px 0 72px;
-  color: var(--surface);
+  color: var(--muted);
   font-size: 0.85rem;
   line-height: 1.6;
 }
 
-.contacts-page .footnote a,
-.contacts-page .contacts-note a {
+.contacts-page .footnote a {
   border-bottom: 1px solid var(--surface);
 }
 
@@ -733,9 +711,8 @@ a[href^="#"] {
   max-width: 900px;
   margin: 0 auto 14px;
   padding: 40px 24px 0;
-  border: 0;
   border-top: 1px solid var(--ink);
-  font-family: var(--page-serif);
+  font-family: var(--heading-font);
   font-size: 1.9rem;
   line-height: 1.4;
   text-align: center;
@@ -747,7 +724,7 @@ a[href^="#"] {
 
 .contacts-main > .quote-author {
   margin: 0 0 56px;
-  color: var(--surface);
+  color: var(--muted);
   font-size: 0.95rem;
   text-align: center;
 }
@@ -755,14 +732,12 @@ a[href^="#"] {
 .contacts-main > .contacts-note {
   margin: 0 0 72px;
   padding: 0 18%;
-  color: var(--ink);
   line-height: 1.8;
   text-align: center;
 }
 
 .contacts-main > .contact-copy {
   flex: 1 1 30%;
-  max-width: none;
   margin: 0 0 72px;
   padding: 30px 32px;
   border: 1px solid var(--line);
@@ -773,21 +748,18 @@ a[href^="#"] {
   margin: 0 0 16px;
   padding: 0 0 14px;
   border-bottom: 1px solid var(--surface);
-  font-family: var(--page-serif);
   font-size: 1.35rem;
   font-weight: 400;
 }
 
 .contact-copy p {
   margin: 0;
-  color: var(--ink);
   font-size: 0.95rem;
   line-height: 1.75;
 }
 
 .contact-back-links {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   gap: 32px;
@@ -812,8 +784,6 @@ a[href^="#"] {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   width: auto;
-  max-width: none;
-  margin: 0;
   padding: 0;
 }
 
@@ -835,21 +805,11 @@ a[href^="#"] {
 
 .login-form {
   align-self: center;
-  box-sizing: border-box;
   width: 100%;
   max-width: 640px;
   padding: 64px 96px 72px;
 }
 
-.login-form > p:first-child {
-  margin: 0 0 32px;
-  color: var(--surface);
-  font-size: 0.8rem;
-}
-
-/* The fieldset is a 2-column grid so short fields (email + phone, birth date
-   + size) can sit side by side while long fields span both columns.
-   Flexbox cannot do that without wrapper rows. */
 .login-form fieldset {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -883,22 +843,22 @@ a[href^="#"] {
 
 .login-form fieldset > .login-intro {
   margin-bottom: 8px;
-  color: var(--ink);
   font-size: 1.05rem;
   line-height: 1.5;
 }
-
+/* !important demonstration:
+   it keeps form labels muted even if another general label rule
+   has the same or lower specificity. */
 .login-form label {
   display: block;
   margin-bottom: 2px;
-  color: var(--surface);
+  color: var(--muted) !important;
   font-size: 0.8rem;
 }
 
 .login-form input:not([type="radio"]):not([type="checkbox"]),
 .login-form select,
 .login-form textarea {
-  box-sizing: border-box;
   width: 100%;
   padding: 10px 0 9px;
   border: 0;
@@ -906,7 +866,6 @@ a[href^="#"] {
   border-radius: 0;
   background: transparent;
   color: var(--ink);
-  font-family: inherit;
   font-size: 1.05rem;
   font-weight: 500;
 }
@@ -924,8 +883,6 @@ a[href^="#"] {
   outline: 0;
 }
 
-/* Attribute selector + adjacent sibling: the label that follows a radio
-   button or the checkbox is inline and darker, like normal text. */
 .login-form input[type="radio"] + label,
 .login-form input[type="checkbox"] + label {
   display: inline;
@@ -935,7 +892,6 @@ a[href^="#"] {
 
 .login-form fieldset fieldset {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 8px 32px;
 }
@@ -943,16 +899,11 @@ a[href^="#"] {
 .login-form fieldset fieldset legend {
   width: 100%;
   margin: 0 0 4px;
-  color: var(--surface);
+  color: var(--muted);
   font-size: 0.8rem;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
-}
-
-.login-form fieldset fieldset > p {
-  flex: 0 1 auto;
-  margin: 0;
 }
 
 .login-form > p:last-child {
@@ -962,16 +913,10 @@ a[href^="#"] {
   margin: 36px 0 0;
 }
 
-.login-form button {
-  font-family: inherit;
-  cursor: pointer;
-}
 
 .login-form button[type="submit"] {
   padding: 22px 24px;
-  border: 1px solid var(--ink);
   border-radius: 4px;
-  background: var(--ink);
   color: var(--paper);
   font-size: 1.05rem;
   font-weight: 800;
@@ -990,12 +935,87 @@ a[href^="#"] {
   padding: 8px;
   border: 0;
   background: transparent;
-  color: var(--surface);
+  color: var(--muted);
   font-size: 0.9rem;
   text-decoration: underline;
 }
 
 .login-form button[type="reset"]:hover,
 .login-form button[type="reset"]:focus {
+  color: var(--ink);
+}
+
+.signin-section {
+  max-width: 520px;
+  margin: 60px auto 0;
+  padding: 36px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.signin-section h2 {
+  margin: 0 0 12px;
+  font-family: var(--heading-font);
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.signin-section > p {
+  margin: 0 0 28px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.signin-section form {
+  display: grid;
+  gap: 18px;
+}
+
+.signin-section form p {
+  margin: 0;
+}
+
+.signin-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.signin-section input[type="email"],
+.signin-section input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+}
+
+.signin-section input:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.signin-section button {
+  padding: 13px 22px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.signin-section button:hover {
+  background: var(--paper);
   color: var(--ink);
 }
