@@ -270,7 +270,7 @@ a[href^="#"] {
   height: 44px;
   border-radius: 50%;
   background-color: var(--ink);
-  color: var(--button-text);
+  color: var(--paper);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -459,8 +459,8 @@ a[href^="#"] {
   column-gap: 12px;
   min-height: 480px;
   padding: 64px 24px;
-  background: var(--ink);
-  color: var(--button-text);
+  background: url("../images/contactsimg.jpg") center / cover;
+  color: var(--paper);
   text-align: center;
 }
 
@@ -476,12 +476,7 @@ a[href^="#"] {
   justify-self: start;
 }
 
-.contacts-kicker {
-  margin: 0;
-  font-size: 1rem;
-  letter-spacing: 0.06em;
-  color: var(--surface);
-}
+
 
 .contacts-hero h2 {
   margin: 10px 0 18px;
@@ -534,9 +529,12 @@ a[href^="#"] {
 .contacts-main > .visit-section {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
   gap: 20px;
+  width: 100%;
   max-width: none;
-  margin: 72px 0;
+  margin: 64px 0;
+  box-sizing: border-box;
 }
 
 .contacts-main > .visit-section > h3 {
@@ -552,14 +550,18 @@ a[href^="#"] {
 
 .contact-detail,
 .contact-links {
-  padding: 32px;
+  box-sizing: border-box;
+  min-height: 230px;
+  margin: 0;
+  padding: 28px;
   border: 1px solid var(--line);
   background: var(--paper);
+  align-self: stretch;
 }
 
 .contact-detail h4,
 .contact-links h4 {
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   font-family: var(--page-serif);
   font-size: 1.35rem;
   font-weight: 400;
@@ -568,7 +570,7 @@ a[href^="#"] {
 .contact-detail p {
   margin: 0;
   color: var(--ink);
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 .contact-detail strong {
@@ -587,53 +589,54 @@ a[href^="#"] {
 .contacts-main .contact-links {
   display: flex;
   flex-direction: column;
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--paper);
+  border-color: var(--line);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 .contacts-main .contact-links h4 {
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .contact-links address {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
+  margin: 0;
   font-style: normal;
 }
 
 .contacts-main .contact-links p {
   margin: 0;
   color: var(--surface);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .contact-label {
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
   color: var(--surface);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
 
 .contacts-page .contact-links a {
-  color: var(--paper);
+  color: var(--ink);
   border-bottom: 1px solid var(--line);
   transition: border-color 0.2s ease;
 }
 
 .contacts-page .contact-links a:hover,
 .contacts-page .contact-links a:focus {
-  border-bottom-color: var(--paper);
+  border-bottom-color: var(--ink);
   outline: 0;
 }
 
 .contacts-page .contact-links .contact-phone {
+  color: var(--ink);
   font-family: var(--page-serif);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   letter-spacing: 0.01em;
 }
-
 /* This unique section is an in-page link target, so an id is appropriate. */
 #how-to-reach {
   display: grid;
@@ -823,26 +826,6 @@ a[href^="#"] {
   outline: 0;
 }
 
-.contacts-page footer,
-.login-page footer {
-  padding: 36px 24px;
-  background: var(--ink);
-  color: var(--surface);
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.contacts-page footer p,
-.login-page footer p {
-  margin: 4px 0;
-}
-
-.contacts-page footer a,
-.login-page footer a {
-  color: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-
 .login-main {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -866,30 +849,6 @@ a[href^="#"] {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.login-photo::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 180px;
-  background: var(--ink);
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.login-photo figcaption {
-  position: absolute;
-  top: 32px;
-  left: 40px;
-  z-index: 1;
-  color: var(--paper);
-  font-family: var(--page-serif);
-  font-size: 2rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
 .login-form {
@@ -1031,7 +990,7 @@ a[href^="#"] {
   border: 1px solid var(--ink);
   border-radius: 4px;
   background: var(--ink);
-  color: var(--button-text);
+  color: var(--paper);
   font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: 0.04em;
