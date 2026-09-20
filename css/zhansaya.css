@@ -254,7 +254,7 @@ main > section p {
 
 /* Attribute selector: matches links inside <main> whose href starts with
    "#", i.e. the in-page links (category cards, "Back to categories"). */
-main a[href^="#"] {
+main a[href^="#"]:not(.back-to-top) {
   color: var(--ink);
 }
 
@@ -1019,3 +1019,4 @@ main a[href^="#"] {
   background: var(--paper);
   color: var(--ink);
 }
+
