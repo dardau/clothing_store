@@ -1,7 +1,4 @@
-/* Dariya — personal stylesheet for about.html and order.html. */
-/* ID selector: #about-page is unique because it is the single About main region. */
 #about-page { padding-top: 110px; }
-/* About already has its own checkbox-controlled hamburger. */
 .about-page {
   padding-top: 0;
   background: var(--paper);
@@ -54,7 +51,6 @@
   text-align: center;
 }
 .store-facts strong { color: var(--ink); font-family: var(--heading-font); font-size: 1.5rem; }
-/* Grid beats Flexbox here: photos form equal columns and one spans both. */
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -220,7 +216,6 @@
 }
 .back-links a:hover,
 .back-links a:focus { background: var(--ink); color: var(--paper); }
-/* Reused on About and Order; items wrap and grow or shrink as space changes. */
 .content-cards { display: flex; flex-direction: row; flex-wrap: wrap; gap: 24px; }
 .content-cards > * {
   flex: 1 1 280px;
@@ -231,7 +226,6 @@
   box-shadow: 0 8px 24px rgba(23, 23, 23, 0.06);
 }
 .story-card + .fun-fact { border-left: 4px solid var(--ink); }
-/* The order photo is a separate centred block so surrounding text stays readable. */
 .order-page { background: #f7f7f7; color: #111111; }
 .order-introduction {
   max-width: 900px;
@@ -323,7 +317,6 @@
 .order-contact-line,
 .order-contact-line a { color: #111111; }
 .order-contact-line a { font-weight: 700; text-decoration-color: #111111; }
-/* Clear keeps the form separated if floated media is added before it later. */
 .order-form {
   clear: both;
   max-width: 680px;
@@ -336,7 +329,6 @@
 .order-form-heading h3 { margin: 0; font-size: 1.7rem; font-weight: 400; }
 .order-form-heading span { color: #777777; font-size: 0.75rem; }
 .order-form-note { margin: 8px 0 30px; color: #777777; }
-/* Grid aligns related form fields in two columns more clearly than Flexbox. */
 .order-field-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -399,9 +391,8 @@
 .order-clear,
 .order-clear:hover,
 .order-clear:focus { padding: 7px 0; border: 0; border-bottom: 1px solid #777777; background: transparent; color: #777777; }
-/* Five competing rules for Task A; specificity rises on each line. */
-h2 { color: var(--ink); }                                  /* (0,0,1) */
-.page-title { color: var(--accent); }                       /* (0,1,0) */
-main .page-title { color: var(--ink); }                     /* (0,1,1) */
-#about-page h2 { color: var(--accent); }                    /* (1,0,1) */
-#about-page .about-hero > .page-title { color: #ffffff; }   /* (1,2,0), winner */
+h2 { color: var(--ink); }
+.page-title { color: var(--accent); }
+main .page-title { color: var(--ink); }
+#about-page h2 { color: var(--accent); }
+#about-page .about-hero > .page-title { color: #ffffff; }
