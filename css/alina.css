@@ -11,8 +11,6 @@ nav ul {
   background-color: #c5c5c0;
   padding: 30px;
   margin: 0px 40px;
-  /* фото должны идти во всю ширину экрана, а не только внутри main —
-     поэтому вылезаю за пределы паддингов main через 100vw и отрицательный margin */
   width: auto;
   border-top: 1px solid #ffffff;
   border-radius: 20px;
