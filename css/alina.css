@@ -30,6 +30,8 @@ nav ul {
 
 .style-categories {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   gap: 35px;
   background-color: #ffffff;
   padding: 20px;
@@ -218,23 +220,6 @@ nav ul {
   background-color: #333333;
 }
 
-@media (max-width: 800px) {
-  .look-section {
-    grid-template-columns: 1fr;
-  }
-
-  .look-main-image {
-    height: 650px;
-  }
-
-  .look-products {
-    padding: 30px 20px;
-  }
-
-  .look-product-image {
-    height: 300px;
-  }
-}
 
 #razmery {
   padding: 40px 50px 60px;
@@ -336,24 +321,6 @@ nav ul {
 }
 
 
-/* MOBILE */
-
-@media (max-width: 800px) {
-
-  .size-measurement {
-    grid-template-columns: 1fr;
-  }
-
-  .fit-information {
-    grid-template-columns: 1fr;
-    gap: 25px;
-  }
-
-  #razmery {
-    padding: 30px 20px;
-  }
-
-}
 
 form {
   width: 100%;

@@ -1,7 +1,3 @@
-main {
-  position: static;
-}
-
 figcaption {
   color: var(--surface);
 }
@@ -415,20 +411,6 @@ a[href^="#"] {
 .contacts-page a,
 .login-page a {
   color: inherit;
-  text-decoration: none;
-}
-
-.contacts-page .site-header,
-.login-page .site-header,
-.contacts-page .site-nav ul,
-.login-page .site-nav ul {
-  background: var(--paper);
-}
-
-.contacts-page .site-nav li > a:hover,
-.contacts-page .site-nav li > a:focus,
-.contacts-page .site-nav li > a[aria-current="page"] {
-  opacity: 0.5;
   text-decoration: none;
 }
 

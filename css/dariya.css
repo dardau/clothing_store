@@ -2,15 +2,7 @@
 /* ID selector: #about-page is unique because it is the single About main region. */
 #about-page { padding-top: 110px; }
 /* About already has its own checkbox-controlled hamburger. */
-.about-page > .site-nav { display: none; }
 .about-page {
-  --ink: #171717;
-  --paper: #ffffff;
-  --surface: #eeeeee;
-  --accent: #707070;
-  --line: #d2d2d2;
-  --body-font: Inter, Manrope, Montserrat, "Helvetica Neue", Arial, sans-serif;
-  --heading-font: Didot, "Bodoni 72", "Times New Roman", serif;
   padding-top: 0;
   background: var(--paper);
   color: var(--ink);
@@ -241,11 +233,6 @@
 .story-card + .fun-fact { border-left: 4px solid var(--ink); }
 /* The order photo is a separate centred block so surrounding text stays readable. */
 .order-page { background: #f7f7f7; color: #111111; }
-.order-page .site-header { background: #ffffff; }
-.order-page .site-header { border-bottom-color: #e2e2e2; }
-.order-page .site-nav li > a:hover,
-.order-page .site-nav li > a:focus,
-.order-page .site-nav li > a[aria-current="page"] { color: #c0c0c0; text-decoration: none; }
 .order-introduction {
   max-width: 900px;
   margin: 42px auto 54px;
@@ -418,27 +405,3 @@ h2 { color: var(--ink); }                                  /* (0,0,1) */
 main .page-title { color: var(--ink); }                     /* (0,1,1) */
 #about-page h2 { color: var(--accent); }                    /* (1,0,1) */
 #about-page .about-hero > .page-title { color: #ffffff; }   /* (1,2,0), winner */
-
-@media (max-width: 700px) {
-  #about-page { width: 100%; padding: 70px 18px 32px; }
-  .about-hero { min-height: 380px; padding: 28px 18px; }
-  .store-facts,
-  .gallery,
-  .gallery--lookbook,
-  .information-grid,
-  .order-field-row { grid-template-columns: 1fr; }
-  .gallery--intro .store-photo,
-  .gallery--lookbook .store-photo { min-height: 280px; }
-  .content-cards { flex-direction: column; }
-  .content-cards > * { flex-basis: auto; }
-  .info-table { display: block; overflow-x: auto; white-space: nowrap; }
-  .information-panel { padding: 20px; }
-  .back-links { flex-direction: column; align-items: center; }
-  .order-form { margin: 40px auto; padding: 26px 20px; }
-  .order-form-heading { display: block; }
-  .order-form-heading span { display: block; margin-top: 8px; }
-  .order-actions { align-items: flex-start; flex-direction: column; }
-  .order-photo { float: none; width: min(100%, 520px); margin: 0 auto 28px; }
-  .order-photo img { height: auto; }
-  .order-introduction { margin: 28px auto 40px; padding: 28px 22px; }
-}
