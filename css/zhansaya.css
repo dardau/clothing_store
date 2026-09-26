@@ -15,87 +15,10 @@ h4 {
 h3 + p {
   margin-top: 0;
 }
-
-.hero {
-  position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  margin-top: 0;
-  margin-bottom: 32px;
-  overflow: hidden;
-}
-
-/* Descendant selector: matches an <img> anywhere inside .hero. */
+/* Keep the catalog banner shallow and darken it for white text contrast. */
 .hero img {
-  width: 100%;
   height: 260px;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.85);
-}
-
-.hero-text {
-  position: absolute;
-  bottom: 20px;
-  left: 24px;
-  color: var(--paper);
-}
-
-.hero-text h2 {
-  color: var(--paper);
-  font-size: 1.8rem;
-  margin: 0 0 4px;
-}
-
-.hero-text p {
-  color: var(--paper);
-  font-size: 0.9rem;
-  margin: 0;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-/* Centering with absolute positioning and transform: the arrow is centered
-   over the hero without affecting the normal document flow. */
-.hero-scroll {
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--paper);
-  font-size: 1.2rem;
-}
-
-.intro-photo {
-  float: left;
-  width: 160px;
-  margin: 4px 20px 12px 0;
-  border-radius: 2px;
-  border: 1px solid var(--line);
-}
-
-/*
-  Child combinator (>): matches only .text-section elements that are direct
-  children of <main> (the four text blocks at the top of the catalog).
-  clear: both moves the section below the floated .intro-photo. Without it
-  the photo, which is taller than the paragraph, would stick out under the
-  first section and the next heading and text would wrap around it.
-*/
-main > .text-section {
-  max-width: 720px;
-  margin: 24px auto;
-  clear: both;
-}
-
-/* Grouping with commas: four ids share one rule. Ids are the right choice
-   here because each category exists exactly once on the page and is the
-   target of an in-page link (href="#tops"), which needs a unique anchor. */
-#outerwear,
-#tops,
-#bottoms,
-#accessories {
-  margin: 24px 0 48px;
+  filter: brightness(0.65);
 }
 
 main > section h3 {
@@ -107,22 +30,6 @@ main > section h3 {
 
 main > section p {
   line-height: 1.6;
-}
-
-/* Grid suits the category cards because it controls rows and columns,
-   and some cards span two columns. */
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  margin: 0 0 48px;
-}
-
-/* :first-child and :last-child match the first and the last category card
-   (Tops and Accessories); they span two columns so every grid row stays full. */
-.category-card:first-child,
-.category-card:last-child {
-  grid-column: span 2;
 }
 
 
@@ -139,15 +46,15 @@ main > section p {
 .category-grid:hover .category-card:not(:hover) {
   opacity: 0.45;
 }
-
+/* Keep category photos in a consistent portrait format. */
 .category-card img {
   width: 100%;
-  height: 360px;
+  height: auto;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
 }
-
 .category-card:hover img,
 .category-card:focus img {
   transform: scale(1.04);
@@ -159,10 +66,6 @@ main > section p {
   left: 16px;
   color: var(--ink);
   background-color: var(--paper);
-  padding: 6px 14px;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
 }
 
 /* Pseudo-element ::before adds an arrow before every label without an extra
@@ -171,105 +74,31 @@ main > section p {
   content: "→ ";
 }
 
-/*
-  Specificity experiment: two rules target the same <figcaption>.
-  Specificity of this rule: .product-grid .product-card figcaption = 0-2-1
-  (two classes + one type). It WINS, although it is written first, because
-  the browser compares specificity before source order. The conflict is
-  resolved with a more specific selector, not with !important.
-*/
-.product-grid .product-card figcaption {
-  color: var(--ink);
-}
-
-/*
-  Specificity of this rule: .product-card figcaption = 0-1-1
-  (one class + one type). It LOSES to the rule above even though it comes
-  later in the file: 0-1-1 is lower than 0-2-1.
-*/
-.product-card figcaption {
-  color: var(--muted);
-}
-
-.product-grid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
-  gap: 18px;
-  margin: 24px 0 48px;
-  padding: 0;
-}
-
 .product-card {
   position: relative;
   min-width: 0;
 }
 
-.product-card figure {
-  margin: 0;
-  overflow: hidden;
-  background-color: var(--paper);
-}
-
+/* Custom portrait ratio and smooth zoom for clothing photos. */
 .product-card img {
-  width: 100%;
-  height: 430px;
-  object-fit: cover;
-  display: block;
+  aspect-ratio: 3 / 4;
   transition: transform 0.3s ease;
 }
 
-.product-card figcaption {
-  padding: 12px 4px 20px;
-  font-size: 0.82rem;
-  line-height: 1.4;
-}
-
-.product-card:hover img {
-  transform: scale(1.02);
-}
-
-/* :nth-child(even) matches the 2nd and 4th card of every product grid. */
-.product-grid .product-card:nth-child(even) figcaption {
-  background-color: var(--surface);
-}
-
-.sizes {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.72rem;
-  color: var(--ink);
-  letter-spacing: 0.04em;
+@media (hover: hover) {
+  .product-card:hover img {
+    transform: scale(1.02);
+  }
 }
 
 .price {
   white-space: nowrap;
 }
 
-.catalog-back-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-}
-
 /* Attribute selector: matches links inside <main> whose href starts with
    "#", i.e. the in-page links (category cards, "Back to categories"). */
-main a[href^="#"] {
+main a[href^="#"]:not(.back-to-top) {
   color: var(--ink);
-}
-
-.badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: var(--surface);
-  color: var(--ink);
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-  padding: 4px 10px;
-  text-transform: uppercase;
-  border-radius: 2px;
-  box-shadow: inset 0 1px 1px var(--line);
 }
 
 /*
@@ -301,117 +130,17 @@ main a[href^="#"] {
   background-color: var(--surface);
   color: var(--ink);
 }
-
-/* Centering with margin auto: equal left and right auto margins center
-   the max-width card. */
-.info-card {
-  max-width: 1000px;
-  margin: 40px auto 48px;
-  padding: 24px 28px;
-  border-radius: 4px;
-  background-color: var(--paper);
-  border: 1px solid var(--line);
-  box-shadow: 0 4px 14px var(--line);
-}
-
-.info-card h4 {
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  color: var(--muted);
-  margin-bottom: 16px;
-}
-
-.info-card > ul {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.info-card > ul > li {
-  font-weight: 700;
-  font-size: 0.95rem;
-  border-top: 2px solid var(--surface);
-  padding-top: 10px;
-}
-
-.info-card > ul > li > ul {
-  list-style: none;
-  margin: 8px 0 0;
-  padding: 0;
-  font-weight: 400;
-}
-
-.info-card > ul > li > ul > li {
-  font-size: 0.82rem;
-  color: var(--muted);
-  padding: 3px 0;
-}
-
-.details-panel {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 32px;
-  max-width: 1000px;
-  margin: 0 auto 48px;
-}
-
 /* Id: the price table exists once on the page and is the target of the
    "Back to price ranges" link, so a unique id fits better than a class. */
 #price {
   background-color: var(--paper);
 }
-
-.details-col {
-  flex: 1 1 320px;
-}
-
-.details-col table {
-  max-width: 480px;
-  margin: 12px 0 20px;
-}
-
-.details-col caption {
-  text-align: left;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.details-col th,
-.details-col td {
-  padding: 8px 12px;
-}
-
-.details-col thead th {
-  border-bottom: 2px solid var(--ink);
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-}
-
 .details-photo {
   width: 100%;
   max-height: 220px;
   object-fit: cover;
   margin-bottom: 16px;
 }
-
-.tip-banner {
-  padding: 16px 20px;
-  border-radius: 4px;
-  background-color: var(--surface);
-  border-left: 4px solid var(--ink);
-}
-
-.tip-banner p {
-  margin: 4px 0 0;
-  font-size: 0.9rem;
-}
-
 .contacts-page a {
   color: inherit;
   text-decoration: none;
@@ -707,6 +436,7 @@ main a[href^="#"] {
   border-bottom: 1px solid var(--surface);
 }
 
+
 .contacts-main > blockquote {
   max-width: 900px;
   margin: 0 auto 14px;
@@ -821,10 +551,7 @@ main a[href^="#"] {
   border: 0;
 }
 
-.login-form fieldset > * {
-  grid-column: 1 / -1;
-  margin: 0;
-}
+t
 
 .login-form fieldset > .field-contact,
 .login-form fieldset > .field-profile {
@@ -846,13 +573,10 @@ main a[href^="#"] {
   font-size: 1.05rem;
   line-height: 1.5;
 }
-/* !important demonstration:
-   it keeps form labels muted even if another general label rule
-   has the same or lower specificity. */
 .login-form label {
   display: block;
   margin-bottom: 2px;
-  color: var(--muted) !important;
+  color: var(--muted);
   font-size: 0.8rem;
 }
 
@@ -1019,3 +743,4 @@ main a[href^="#"] {
   background: var(--paper);
   color: var(--ink);
 }
+
