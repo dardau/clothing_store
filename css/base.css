@@ -299,8 +299,8 @@ a[target="_blank"]::after {
   content: " ↗";
   font-size: 0.8em;
 }
-
-main {
+/* Legacy layout for pages not yet using Bootstrap containers. */
+main:not(.container):not(.container-fluid) {
   width: min(1200px, 92%);
   margin: 0 auto;
   padding: 48px 32px;
@@ -395,20 +395,20 @@ img {
   border-radius: 4px;
 }
 
-table {
+table:not(.table) {
   width: 100%;
   margin: 24px 0;
   border-collapse: collapse;
 }
 
-th,
-td {
+table:not(.table) th,
+table:not(.table) td {
   padding: 12px;
   border: 1px solid var(--line);
   text-align: left;
 }
 
-th {
+table:not(.table) th {
   background: var(--surface);
 }
 
@@ -495,3 +495,4 @@ footer {
   color: var(--ink);
 }
 
+  

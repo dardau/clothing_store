@@ -8,93 +8,174 @@
     content="Instyle.zh2 clothing catalog: product categories, price examples and a link to the full assortment on Instagram.">
   <meta name="author" content="Zhansaya">
   <title>Catalog — Instyle.zh2</title>
+  <!-- Bootstrap 5.3.8: loaded before our custom styles -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+  crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/zhansaya.css">
 </head>
 
-<body id="page-top">
+<body id="page-top" class="pt-0">
   <!-- Page author: Zhansaya -->
   <!-- Comment: aside is separated from article because it's an extra "by the way"
        tip, not part of the main description of product categories. -->
 
-  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-label="Open navigation menu">
+  <!-- Bootstrap Navbar with Collapse:
+     adapted to our existing pages and contact links.
+     Navigation expands from 992px and collapses below that width. -->
+  <header class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
+      <div class="container">
+        <h1 class="navbar-brand mb-0">
+          <a class="text-dark text-decoration-none" href="index.html">
+            Instyle.zh2
+          </a>
+        </h1>
+        <button
+          class="navbar-toggler bg-transparent"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#catalogNavigation"
+          aria-controls="catalogNavigation"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <header class="top-nav" >
-    <div class="top-nav-left">
-      <label class="top-nav-control" for="menu-toggle">
-        <span class="bars"><span></span><span></span><span></span></span>
-        Menu
-      </label>
-    </div>
-    <h1 class="top-nav-logo">Instyle.zh2</h1>
-    <div class="top-nav-right"><a href="contacts.html">Contact us</a><a href="login.html">Login</a></div>
-  </header>
+        <div class="collapse navbar-collapse" id="catalogNavigation">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
 
-  <label class="menu-overlay" for="menu-toggle"></label>
-  <aside class="side-menu" aria-label="Menu panel">
-    <label class="side-menu-close" for="menu-toggle">×</label>
-    <p class="side-menu-title">Instyle.zh2</p>
-    <nav aria-label="Side navigation">
-      <ul class="side-menu-nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="catalog.html" aria-current="page">Catalog</a></li>
-        <li><a href="lookbook.html">Lookbook</a></li>
-        <li><a href="order.html">Order</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="reviews.html">Reviews</a></li>
-        <li><a href="contacts.html">Contacts</a></li>
-      </ul>
-    </nav>
-    <hr class="side-menu-divider">
-    <p class="side-menu-footer"><a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a><a href="mailto:zhan.ideas@mail.ru">Email us</a><a href="tel:+77012540203">WhatsApp</a></p>
-  </aside>
+            <li class="nav-item">
+              <a class="nav-link active"
+                href="catalog.html"
+                aria-current="page">
+                Catalog
+              </a>
+            </li>
 
-  <main>
+            <li class="nav-item">
+              <a class="nav-link" href="lookbook.html">Lookbook</a>
+            </li>
 
-    <section class="hero">
-      <img src="images/css_catalog.jpg" alt="store window Instyle.zh2">
-      <div class="hero-text">
-        <h2>Catalog</h2>
-        <p>New season, real prices, real fit.</p>
+            <li class="nav-item">
+              <a class="nav-link" href="order.html">Order</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="reviews.html">Reviews</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="contacts.html">Contacts</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+          </ul>
+
+          <div class="d-lg-none border-top pt-3 mt-3">
+            <a
+              class="d-block mb-2 text-dark"
+              href="https://www.instagram.com/instyle.zh2"
+              target="_blank"
+              rel="noopener noreferrer">
+              Instagram
+            </a>
+
+            <a class="d-block mb-2 text-dark"
+              href="mailto:zhan.ideas@mail.ru">
+              Email us
+            </a>
+
+            <a class="d-block mb-2 text-dark"
+              href="tel:+77012540203">
+              Call us
+            </a>
+          </div>
+        </div>
+
       </div>
-      <span class="hero-scroll">&darr;</span>
+    </nav>
+  </header>
+  <!-- A container keeps catalog content centered and readable on wide screens. -->
+  <main class="container-fluid p-0">
+
+    <section class="hero position-relative overflow-hidden mt-0 mb-0">
+      <img
+        class="w-100 d-block object-fit-cover rounded-0"
+        src="images/css_catalog.jpg"
+        alt="Store window Instyle.zh2">
+
+      <div class="position-absolute bottom-0 start-0 w-100">
+        <div class="container pb-4 text-center text-md-start">
+          <h2 class="display-5 fw-semibold text-white mb-2">
+            Catalog
+          </h2>
+          <p class="lead text-white mb-0">
+            New season, real prices, real fit.
+          </p>
+        </div>
+      </div>
     </section>
-  
-    <section class="category-grid">
-      <a href="#tops" class="category-card">
+    <!-- container limits the width of products and text for readability. -->
+    <div class="container py-4">
+    <section class="category-grid row g-3 mb-5">
+      <a href="#tops"
+       class="category-card col-12 col-md-6 col-lg-3">
         <img src="images/tops.jpg" alt="Tops category preview">
         <span>Tops</span>
       </a>
-      <a href="#bottoms" class="category-card">
+      <a href="#bottoms"
+       class="category-card col-12 col-md-6 col-lg-3">
         <img src="images/bottoms.jpg" alt="Bottoms category preview">
         <span>Bottoms</span>
       </a>
-      <a href="#outerwear" class="category-card">
+      <a href="#outerwear"
+       class="category-card col-12 col-md-6 col-lg-3">
         <img src="images/outerwear.jpg" alt="Outerwear category preview">
         <span>Outerwear</span>
       </a>
-      <a href="#accessories" class="category-card">
+      <a href="#accessories"
+       class="category-card col-12 col-md-6 col-lg-3">
         <img src="images/accessories.jpg" alt="Accessories category preview">
         <span>Accessories</span>
       </a>
     </section>
+    <section class="text-section col-lg-10 mx-auto my-5">
+      <h3 class="h4 fw-normal mb-4">What categories are available</h3>
+      <p class="row g-4 align-items-center mb-0">
+        <span class="col-12 col-md-4 col-lg-3">
+          <img
+            src="images/textphoto.jpg"
+            alt="A stylish photo featuring the store's collection"
+            class="img-fluid w-100 rounded">
+        </span>
 
-    <section class="text-section">
-      <h3>What categories are available</h3>
-      <p>
-        <img src="images/textphoto.jpg" alt="A stylish photo featuring the store's collection" class="intro-photo">
-        The Instyle.zh2 catalog covers a mix of everyday clothing, including jackets,
-        skirts, long-sleeves, and T-shirts, so there's usually something for both
-        casual and slightly dressier looks. Beyond clothing, the store also carries
-        accessories like caps and bags, which means you can put together a full outfit
-        without needing to shop somewhere else. The assortment stays fairly compact,
-        but it's varied enough that browsing through it doesn't take long.
+        <span class="col-12 col-md-8 col-lg-9 text-body-secondary lh-lg">
+          The Instyle.zh2 catalog covers a mix of everyday clothing, including jackets,
+          skirts, long-sleeves, and T-shirts, so there's usually something for both
+          casual and slightly dressier looks. Beyond clothing, the store also carries
+          accessories like caps and bags, which means you can put together a full outfit
+          without needing to shop somewhere else. The assortment stays fairly compact,
+          but it's varied enough that browsing through it doesn't take long.
+        </span>
       </p>
     </section>
 
-    <section class="text-section">
-      <h3>How often the assortment is updated</h3>
-      <p>
+    <section class="text-section col-lg-10 mx-auto my-5 pt-4 border-top">
+      <h3 class="h4 fw-normal mb-3">How often the assortment is updated</h3>
+      <p class="text-body-secondary lh-lg mb-0">
         New arrivals show up fairly regularly, and the easiest way to keep track of
         them is through the store's Instagram stories rather than this page alone.
         Since the store doesn't have its own website, Instagram is really where
@@ -104,9 +185,10 @@
       </p>
     </section>
 
-    <section class="text-section">
-      <h3>What makes the store different</h3>
-      <p>
+    <section class="text-section col-lg-10 mx-auto my-5 pt-4 border-top">
+      <h3 class="h4 fw-normal mb-3">What makes the store different</h3>
+
+      <p class="text-body-secondary lh-lg mb-0">
         One detail that stands out right away is the ZH2 branding — it's on the
         hangers, the tags, pretty much everywhere, which gives the store a more
         put-together feel than a typical small shop. What we liked is that it's not
@@ -116,9 +198,10 @@
       </p>
     </section>
 
-    <section class="text-section">
-      <h3>What to check before ordering</h3>
-      <p>
+    <section class="text-section col-lg-10 mx-auto my-5 pt-4 border-top">
+      <h3 class="h4 fw-normal mb-3">What to check before ordering</h3>
+
+      <p class="text-body-secondary lh-lg mb-0">
         Because the store is small, it's worth double-checking the price, size, and
         current availability of an item before deciding on it — stock can shift
         quickly, and something popular might already be gone by the time you decide.
@@ -127,43 +210,53 @@
       </p>
     </section>
 
-    
+    <!-- Bootstrap Cards: adapted to our product photos, prices and sizes.
+     Existing figure and figcaption elements are preserved.
+     Card widths are controlled by the responsive grid. -->
     <section id="tops">
       <h3>Tops</h3>
-      <ul class="product-grid">
-        <li class="product-card">
-          <figure>
-            <img src="images/tops1.jpg" alt="Long-sleeve top paired with a lightweight top made of semi-sheer fabric">
-            <figcaption>
+      <ul class="product-grid row g-4 list-unstyled mt-3 mb-5">
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/tops1.jpg" alt="Long-sleeve top paired with a lightweight top made of semi-sheer fabric">
+            <figcaption class="card-body small">
               Long-sleeve top paired with a lightweight top made of semi-sheer fabric &mdash; 12.000kzt&nbsp;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/tops2.jpg" alt="Long-sleeve top with ribbons">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/tops2.jpg" alt="Long-sleeve top with ribbons">
+            <figcaption class="card-body small">
               Long-sleeve top with ribbons &mdash; 12.500kzt&nbsp;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/tops3.jpg" alt="Warm sweater in a soft turquoise color">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/tops3.jpg" alt="Warm sweater in a soft turquoise color">
+            <figcaption class="card-body small">
               Warm sweater in a soft turquoise color &mdash; 9.000kzt&nbsp;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/tops4.jpg" alt="Denim shirt">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/tops4.jpg" alt="Denim shirt">
+            <figcaption class="card-body small">
               Denim shirt &mdash; 18.000kzt&nbsp;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
@@ -172,40 +265,48 @@
 
     <section id="bottoms">
       <h3>Bottoms</h3>
-      <ul class="product-grid">
-        <li class="product-card">
-          <figure>
-            <img src="images/bottoms1.jpg" alt="Denim bermuda shorts">
-            <figcaption>
+      <ul class="product-grid row g-4 list-unstyled mt-3 mb-5">
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/bottoms1.jpg" alt="Denim bermuda shorts">
+            <figcaption class="card-body small">
               Denim bermuda shorts &mdash; 18.000kzt&nbsp;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/bottoms2.jpg" alt="Light-colored jeans">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/bottoms2.jpg" alt="Light-colored jeans">
+            <figcaption class="card-body small">
               Light-colored jeans &mdash; 20.500kzt&nbsp;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/bottoms3.jpg" alt="Oversized joggers with an elastic waistband">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/bottoms3.jpg" alt="Oversized joggers with an elastic waistband">
+            <figcaption class="card-body small">
               Oversized joggers with an elastic waistband &mdash; 13.000kzt&nbsp;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/bottoms4.jpg" alt="White lace skirt">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/bottoms4.jpg" alt="White lace skirt">
+            <figcaption class="card-body small">
               White lace skirt &mdash; 12.500kzt&nbsp;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
@@ -214,41 +315,49 @@
 
     <section id="outerwear">
       <h3>Outerwear</h3>
-      <ul class="product-grid">
-        <li class="product-card">
-          <figure>
+      <ul class="product-grid row g-4 list-unstyled mt-3 mb-5">
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
             <span class="badge">New</span>
-            <img src="images/outerwear1.jpg" alt="Black jacket made of soft eco-leather">
-            <figcaption>
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/outerwear1.jpg" alt="Black jacket made of soft eco-leather">
+            <figcaption class="card-body small">
               Black oversized jacket in soft eco-leather &mdash; 42.000&nbsp;&#8376;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/outerwear2.jpg" alt="Black bomber jacket in soft eco-leather">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/outerwear2.jpg" alt="Black bomber jacket in soft eco-leather">
+            <figcaption class="card-body small">
               Black bomber jacket in soft eco-leather &mdash; 36.000&nbsp;&#8376;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/outerwear3.jpg" alt="Faux suede jacket with patch pockets">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/outerwear3.jpg" alt="Faux suede jacket with patch pockets">
+            <figcaption class="card-body small">
               Faux suede jacket with patch pockets &mdash; 39.500&nbsp;&#8376;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/outerwear4.jpg" alt="Oversized belted coat">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/outerwear4.jpg" alt="Oversized belted coat">
+            <figcaption class="card-body small">
               Oversized belted coat &mdash; 42.000&nbsp;&#8376;
-              <span class="sizes">Sizes: S · M · L</span>
+              <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
             </figcaption>
           </figure>
         </li>
@@ -257,41 +366,49 @@
 
     <section id="accessories">
       <h3>Accessories</h3>
-      <ul class="product-grid">
-        <li class="product-card">
-          <figure>
-            <img src="images/access1.jpg" alt="Striped tie">
-            <figcaption>
+      <ul class="product-grid row g-4 list-unstyled mt-3 mb-5">
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/access1.jpg" alt="Striped tie">
+            <figcaption class="card-body small"> 
               Striped tie &mdash; 4.000kzt&nbsp;
-              <span class="sizes">One size</span>
+              <span class="d-block mt-2 small text-body-secondary">One size</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/access2.jpg" alt="Spacious beige eco-leather bag">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/access2.jpg" alt="Spacious beige eco-leather bag">
+            <figcaption class="card-body small">
               Spacious beige eco-leather bag &mdash; 15.000kzt&nbsp;
-              <span class="sizes">One size</span>
+              <span class="d-block mt-2 small text-body-secondary">One size</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/access3.jpg" alt="Stylish pendant with a black stone">
-            <figcaption>
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/access3.jpg" alt="Stylish pendant with a black stone">
+            <figcaption class="card-body small">
               Stylish pendant with a black stone &mdash; 6.500kzt&nbsp;
-              <span class="sizes">One size</span>
+              <span class="d-block mt-2 small text-body-secondary">One size</span>
             </figcaption>
           </figure>
         </li>
-        <li class="product-card">
-          <figure>
-            <img src="images/access4.jpg" alt="Small bag made of mixed materials">
+        <li class="product-card col-12 col-md-6 col-lg-3">
+          <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
+            <img 
+            class="card-img-top w-100 object-fit-cover rounded-0"
+            src="images/access4.jpg" alt="Small bag made of mixed materials">
             <figcaption>
               Small bag made of mixed materials &mdash; 11.000kzt&nbsp;
-              <span class="sizes">One size</span>
-            </figcaption>
+              <span class="d-block mt-2 small text-body-secondary">One size</span>
+            </figcaption class="card-body small">
           </figure>
         </li>
       </ul>
@@ -342,17 +459,15 @@
       </article>
     </section>
 
-
-    <!-- Comment: this section is laid out as two flex columns (details-panel) —
-         left holds price/instruction data, right holds the ordering tip and a
-         photo, so related "before you order" information sits side by side
-         instead of stacking as separate full-width blocks. -->
-    <section id="price" class="details-panel">
-      <div class="details-col">
+    <!-- Stack on phones; show two equal columns from 768px. -->
+    <section id="price" class="details-panel row g-4 mb-5">
+      <div class="details-col col-12 col-md-6">
         <h3>Price Ranges by Category</h3>
-        <table>
-          <caption>Approximate price range per category, Instyle.zh2</caption>
-          <thead>
+        <!-- Bootstrap Table: adapted for our category prices, with borders,
+        striped rows and a caption above the table. -->
+        <table class="table table-striped table-bordered align-middle caption-top mt-3 mb-4">
+          <caption class="small text-body-secondary">Approximate price range per category, Instyle.zh2</caption>
+          <thead class="table-dark">
             <tr>
               <th scope="col">Category</th>
               <th scope="col">Price range, &#8376;</th>
@@ -386,19 +501,23 @@
           <li>Place your order on the <a href="order.html">order page</a>.</li>
         </ol>
 
-        <dl>
-          <dt>Drop</dt>
-          <dd>The release of a new batch of stock &mdash; usually announced in stories beforehand.</dd>
-          <dt>Pre-order</dt>
-          <dd>Reserving an item before it physically arrives in stock.</dd>
+        <dl class="row g-2 mt-3">
+          <dt class="col-12 col-sm-4">Drop</dt>
+          <dd class="col-12 col-sm-8">
+            The release of a new batch of stock &mdash; usually announced in stories beforehand.
+          </dd>
+          <dt class="col-12 col-sm-4">Pre-order</dt>
+          <dd class="col-12 col-sm-8">
+            Reserving an item before it physically arrives in stock.
+          </dd>
         </dl>
       </div>
 
-      <div class="details-col">
+      <div class="details-col col-12 col-md-6">
         <img src="images/imgcatalog.jpg" alt="details photo" class="details-photo">
-        <aside class="tip-banner">
-          <h4>Tip Before Ordering</h4>
-          <p>Confirm the availability of a specific model via WhatsApp &mdash; the Instagram feed updates faster
+        <aside class="p-4 bg-light border-start border-4 border-dark rounded shadow-sm">
+          <h4 class="h5 mb-2">Tip Before Ordering</h4>
+          <p class="mb-0">Confirm the availability of a specific model via WhatsApp &mdash; the Instagram feed updates faster
               than the stockroom.</p>
         </aside>
       </div>
@@ -415,8 +534,11 @@
           page.</small>
     </p>
 
-    <p class="catalog-back-links"><a href="#categories">&uarr; Back to categories</a><a href="#price">&uarr; Back to price
+    <p class="catalog-back-links d-flex flex-column flex-sm-row
+          justify-content-center justify-content-md-start
+          gap-3 text-center text-md-start border-top pt-3 mt-4"><a href="#categories">&uarr; Back to categories</a><a href="#price">&uarr; Back to price
         ranges</a></p>
+    </div><!-- End of the catalog content container -->
   </main>
 
   <footer>
@@ -424,6 +546,10 @@
         href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+  crossorigin="anonymous"></script>
 </body>
 
 </html>
