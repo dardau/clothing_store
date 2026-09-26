@@ -12,9 +12,6 @@
 </head>
 
 <body class="order-page">
-  <!-- Page author: Dariya -->
-  <!-- Comment: the form doesn't submit anywhere — at this stage of the course there's
-       no server-side processing yet, so the action attribute points "nowhere" for now. -->
 
   <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-label="Open navigation menu">
 
@@ -85,9 +82,6 @@
       <abbr title="except official public holidays">except on holidays</abbr>.
     </p>
 
-    <!-- Comment: form is the right tag here (not a div/span question), but fieldset
-         groups fields by meaning inside it — fulfillment method vs. customer details. -->
-    <!-- Only inline style: cascade demo overriding the external form border. -->
     <form class="order-form" action="#" method="post" style="border-top: 3px solid #111111;">
       <header class="order-form-heading">
         <h3>Reserve an item</h3>
@@ -170,9 +164,6 @@
       <span title="usually the store's business hours match the schedule on Instagram">Order status</span>
       can be checked at any time using the number above.
     </p>
-    <!-- Comment: the span above is the only place a plain inline container without
-         semantics was needed, to attach a title tooltip to part of a sentence without
-         starting a new paragraph or using a block-level tag. -->
   </main>
 
   <footer>

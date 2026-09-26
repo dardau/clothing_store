@@ -17,7 +17,7 @@
 
   <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-label="Open navigation menu">
 
-  <header class="top-nav" id="page-top">
+  <header class="top-nav" >
     <div class="top-nav-left">
       <label class="top-nav-control" for="menu-toggle">
         <span class="bars"><span></span><span></span><span></span></span>
@@ -52,9 +52,11 @@
       <p class="contacts-kicker">Our boutique in Astana</p>
       <h2>Contacts</h2>
       <p>Visit us, call us or write on Instagram. We will gladly help you choose the right size.</p>
-      <a class="contacts-button" href="tel:+77012540203">Call us</a>
-      <a class="contacts-button contacts-button-secondary" href="https://2gis.kz/astana/geo/70000001079925695"
-        target="_blank" rel="noopener noreferrer">Open in 2GIS</a>
+      <!-- Inline style cascade demonstration:
+     the inline letter-spacing overrides the external CSS rule. -->
+     <a class="contacts-button" href="tel:+77012540203" style="letter-spacing: 0.16em;">Call us</a>
+     <a class="contacts-button contacts-button-secondary" href="https://2gis.kz/astana/geo/70000001079925695"
+      target="_blank" rel="noopener noreferrer">Open in 2GIS</a>
     </header>
 
     <section class="visit-section">

@@ -8,6 +8,8 @@
     content="Instyle.zh2 lookbook: a curated selection of outfits, product categories and a size chart.">
   <meta name="author" content="Alina">
   <title>Lookbook — Instyle.zh2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap 5.3.3, подключён через CDN -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/alina.css">
 </head>
@@ -52,10 +54,11 @@
   </aside>
 
   <main>
-
+ <div class="container">
     <section class="style-categories-section">
       <h2>LOOKBOOK</h2>
-      <div class="style-categories">
+      <div class="style-categories row">
+        <div class="col-12 col-md-4">
         <a href="#trendy-look" class="style-category-card">
           <img src="images/trendy.jpg" alt="Образ trendy: ЮБКА И ЛОНГСЛИВ">
           <h3>Trendy</h3>
@@ -68,9 +71,9 @@
             </li>
             <li>Statement accessories</li>
           </ul>
-
         </a>
-
+        </div>
+         <div class="col-12 col-md-4">
         <a href="#casual-look" class="style-category-card">
           <img src="images/casual.jpg" alt="Образ casual: повседневный стиль">
           <h3>CASUAL</h3>
@@ -84,7 +87,8 @@
             <li>Wide-leg jeans</li>
           </ul>
         </a>
-
+        </div>
+         <div class="col-12 col-md-4">
         <a href="#cozy-look" class="style-category-card">
           <img src="images/cozy.jpg" alt="Уютный образ с аксессуарами">
           <h3>Cozy</h3>
@@ -99,14 +103,18 @@
           </ul>
         </a>
       </div>
+      </div>
     </section>
 
     <section class="look-section" id="trendy-look">
-
+        <div class="row">
+  <div class="col-12 col-md-5">
       <div class="look-main-image">
         <img src="images/trendy.jpg" alt="Trendy outfit">
       </div>
+      </div>
 
+<div class="col-12 col-md-7">
       <div class="look-products">
 
         <div class="look-products-header">
@@ -141,15 +149,19 @@
           </article>
         </div>
       </div>
+      </div>
+      </div>
 
     </section>
 
     <section class="look-section" id="casual-look">
-
+      <div class="row">
+  <div class="col-12 col-md-5">
       <div class="look-main-image">
         <img src="images/casual.jpg" alt="Casual outfit">
       </div>
-
+      </div>
+      <div class="col-12 col-md-7">
       <div class="look-products">
 
         <div class="look-products-header">
@@ -183,15 +195,19 @@
 
         </div>
       </div>
-
+      </div>
+      </div>
     </section>
 
     <section class="look-section" id="cozy-look">
-
+   <div class="row">
+  <div class="col-12 col-md-5">
       <div class="look-main-image">
         <img src="images/cozy.jpg" alt="Cozy outfit">
       </div>
+      </div>
 
+      <div class="col-12 col-md-7">
       <div class="look-products">
 
         <div class="look-products-header">
@@ -214,6 +230,8 @@
 
         </div>
       </div>
+      </div>
+      </div>
 
     </section>
 
@@ -222,10 +240,10 @@
 
       <h3>Size Chart</h3>
 
-      <div class="size-measurement">
+      <div class="size-measurement row">
 
-        <!-- Size Chart -->
-        <div class="size-chart">
+  <!-- Size Chart -->
+  <div class="col-12 col-md-6 size-chart">
 
           <table>
             <caption>Instyle.zh2 t-shirt size chart (real measurements)</caption>
@@ -263,8 +281,8 @@
         </div>
 
 
-        <!-- How to Measure -->
-        <div class="measure-guide">
+       <!-- How to Measure -->
+<div class="col-12 col-md-6 measure-guide">
 
           <h3>How to Measure Yourself Correctly</h3>
 
@@ -307,11 +325,11 @@
     <section class="lookbook-intro">
       <h2>Lookbook</h2>
 
-      <div class="lookbook-intro-content">
-
+     <div class="lookbook-intro-content row">
+  <div class="col-12 col-md-5">
         <img src="images/lkbk.jpg" alt="Lookbook fashion style">
-
-        <div class="lookbook-intro-text">
+</div>
+       <div class="col-12 col-md-7 lookbook-intro-text">
 
           <p>
             The instyle zh2 clothing store offers a wide range of clothing.
@@ -388,6 +406,7 @@
       &nbsp;|&nbsp;
       <a href="index.html">&uarr; Back to Home</a>
     </p>
+    </div>
   </main>
 
   <footer>
@@ -395,6 +414,7 @@
         href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
