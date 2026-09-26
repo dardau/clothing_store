@@ -38,3 +38,11 @@
 - Used the Bootstrap bundle for toggling; no custom JavaScript.
 - Removed the catalog's old body top padding with pt-0.
 - Legacy navigation CSS remains temporarily for the other pages.
+- Replaced the Main Categories custom grid and styling with
+  Bootstrap columns, spacing, borders and shadow utilities.
+- Replaced custom New badge styling with Bootstrap badge utilities.
+- Styled existing navigation actions with Bootstrap button
+  variants and sizes.
+- Replaced product section margins with my-5.
+- Corrected the last product's figcaption markup.
+- Consolidated the product image hover effect.

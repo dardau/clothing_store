@@ -20,15 +20,6 @@ h3 + p {
   height: 260px;
   filter: brightness(0.65);
 }
-/* Grouping with commas: four ids share one rule. Ids are the right choice
-   here because each category exists exactly once on the page and is the
-   target of an in-page link (href="#tops"), which needs a unique anchor. */
-#outerwear,
-#tops,
-#bottoms,
-#accessories {
-  margin: 24px 0 48px;
-}
 
 main > section h3 {
   font-size: 1.1rem;
@@ -75,10 +66,6 @@ main > section p {
   left: 16px;
   color: var(--ink);
   background-color: var(--paper);
-  padding: 6px 14px;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
 }
 
 /* Pseudo-element ::before adds an arrow before every label without an extra
@@ -92,22 +79,17 @@ main > section p {
   min-width: 0;
 }
 
-/* Custom portrait ratio for clothing photos.
-   Bootstrap has no built-in 3:4 ratio utility. */
+/* Custom portrait ratio and smooth zoom for clothing photos. */
 .product-card img {
   aspect-ratio: 3 / 4;
-}
-
-.product-card:hover img {
-  transform: scale(1.02);
   transition: transform 0.3s ease;
 }
-@media (hover: hover){
+
+@media (hover: hover) {
   .product-card:hover img {
     transform: scale(1.02);
   }
 }
-
 
 .price {
   white-space: nowrap;
@@ -117,20 +99,6 @@ main > section p {
    "#", i.e. the in-page links (category cards, "Back to categories"). */
 main a[href^="#"]:not(.back-to-top) {
   color: var(--ink);
-}
-
-.badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: var(--surface);
-  color: var(--ink);
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-  padding: 4px 10px;
-  text-transform: uppercase;
-  border-radius: 2px;
-  box-shadow: inset 0 1px 1px var(--line);
 }
 
 /*
@@ -162,57 +130,6 @@ main a[href^="#"]:not(.back-to-top) {
   background-color: var(--surface);
   color: var(--ink);
 }
-
-/* Centering with margin auto: equal left and right auto margins center
-   the max-width card. */
-.info-card {
-  max-width: 1000px;
-  margin: 40px auto 48px;
-  padding: 24px 28px;
-  border-radius: 4px;
-  background-color: var(--paper);
-  border: 1px solid var(--line);
-  box-shadow: 0 4px 14px var(--line);
-}
-
-.info-card h4 {
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  color: var(--muted);
-  margin-bottom: 16px;
-}
-
-.info-card > ul {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.info-card > ul > li {
-  font-weight: 700;
-  font-size: 0.95rem;
-  border-top: 2px solid var(--surface);
-  padding-top: 10px;
-}
-
-.info-card > ul > li > ul {
-  list-style: none;
-  margin: 8px 0 0;
-  padding: 0;
-  font-weight: 400;
-}
-
-.info-card > ul > li > ul > li {
-  font-size: 0.82rem;
-  color: var(--muted);
-  padding: 3px 0;
-}
-
-
 /* Id: the price table exists once on the page and is the target of the
    "Back to price ranges" link, so a unique id fits better than a class. */
 #price {
@@ -656,13 +573,10 @@ t
   font-size: 1.05rem;
   line-height: 1.5;
 }
-/* !important demonstration:
-   it keeps form labels muted even if another general label rule
-   has the same or lower specificity. */
 .login-form label {
   display: block;
   margin-bottom: 2px;
-  color: var(--muted) !important;
+  color: var(--muted);
   font-size: 0.8rem;
 }
 
