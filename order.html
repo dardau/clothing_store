@@ -7,171 +7,251 @@
   <meta name="description" content="Placing an order at Instyle.zh2: the order form.">
   <meta name="author" content="Dariya">
   <title>Order — Instyle.zh2</title>
+  <!-- Bootstrap 5.3.8 is loaded from the CDN for the grid, utilities and components. -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/dariya.css">
 </head>
 
-<body class="order-page">
+<body class="order-page" id="page-top">
 
-  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-label="Open navigation menu">
+  <header class="border-bottom bg-white">
+      <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
+        <div class="container">
+          <h1 class="navbar-brand mb-0">
+            <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
+          </h1>
+          <button
+            class="navbar-toggler bg-transparent"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavigation"
+            aria-controls="mainNavigation"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-  <header class="top-nav" id="page-top">
-    <div class="top-nav-left">
-      <label class="top-nav-control" for="menu-toggle">
-        <span class="bars"><span></span><span></span><span></span></span>
-        Menu
-      </label>
-    </div>
-    <h1 class="top-nav-logo">Instyle.zh2</h1>
-    <div class="top-nav-right"><a href="contacts.html">Contact us</a><a href="login.html">Login</a></div>
-  </header>
+          <div class="collapse navbar-collapse" id="mainNavigation">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="catalog.html">Catalog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="lookbook.html">Lookbook</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="order.html" aria-current="page">Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="reviews.html">Reviews</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacts.html">Contacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+              </li>
+            </ul>
 
-  <label class="menu-overlay" for="menu-toggle"></label>
-  <aside class="side-menu" aria-label="Menu panel">
-    <label class="side-menu-close" for="menu-toggle">×</label>
-    <p class="side-menu-title">Instyle.zh2</p>
-    <nav aria-label="Side navigation">
-      <ul class="side-menu-nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="catalog.html">Catalog</a></li>
-        <li><a href="lookbook.html">Lookbook</a></li>
-        <li><a href="order.html" aria-current="page">Order</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="reviews.html">Reviews</a></li>
-        <li><a href="contacts.html">Contacts</a></li>
-      </ul>
-    </nav>
-    <hr class="side-menu-divider">
-    <p class="side-menu-footer"><a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a><a href="mailto:zhan.ideas@mail.ru">Email us</a><a href="tel:+77012540203">WhatsApp</a></p>
-  </aside>
-  <main>
-    <h2>Placing an Order</h2>
+            <div class="d-lg-none border-top pt-3 mt-3">
+              <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2"
+                target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
+              <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-    <section class="order-introduction">
-      <p class="order-introduction-label">How ordering works</p>
-      <h3 class="order-introduction-lead">A personal and simple way to order from Instyle.zh2.</h3>
-      <p>
-        Message us through WhatsApp at <strong>+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</strong> or Instagram Direct
-        <strong>@instyle.zh2</strong>. A consultant will confirm the model, colour, size, and availability,
-        then help you choose the most suitable option.
-      </p>
-      <p>
-        Collect your order from one of our three Astana locations or arrange courier delivery.
-        Payment is available in cash, by bank card, or through Kaspi QR. Before confirming the order,
-        the consultant can send additional photographs and measurements of the item.
-      </p>
+  <!-- A fixed Bootstrap container keeps the form readable on large screens. -->
+  <main class="container py-5">
+    <h2 class="display-5 text-center mb-4">Placing an Order</h2>
+
+    <section class="row g-4 align-items-center bg-white border-start border-4 shadow-sm p-3 p-lg-5 mt-0 mb-5">
+      <div class="col-12 col-lg-4">
+        <p class="small text-uppercase fw-bold text-body-secondary mb-2">How ordering works</p>
+        <h3 class="h2 mb-0">A personal and simple way to order from Instyle.zh2.</h3>
+      </div>
+      <div class="col-12 col-lg-8">
+        <p>
+          Message us through WhatsApp at <strong>+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</strong> or Instagram Direct
+          <strong>@instyle.zh2</strong>. A consultant will confirm the model, colour, size, and availability,
+          then help you choose the most suitable option.
+        </p>
+        <p class="mb-0">
+          Collect your order from one of our three Astana locations or arrange courier delivery.
+          Payment is available in cash, by bank card, or through Kaspi QR. Before confirming the order,
+          the consultant can send additional photographs and measurements of the item.
+        </p>
+      </div>
     </section>
 
-    <p>As one of our customers wrote to the store:</p>
-    <blockquote class="order-testimonial" cite="https://www.instagram.com/instyle.zh2">
-      <p>&ldquo;Hello, I received the bag. I really liked it, thank you so much 🙏&rdquo;</p>
-      <footer>Customer review · <cite>instyle.zh2 highlights</cite>, October 2025</footer>
-    </blockquote>
-    <hr>
+    <div class="row g-4 align-items-center mb-5">
+      <div class="col-12 col-lg-7">
+        <p class="small text-uppercase fw-semibold text-body-secondary mb-2">
+          Customer feedback
+        </p>
+        <blockquote class="order-testimonial position-relative bg-white border-top border-bottom p-4 p-lg-5 mb-0"
+          cite="https://www.instagram.com/instyle.zh2">
+          <p class="lead text-center mb-3">
+            &ldquo;Hello, I received the bag. I really liked it, thank you so much 🙏&rdquo;
+          </p>
+          <footer class="small text-center text-body-secondary text-uppercase p-0 border-0 bg-transparent">
+            Customer review · <cite>instyle.zh2 highlights</cite>, October 2025
+          </footer>
+        </blockquote>
+      </div>
 
-    <figure class="order-photo">
-      <img src="images/kassa.jpg" alt="Checkout counter with bags, sunglasses and jewelry on display">
-      <figcaption>The order desk in the store.</figcaption>
-    </figure>
+      <div class="col-12 col-lg-5">
+        <figure class="order-photo border rounded shadow-sm overflow-hidden mb-0">
+          <img class="img-fluid w-100 rounded-0"
+            src="images/kassa.jpg" alt="Checkout counter with bags, sunglasses and jewelry on display">
+          <figcaption class="small text-center text-uppercase p-3 bg-white">
+            The order desk in the store.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
 
-    <p class="order-contact-line">
+    <p class="lead mb-5">
       Contact us by email at <a href="mailto:zhan.ideas@mail.ru">zhan.ideas@mail.ru</a> or
       by phone at <a href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a> if you
-      have questions before filling out the form <i>below</i> &mdash; we reply <b>within the
-        business day</b>, usually no longer than 24 hours,
-      <abbr title="except official public holidays">except on holidays</abbr>.
+      have questions before filling out the form below. We reply within the business day,
+      usually no longer than 24 hours.
     </p>
 
-    <form class="order-form" action="#" method="post" style="border-top: 3px solid #111111;">
-      <header class="order-form-heading">
-        <h3>Reserve an item</h3>
-        <span>Fields marked * are required</span>
-      </header>
-      <p class="order-form-note"><small>This is a learning form: it doesn&rsquo;t submit anywhere, there&rsquo;s no server behind it yet.</small></p>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9">
+        <form class="order-form bg-white border border-top border-3 shadow-sm p-3 p-md-4 p-lg-5 mb-5"
+          action="#" method="post">
+          <header class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+            <h3 class="h2 mb-0">Reserve an item</h3>
+            <span class="small text-body-secondary">Fields marked * are required</span>
+          </header>
 
-      <fieldset class="order-field-row">
-        <legend>Contact Details</legend>
+          <!-- Bootstrap Alert component adapted to explain that this is a demonstration form. -->
+          <p class="alert alert-light border small mb-4" role="note">
+            This is a learning form: it doesn&rsquo;t submit anywhere because there is no server behind it yet.
+          </p>
 
-        <p class="order-field">
-          <label for="name">Name*</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name" required>
-        </p>
+          <fieldset class="border-0 p-0 m-0">
+            <legend class="h6 fw-bold border-bottom pb-2 mb-3">Contact Details</legend>
+            <div class="row g-3">
+              <p class="col-12 col-md-6 mb-3">
+                <label class="form-label" for="name">Name*</label>
+                <input class="form-control" type="text" id="name" name="name"
+                  placeholder="Enter your name" required>
+              </p>
 
-        <p class="order-field">
-          <label for="email">Email*</label>
-          <input type="email" id="email" name="email" placeholder="example@mail.com" required>
-        </p>
+              <p class="col-12 col-md-6 mb-3">
+                <label class="form-label" for="email">Email*</label>
+                <input class="form-control" type="email" id="email" name="email"
+                  placeholder="example@mail.com" required>
+              </p>
 
-        <p class="order-field order-field-wide">
-          <label for="phone">Phone*</label>
-          <input type="tel" id="phone" name="phone" placeholder="+7 700 000 00 00" required>
-        </p>
-      </fieldset>
+              <p class="col-12 mb-4">
+                <label class="form-label" for="phone">Phone*</label>
+                <input class="form-control" type="tel" id="phone" name="phone"
+                  placeholder="+7 700 000 00 00" required>
+              </p>
+            </div>
+          </fieldset>
 
-      <fieldset class="order-field-row">
-        <legend>Order Details</legend>
+          <fieldset class="border-0 p-0 m-0">
+            <legend class="h6 fw-bold border-bottom pb-2 mb-3">Order Details</legend>
+            <div class="row g-3">
+              <p class="col-12 col-md-6 mb-3">
+                <label class="form-label" for="qty">Quantity</label>
+                <input class="form-control" type="number" id="qty" name="qty" min="1" value="1">
+              </p>
 
-        <p class="order-field">
-          <label for="qty">Quantity</label>
-          <input type="number" id="qty" name="qty" min="1" value="1">
-        </p>
+              <p class="col-12 col-md-6 mb-3">
+                <label class="form-label" for="pickup-date">Desired pickup date</label>
+                <input class="form-control" type="date" id="pickup-date" name="pickup-date">
+              </p>
 
-        <p class="order-field">
-          <label for="pickup-date">Desired pickup date</label>
-          <input type="date" id="pickup-date" name="pickup-date">
-        </p>
+              <p class="col-12 mb-3">
+                <label class="form-label" for="size">Size</label>
+                <select class="form-select" id="size" name="size">
+                  <option value="s">S</option>
+                  <option value="m">M</option>
+                  <option value="l">L</option>
+                  <option value="xl">XL</option>
+                </select>
+              </p>
 
-        <p class="order-field order-field-wide">
-          <label for="size">Size</label>
-          <select id="size" name="size">
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-            <option value="xl">XL</option>
-          </select>
-        </p>
+              <fieldset class="col-12 border-0 p-0 m-0">
+                <legend class="h6 mb-2">Fulfillment Method</legend>
+                <div class="d-flex flex-column flex-sm-row gap-3 mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" id="pickup"
+                      name="delivery-method" value="pickup" checked>
+                    <label class="form-check-label" for="pickup">Pickup</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" id="courier"
+                      name="delivery-method" value="courier">
+                    <label class="form-check-label" for="courier">Courier</label>
+                  </div>
+                </div>
+              </fieldset>
 
-        <fieldset class="order-choices">
-          <legend>Fulfillment Method</legend>
-          <label class="order-choice" for="pickup">
-            <input type="radio" id="pickup" name="delivery-method" value="pickup" checked>
-            <span>Pickup</span>
-          </label>
-          <label class="order-choice" for="courier">
-            <input type="radio" id="courier" name="delivery-method" value="courier">
-            <span>Courier</span>
-          </label>
-        </fieldset>
+              <p class="col-12 mb-3">
+                <label class="form-label" for="comment">Order comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="4"
+                  placeholder="For example: gift wrapping needed"></textarea>
+              </p>
 
-        <p class="order-field order-field-wide">
-          <label for="comment">Order comment</label>
-          <textarea id="comment" name="comment" placeholder="For example: gift wrapping needed"></textarea>
-        </p>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="agree" name="agree" required>
+                  <label class="form-check-label" for="agree">
+                    I agree to the data processing terms*
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
 
-        <p class="order-consent order-field-wide">
-          <input type="checkbox" id="agree" name="agree" required>
-          <label for="agree">I agree to the data processing terms*</label>
-        </p>
-      </fieldset>
+          <p class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-3 mt-4 mb-0">
+            <button class="btn btn-dark btn-lg" type="submit">Submit Order</button>
+            <button class="btn btn-outline-secondary" type="reset">Clear Form</button>
+            <button class="btn btn-secondary btn-sm" type="button" disabled>
+              Online payment coming soon
+            </button>
+          </p>
+        </form>
+      </div>
+    </div>
 
-      <p class="order-actions">
-        <button class="order-submit" type="submit">Submit Order</button>
-        <button class="order-clear" type="reset">Clear Form</button>
-      </p>
-    </form>
-
-    <p>
+    <p class="small text-center text-body-secondary mb-0">
       <span title="usually the store's business hours match the schedule on Instagram">Order status</span>
       can be checked at any time using the number above.
     </p>
   </main>
 
-  <footer>
+  <footer class="text-center border-top py-4">
     <p>Address: Ryskulov St. 5/5, office 3, Astana &mdash; Phone: <a
         href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
-  <a class="back-to-top" href="#page-top" aria-label="Back to top">↑</a>
+  <a class="back-to-top btn btn-dark rounded-circle" href="#page-top" aria-label="Back to top">↑</a>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

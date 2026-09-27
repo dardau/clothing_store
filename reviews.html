@@ -7,50 +7,76 @@
   <meta name="description" content="Customer reviews for the Instyle.zh2 clothing store.">
   <meta name="author" content="Alina">
   <title>Reviews — Instyle.zh2</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap 5.3.3, подключён через CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/alina.css">
 </head>
 
-<body>
+<body id="page-top">
   <!-- Page author: Alina -->
   <!-- Comment: each review is marked up as an article, because it's a standalone,
        complete piece of content — it could be published on its own. -->
 
-  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-label="Open navigation menu">
+  <header class="border-bottom bg-white">
+      <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
+        <div class="container">
+          <h1 class="navbar-brand mb-0">
+            <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
+          </h1>
+          <button
+            class="navbar-toggler bg-transparent"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavigation"
+            aria-controls="mainNavigation"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-  <header class="top-nav" id="page-top">
-    <div class="top-nav-left">
-      <label class="top-nav-control" for="menu-toggle">
-        <span class="bars"><span></span><span></span><span></span></span>
-        Menu
-      </label>
-    </div>
-    <h1 class="top-nav-logo">Instyle.zh2</h1>
-    <div class="top-nav-right"><a href="contacts.html">Contact us</a><a href="login.html">Login</a></div>
-  </header>
+          <div class="collapse navbar-collapse" id="mainNavigation">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="catalog.html">Catalog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="lookbook.html">Lookbook</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="order.html">Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="reviews.html" aria-current="page">Reviews</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacts.html">Contacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+              </li>
+            </ul>
 
-  <label class="menu-overlay" for="menu-toggle"></label>
-  <aside class="side-menu" aria-label="Menu panel">
-    <label class="side-menu-close" for="menu-toggle">×</label>
-    <p class="side-menu-title">Instyle.zh2</p>
-    <nav aria-label="Side navigation">
-      <ul class="side-menu-nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="catalog.html">Catalog</a></li>
-        <li><a href="lookbook.html">Lookbook</a></li>
-        <li><a href="order.html">Order</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="reviews.html" aria-current="page">Reviews</a></li>
-        <li><a href="contacts.html">Contacts</a></li>
-      </ul>
-    </nav>
-    <hr class="side-menu-divider">
-    <p class="side-menu-footer"><a href="https://www.instagram.com/instyle.zh2" target="_blank"
-        rel="noopener noreferrer">Instagram</a><a href="mailto:zhan.ideas@mail.ru">Email us</a><a
-        href="tel:+77012540203">WhatsApp</a></p>
-  </aside>
+            <div class="d-lg-none border-top pt-3 mt-3">
+              <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2"
+                target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
+              <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
 
   <main>
    <div class="container-fluid p-0">
@@ -242,7 +268,10 @@
         href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

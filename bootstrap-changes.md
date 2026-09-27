@@ -46,3 +46,28 @@
 - Replaced product section margins with my-5.
 - Corrected the last product's figcaption markup.
 - Consolidated the product image hover effect.
+
+## Dariya — About and Order
+
+- About page wrapper: replaced custom width and page spacing with
+  `container-fluid`, a nested `container`, `py-5` and responsive padding utilities.
+- Store facts: replaced the custom four-column CSS Grid with
+  `row`, `g-3`, `col-12`, `col-sm-6` and `col-lg-3`.
+- Store and lookbook galleries: replaced custom gallery grids with responsive
+  Bootstrap columns. The lookbook includes a nested `row` inside `col-12`.
+- Store facts and information panels: adapted Bootstrap Cards with
+  `card`, `card-body`, `h-100`, borders and shadow utilities.
+- Store information: replaced custom table layout and striping with
+  `table-responsive`, `table`, `table-striped`, `table-hover` and `align-middle`.
+- About actions: replaced custom link-button rules with Bootstrap button variants
+  and a large button size.
+- Order introduction, testimonial and photo: replaced custom widths, alignment,
+  margins and padding with the Bootstrap grid and utility classes.
+- Order form: replaced the custom form grid with `row`, `g-3`, `col-12` and
+  `col-md-6`; controls now use `form-control`, `form-select` and `form-check`.
+- Form buttons: replaced custom button rules with `btn-dark`,
+  `btn-outline-secondary`, size variants and a genuine disabled control.
+- Removed the Order form inline style and replaced it with Bootstrap border,
+  spacing and shadow utilities.
+- Reduced `css/dariya.css` from 402 lines to a 60-line correction layer containing
+  only imagery, brand background and focus/decorative details.

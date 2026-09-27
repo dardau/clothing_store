@@ -7,208 +7,304 @@
   <meta name="description" content="About the Instyle.zh2 store (instyle.zh2): history, locations and contacts.">
   <meta name="author" content="Dariya">
   <title>About Us — Instyle.zh2</title>
+  <!-- Bootstrap 5.3.8 is loaded from the CDN for the grid, utilities and components. -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/dariya.css">
-  <style>
-    #about-page>p {
-      letter-spacing: 0.015em;
-    }
-  </style>
 </head>
 
-<body class="about-page">
+<body class="about-page" id="page-top">
 
-  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-label="Open navigation menu">
+  <header class="border-bottom bg-white">
+      <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
+        <div class="container">
+          <h1 class="navbar-brand mb-0">
+            <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
+          </h1>
+          <button
+            class="navbar-toggler bg-transparent"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavigation"
+            aria-controls="mainNavigation"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-  <header class="top-nav" id="page-top">
-    <div class="top-nav-left">
-      <label class="top-nav-control" for="menu-toggle">
-        <span class="bars"><span></span><span></span><span></span></span>
-        Menu
-      </label>
-    </div>
-    <h1 class="top-nav-logo">Instyle.zh2</h1>
-    <div class="top-nav-right"><a href="contacts.html">Contact us</a><a href="login.html">Login</a></div>
-  </header>
+          <div class="collapse navbar-collapse" id="mainNavigation">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="catalog.html">Catalog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="lookbook.html">Lookbook</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="order.html">Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="about.html" aria-current="page">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="reviews.html">Reviews</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacts.html">Contacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+              </li>
+            </ul>
 
-  <label class="menu-overlay" for="menu-toggle"></label>
-  <aside class="side-menu" aria-label="Menu panel">
-    <label class="side-menu-close" for="menu-toggle">×</label>
-    <p class="side-menu-title">Instyle.zh2</p>
-    <nav aria-label="Side navigation">
-      <ul class="side-menu-nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="catalog.html">Catalog</a></li>
-        <li><a href="lookbook.html">Lookbook</a></li>
-        <li><a href="order.html">Order</a></li>
-        <li><a href="about.html" aria-current="page">About Us</a></li>
-        <li><a href="reviews.html">Reviews</a></li>
-        <li><a href="contacts.html">Contacts</a></li>
-      </ul>
-    </nav>
-    <hr class="side-menu-divider">
-    <p class="side-menu-footer"><a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a><a href="mailto:zhan.ideas@mail.ru">Email us</a><a href="tel:+77012540203">WhatsApp</a></p>
-  </aside>
+            <div class="d-lg-none border-top pt-3 mt-3">
+              <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2"
+                target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
+              <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
 
-  <main id="about-page">
-    <section class="about-hero">
-      <h2 class="page-title">About Instyle.zh2</h2>
-      <p>Everyday style, thoughtful service, and new collections in Astana.</p>
-      <a class="hero-action" href="catalog.html">View collection</a>
+
+  <!-- container-fluid allows the hero to span the viewport; the nested container keeps text readable. -->
+  <main id="about-page" class="container-fluid px-0">
+    <section class="about-hero d-grid align-content-center text-center text-white px-3 py-5 mt-0">
+      <h2 class="page-title display-3 fw-bold mb-3">About Instyle.zh2</h2>
+      <p class="lead mb-4">
+        Everyday style and thoughtful service
+        <span class="d-none d-md-inline">with new collections in Astana.</span>
+      </p>
+      <p class="mb-0">
+        <a class="btn btn-light btn-lg" href="catalog.html">View collection</a>
+      </p>
     </section>
 
-    <p>
-      Instyle.zh2 is a women&rsquo;s clothing boutique with three locations in Astana. The stores
-      are open daily from 11:00 to 21:00 and combine affordable everyday pieces with personal
-      styling advice.
-    </p>
+    <!-- A fixed container keeps long text and cards comfortable to read on desktop. -->
+    <div class="container py-5">
+      <p class="lead text-center mx-auto mb-5">
+        Instyle.zh2 is a women&rsquo;s clothing boutique with three locations in Astana. The stores
+        are open daily from 11:00 to 21:00 and combine affordable everyday pieces with personal
+        styling advice.
+      </p>
 
-    <section class="store-facts" aria-label="Store highlights">
-      <article><strong>3</strong><span>stores in Astana</span></article>
-      <article><strong>Weekly</strong><span>collection updates</span></article>
-      <article><strong>Citywide</strong><span>pickup and delivery</span></article>
-      <article><strong>Personal</strong><span>WhatsApp consultation</span></article>
-    </section>
-
-    <section class="gallery gallery--intro" aria-label="Store locations">
-      <figure class="store-photo">
-        <img src="images/store.jpeg" alt="Instyle.zh2 storefront facade">
-        <figcaption>One of our store locations in Astana.</figcaption>
-      </figure>
-      <figure class="store-photo">
-        <img src="images/magazin01.png" alt="Interior of an Instyle.zh2 boutique">
-        <figcaption>Inside the boutique.</figcaption>
-      </figure>
-    </section>
-
-    <p>
-      The assortment includes sweatshirts, dresses, trousers, bags, belts, glasses, and hats.
-      New pieces arrive almost every week. Customers can ask about sizing and availability through
-      WhatsApp or Instagram Direct before arranging pickup or delivery.
-    </p>
-
-    <section class="story-section content-cards" id="lookbook-preview">
-      <h3>Lookbook</h3>
-      <div class="gallery gallery--lookbook">
-        <figure class="store-photo">
-          <img src="images/odezhda.png" alt="Outfit from the current Instyle.zh2 collection">
-        </figure>
-        <figure class="store-photo">
-          <img src="images/odezhda01.png" alt="Denim and knitwear outfit from Instyle.zh2">
-        </figure>
-        <figure class="store-photo">
-          <img src="images/odezhda02.png" alt="Bag, top and accessories from Instyle.zh2">
-        </figure>
-      </div>
-    </section>
-
-    <p>Here&rsquo;s what a customer shared with the store:</p>
-    <blockquote class="testimonial" cite="https://www.instagram.com/instyle.zh2">
-      <p>&ldquo;Thank you for the consultation, everything arrived the right size, the quality is amazing 👍👍👍&rdquo;
-        &mdash; from a conversation with a customer, published in the instyle.zh2 &ldquo;reviews&rdquo; highlight,
-        &asymp; November 2025.</p>
-      <figure class="store-photo testimonial-photo">
-        <img src="images/otzyv.png" alt="Screenshot of a customer review sent to Instyle.zh2">
-      </figure>
-    </blockquote>
-    <hr>
-    <p>
-      As they describe themselves in the bio: <q>clothing at affordable prices</q>.
-    </p>
-
-    <section id="kontakty-tablitsa" class="information-panel">
-      <header class="information-heading">
-        <p class="section-label">Store details</p>
-        <h3>Key Information</h3>
-      </header>
-      <table class="info-table">
-        <caption>Real data about the Instyle.zh2 store</caption>
-        <thead>
-          <tr>
-            <th scope="col">Parameter</th>
-            <th scope="col">Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">City</th>
-            <td>Astana</td>
-          </tr>
-          <tr>
-            <th scope="row">Fulfillment</th>
-            <td>Pickup from one of three locations or courier delivery around the city</td>
-          </tr>
-          <tr>
-            <th scope="row">Instagram</th>
-            <td><a href="https://www.instagram.com/instyle.zh2" target="_blank"
-                rel="noopener noreferrer">instyle.zh2</a></td>
-          </tr>
-          <tr>
-            <th scope="row">Average check</th>
-            <td>approx. 8,000&ndash;15,000&nbsp;&#8376; (estimate based on story prices)</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <section class="information-grid">
-        <article class="information-card">
-          <h3>What You Can Find Here</h3>
-          <ul>
-            <li><strong>Clothing</strong>
-              <ul>
-                <li>Sweatshirts</li>
-                <li>Dresses and trousers</li>
-              </ul>
-            </li>
-            <li><strong>Accessories</strong>
-              <ul>
-                <li>Bags, belts, glasses, hats</li>
-              </ul>
-            </li>
-          </ul>
+      <!-- Bootstrap Card component adapted to show the store's key facts. -->
+      <section class="row g-3 mt-0 mb-5" aria-label="Store highlights">
+        <article class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100 text-center border-0 shadow-sm">
+            <div class="card-body">
+              <h3 class="h4 mb-1">3</h3>
+              <span class="small text-body-secondary">stores in Astana</span>
+            </div>
+          </div>
         </article>
-
-        <article class="information-card order-steps">
-          <h3>How to Order</h3>
-          <ol>
-            <li>Message via Instagram Direct or WhatsApp</li>
-            <li>Confirm size and model availability</li>
-            <li>Arrange pickup or delivery</li>
-          </ol>
+        <article class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100 text-center border-0 shadow-sm">
+            <div class="card-body">
+              <h3 class="h4 mb-1">Weekly</h3>
+              <span class="small text-body-secondary">collection updates</span>
+            </div>
+          </div>
+        </article>
+        <article class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100 text-center border-0 shadow-sm">
+            <div class="card-body">
+              <h3 class="h4 mb-1">Citywide</h3>
+              <span class="small text-body-secondary">pickup and delivery</span>
+            </div>
+          </div>
+        </article>
+        <article class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100 text-center border-0 shadow-sm">
+            <div class="card-body">
+              <h3 class="h4 mb-1">Personal</h3>
+              <span class="small text-body-secondary">WhatsApp consultation</span>
+            </div>
+          </div>
         </article>
       </section>
-    </section>
 
-    <p class="contact-card">
-      Store profile &mdash; <a href="https://www.instagram.com/instyle.zh2" target="_blank"
-        rel="noopener noreferrer">instagram.com/instyle.zh2</a>
-      (opens in a new tab). Have a question before ordering? Email us at
-      <a href="mailto:zhan.ideas@mail.ru">zhan.ideas@mail.ru</a> or message us on WhatsApp
-      <a href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a> &mdash;
-      we reply <b>quickly</b>, <i>even on weekends</i>. Average response time is
-      <abbr title="approximately">approx.</abbr> 30 minutes, unless it&rsquo;s late at night<sup>*</sup>.
-    </p>
+      <section class="row g-4 mt-0 mb-5" aria-label="Store locations">
+        <figure class="store-photo col-12 col-md-6 mb-0">
+          <img class="about-gallery-image img-fluid w-100 rounded shadow-sm"
+            src="images/store.jpeg" alt="Instyle.zh2 storefront facade">
+          <figcaption class="small text-body-secondary mt-2">One of our store locations in Astana.</figcaption>
+        </figure>
+        <figure class="store-photo col-12 col-md-6 mb-0">
+          <img class="about-gallery-image img-fluid w-100 rounded shadow-sm"
+            src="images/magazin01.png" alt="Interior of an Instyle.zh2 boutique">
+          <figcaption class="small text-body-secondary mt-2">Inside the boutique.</figcaption>
+        </figure>
+      </section>
 
-    <div class="contact-note">
-      <p><small>The contact info above should be double-checked against the current Instagram bio or direct
-          messages.</small></p>
+      <p class="mb-5">
+        The assortment includes sweatshirts, dresses, trousers, bags, belts, glasses, and hats.
+        New pieces arrive almost every week. Customers can ask about sizing and availability through
+        WhatsApp or Instagram Direct before arranging pickup or delivery.
+      </p>
+
+      <section class="row g-3 bg-light border rounded-3 p-3 p-lg-4 mt-0 mb-5" id="lookbook-preview">
+        <h3 class="col-12 h4 text-center mb-2">Lookbook</h3>
+        <div class="col-12">
+          <!-- Nested Bootstrap row keeps the three lookbook images responsive inside this column. -->
+          <div class="row g-3">
+            <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
+              <img class="about-lookbook-image img-fluid w-100 rounded"
+                src="images/odezhda.png" alt="Outfit from the current Instyle.zh2 collection">
+            </figure>
+            <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
+              <img class="about-lookbook-image img-fluid w-100 rounded"
+                src="images/odezhda01.png" alt="Denim and knitwear outfit from Instyle.zh2">
+            </figure>
+            <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
+              <img class="about-lookbook-image img-fluid w-100 rounded"
+                src="images/odezhda02.png" alt="Bag, top and accessories from Instyle.zh2">
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <p class="small text-uppercase fw-semibold text-body-secondary mb-2">
+        Here&rsquo;s what a customer shared with the store:
+      </p>
+      <blockquote class="testimonial border-start border-4 bg-light ps-4 py-3 my-4"
+        cite="https://www.instagram.com/instyle.zh2">
+        <p class="lead mb-3">
+          &ldquo;Thank you for the consultation, everything arrived the right size, the quality is amazing 👍👍👍&rdquo;
+          &mdash; from a conversation with a customer, published in the instyle.zh2
+          &ldquo;reviews&rdquo; highlight, &asymp; November 2025.
+        </p>
+        <figure class="testimonial-photo col-12 col-md-8 col-lg-6 mx-auto mb-0">
+          <img class="img-fluid w-100 rounded shadow-sm"
+            src="images/otzyv.png" alt="Screenshot of a customer review sent to Instyle.zh2">
+        </figure>
+      </blockquote>
+
+      <p class="mb-4">
+        As they describe themselves in the bio: <q>clothing at affordable prices</q>.
+      </p>
+
+      <section id="kontakty-tablitsa" class="bg-light border rounded-3 p-3 p-lg-4 mt-0 mb-5">
+        <header class="text-center text-md-start mb-4">
+          <p class="small text-uppercase fw-bold text-body-secondary mb-1">Store details</p>
+          <h3 class="h2 mb-0">Key Information</h3>
+        </header>
+
+        <!-- Bootstrap responsive Table component adapted to real store information. -->
+        <div class="table-responsive">
+          <table class="table table-striped table-hover align-middle bg-white mb-4">
+            <caption class="caption-top fw-semibold">Real data about the Instyle.zh2 store</caption>
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">City</th>
+                <td>Astana</td>
+              </tr>
+              <tr>
+                <th scope="row">Fulfillment</th>
+                <td>Pickup from one of three locations or courier delivery around the city</td>
+              </tr>
+              <tr>
+                <th scope="row">Instagram</th>
+                <td>
+                  <a href="https://www.instagram.com/instyle.zh2" target="_blank"
+                    rel="noopener noreferrer">instyle.zh2</a>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Average check</th>
+                <td>approx. 8,000&ndash;15,000&nbsp;&#8376; (estimate based on story prices)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <section class="row g-4 mt-0">
+          <h3 class="visually-hidden">More store information</h3>
+          <article class="col-12 col-lg-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h3 class="card-title h5">What You Can Find Here</h3>
+                <ul class="mb-0">
+                  <li><strong>Clothing</strong>
+                    <ul>
+                      <li>Sweatshirts</li>
+                      <li><span class="fw-bold">Dresses and trousers</span></li>
+                    </ul>
+                  </li>
+                  <li><strong>Accessories</strong>
+                    <ul>
+                      <li>Bags, belts, glasses, hats</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-12 col-lg-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h3 class="card-title h5">How to Order</h3>
+                <ol class="mb-0">
+                  <li>Message via Instagram Direct or WhatsApp</li>
+                  <li>Confirm size and model availability</li>
+                  <li>Arrange pickup or delivery</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <p class="alert alert-secondary mt-0 mb-3" role="note">
+        Store profile &mdash; <a class="alert-link" href="https://www.instagram.com/instyle.zh2"
+          target="_blank" rel="noopener noreferrer">instagram.com/instyle.zh2</a>
+        (opens in a new tab). Have a question before ordering? Email us at
+        <a class="alert-link" href="mailto:zhan.ideas@mail.ru">zhan.ideas@mail.ru</a> or call
+        <a class="alert-link" href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a>.
+      </p>
+
+      <div class="border rounded p-3 text-body-secondary">
+        <p class="small mb-0">
+          The contact info above should be double-checked against the current Instagram bio or direct messages.
+        </p>
+      </div>
+
+      <p class="d-flex flex-column flex-sm-row justify-content-center gap-2 mt-4 mb-0">
+        <a class="btn btn-outline-dark" href="#kontakty-tablitsa">&uarr; Back to the info table</a>
+        <a class="btn btn-dark" href="index.html">&uarr; Back to Home</a>
+      </p>
     </div>
-
-    <p class="back-links">
-      <a href="#kontakty-tablitsa">&uarr; Back to the info table</a>
-      <a href="index.html">&uarr; Back to Home</a>
-    </p>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer text-center border-top py-4">
     <p>Address: Ryskulov St. 5/5, office 3, Astana &mdash; Instagram: <a href="https://www.instagram.com/instyle.zh2"
         target="_blank" rel="noopener noreferrer">instyle.zh2</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
 
-  <a class="back-to-top" href="#page-top" aria-label="Back to top">↑</a>
+  <a class="back-to-top btn btn-dark rounded-circle" href="#page-top" aria-label="Back to top">↑</a>
 
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
