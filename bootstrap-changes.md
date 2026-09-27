@@ -46,6 +46,27 @@
 - Replaced product section margins with my-5.
 - Corrected the last product's figcaption markup.
 - Consolidated the product image hover effect.
+## Zhansaya — Contacts and CSS cleanup
+
+- Replaced the Contacts page layout with a Bootstrap container,
+  responsive rows, columns and gutters.
+- Adapted Bootstrap Cards for the address, directions and contact links.
+- Replaced the contact steps and descriptions with responsive columns,
+  including a nested row.
+- Replaced custom contact buttons with Bootstrap button classes.
+- Removed the inline style from the Call us link.
+- Removed the old Contacts grid, flex layout, spacing and button rules.
+- Kept only the custom hero photograph and dark overlay.
+- Added mt-0 to section cards to neutralize the legacy section margin.
+- Moved catalog category positioning, image sizing and label styling
+  to Bootstrap utilities.
+- Replaced price white-space rules with text-nowrap.
+- Replaced supporting image width, cropping and spacing rules with
+  w-100, object-fit-cover and mb-3.
+- Removed unused back-to-top styling from zhansaya.css.
+- Removed broad heading, paragraph and anchor overrides.
+- Preserved custom image proportions and hover transitions.
+- Corrected the Login form breakpoint comment to 768px.
 
 ## Dariya — About and Order
 

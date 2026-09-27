@@ -1,79 +1,36 @@
-/* position: static is the default flow behaviour, kept here on purpose as
-   the baseline that the fixed back-to-top button and the absolutely
-   positioned badges/labels are compared against. */
-main {
-  position: static;
-}
-
-h4 {
-  margin: 4px 0 6px;
-}
-
-/* Adjacent sibling selector (+): matches a <p> immediately after an <h3>.
-   Margin collapse: neighbouring vertical margins collapse into one gap,
-   so setting the p margin-top to 0 lets the h3 margin control the gap. */
-h3 + p {
-  margin-top: 0;
-}
 /* Keep the catalog banner shallow and darken it for white text contrast. */
 .hero img {
   height: 260px;
   filter: brightness(0.65);
 }
-
-main > section h3 {
-  font-size: 1.1rem;
-  border-bottom: 2px solid var(--surface);
-  padding-bottom: 6px;
-  margin-bottom: 10px;
-}
-
-main > section p {
-  line-height: 1.6;
-}
-
-
-/* position: relative makes each card the containing block for its
-   absolutely positioned label <span>. */
+/* Custom category transitions and portrait proportions. */
 .category-card {
-  position: relative;
-  display: block;
-  text-decoration: none;
-  overflow: hidden;
   transition: opacity 0.3s ease;
 }
 
-.category-grid:hover .category-card:not(:hover) {
-  opacity: 0.45;
-}
-/* Keep category photos in a consistent portrait format. */
 .category-card img {
-  width: 100%;
-  height: auto;
   aspect-ratio: 3 / 4;
-  object-fit: cover;
-  display: block;
   transition: transform 0.3s ease;
 }
-.category-card:hover img,
-.category-card:focus img {
+
+/* Apply hover effects only on devices that support hovering. */
+@media (hover: hover) {
+  .category-grid:hover .category-card:not(:hover) {
+    opacity: 0.45;
+  }
+
+  .category-card:hover img {
+    transform: scale(1.04);
+  }
+}
+/* Keep the image effect available to keyboard users. */
+.category-card:focus-visible img {
   transform: scale(1.04);
 }
-
-.category-card span {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  color: var(--ink);
-  background-color: var(--paper);
-}
-
-/* Pseudo-element ::before adds an arrow before every label without an extra
-   HTML element. */
+/* Decorative arrow before each category label. */
 .category-card span::before {
   content: "→ ";
 }
-
 .product-card {
   position: relative;
   min-width: 0;
@@ -90,427 +47,22 @@ main > section p {
     transform: scale(1.02);
   }
 }
-
-.price {
-  white-space: nowrap;
-}
-
-/* Attribute selector: matches links inside <main> whose href starts with
-   "#", i.e. the in-page links (category cards, "Back to categories"). */
-main a[href^="#"]:not(.back-to-top) {
-  color: var(--ink);
-}
-
-/*
-  position: fixed takes the button out of the flow and pins it to the
-  viewport, so it stays in the corner while the page scrolls.
-  Centering with flexbox: justify-content and align-items center the arrow
-  inside the fixed-size button. base.css centres it with grid; this file is
-  linked second, so its display: flex wins the cascade on my pages.
-*/
-.back-to-top {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: var(--ink);
-  color: var(--paper);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  box-shadow: 0 2px 8px var(--line);
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.back-to-top:hover {
-  background-color: var(--surface);
-  color: var(--ink);
-}
 /* Id: the price table exists once on the page and is the target of the
    "Back to price ranges" link, so a unique id fits better than a class. */
 #price {
   background-color: var(--paper);
 }
+/* Limit the supporting photo's height beside the price table. */
 .details-photo {
-  width: 100%;
   max-height: 220px;
-  object-fit: cover;
-  margin-bottom: 16px;
 }
-.contacts-page a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.contacts-main {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 20px;
-  width: 94%;
-  max-width: 1200px;
-  padding: 56px 24px 80px;
-}
-
-/* Universal selector (*) matches every direct child of .contacts-main. */
-.contacts-main > * {
-  flex: 1 1 100%;
-  min-width: 0;
-}
-
-/* Centering with grid: align-content and justify-items center the hero
-   content while the buttons remain in the grid layout. */
+/* Custom photo and dark overlay; Bootstrap handles layout and spacing. */
 .contacts-hero {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-content: center;
-  justify-items: center;
-  column-gap: 12px;
-  min-height: 480px;
-  padding: 64px 24px;
-  background: url("../images/contactsimg.jpg") center / cover;
-  color: var(--paper);
-  text-align: center;
-}
-
-.contacts-hero > :not(a) {
-  grid-column: 1 / -1;
-}
-
-.contacts-hero > .contacts-button {
-  justify-self: end;
-}
-
-.contacts-hero > .contacts-button-secondary {
-  justify-self: start;
-}
-
-.contacts-hero h2 {
-  margin: 10px 0 18px;
-  font-size: 6rem;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.contacts-kicker {
-  margin: 0;
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.contacts-hero > p:not(.contacts-kicker) {
-  max-width: 560px;
-  margin: 0 0 28px;
-  font-size: 1.05rem;
-  line-height: 1.6;
-}
-
-.contacts-page .contacts-button {
-  padding: 14px 30px;
-  border: 1px solid var(--paper);
-  background: var(--paper);
-  color: var(--ink);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
-.contacts-page .contacts-button:hover,
-.contacts-page .contacts-button:focus {
-  background: transparent;
-  color: var(--paper);
-}
-
-.contacts-page .contacts-button-secondary {
-  background: transparent;
-  color: var(--paper);
-}
-
-.contacts-page .contacts-button-secondary:hover,
-.contacts-page .contacts-button-secondary:focus {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.contacts-main > .visit-section {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: stretch;
-  gap: 20px;
-  margin: 64px 0;
-}
-
-.contacts-main > .visit-section > h3 {
-  grid-column: 1 / -1;
-  margin: 0 0 8px;
-  padding: 0;
-  border: 0;
-  font-size: 2.2rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-
-.contact-detail,
-.contact-links {
-  min-height: 230px;
-  margin: 0;
-  padding: 28px;
-  border: 1px solid var(--line);
-  background: var(--paper);
-  align-self: stretch;
-}
-
-.contact-detail h4,
-.contact-links h4 {
-  margin: 0 0 18px;
-  font-size: 1.35rem;
-  font-weight: 400;
-}
-
-.contact-detail p {
-  margin: 0;
-  line-height: 1.7;
-}
-
-.contact-detail strong {
-  font-family: var(--heading-font);
-  font-size: 1.15rem;
-  font-weight: 400;
-}
-
-.contact-detail mark {
-  padding: 0 2px;
-  background: var(--surface);
-  color: inherit;
-}
-
-.contacts-main .contact-links {
-  display: flex;
-  flex-direction: column;
-}
-
-.contact-links address {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  font-style: normal;
-}
-
-.contacts-main .contact-links p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.contact-label {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 0.8rem;
-}
-
-.contacts-page .contact-links a {
-  color: var(--ink);
-  border-bottom: 1px solid var(--line);
-  transition: border-color 0.2s ease;
-}
-
-.contacts-page .contact-links a:hover,
-.contacts-page .contact-links a:focus {
-  border-bottom-color: var(--ink);
-  outline: 0;
-}
-
-.contacts-page .contact-links .contact-phone {
-  font-family: var(--heading-font);
-  font-size: 1.5rem;
-  letter-spacing: 0.01em;
-}
-
-/* This unique section is an in-page link target, so an id is appropriate. */
-#how-to-reach {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 20px;
-  row-gap: 32px;
-  margin: 72px 0 0;
-  padding: 56px;
-  border: 1px solid var(--line);
-  background: var(--paper);
-}
-
-#how-to-reach > h3 {
-  grid-column: 1 / -1;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 2.2rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-
-#how-to-reach > ol {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: step;
-}
-
-#how-to-reach > ol > li {
-  flex: 1 1 240px;
-  counter-increment: step;
-  padding: 24px;
-  background: var(--surface);
-  line-height: 1.6;
-}
-
-#how-to-reach > ol > li::before {
-  content: counter(step);
-  display: block;
-  margin-bottom: 14px;
-  font-family: var(--heading-font);
-  font-size: 2.6rem;
-  line-height: 1;
-}
-
-#how-to-reach > ul {
-  grid-column: 1;
-  margin: 0;
-  padding: 32px 0 0;
-  border-top: 1px solid var(--line);
-  list-style: none;
-  font-family: var(--heading-font);
-  font-size: 1.25rem;
-}
-
-#how-to-reach > ul ul {
-  margin: 12px 0 0;
-  padding: 0 0 0 16px;
-  border-left: 2px solid var(--surface);
-  list-style: none;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-#how-to-reach > ul ul li {
-  padding: 4px 0;
-}
-
-#how-to-reach > dl {
-  grid-column: 2 / span 2;
-  display: grid;
-  grid-template-columns: 7rem minmax(0, 1fr);
-  gap: 14px 24px;
-  margin: 0;
-  padding: 32px 0 0;
-  border-top: 1px solid var(--line);
-}
-
-#how-to-reach dt {
-  font-weight: 700;
-}
-
-#how-to-reach dd {
-  margin: 0;
-  line-height: 1.6;
-}
-
-.contacts-main > .footnote {
-  margin: 14px 0 72px;
-  color: var(--muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
-
-.contacts-page .footnote a {
-  border-bottom: 1px solid var(--surface);
-}
-
-
-.contacts-main > blockquote {
-  max-width: 900px;
-  margin: 0 auto 14px;
-  padding: 40px 24px 0;
-  border-top: 1px solid var(--ink);
-  font-family: var(--heading-font);
-  font-size: 1.9rem;
-  line-height: 1.4;
-  text-align: center;
-}
-
-.contacts-main > blockquote p {
-  margin: 0;
-}
-
-.contacts-main > .quote-author {
-  margin: 0 0 56px;
-  color: var(--muted);
-  font-size: 0.95rem;
-  text-align: center;
-}
-
-.contacts-main > .contacts-note {
-  margin: 0 0 72px;
-  padding: 0 18%;
-  line-height: 1.8;
-  text-align: center;
-}
-
-.contacts-main > .contact-copy {
-  flex: 1 1 30%;
-  margin: 0 0 72px;
-  padding: 30px 32px;
-  border: 1px solid var(--line);
-  background: var(--paper);
-}
-
-.contact-copy h3 {
-  margin: 0 0 16px;
-  padding: 0 0 14px;
-  border-bottom: 1px solid var(--surface);
-  font-size: 1.35rem;
-  font-weight: 400;
-}
-
-.contact-copy p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.75;
-}
-
-.contact-back-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 32px;
-  margin: 0;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-  font-size: 0.9rem;
-}
-
-.contacts-page .contact-back-links a {
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-.contacts-page .contact-back-links a:hover,
-.contacts-page .contact-back-links a:focus {
-  border-bottom-color: var(--ink);
-  outline: 0;
+  background:
+    linear-gradient(rgb(0 0 0 / 45%), rgb(0 0 0 / 45%)),
+    url("../images/contactsimg.jpg") center / cover;
 }
 /* Match the registration legend to the site's heading font. */
 .login-form > fieldset > legend {
   font-family: var(--heading-font);
 }
-
