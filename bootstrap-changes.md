@@ -71,3 +71,18 @@
   spacing and shadow utilities.
 - Reduced `css/dariya.css` from 402 lines to a 60-line correction layer containing
   only imagery, brand background and focus/decorative details.
+- Login: connected Bootstrap and reused the shared Navbar.
+- Replaced the photo and registration layout with Bootstrap columns.
+- Removed fixed photo positioning and custom form width and padding.
+- Fixed the duplicate id attribute on the Sign in section.
+- Removed the old internal style demonstration.
+- Registration: replaced custom fieldset grid with Bootstrap row and columns.
+- Replaced custom field, label and button styling with Bootstrap form classes.
+- Scoped legacy base.css field styles to non-Bootstrap controls.
+- Fixed the closing order of the registration form and its outer row.
+- Added an explained disabled submit state because registration has no backend.
+- Sign in: replaced custom form styling with Bootstrap form-control,
+  form-label, button, spacing, border and shadow classes.
+- Removed obsolete .signin-section rules.
+- Added an explained disabled submit state because authentication
+  has no backend; the reset button remains functional.
