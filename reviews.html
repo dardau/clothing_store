@@ -16,11 +16,16 @@
   <link rel="stylesheet" href="css/alina.css">
 </head>
 
+<<<<<<< HEAD
 <body id="page-top">
+=======
+<body id="page-top" class="pt-0">
+>>>>>>> 930ddb7 (Assignment 3: Bootstrap for lookbook and reviews, CSS cleanup)
   <!-- Page author: Alina -->
   <!-- Comment: each review is marked up as an article, because it's a standalone,
        complete piece of content — it could be published on its own. -->
 
+<<<<<<< HEAD
   <header class="border-bottom bg-white">
       <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
         <div class="container">
@@ -77,22 +82,84 @@
       </nav>
     </header>
 
+=======
+ <!-- Bootstrap Navbar with Collapse:
+     adapted to our existing pages and contact links.
+     Navigation expands from 992px and collapses below that width. -->
+<header class="border-bottom bg-white">
+  <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
+    <div class="container">
+      <h1 class="navbar-brand mb-0">
+        <a class="text-dark text-decoration-none" href="index.html">
+          Instyle.zh2
+        </a>
+      </h1>
+      <button
+        class="navbar-toggler bg-transparent"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#reviewsNavigation"
+        aria-controls="reviewsNavigation"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="reviewsNavigation">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="catalog.html">Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="lookbook.html">Lookbook</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="order.html">Order</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="reviews.html" aria-current="page">Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacts.html">Contacts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+          </li>
+        </ul>
+
+        <div class="d-lg-none border-top pt-3 mt-3">
+          <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
+          <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+>>>>>>> 930ddb7 (Assignment 3: Bootstrap for lookbook and reviews, CSS cleanup)
 
   <main>
    <div class="container-fluid p-0">
-    <section class="page-hero">
+    <section class="page-hero my-3 my-md-4">
       <img src="images/vitrinaman.jpg" alt="Витрина магазина Instyle.zh2">
       <div class="hero-overlay">
         <p class="hero-eyebrow">INSTYLE.ZH2 &middot; ASTANA</p>
-        <h2 class="hero-title">Customer<br>Reviews</h2>
-        <p class="hero-subtitle">Real feedback from real customers, in their own words.</p>
+        <h2 class="hero-title display-4">Customer<br>Reviews</h2>
+       <p class="hero-subtitle">Real feedback from real customers, in their own words.</p>
+<a href="#rating-tabl" class="btn btn-light btn-lg mt-3">See Ratings</a>
       </div>
     </section>
      </div>
 <div class="container">
-     <div class="review-text-masonry row">
-<div class="col-12 col-md-6 col-lg-4">
-      <article class="review-text-card">
+<div class="review-text-masonry row g-3 my-4">
+  <div class="col-12 col-md-6 col-lg-4">
+    <article class="review-text-card h-100">
         <div class="review-head">
           <span class="review-avatar">ЖС</span>
           <div>
@@ -104,10 +171,10 @@
             2025</time></p>
         <p class="review-body">Очень классный и стильный ассортимент 😍 нашла идеальный вариант 🤞 Спасибо консультанту
           Айгерим 💗 хотелось купить все образы 🥰 💗 Буду еще рада приходить 💗</p>
-      </article>
-      </div>
-  <div class="col-12 col-md-6 col-lg-4">
-      <article class="review-text-card">
+          </article>
+          </div>
+        <div class="col-12 col-md-6 col-lg-4">
+    <article class="review-text-card h-100">
         <div class="review-head">
           <span class="review-avatar">РИ</span>
           <div>
@@ -120,11 +187,10 @@
         <p class="review-body">Уже несколько лет обслуживаюсь в вашем магазине. Всегда качественный товар, современные
           модели. Без покупок из магазина не ухожу. Здесь отличное обслуживание, девочки всегда добры, внимательны.
           Помогут с выбором. Спасибо огромное 🥰</p>
-      </article>
-      </div>
-
-<div class="col-12 col-md-6 col-lg-4">
-      <article class="review-text-card">
+    </article>
+    </div>
+        <div class="col-12 col-md-6 col-lg-4">
+    <article class="review-text-card h-100">
         <div class="review-head">
           <span class="review-avatar">LT</span>
           <div>
@@ -137,10 +203,11 @@
           идеально, цены очень адекватные, а обслуживание просто на высшем уровне. Отдельное спасибо консультанту Анеле
           — за внимательность и отличное чувство стиля! Ассортимент реально классный — стильные, актуальные вещи,
           хочется забрать всё! Однозначно вернусь ещё 🧑‍🤝‍🧑</p>
-      </article>
-      </div>
-<div class="col-12 col-md-6 col-lg-4">
-      <article class="review-text-card">
+        </article>
+        </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+    <article class="review-text-card h-100">
         <div class="review-head">
           <span class="review-avatar">A</span>
           <div>
@@ -152,10 +219,12 @@
             2025</time></p>
         <p class="review-body">Благодарю консультанта Толкын, за шикарное обслуживание. Круто собрала мне луки, все
           купила. Ассортимент шикарный, и цены супер. Благодарю 🙏</p>
-      </article>
-      </div>
-<div class="col-12 col-md-6 col-lg-4">
-      <article class="review-text-card">
+      
+        </article>
+        </div>
+      
+          <div class="col-12 col-md-6 col-lg-4">
+    <article class="review-text-card h-100">
         <div class="review-head">
           <span class="review-avatar">R</span>
           <div>
@@ -166,7 +235,9 @@
         <p class="review-stars-date">&#9733;&#9733;&#9733;&#9733; <time datetime="2025-06-15">15 июня 2025</time></p>
         <p class="review-body">Понравилось, одежда вся представлена со вкусом и в хорошем цветовом сочетании.
           Обслуживание грамотное, и очень чисто в примерочной. Спасибо большое! Процветания магазину 🌸</p>
+        
       </article>
+      </div>
       </div>
 
     </div>
@@ -191,8 +262,8 @@
 
 
 
-    <section id="rating-tabl" class="rating-card">
-      <h3>Ratings by Category</h3>
+    <section id="rating-tabl" class="rating-card my-4 my-md-5">
+      <h3 class="mb-3">Ratings by Category</h3>
       <table>
         <caption>Average store ratings based on real reviews</caption>
         <thead>
@@ -218,21 +289,30 @@
       </table>
 
       <h3>How to Leave a Review</h3>
-      <ol type="1" class="review-steps">
-        <li>Make a purchase at the store</li>
-        <li>Open the store's page on 2GIS or Instagram</li>
-        <li>Write an honest review and, if you'd like, attach a photo</li>
-      </ol>
+     <ol type="1" class="review-steps row g-3">
+  <li class="col-12 col-sm-6 col-md-4">Make a purchase at the store</li>
+  <li class="col-12 col-sm-6 col-md-4">Open the store's page on 2GIS or Instagram</li>
+  <li class="col-12 col-sm-6 col-md-4">Write an honest review and, if you'd like, attach a photo</li>
+</ol>
 
-      <ul>
-        <li>Places to leave a review
-          <ul>
-            <li>2GIS</li>
-            <li>Instagram</li>
-            <li>In-store comment book</li>
-          </ul>
-        </li>
-      </ul>
+<!-- Bootstrap component: List Group, adapted from https://getbootstrap.com/docs/5.3/components/list-group/
+     — changed items from generic "Cras justo..." placeholders to our real review platforms,
+     added badges showing where each platform ranks by popularity -->
+<p class="fw-bold mb-2">Places to leave a review</p>
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    2GIS
+    <span class="badge bg-dark rounded-pill">Most popular</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Instagram
+    <span class="badge bg-secondary rounded-pill">Popular</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    In-store comment book
+    <span class="badge bg-secondary rounded-pill">Occasional</span>
+  </li>
+</ul>
 
       <dl>
         <dt>Verified review</dt>
@@ -251,10 +331,9 @@
       rounded value, not an <abbr title="artificially inflated value">inflated</abbr> rating.
     </p>
 
-    <div>
-      <p><small>Reviews reflect customers' personal experience and may not match the store's official policy.</small>
-      </p>
-    </div>
+  <div class="text-muted">
+  <p><small>Reviews reflect customers' personal experience and may not match the store's official policy.</small></p>
+</div>
     <!-- Comment: div is again only a wrapper for a technical disclaimer —
          it's not a separate page section or a secondary column (aside). -->
 
