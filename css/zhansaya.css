@@ -1,9 +1,9 @@
-/* Keep the catalog banner shallow and darken it for white text contrast. */
+
 .hero img {
   height: 260px;
   filter: brightness(0.65);
 }
-/* Custom category transitions and portrait proportions. */
+
 .category-card {
   transition: opacity 0.3s ease;
 }
@@ -13,7 +13,6 @@
   transition: transform 0.3s ease;
 }
 
-/* Apply hover effects only on devices that support hovering. */
 @media (hover: hover) {
   .category-grid:hover .category-card:not(:hover) {
     opacity: 0.45;
@@ -23,11 +22,11 @@
     transform: scale(1.04);
   }
 }
-/* Keep the image effect available to keyboard users. */
+
 .category-card:focus-visible img {
   transform: scale(1.04);
 }
-/* Decorative arrow before each category label. */
+
 .category-card span::before {
   content: "→ ";
 }
@@ -36,7 +35,6 @@
   min-width: 0;
 }
 
-/* Custom portrait ratio and smooth zoom for clothing photos. */
 .product-card img {
   aspect-ratio: 3 / 4;
   transition: transform 0.3s ease;
@@ -47,22 +45,21 @@
     transform: scale(1.02);
   }
 }
-/* Id: the price table exists once on the page and is the target of the
-   "Back to price ranges" link, so a unique id fits better than a class. */
+
 #price {
   background-color: var(--paper);
 }
-/* Limit the supporting photo's height beside the price table. */
+
 .details-photo {
   max-height: 220px;
 }
-/* Custom photo and dark overlay; Bootstrap handles layout and spacing. */
+
 .contacts-hero {
   background:
     linear-gradient(rgb(0 0 0 / 45%), rgb(0 0 0 / 45%)),
     url("../images/contactsimg.jpg") center / cover;
 }
-/* Match the registration legend to the site's heading font. */
+
 .login-form > fieldset > legend {
   font-family: var(--heading-font);
 }

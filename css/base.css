@@ -1,14 +1,4 @@
-/*
-  Colour palette:
-  #000000 — primary text, headings and strong borders for clear contrast.
-  white — main page background and light text on dark elements.
-  #d4d4d4 — navigation and secondary surfaces.
-  rgba(0, 0, 0, 0.14) — subtle borders and separators.
-  rgb(120, 120, 120) — muted secondary text.
 
-  The palette is limited to five colours and uses HEX, RGBA,
-  RGB and one named colour as required by Assignment 2.
-*/
 
 :root {
   --ink: #000000;
@@ -21,10 +11,6 @@
   --heading-font: Georgia, "Times New Roman", serif;
 }
 
-/*
-  Universal selector: applies box-sizing to every element so that
-  padding and borders are included in the declared width and height.
-*/
 * {
   box-sizing: border-box;
 }
@@ -76,7 +62,6 @@ a:focus {
   text-decoration-thickness: 2px;
 }
 
-/* Shared checkbox navigation: identical on every page and uses no JavaScript. */
 .menu-toggle {
   position: fixed;
   width: 1px;
@@ -145,7 +130,6 @@ a:focus {
 .side-menu-footer a { display: block; margin-bottom: 12px; color: #ffffff; text-decoration: none; }
 .side-menu-footer a:hover,
 .side-menu-footer a:focus { color: var(--surface); }
-
 
 .site-header {
   position: fixed;
@@ -299,7 +283,7 @@ a[target="_blank"]::after {
   content: " ↗";
   font-size: 0.8em;
 }
-/* Legacy layout for pages not yet using Bootstrap containers. */
+
 main:not(.container):not(.container-fluid) {
   width: min(1200px, 92%);
   margin: 0 auto;
@@ -419,7 +403,6 @@ button {
   font: inherit;
 }
 
-/* Keep legacy styles only for fields without Bootstrap classes. */
 input:not(.form-control):not(.form-check-input),
 select:not(.form-select),
 textarea:not(.form-control) {
@@ -468,10 +451,6 @@ footer {
   text-align: center;
 }
 
-/*
-  Fixed positioning keeps the back-to-top control visible
-  while the user scrolls through the page.
-*/
 .back-to-top {
   position: fixed;
   right: 24px;
@@ -498,4 +477,15 @@ footer {
 
 .videlit {
   font-weight: bold;
+}
+
+.site-nav-toggle:focus-visible + label {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+@media (max-width: 991.98px) {
+  .site-nav-toggle:not(:checked) ~ .site-nav-links {
+    display: none;
+  }
 }

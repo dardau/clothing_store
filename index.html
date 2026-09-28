@@ -17,12 +17,6 @@
 </head>
 
 <body class="home-page" id="page-top">
-  <!-- Comment (why, not what): we use header/nav/main/footer instead of div,
-       because these are semantically meaningful, "real" sections of every page on
-       the site, not faceless containers — this way the browser, search engine and
-       screen reader all understand the page structure. -->
-  <!-- Shared page: intro text drafted by Dariya from verified store data; navigation
-       and structure agreed on by the whole team. -->
 
   <header class="border-bottom bg-white">
       <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
@@ -30,18 +24,22 @@
           <h1 class="navbar-brand mb-0">
             <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
           </h1>
-          <button
-            class="navbar-toggler bg-transparent"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mainNavigation"
-            aria-controls="mainNavigation"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
 
-          <div class="collapse navbar-collapse" id="mainNavigation">
+          <input
+            type="checkbox"
+            id="navigation-toggle"
+            class="site-nav-toggle visually-hidden d-lg-none"
+            aria-label="Show navigation"
+            aria-controls="mainNavigation">
+
+          <label
+            for="navigation-toggle"
+            class="navbar-toggler bg-transparent">
+            <span class="navbar-toggler-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Toggle navigation</span>
+          </label>
+
+          <div class="navbar-collapse site-nav-links" id="mainNavigation">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active" href="index.html" aria-current="page">Home</a>
@@ -79,7 +77,6 @@
         </div>
       </nav>
     </header>
-
 
   <section class="home-hero">
     <div class="home-hero-content">
@@ -122,10 +119,6 @@
         href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -324,7 +324,6 @@ form input[type="radio"]+label {
   display: inline;
 }
 
-/* Email field */
 form input[type="email"] {
   display: block;
   width: 60%;
@@ -420,7 +419,6 @@ form label[for="notify-phone"] {
 .lookbook-intro-text em {
   font-style: italic;
 }
-
 
 .page-hero {
   position: relative;

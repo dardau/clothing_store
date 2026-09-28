@@ -12,17 +12,12 @@
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous">
-  <!-- Bootstrap 5.3.8, подключён через CDN -->
-  <link rel="stylesheet" href="css/base.css"> 
+
+  <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/alina.css">
 </head>
 
-
 <body id="page-top" class="pt-0">
-
-  <!-- Page author: Alina -->
-  <!-- Comment: each review is marked up as an article, because it's a standalone,
-       complete piece of content — it could be published on its own. -->
 
   <header class="border-bottom bg-white">
       <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
@@ -30,18 +25,22 @@
           <h1 class="navbar-brand mb-0">
             <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
           </h1>
-          <button
-            class="navbar-toggler bg-transparent"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mainNavigation"
-            aria-controls="mainNavigation"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
 
-          <div class="collapse navbar-collapse" id="mainNavigation">
+          <input
+            type="checkbox"
+            id="navigation-toggle"
+            class="site-nav-toggle visually-hidden d-lg-none"
+            aria-label="Show navigation"
+            aria-controls="mainNavigation">
+
+          <label
+            for="navigation-toggle"
+            class="navbar-toggler bg-transparent">
+            <span class="navbar-toggler-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Toggle navigation</span>
+          </label>
+
+          <div class="navbar-collapse site-nav-links" id="mainNavigation">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link" href="index.html">Home</a>
@@ -81,7 +80,7 @@
     </header>
 
   <main>
-    <!-- container-fluid: hero-фото на всю ширину экрана; обычный container для остального контента, чтобы текст не растягивался -->
+
    <div class="container-fluid p-0">
     <section class="page-hero my-3 my-md-4">
       <img src="images/vitrinaman.jpg" alt="Витрина магазина Instyle.zh2">
@@ -156,10 +155,10 @@
             2025</time></p>
         <p class="review-body">Благодарю консультанта Толкын, за шикарное обслуживание. Круто собрала мне луки, все
           купила. Ассортимент шикарный, и цены супер. Благодарю 🙏</p>
-      
+
         </article>
         </div>
-      
+
           <div class="col-12 col-md-6 col-lg-4">
     <article class="review-text-card h-100">
         <div class="review-head">
@@ -172,13 +171,12 @@
         <p class="review-stars-date">&#9733;&#9733;&#9733;&#9733; <time datetime="2025-06-15">15 июня 2025</time></p>
         <p class="review-body">Понравилось, одежда вся представлена со вкусом и в хорошем цветовом сочетании.
           Обслуживание грамотное, и очень чисто в примерочной. Спасибо большое! Процветания магазину 🌸</p>
-        
+
       </article>
       </div>
       </div>
 
     </div>
-
 
     <p>
       The store actively maintains Instagram and tiktok accounts.But they don't often post their customer reviews
@@ -195,9 +193,6 @@
       and why they have such good reviews, is due to the quality, the wide range of products, and the prices.
       Jump straight to the <a href="https://2gis.kz/astana/geo/70000001032452316">2gis ZH2</a> if you like.
     </p>
-
-
-
 
     <section id="rating-tabl" class="rating-card my-4 my-md-5">
       <h3 class="mb-3">Ratings by Category</h3>
@@ -232,9 +227,6 @@
   <li class="col-12 col-sm-6 col-md-4">Write an honest review and, if you'd like, attach a photo</li>
 </ol>
 
-<!-- Bootstrap component: List Group, adapted from https://getbootstrap.com/docs/5.3/components/list-group/
-     — changed items from generic "Cras justo..." placeholders to our real review platforms,
-     added badges showing where each platform ranks by popularity -->
 <p class="fw-bold mb-2">Places to leave a review</p>
 <ul class="list-group">
   <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -271,8 +263,6 @@
   <div class="text-muted">
   <p><small>Reviews reflect customers' personal experience and may not match the store's official policy.</small></p>
 </div>
-    <!-- Comment: div is again only a wrapper for a technical disclaimer —
-         it's not a separate page section or a secondary column (aside). -->
 
     <p><a href="#rating-tabl">&uarr; Back to the rating table</a> &nbsp;|&nbsp; <a href="index.html">&uarr; Back to
         Home</a></p>
@@ -284,10 +274,6 @@
         href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>

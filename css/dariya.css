@@ -1,7 +1,4 @@
-/*
-  Assignment 3 correction layer for Dariya's About and Order pages.
-  Bootstrap handles containers, grid, spacing, alignment, forms and buttons.
-*/
+
 
 .about-hero {
   min-height: clamp(360px, 55vw, 520px);

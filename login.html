@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Create an Instyle.zh2 customer account.">
   <meta name="author" content="Zhansaya">
-  <!-- Bootstrap 5.3.8: loaded before our custom styles -->
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
@@ -15,9 +15,7 @@
 </head>
 
 <body id="page-top" class="pt-0 overflow-x-visible">
-  <!-- Bootstrap Navbar with Collapse:
-     adapted to our existing pages and contact links.
-     Navigation expands from 992px and collapses below that width. -->
+
   <header class="border-bottom bg-white">
     <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
       <div class="container">
@@ -26,13 +24,22 @@
             Instyle.zh2
           </a>
         </h1>
-        <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse"
-          data-bs-target="#catalogNavigation" aria-controls="catalogNavigation" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="catalogNavigation">
+        <input
+          type="checkbox"
+          id="navigation-toggle"
+          class="site-nav-toggle visually-hidden d-lg-none"
+          aria-label="Show navigation"
+          aria-controls="catalogNavigation">
+
+        <label
+          for="navigation-toggle"
+          class="navbar-toggler bg-transparent">
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Toggle navigation</span>
+        </label>
+
+        <div class="navbar-collapse site-nav-links" id="catalogNavigation">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home</a>
@@ -88,7 +95,7 @@
       </div>
     </nav>
   </header>
-  <!-- container keeps the forms readable on wide screens. -->
+
   <main class="login-main container py-4 py-md-5">
     <div class="row g-4 g-lg-5 align-items-start">
       <figure class="login-photo col-6 col-md-4 col-lg-5 mx-auto mb-0">
@@ -107,8 +114,6 @@
             information about you.
           </p>
 
-          <!-- Bootstrap form grid: one column below 768px,
-     paired fields from 768px within the registration column. -->
           <div class="row g-3">
             <p class="col-12 mb-0">
               <label class="form-label" for="acc-name">Full name*</label>
@@ -214,7 +219,7 @@
           <a href="#signin">Sign in</a>
         </p>
       </form>
-    </div><!-- End of the photo and registration row -->
+    </div>
     <section id="signin" class="col-12 col-md-8 col-lg-6 mx-auto mt-5 p-3 p-md-4 border rounded shadow-sm"
       aria-labelledby="signin-title">
 
@@ -266,9 +271,6 @@
     </p>
     <p>&copy; 2026 Instyle.zh2. All rights reserved</p>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>
