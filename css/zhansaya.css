@@ -66,3 +66,53 @@
 .login-form > fieldset > legend {
   font-family: var(--heading-font);
 }
+/* Allow long words to wrap on exceptionally narrow catalog screens. */
+.catalog-page {
+  overflow-wrap: anywhere;
+}
+/* Stack category and price on exceptionally narrow screens. */
+@media (max-width: 359.98px) {
+  .catalog-price-table,
+  .catalog-price-table caption,
+  .catalog-price-table tbody,
+  .catalog-price-table tr,
+  .catalog-price-table th,
+  .catalog-price-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .catalog-price-table thead {
+    display: none;
+  }
+
+  .catalog-price-table tbody tr {
+    margin-bottom: 0.75rem;
+  }
+
+  .catalog-price-table th,
+  .catalog-price-table td {
+    overflow-wrap: anywhere;
+    text-align: start;
+  }
+}
+/* Keep the caption over the photo when there is enough width. */
+.catalog-hero-caption {
+  position: absolute;
+}
+/* Let the caption grow naturally on exceptionally narrow screens. */
+@media (max-width: 359.98px) {
+  .catalog-hero-caption {
+    position: static;
+    background-color: #212529;
+  }
+  .catalog-page .hero img {
+    height: auto;
+  }
+}
+/* Allow the catalog logo to fit very narrow navigation bars. */
+.catalog-page .navbar-brand {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
