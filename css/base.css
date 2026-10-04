@@ -499,3 +499,14 @@ footer {
 .videlit {
   font-weight: bold;
 }
+
+.site-nav-toggle:focus-visible + label {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+@media (max-width: 991.98px) {
+  .site-nav-toggle:not(:checked) ~ .site-nav-links {
+    display: none;
+  }
+}
