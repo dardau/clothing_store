@@ -14,3 +14,7 @@
 
 
 
+
+| 05.10.2026 | Project review | Compare About and Contacts with the midterm brief and correct incomplete content and narrow-screen CSS | Updated navigation and footers, connected catalog and pickup-order paths, normalized English ids, added image captions, removed an estimated average check and unfinished editorial note, added scoped responsive corrections; checked local references and W3C HTML validation. Browser screenshots and phone rendering were not verified. |
+
+| 05.10.2026 | Project review | Finish missing midterm markup and documentation across the existing site | Unified navigation/footer, repaired invalid HTML, completed Lookbook product and favorites hooks, prepared local request/order/account result paths, added shared state/narrow-screen CSS, and updated README journeys and source quality findings. No JavaScript or generated photographs added. Real browser/peer checks remain outstanding. |

@@ -11,6 +11,7 @@
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <!-- Bootstrap 5.3.8, подключён через CDN -->
   <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/readiness.css">
   <link rel="stylesheet" href="css/alina.css">
 </head>
 
@@ -29,14 +30,15 @@
         </h1>
 
         <input type="checkbox" id="navigation-toggle" class="site-nav-toggle visually-hidden d-lg-none"
-          aria-label="Show navigation" aria-controls="catalogNavigation">
+          aria-label="Show navigation" aria-controls="main-navigation">
 
         <label for="navigation-toggle" class="navbar-toggler bg-transparent">
           <span class="navbar-toggler-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Toggle navigation</span>
         </label>
 
-        <div class="navbar-collapse site-nav-links" id="catalogNavigation">
+
+        <div class="navbar-collapse site-nav-links" id="main-navigation">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home</a>
@@ -75,7 +77,7 @@
     </nav>
   </header>
 
-  <main>
+  <main class="container py-4 py-md-5">
     <!-- container-fluid: hero-фото на всю ширину экрана; обычный container для остального контента, чтобы текст не растягивался -->
     <div class="container-fluid p-0">
       <section class="page-hero my-3 my-md-4">
@@ -84,7 +86,7 @@
           <p class="hero-eyebrow">INSTYLE.ZH2 &middot; ASTANA</p>
           <h2 class="hero-title display-4">Customer<br>Reviews</h2>
           <p class="hero-subtitle">Real feedback from real customers, in their own words.</p>
-          <a href="#rating-tabl" class="btn btn-light btn-lg mt-3">See Ratings</a>
+          <a href="#rating-table" class="btn btn-light btn-lg mt-3">See Ratings</a>
         </div>
       </section>
     </div>
@@ -200,7 +202,7 @@
 
 
 
-    <section id="rating-tabl" class="rating-card my-4 my-md-5">
+    <section id="rating-table" class="rating-card my-4 my-md-5">
       <h3 class="mb-3">Ratings by Category</h3>
       <table>
         <caption>Average store ratings based on real reviews</caption>
@@ -276,14 +278,20 @@
     <!-- Comment: div is again only a wrapper for a technical disclaimer —
          it's not a separate page section or a secondary column (aside). -->
 
-    <p><a href="#rating-tabl">&uarr; Back to the rating table</a> &nbsp;|&nbsp; <a href="index.html">&uarr; Back to
+    <p><a href="#rating-table">&uarr; Back to the rating table</a> &nbsp;|&nbsp; <a href="index.html">&uarr; Back to
         Home</a></p>
-    </div>
   </main>
 
-  <footer>
-    <p>Address: Ryskulov St. 5/5, office 3, Astana &mdash; Phone: <a
-        href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
+  <footer class="site-footer text-center border-top py-4 px-2 px-sm-4">
+    <p>Address: 5/5 Ryskulov Street, Office 3, Astana &mdash; Phone:
+      <a href="tel:+77012540203">+7 (701) 254 02 03</a></p>
+    <nav aria-label="Contact links" class="my-3">
+      <ul class="list-unstyled d-flex flex-column flex-sm-row flex-wrap justify-content-center gap-2 gap-sm-4 mb-0">
+        <li><a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="mailto:zhan.ideas@mail.ru">Email us</a></li>
+        <li><a href="tel:+77012540203">Call us</a></li>
+      </ul>
+    </nav>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
 </body>

@@ -1,16 +1,6 @@
-# Папка images/
+# Project images
 
-Сюда нужно положить **только реальные фотографии**, сделанные командой лично в магазине.
-Никаких стоковых фото, никаких изображений, сгенерированных ИИ — за это штраф 15 баллов
-(генерик/плейсхолдер-контент) по правилам задания.
-
-Минимум нужно:
-- 3 фотографии на страницах [ИМЯ СТУДЕНТА 1] (assortment.html: 2, order.html: 1)
-- 3 фотографии на страницах [ИМЯ СТУДЕНТА 2] (brands.html: 2, delivery.html: 1)
-- 3 фотографии на страницах [ИМЯ СТУДЕНТА 3] (reviews.html: 2, contacts.html: 1)
-
-Итого минимум 9 изображений с содержательным `alt`, при этом хотя бы 3 из них — фотографии,
-которые вы сделали сами (по требованию раздела Submission).
-
-После того как добавите файлы, замените в HTML пути вида `images/TODO-название.jpg` на
-реальные имена файлов и перепишите `alt`, чтобы он описывал именно то, что на фото.
+This folder contains the website's existing photographs, review captures and measurement image.
+The midterm requires photographs taken by the team, with no stock or AI-generated images.
+The team must verify ownership and source of every published image before submission;
+file names and HTML captions alone do not prove ownership. No new images were generated for the correction pass.

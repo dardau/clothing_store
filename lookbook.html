@@ -12,6 +12,7 @@
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <!-- Bootstrap 5.3.8, подключён через CDN -->
   <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/readiness.css">
   <link rel="stylesheet" href="css/alina.css">
 </head>
 
@@ -29,14 +30,15 @@
         </h1>
 
         <input type="checkbox" id="navigation-toggle" class="site-nav-toggle visually-hidden d-lg-none"
-          aria-label="Show navigation" aria-controls="mainNavigation">
+          aria-label="Show navigation" aria-controls="main-navigation">
 
         <label for="navigation-toggle" class="navbar-toggler bg-transparent">
           <span class="navbar-toggler-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Toggle navigation</span>
         </label>
 
-        <div class="navbar-collapse site-nav-links" id="mainNavigation">
+
+        <div class="navbar-collapse site-nav-links" id="main-navigation">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home</a>
@@ -75,7 +77,7 @@
     </nav>
   </header>
 
-  <main>
+  <main class="container py-4 py-md-5">
     <div class="container">
       <section class="style-categories-section">
         <h2 class="text-center mb-4">LOOKBOOK</h2>
@@ -147,33 +149,33 @@
               <div class="look-products-grid row g-3 gy-4">
                 <div class="col-12 col-sm-6">
 
-                  <article class="look-product shadow-sm d-flex flex-column">
+                  <article id="look-sweater" data-price="17990" class="look-product shadow-sm d-flex flex-column">
                     <div class="look-product-image">
                       <img src="images/long.jpg" alt="Brown asymmetric jumper">
-                      <button type="button" aria-label="Add to favorites">♡</button>
+                      <button id="favorite-look-sweater" type="button" aria-label="Save asymmetrical neckline sweater to favorites" aria-pressed="false">♡</button>
                     </div>
 
                     <h4>ASYMMETRICAL NECKLINE SWEATER</h4>
                     <p>17,990.00 KZT</p>
-                    <button class="look-add-button btn btn-dark" type="button">ADD</button>
+                    <a id="order-look-sweater" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-sweater">Order</a>
                   </article>
                 </div>
 
                 <div class="col-12 col-sm-6">
-                  <article class="look-product shadow-sm d-flex flex-column">
+                  <article id="look-skirt" data-price="19990" class="look-product shadow-sm d-flex flex-column">
                     <div class="look-product-image">
                       <img src="images/skirt.jpg" alt="Fashion skirt">
-                      <button type="button" aria-label="Add to favorites">♡</button>
+                      <button id="favorite-look-skirt" type="button" aria-label="Save asymmetrical-cut skirt to favorites" aria-pressed="false">♡</button>
                     </div>
                     <h4>ASYMMETRICAL-CUT SKIRT</h4>
                     <p>19,990.00 KZT</p>
-                    <button class="look-add-button btn btn-dark" type="button">ADD</button>
+                    <a id="order-look-skirt" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-skirt">Order</a>
                   </article>
                 </div>
               </div>
             </div>
           </div>
-
+        </div>
       </section>
 
       <section class="look-section" id="casual-look">
@@ -193,28 +195,28 @@
 
               <div class="look-products-grid row g-3 gy-4">
                 <div class="col-12 col-sm-6">
-                  <article class="look-product shadow-sm d-flex flex-column">
+                  <article id="look-trousers" data-price="18990" class="look-product shadow-sm d-flex flex-column">
                     <div class="look-product-image">
                       <img src="images/jeans.jpg" alt="Casual product">
-                      <button type="button" aria-label="Add to favorites">♡</button>
+                      <button id="favorite-look-trousers" type="button" aria-label="Save milky-white trousers to favorites" aria-pressed="false">♡</button>
                     </div>
 
                     <h4>MILKY-WHITE TROUSERS</h4>
                     <p>18,990.00 KZT</p>
-                    <button class="look-add-button btn btn-dark" type="button">ADD</button>
+                    <a id="order-look-trousers" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-trousers">Order</a>
                   </article>
                 </div>
 
                 <div class="col-12 col-sm-6">
-                  <article class="look-product shadow-sm d-flex flex-column">
+                  <article id="look-jacket" data-price="25990" class="look-product shadow-sm d-flex flex-column">
                     <div class="look-product-image">
                       <img src="images/jacket.jpg" alt="JACKET product">
-                      <button type="button" aria-label="Add to favorites">♡</button>
+                      <button id="favorite-look-jacket" type="button" aria-label="Save jacket to favorites" aria-pressed="false">♡</button>
                     </div>
 
                     <h4>JACKET</h4>
                     <p>25,990.00 KZT</p>
-                    <button class="look-add-button btn btn-dark" type="button">ADD</button>
+                    <a id="order-look-jacket" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-jacket">Order</a>
                   </article>
                 </div>
 
@@ -243,15 +245,15 @@
 
               <div class="look-products-grid row g-3 gy-4">
                 <div class="col-12 col-sm-6">
-                  <article class="look-product shadow-sm d-flex flex-column">
+                  <article id="look-set" data-price="28990" class="look-product shadow-sm d-flex flex-column">
                     <div class="look-product-image">
                       <img src="images/sport.jpg" alt="SET product">
-                      <button type="button" aria-label="Add to favorites">♡</button>
+                      <button id="favorite-look-set" type="button" aria-label="Save two-piece set to favorites" aria-pressed="false">♡</button>
                     </div>
 
                     <h4>TWO-PIECE SET</h4>
                     <p>28,990.00 KZT</p>
-                    <button class="look-add-button btn btn-dark" type="button" disabled>ADD</button>
+                    <a id="order-look-set" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-set">Order</a>
                   </article>
                 </div>
 
@@ -263,7 +265,7 @@
       </section>
 
 
-      <section id="razmery" class="p-3 p-md-5">
+      <section id="size-chart" class="p-3 p-md-5">
 
         <h3>Size Chart</h3>
 
@@ -322,12 +324,12 @@
 
         <!-- Fit Information -->
         <div class="fit-information row mt-4 pt-3 border-top">
-          <div class="fit-item col-6">
+          <div class="fit-item col-12 col-sm-6">
             <h3>Oversize</h3>
             <p>A loose cut, 1&ndash;2 sizes bigger than usual.</p>
           </div>
 
-          <div class="fit-item col-6">
+          <div class="fit-item col-12 col-sm-6">
             <h3>Slim fit</h3>
             <p>A fitted cut that follows the body's silhouette.</p>
           </div>
@@ -376,42 +378,59 @@
               The top sellers are <strong>the grey mini skirt and the shirt with an unusual style</strong> while the
               <em>new
                 arrival of the season</em> is the autumn coat line.
-              Jump straight to the <a href="#razmery">size chart.</a>
+              Jump straight to the <a href="#size-chart">size chart.</a>
             </p>
           </div>
         </div>
       </section>
 
-      <section>
-        <h2>Check availability</h2>
-        <form method="post" action="#" class="mx-auto my-4 my-md-5">
-          <fieldset class="p-3 p-md-5">
-            <legend>Check availability</legend>
-            <label for="item-name">Item name</label>
-            <input type="text" id="item-name" name="item-name" placeholder="e.g. grey mini skirt" required>
-
-            <label for="size-select">Size</label>
-            <select id="size-select" name="size-select">
-              <option value="s">S</option>
-              <option value="m">M</option>
-              <option value="l">L</option>
-            </select>
-            <label for="color">Preferred color</label>
-            <input type="text" id="color" name="color" placeholder="e.g. grey">
-
-            <p>Notify me by:</p>
-            <input type="radio" id="notify-email" name="notify" value="email">
-            <label for="notify-email">Email</label>
-            <input type="radio" id="notify-phone" name="notify" value="phone">
-            <label for="notify-phone">Phone</label>
-            <label for="customer-email">Your email</label>
-            <input type="email" id="customer-email" name="customer-email" required>
-
-            <label for="comment">Comment</label>
-            <textarea id="comment" name="comment" placeholder="Anything else you'd like to add"></textarea>
-            <button type="submit" class="btn btn-dark">Send request</button>
-            <button type="reset" class="btn btn-outline-dark btn-sm">Clear</button>
+      <section id="favorites-section" class="border rounded p-3" aria-labelledby="favorites-title">
+        <h2 id="favorites-title" class="h4">Your favorites</h2>
+        <p id="favorites-status" role="status">No items saved. Use the heart on a product to save it here.</p>
+        <div id="favorites-items" class="row g-3"></div>
+        <div id="favorites-error" class="alert alert-danger hidden" role="alert"></div>
+        <a id="favorites-order-link" class="btn btn-dark" href="order.html#order-form">Prepare an order</a>
+      </section>
+      <section id="product-request" aria-labelledby="request-title">
+        <h2 id="request-title">Prepare a product request</h2>
+        <p id="request-instructions">Enter the item, size and preferred color. The result area will show your request summary.
+          This form prepares a request on your device; it does not send a message to the store.
+          For an order, use the <a href="order.html#order-form">pickup order form</a>.</p>
+        <form id="request-form" action="lookbook.html" method="get" aria-describedby="request-instructions">
+          <fieldset class="border rounded p-2 p-sm-3">
+            <legend class="h5">Product preferences</legend>
+            <div class="mb-3">
+              <label class="form-label" for="request-item">Item name*</label>
+              <input class="form-control" id="request-item" name="item" required aria-describedby="request-item-error">
+              <span id="request-item-error" class="invalid-feedback">Enter an item name.</span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="request-size">Size*</label>
+              <select class="form-select" id="request-size" name="size" required aria-describedby="request-size-error">
+                <option value="">Choose a size</option><option>S</option><option>M</option><option>L</option><option>One size</option>
+              </select>
+              <span id="request-size-error" class="invalid-feedback">Choose a size.</span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="request-color">Preferred color</label>
+              <input class="form-control" id="request-color" name="color">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="request-comment">Additional details</label>
+              <textarea class="form-control" id="request-comment" name="comment" rows="3"></textarea>
+            </div>
+            <div class="d-flex flex-column flex-sm-row gap-2">
+              <button id="request-submit" class="btn btn-dark" type="button">Prepare request</button>
+              <button id="request-reset" class="btn btn-outline-secondary" type="reset">Clear</button>
+            </div>
           </fieldset>
+          <section id="request-result" class="border rounded p-2 p-sm-3" aria-labelledby="request-result-title">
+            <h3 id="request-result-title" class="h5">Request status</h3>
+            <p id="request-status" role="status">No request prepared.</p>
+            <div id="request-error" class="alert alert-danger hidden" role="alert"></div>
+            <div id="request-success" class="alert alert-success hidden" role="status"></div>
+            <div id="request-summary"></div>
+          </section>
         </form>
       </section>
       <p>
@@ -429,16 +448,23 @@
         </small>
       </p>
       <p>
-        <a href="#razmery">&uarr; Back to the size chart</a>
+        <a href="#size-chart">&uarr; Back to the size chart</a>
         &nbsp;|&nbsp;
         <a href="index.html">&uarr; Back to Home</a>
       </p>
     </div>
   </main>
 
-  <footer>
-    <p>Address: Ryskulov St. 5/5, office 3, Astana &mdash; Phone: <a
-        href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a></p>
+  <footer class="site-footer text-center border-top py-4 px-2 px-sm-4">
+    <p>Address: 5/5 Ryskulov Street, Office 3, Astana &mdash; Phone:
+      <a href="tel:+77012540203">+7 (701) 254 02 03</a></p>
+    <nav aria-label="Contact links" class="my-3">
+      <ul class="list-unstyled d-flex flex-column flex-sm-row flex-wrap justify-content-center gap-2 gap-sm-4 mb-0">
+        <li><a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="mailto:zhan.ideas@mail.ru">Email us</a></li>
+        <li><a href="tel:+77012540203">Call us</a></li>
+      </ul>
+    </nav>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
   </footer>
 </body>

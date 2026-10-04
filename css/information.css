@@ -1,0 +1,77 @@
+/* Small corrections for the About and Contacts Bootstrap layouts. */
+.about-page,
+.contacts-page {
+  overflow-wrap: anywhere;
+}
+
+:is(.about-page, .contacts-page) .navbar-brand {
+  max-width: 100%;
+  white-space: normal;
+}
+
+:is(.about-page, .contacts-page) .row > *,
+:is(.about-page, .contacts-page) .card-body,
+:is(.about-page, .contacts-page) .navbar-collapse {
+  min-width: 0;
+}
+
+:is(.about-page, .contacts-page) .btn {
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* Prepared states for later JavaScript updates. */
+:is(.about-page, .contacts-page) .hidden {
+  display: none !important;
+}
+
+:is(.about-page, .contacts-page) .selected {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+@media (max-width: 359.98px) {
+  :is(.about-page, .contacts-page) .navbar > .container {
+    gap: 0.5rem;
+  }
+
+  :is(.about-page, .contacts-page) .navbar-brand {
+    margin-right: 0;
+  }
+
+  .about-page .about-hero {
+    padding-inline: 0.5rem !important;
+  }
+
+  .about-page #store-details,
+  .about-page #lookbook-preview {
+    padding: 0.5rem !important;
+  }
+
+  .about-page .testimonial {
+    padding-inline: 0.5rem !important;
+  }
+
+  .store-details-table,
+  .store-details-table caption,
+  .store-details-table tbody,
+  .store-details-table tr,
+  .store-details-table th,
+  .store-details-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .store-details-table thead {
+    display: none;
+  }
+
+  .store-details-table tbody tr + tr {
+    margin-top: 0.75rem;
+  }
+
+  .about-page .back-to-top {
+    position: static;
+    margin: 0.5rem auto 1rem;
+  }
+}
