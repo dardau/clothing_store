@@ -7,12 +7,9 @@
   <meta name="description" content="About the Instyle.zh2 store (instyle.zh2): history, locations and contacts.">
   <meta name="author" content="Dariya">
   <title>About Us — Instyle.zh2</title>
-
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-    crossorigin="anonymous">
+  <!-- Bootstrap 5.3.8 is loaded from the CDN for the grid, utilities and components. -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/dariya.css">
 </head>
@@ -20,65 +17,63 @@
 <body class="about-page" id="page-top">
 
   <header class="border-bottom bg-white">
-      <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
-        <div class="container">
-          <h1 class="navbar-brand mb-0">
-            <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
-          </h1>
+    <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
+      <div class="container">
+        <h1 class="navbar-brand mb-0">
+          <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
+        </h1>
 
-          <input
-            type="checkbox"
-            id="navigation-toggle"
-            class="site-nav-toggle visually-hidden d-lg-none"
-            aria-label="Show navigation"
-            aria-controls="mainNavigation">
+        <input type="checkbox" id="navigation-toggle" class="site-nav-toggle visually-hidden d-lg-none"
+          aria-label="Show navigation" aria-controls="catalogNavigation">
 
-          <label
-            for="navigation-toggle"
-            class="navbar-toggler bg-transparent">
-            <span class="navbar-toggler-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Toggle navigation</span>
-          </label>
+        <label for="navigation-toggle" class="navbar-toggler bg-transparent">
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Toggle navigation</span>
+        </label>
 
-          <div class="navbar-collapse site-nav-links" id="mainNavigation">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="catalog.html">Catalog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="lookbook.html">Lookbook</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="order.html">Order</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="about.html" aria-current="page">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="reviews.html">Reviews</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contacts.html">Contacts</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
-              </li>
-            </ul>
 
-            <div class="d-lg-none border-top pt-3 mt-3">
-              <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2"
-                target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
-              <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
-            </div>
+        <div class="navbar-collapse site-nav-links" id="catalogNavigation">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="catalog.html">Catalog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="lookbook.html">Lookbook</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="order.html">Order</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="about.html" aria-current="page">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reviews.html">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contacts.html">Contacts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+          </ul>
+
+          <div class="d-lg-none border-top pt-3 mt-3">
+            <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2" target="_blank"
+              rel="noopener noreferrer">Instagram</a>
+            <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
+            <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
+  </header>
 
+
+
+  <!-- container-fluid allows the hero to span the viewport; the nested container keeps text readable. -->
   <main id="about-page" class="container-fluid px-0">
     <section class="about-hero d-grid align-content-center text-center text-white px-3 py-5 mt-0">
       <h2 class="page-title display-3 fw-bold mb-3">About Instyle.zh2</h2>
@@ -91,6 +86,7 @@
       </p>
     </section>
 
+    <!-- A fixed container keeps long text and cards comfortable to read on desktop. -->
     <div class="container py-5">
       <p class="lead text-center mx-auto mb-5">
         Instyle.zh2 is a women&rsquo;s clothing boutique with three locations in Astana. The stores
@@ -98,6 +94,7 @@
         styling advice.
       </p>
 
+      <!-- Bootstrap Card component adapted to show the store's key facts. -->
       <section class="row g-3 mt-0 mb-5" aria-label="Store highlights">
         <article class="col-12 col-sm-6 col-lg-3">
           <div class="card h-100 text-center border-0 shadow-sm">
@@ -135,13 +132,13 @@
 
       <section class="row g-4 mt-0 mb-5" aria-label="Store locations">
         <figure class="store-photo col-12 col-md-6 mb-0">
-          <img class="about-gallery-image img-fluid w-100 rounded shadow-sm"
-            src="images/store.jpeg" alt="Instyle.zh2 storefront facade">
+          <img class="about-gallery-image img-fluid w-100 rounded shadow-sm" src="images/store.jpeg"
+            alt="Instyle.zh2 storefront facade">
           <figcaption class="small text-body-secondary mt-2">One of our store locations in Astana.</figcaption>
         </figure>
         <figure class="store-photo col-12 col-md-6 mb-0">
-          <img class="about-gallery-image img-fluid w-100 rounded shadow-sm"
-            src="images/magazin01.png" alt="Interior of an Instyle.zh2 boutique">
+          <img class="about-gallery-image img-fluid w-100 rounded shadow-sm" src="images/magazin01.png"
+            alt="Interior of an Instyle.zh2 boutique">
           <figcaption class="small text-body-secondary mt-2">Inside the boutique.</figcaption>
         </figure>
       </section>
@@ -155,19 +152,19 @@
       <section class="row g-3 bg-light border rounded-3 p-3 p-lg-4 mt-0 mb-5" id="lookbook-preview">
         <h3 class="col-12 h4 text-center mb-2">Lookbook</h3>
         <div class="col-12">
-
+          <!-- Nested Bootstrap row keeps the three lookbook images responsive inside this column. -->
           <div class="row g-3">
             <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
-              <img class="about-lookbook-image img-fluid w-100 rounded"
-                src="images/odezhda.png" alt="Outfit from the current Instyle.zh2 collection">
+              <img class="about-lookbook-image img-fluid w-100 rounded" src="images/odezhda.png"
+                alt="Outfit from the current Instyle.zh2 collection">
             </figure>
             <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
-              <img class="about-lookbook-image img-fluid w-100 rounded"
-                src="images/odezhda01.png" alt="Denim and knitwear outfit from Instyle.zh2">
+              <img class="about-lookbook-image img-fluid w-100 rounded" src="images/odezhda01.png"
+                alt="Denim and knitwear outfit from Instyle.zh2">
             </figure>
             <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
-              <img class="about-lookbook-image img-fluid w-100 rounded"
-                src="images/odezhda02.png" alt="Bag, top and accessories from Instyle.zh2">
+              <img class="about-lookbook-image img-fluid w-100 rounded" src="images/odezhda02.png"
+                alt="Bag, top and accessories from Instyle.zh2">
             </figure>
           </div>
         </div>
@@ -184,8 +181,8 @@
           &ldquo;reviews&rdquo; highlight, &asymp; November 2025.
         </p>
         <figure class="testimonial-photo col-12 col-md-8 col-lg-6 mx-auto mb-0">
-          <img class="img-fluid w-100 rounded shadow-sm"
-            src="images/otzyv.png" alt="Screenshot of a customer review sent to Instyle.zh2">
+          <img class="img-fluid w-100 rounded shadow-sm" src="images/otzyv.png"
+            alt="Screenshot of a customer review sent to Instyle.zh2">
         </figure>
       </blockquote>
 
@@ -199,6 +196,7 @@
           <h3 class="h2 mb-0">Key Information</h3>
         </header>
 
+        <!-- Bootstrap responsive Table component adapted to real store information. -->
         <div class="table-responsive">
           <table class="table table-striped table-hover align-middle bg-white mb-4">
             <caption class="caption-top fw-semibold">Real data about the Instyle.zh2 store</caption>
@@ -271,8 +269,8 @@
       </section>
 
       <p class="alert alert-secondary mt-0 mb-3" role="note">
-        Store profile &mdash; <a class="alert-link" href="https://www.instagram.com/instyle.zh2"
-          target="_blank" rel="noopener noreferrer">instagram.com/instyle.zh2</a>
+        Store profile &mdash; <a class="alert-link" href="https://www.instagram.com/instyle.zh2" target="_blank"
+          rel="noopener noreferrer">instagram.com/instyle.zh2</a>
         (opens in a new tab). Have a question before ordering? Email us at
         <a class="alert-link" href="mailto:zhan.ideas@mail.ru">zhan.ideas@mail.ru</a> or call
         <a class="alert-link" href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a>.
@@ -298,7 +296,6 @@
   </footer>
 
   <a class="back-to-top btn btn-dark rounded-circle" href="#page-top" aria-label="Back to top">↑</a>
-
 </body>
 
 </html>

@@ -8,75 +8,72 @@
     content="Homepage of the Instyle.zh2 clothing store website — catalog, lookbook, reviews and contacts.">
   <meta name="author" content="Dariya, Alina, Zhansaya">
   <title>Instyle.zh2 — Clothing Store</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-    crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
 </head>
 
 <body class="home-page" id="page-top">
+  <!-- Comment (why, not what): we use header/nav/main/footer instead of div,
+       because these are semantically meaningful, "real" sections of every page on
+       the site, not faceless containers — this way the browser, search engine and
+       screen reader all understand the page structure. -->
+  <!-- Shared page: intro text drafted by Dariya from verified store data; navigation
+       and structure agreed on by the whole team. -->
 
   <header class="border-bottom bg-white">
-      <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
-        <div class="container">
-          <h1 class="navbar-brand mb-0">
-            <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
-          </h1>
+    <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
+      <div class="container">
+        <h1 class="navbar-brand mb-0">
+          <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
+        </h1>
+        <input type="checkbox" id="navigation-toggle" class="site-nav-toggle visually-hidden d-lg-none"
+          aria-label="Show navigation" aria-controls="catalogNavigation">
 
-          <input
-            type="checkbox"
-            id="navigation-toggle"
-            class="site-nav-toggle visually-hidden d-lg-none"
-            aria-label="Show navigation"
-            aria-controls="mainNavigation">
+        <label for="navigation-toggle" class="navbar-toggler bg-transparent">
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Toggle navigation</span>
+        </label>
 
-          <label
-            for="navigation-toggle"
-            class="navbar-toggler bg-transparent">
-            <span class="navbar-toggler-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Toggle navigation</span>
-          </label>
+        <div class="navbar-collapse site-nav-links" id="catalogNavigation">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html" aria-current="page">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="catalog.html">Catalog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="lookbook.html">Lookbook</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="order.html">Order</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reviews.html">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contacts.html">Contacts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+          </ul>
 
-          <div class="navbar-collapse site-nav-links" id="mainNavigation">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.html" aria-current="page">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="catalog.html">Catalog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="lookbook.html">Lookbook</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="order.html">Order</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="reviews.html">Reviews</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contacts.html">Contacts</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
-              </li>
-            </ul>
-
-            <div class="d-lg-none border-top pt-3 mt-3">
-              <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2"
-                target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
-              <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
-            </div>
+          <div class="d-lg-none border-top pt-3 mt-3">
+            <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2" target="_blank"
+              rel="noopener noreferrer">Instagram</a>
+            <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
+            <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
+  </header>
+
 
   <section class="home-hero">
     <div class="home-hero-content">
