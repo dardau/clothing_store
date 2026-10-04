@@ -14,7 +14,7 @@
   <title>Create Account — Instyle.zh2</title>
 </head>
 
-<body id="page-top" class="pt-0 overflow-x-visible">
+<body id="page-top" class="login-page pt-0 overflow-x-visible">
   <!-- Bootstrap Navbar with Collapse:
      adapted to our existing pages and contact links.
      Navigation expands from 992px and collapses below that width. -->
@@ -71,20 +71,6 @@
             </li>
           </ul>
 
-          <div class="d-lg-none border-top pt-3 mt-3">
-            <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2" target="_blank"
-              rel="noopener noreferrer">
-              Instagram
-            </a>
-
-            <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">
-              Email us
-            </a>
-
-            <a class="d-block mb-2 text-dark" href="tel:+77012540203">
-              Call us
-            </a>
-          </div>
         </div>
 
       </div>
@@ -92,12 +78,12 @@
   </header>
   <!-- container keeps the forms readable on wide screens. -->
   <main class="login-main container py-4 py-md-5">
-    <div class="row g-4 g-lg-5 align-items-start">
-      <figure class="login-photo col-6 col-md-4 col-lg-5 mx-auto mb-0">
+    <div class="row g-2 g-md-4 g-lg-5 align-items-start">
+      <figure class="login-photo col-12 col-sm-6 col-md-4 col-lg-5 mx-auto mb-0">
         <img src="images/loginimg.jpg" alt="Fashion inspiration from Instyle.zh2" class="img-fluid w-100 rounded">
       </figure>
 
-      <form class="login-form col-12 col-md-8 col-lg-7" action="#" method="post">
+      <form id="registration-form" class="login-form col-12 col-md-8 col-lg-7" action="#" method="post">
 
         <fieldset class="border-0 p-0 m-0">
           <legend class="h3 fw-normal mb-3">
@@ -115,20 +101,50 @@
             <p class="col-12 mb-0">
               <label class="form-label" for="acc-name">Full name*</label>
               <input class="form-control" type="text" id="acc-name" name="acc-name" autocomplete="name"
-                placeholder="Enter your full name" required>
+                placeholder="Enter your full name" aria-describedby="acc-name-error" required>
+              <span id="acc-name-error" class="invalid-feedback">
+                Enter your full name.
+              </span>
             </p>
 
             <p class="col-12 col-md-6 mb-0">
               <label class="form-label" for="acc-email">Email*</label>
+
               <input class="form-control" type="email" id="acc-email" name="acc-email" autocomplete="email"
-                placeholder="example@mail.com" required>
+                placeholder="example@mail.com" aria-describedby="acc-email-error" required>
+
+              <span id="acc-email-error" class="invalid-feedback">
+                Enter a valid email address.
+              </span>
             </p>
 
             <p class="col-12 col-md-6 mb-0">
               <label class="form-label" for="acc-phone">Phone*</label>
               <input class="form-control" type="tel" id="acc-phone" name="acc-phone" autocomplete="tel"
-                placeholder="+7 700 000 00 00" required>
+                placeholder="+7 700 000 00 00" aria-describedby="acc-phone-error" required>
+              <span id="acc-phone-error" class="invalid-feedback">
+                Enter your contact phone number.
+              </span>
             </p>
+            <div class="col-12">
+              <label class="form-label" for="acc-password">Password*</label>
+              <input class="form-control" type="password" id="acc-password" name="acc-password"
+                autocomplete="new-password" aria-describedby="acc-password-error" required>
+              <span id="acc-password-error" class="invalid-feedback">
+                Enter a password.
+              </span>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label" for="acc-password-confirm">
+                Confirm password*
+              </label>
+              <input class="form-control" type="password" id="acc-password-confirm" name="acc-password-confirm"
+                autocomplete="new-password" aria-describedby="acc-password-confirm-error" required>
+              <span id="acc-password-confirm-error" class="invalid-feedback">
+                Enter the same password in both fields.
+              </span>
+            </div>
 
             <p class="col-12 col-md-6 mb-0">
               <label class="form-label" for="acc-birthdate">
@@ -142,7 +158,10 @@
                 Usual clothing size
               </label>
               <input class="form-control" type="number" id="acc-size" name="acc-size" min="36" max="52" step="2"
-                value="42">
+                value="42" aria-describedby="acc-size-error">
+              <span id="acc-size-error" class="invalid-feedback">
+                Choose an even-numbered size from 36 to 52, or leave this field empty.
+              </span>
             </p>
 
             <p class="col-12 mb-0">
@@ -179,10 +198,16 @@
 
             <div class="col-12">
               <p class="form-check mb-0">
-                <input class="form-check-input" type="checkbox" id="acc-agree" name="acc-agree" required>
+                <input class="form-check-input" type="checkbox" id="acc-agree" name="acc-agree"
+                  aria-describedby="acc-agree-error" required>
+
                 <label class="form-check-label small" for="acc-agree">
                   I agree to the processing of my personal data*
                 </label>
+
+                <span id="acc-agree-error" class="invalid-feedback">
+                  Confirm your agreement before continuing.
+                </span>
               </p>
             </div>
 
@@ -197,27 +222,41 @@
         </fieldset>
 
         <p class="small text-body-secondary mt-4 mb-3" id="registration-note">
-          Demo form: account creation is currently unavailable.
-          You can try the fields and clear the form.
+          Complete the required fields and confirm your password.
+          Registration feedback will appear in the status area below.
         </p>
 
         <p class="d-flex flex-column flex-sm-row gap-2 mb-3">
-          <button class="btn btn-dark" type="submit" aria-describedby="registration-note" disabled>
+          <button id="registration-submit" class="btn btn-dark text-wrap" type="button"
+            aria-describedby="registration-note">
             Create account
           </button>
 
-          <button class="btn btn-outline-secondary" type="reset">
+          <button id="registration-reset" class="btn btn-outline-secondary text-wrap" type="reset">
             Clear form
           </button>
         </p>
 
+        <section class="border rounded p-2 p-sm-3 mb-3" aria-labelledby="registration-status-title">
+          <h2 id="registration-status-title" class="h5">
+            Registration status
+          </h2>
+
+          <p id="registration-status" class="text-body-secondary mb-0" role="status">
+            No registration has been submitted.
+          </p>
+
+          <div id="registration-error" class="alert alert-danger mt-3 mb-0" role="alert" hidden></div>
+
+          <div id="registration-success" class="alert alert-success mt-3 mb-0" role="status" hidden></div>
+        </section>
         <p class="small mb-0">
           Already have an account?
           <a href="#signin">Sign in</a>
         </p>
       </form>
     </div><!-- End of the photo and registration row -->
-    <section id="signin" class="col-12 col-md-8 col-lg-6 mx-auto mt-5 p-3 p-md-4 border rounded shadow-sm"
+    <section id="signin" class="col-12 col-md-8 col-lg-6 mx-auto mt-5 p-2 p-sm-3 p-md-4 border rounded shadow-sm"
       aria-labelledby="signin-title">
 
       <h2 id="signin-title" class="h3 fw-normal mb-3">
@@ -228,13 +267,16 @@
         Already have an Instyle.zh2 account? Enter your details below.
       </p>
 
-      <form action="#" method="post">
+      <form id="signin-form" action="#" method="post">
         <p class="mb-3">
           <label class="form-label" for="signin-email">
             Email
           </label>
           <input class="form-control" type="email" id="signin-email" name="signin-email" autocomplete="username"
-            placeholder="example@mail.com" required>
+            placeholder="example@mail.com" aria-describedby="signin-email-error" required>
+          <span id="signin-email-error" class="invalid-feedback">
+            Enter a valid email address.
+          </span>
         </p>
 
         <p class="mb-3">
@@ -242,31 +284,87 @@
             Password
           </label>
           <input class="form-control" type="password" id="signin-password" name="signin-password"
-            autocomplete="current-password" placeholder="Enter your password" required>
+            autocomplete="current-password" placeholder="Enter your password" aria-describedby="signin-password-error"
+            required>
+          <span id="signin-password-error" class="invalid-feedback">
+            Enter your password.
+          </span>
         </p>
 
         <p id="signin-note" class="small text-body-secondary mb-3">
-          Demo form: signing in is currently unavailable.
-          Use sample details to try the fields.
+          Enter your email and password.
+          Sign-in feedback will appear in the status area below.
         </p>
 
-        <p class="d-flex flex-column flex-sm-row gap-2 mb-0">
-          <button class="btn btn-dark" type="submit" aria-describedby="signin-note" disabled>
+        <p class="d-flex flex-column flex-sm-row gap-2 mb-3">
+          <button id="signin-submit" class="btn btn-dark text-wrap" type="button" aria-describedby="signin-note">
             Sign in
           </button>
 
-          <button class="btn btn-outline-secondary" type="reset">
+          <button id="signin-reset" class="btn btn-outline-secondary text-wrap" type="reset">
             Clear form
           </button>
         </p>
+
+        <section class="border rounded p-2 p-sm-3" aria-labelledby="signin-status-title">
+          <h3 id="signin-status-title" class="h5">Sign-in status</h3>
+
+          <p id="signin-status" class="text-body-secondary mb-0" role="status">
+            You are not signed in.
+          </p>
+
+          <div id="signin-error" class="alert alert-danger mt-3 mb-0" role="alert" hidden></div>
+
+          <div id="signin-success" class="alert alert-success mt-3 mb-0" role="status" hidden></div>
+        </section>
       </form>
+    </section>
+    <section id="account-panel" class="col-12 col-md-8 col-lg-6 mx-auto mt-4
+                border rounded p-2 p-sm-4" aria-labelledby="account-title" hidden>
+      <h2 id="account-title" class="h4">Your profile</h2>
+
+      <dl>
+        <dt>Name</dt>
+        <dd id="account-name"></dd>
+
+        <dt>Email</dt>
+        <dd id="account-email"></dd>
+      </dl>
+
+      <a href="catalog.html" class="btn btn-outline-dark text-wrap">
+        Browse catalog
+      </a>
+
+      <button id="signout-button" class="btn btn-dark text-wrap" type="button">
+        Sign out
+      </button>
     </section>
   </main>
 
-  <footer>
-    <p>Address: 5/5 Ryskulov Street, Office 3, Astana &mdash; Phone: <a class="text-nowrap" href="tel:+77012540203">+7
+  <footer class="px-2 px-sm-4">
+    <p>Address: 5/5 Ryskulov Street, Office 3, Astana &mdash; Phone: <a href="tel:+77012540203">+7
         (701) 254 02 03</a>
     </p>
+    <nav aria-label="Contact links" class="my-3">
+      <ul class="list-unstyled d-flex flex-column flex-sm-row
+             flex-wrap justify-content-center gap-2 gap-sm-4 mb-0">
+        <li>
+          <a class="link-dark" href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">
+            Instagram
+          </a>
+        </li>
+        <li>
+          <a class="link-dark" href="mailto:zhan.ideas@mail.ru">
+            Email us
+          </a>
+        </li>
+        <li>
+          <a class="link-dark" href="tel:+77012540203">
+            Call us
+          </a>
+        </li>
+      </ul>
+    </nav>
     <p>&copy; 2026 Instyle.zh2. All rights reserved</p>
   </footer>
 </body>

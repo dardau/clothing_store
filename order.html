@@ -283,90 +283,93 @@
                   Choose S, M or L for clothing, or One size for accessories.
                 </span>
               </p>
+              <div class="col-12 mb-3">
+                <input type="hidden" id="pickup-method" name="delivery-method" value="pickup">
+                <div class="border rounded bg-light p-2 p-sm-3">
+                  <h4 class="h6 mb-2">Store pickup</h4>
+                  <address class="mb-2">
+                    5/5 Ryskulov Street, Office 3, Astana
+                  </address>
+                  <p class="small mb-0">
+                    Opening hours: 11:00–21:00, every day.
+                  </p>
+                </div>
+              </div>
+              <p class="col-12 mb-3">
+                <label class="form-label" for="comment">Order comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="4"
+                  placeholder="For example: gift wrapping needed"></textarea>
+              </p>
 
-              <div class="border rounded bg-light p-2 p-sm-3">
-                <h4 class="h6 mb-2">Store pickup</h4>
-                <address class="mb-2">
-                  5/5 Ryskulov Street, Office 3, Astana
-                </address>
-                <p class="small mb-0">
-                  Opening hours: 11:00–21:00, every day.
-                </p>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="agree" name="agree"
+                    aria-describedby="order-agree-error" required>
+                  <label class="form-check-label" for="agree">
+                    I agree to the data processing terms*
+                  </label>
+                  <span id="order-agree-error" class="invalid-feedback">
+                    Confirm your agreement before submitting.
+                  </span>
+                </div>
               </div>
             </div>
-            <p class="col-12 mb-3">
-              <label class="form-label" for="comment">Order comment</label>
-              <textarea class="form-control" id="comment" name="comment" rows="4"
-                placeholder="For example: gift wrapping needed"></textarea>
+          </fieldset>
+          <section id="order-summary" class="border rounded bg-light p-2 p-sm-3 mt-4"
+            aria-labelledby="order-summary-title">
+            <h4 id="order-summary-title" class="h5 mb-3">
+              Order summary
+            </h4>
+
+            <dl class="mb-0">
+              <dt>Product</dt>
+              <dd id="summary-product">No product selected</dd>
+
+              <dt>Size</dt>
+              <dd id="summary-size">No size selected</dd>
+
+              <dt>Quantity</dt>
+              <dd id="summary-quantity">1</dd>
+
+              <dt>Collection</dt>
+              <dd id="summary-fulfillment">
+                Store pickup — 5/5 Ryskulov Street, Office 3
+              </dd>
+
+              <dt>Preferred pickup date</dt>
+              <dd id="summary-pickup-date">Not selected</dd>
+
+              <dt>Total item cost, KZT</dt>
+              <dd id="summary-total" class="mb-0">Not calculated</dd>
+            </dl>
+          </section>
+
+          <p class="d-flex flex-column flex-sm-row
+          align-items-stretch align-items-sm-center gap-3 mt-4 mb-0">
+            <button id="order-submit" class="btn btn-dark text-wrap" type="button"
+              aria-describedby="order-instructions">
+              Submit order
+            </button>
+
+            <button id="order-reset" class="btn btn-outline-secondary text-wrap" type="reset">
+              Clear form
+            </button>
+          </p>
+          <section id="order-result" class="border rounded p-2 p-sm-3 mt-4" aria-labelledby="order-result-title">
+            <h4 id="order-result-title" class="h5 mb-2">
+              Order status
+            </h4>
+
+            <p id="order-status" class="text-body-secondary mb-0" role="status">
+              No order has been submitted.
             </p>
 
-            <div class="col-12">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="agree" name="agree"
-                  aria-describedby="order-agree-error" required>
-                <label class="form-check-label" for="agree">
-                  I agree to the data processing terms*
-                </label>
-                <span id="order-agree-error" class="invalid-feedback">
-                  Confirm your agreement before submitting.
-                </span>
-              </div>
-            </div>
+            <div id="order-error" class="alert alert-danger mt-3 mb-0" role="alert" hidden></div>
+
+            <div id="order-success" class="alert alert-success mt-3 mb-0" role="status" hidden></div>
+          </section>
+        </form>
       </div>
-      </fieldset>
-      <section id="order-summary" class="border rounded bg-light p-2 p-sm-3 mt-4" aria-labelledby="order-summary-title">
-        <h4 id="order-summary-title" class="h5 mb-3">
-          Order summary
-        </h4>
-
-        <dl class="mb-0">
-          <dt>Product</dt>
-          <dd id="summary-product">No product selected</dd>
-
-          <dt>Size</dt>
-          <dd id="summary-size">No size selected</dd>
-
-          <dt>Quantity</dt>
-          <dd id="summary-quantity">1</dd>
-
-          <dt>Collection</dt>
-          <dd id="summary-fulfillment">
-            Store pickup — 5/5 Ryskulov Street, Office 3
-          </dd>
-
-          <dt>Preferred pickup date</dt>
-          <dd id="summary-pickup-date">Not selected</dd>
-
-          <dt>Total item cost, KZT</dt>
-          <dd id="summary-total" class="mb-0">Not calculated</dd>
-        </dl>
-      </section>
-
-      <p class="d-flex flex-column flex-sm-row
-          align-items-stretch align-items-sm-center gap-3 mt-4 mb-0">
-        <button id="order-submit" class="btn btn-dark text-wrap" type="button" aria-describedby="order-instructions">
-          Submit order
-        </button>
-
-        <button id="order-reset" class="btn btn-outline-secondary text-wrap" type="reset">
-          Clear form
-        </button>
-      </p>
-      <section id="order-result" class="border rounded p-2 p-sm-3 mt-4" aria-labelledby="order-result-title">
-        <h4 id="order-result-title" class="h5 mb-2">
-          Order status
-        </h4>
-
-        <p id="order-status" class="text-body-secondary mb-0" role="status">
-          No order has been submitted.
-        </p>
-
-        <div id="order-error" class="alert alert-danger mt-3 mb-0" role="alert" hidden></div>
-
-        <div id="order-success" class="alert alert-success mt-3 mb-0" role="status" hidden></div>
-      </section>
-      </form>
-    </div>
     </div>
 
     <p class="small text-center text-body-secondary mb-0">

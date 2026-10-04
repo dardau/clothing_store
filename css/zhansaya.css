@@ -116,3 +116,13 @@
   white-space: normal;
   overflow-wrap: anywhere;
 }
+.login-page,
+.contacts-page {
+  overflow-wrap: anywhere;
+}
+.login-page .navbar-brand,
+.contacts-page .navbar-brand {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
