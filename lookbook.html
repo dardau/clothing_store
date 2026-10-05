@@ -8,18 +8,19 @@
     content="Instyle.zh2 lookbook: a curated selection of outfits, product categories and a size chart.">
   <meta name="author" content="Alina">
   <title>Lookbook — Instyle.zh2</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <!-- Bootstrap 5.3.8, подключён через CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous">
+     <!-- Bootstrap 5.3.8, loaded from CDN -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/readiness.css">
   <link rel="stylesheet" href="css/alina.css">
 </head>
 
 <body id="page-top" class="pt-0">
-  <!-- Page author: Alina -->
-  <!-- Comment: aside is used for the sizing tip — this is extra, non-essential
-       information that isn't logically part of the article describing the category. -->
+<!-- Page author: Alina -->
 
 
   <header class="border-bottom bg-white">
@@ -77,381 +78,362 @@
     </nav>
   </header>
 
-  <main class="container py-4 py-md-5">
-    <div class="container">
-      <section class="style-categories-section">
-        <h2 class="text-center mb-4">LOOKBOOK</h2>
-        <div class="style-categories row">
-          <div class="col-12 col-md-4">
-            <a href="#trendy-look" class="style-category-card">
-              <img src="images/trendy.jpg" alt="Образ trendy: ЮБКА И ЛОНГСЛИВ">
-              <h3>Trendy</h3>
-              <ul class="visually-hidden">
-                <li>Oversized outerwear
-                  <ul>
-                    <li>Boucle blazers</li>
-                    <li>Leather jackets</li>
-                  </ul>
-                </li>
-                <li>Statement accessories</li>
+  <main>
+ <!-- container (not container-fluid): the page is text- and card-heavy, a max width keeps lines readable -->
+ <div class="container">
+   <section class="style-categories-section rounded-4 overflow-hidden p-3 p-md-4 mx-3 mx-md-5">
+  <h2 class="text-center mb-4 display-6">LOOKBOOK</h2>
+  <div class="style-categories bg-white rounded-4 p-3 p-md-4 mt-3">
+  <div class="row g-3">
+        <div class="col-12 col-md-4">
+        <a href="#trendy-look" class="style-category-card d-block position-relative overflow-hidden rounded-4 text-decoration-none text-reset" >
+ <img class="w-100 d-block object-fit-cover" src="images/trendy.jpg" alt="Trendy look: skirt and longsleeve">
+  <h3 class="position-absolute bottom-0 start-0 end-0 m-3 text-uppercase fw-bold text-white fs-5">Trendy</h3>
+  <ul class="visually-hidden">
+    <li>Oversized outerwear
+              <ul>
+                <li>Boucle blazers</li>
+                <li>Leather jackets</li>
               </ul>
-            </a>
-          </div>
-          <div class="col-12 col-md-4">
-            <a href="#casual-look" class="style-category-card">
-              <img src="images/casual.jpg" alt="Образ casual: повседневный стиль">
-              <h3>CASUAL</h3>
-              <ul class="visually-hidden">
-                <li>Everyday basics
-                  <ul>
-                    <li>T-shirts and longsleeves</li>
-                    <li>Sweatshirts</li>
-                  </ul>
-                </li>
-                <li>Wide-leg jeans</li>
+            </li>
+            <li>Statement accessories</li>
+          </ul>
+        </a>
+        </div>
+         <div class="col-12 col-md-4">
+       <a href="#casual-look" class="style-category-card d-block position-relative overflow-hidden rounded-4 text-decoration-none text-reset">
+  <img class="w-100 d-block object-fit-cover" src="images/casual.jpg" alt="Casual look: everyday style">
+  <h3 class="position-absolute bottom-0 start-0 end-0 m-3 text-uppercase fw-bold text-white fs-5">Casual</h3>
+  <ul class="visually-hidden">
+    <li>Everyday basics
+              <ul>
+                <li>T-shirts and longsleeves</li>
+                <li>Sweatshirts</li>
               </ul>
-            </a>
-          </div>
-          <div class="col-12 col-md-4">
-            <a href="#cozy-look" class="style-category-card">
-              <img src="images/cozy.jpg" alt="Уютный образ с аксессуарами">
-              <h3>Cozy</h3>
-              <ul class="visually-hidden">
-                <li>Knitwear
-                  <ul>
-                    <li>Cardigans</li>
-                    <li>Sweaters</li>
-                  </ul>
-                </li>
-                <li>Scarves and soft accessories</li>
+            </li>
+            <li>Wide-leg jeans</li>
+          </ul>
+        </a>
+        </div>
+         <div class="col-12 col-md-4">
+      <a href="#cozy-look" class="style-category-card d-block position-relative overflow-hidden rounded-4 text-decoration-none text-reset">
+  <img class="w-100 d-block object-fit-cover" src="images/cozy.jpg" alt="Cozy look with accessories">
+  <h3 class="position-absolute bottom-0 start-0 end-0 m-3 text-uppercase fw-bold text-white fs-5">Cozy</h3>
+  <ul class="visually-hidden">
+    <li>Knitwear
+              <ul>
+                <li>Cardigans</li>
+                <li>Sweaters</li>
               </ul>
-            </a>
-          </div>
-        </div>
-      </section>
+            </li>
+            <li>Scarves and soft accessories</li>
+          </ul>
+        </a>
+      </div>
+      </div>
+  </div>
+    </section>
 
-      <section class="look-section" id="trendy-look">
-        <div class="row">
-          <div class="col-12 col-md-5">
-            <div class="look-main-image">
-              <img src="images/trendy.jpg" alt="Trendy outfit">
-            </div>
-          </div>
+   <section class="look-section bg-white rounded-4 overflow-hidden mt-3 mt-md-4 mx-3 mx-md-5" id="trendy-look">
+    <div class="row">
+  <div class="col-12 col-md-5">
+      <div class="look-main-image overflow-hidden">
+       <img class="w-100 h-100 d-block object-fit-cover" src="images/trendy.jpg" alt="Trendy outfit">
+      </div>
+      </div>
 
-          <div class="col-12 col-md-7">
-            <div class="look-products p-3 p-md-4">
+<div class="col-12 col-md-7">
+      <div class="look-products p-3 p-md-4">
 
-              <div class="look-products-header d-flex justify-content-between align-items-center mb-4">
-                <h3>GET THE LOOK</h3>
-                <span>PRODUCTS: 2</span>
-              </div>
-
-              <div class="look-products-grid row g-3 gy-4">
-                <div class="col-12 col-sm-6">
-
-                  <article id="look-sweater" data-price="17990" class="look-product shadow-sm d-flex flex-column">
-                    <div class="look-product-image">
-                      <img src="images/long.jpg" alt="Brown asymmetric jumper">
-                      <button id="favorite-look-sweater" type="button" aria-label="Save asymmetrical neckline sweater to favorites" aria-pressed="false">♡</button>
-                    </div>
-
-                    <h4>ASYMMETRICAL NECKLINE SWEATER</h4>
-                    <p>17,990.00 KZT</p>
-                    <a id="order-look-sweater" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-sweater">Order</a>
-                  </article>
-                </div>
-
-                <div class="col-12 col-sm-6">
-                  <article id="look-skirt" data-price="19990" class="look-product shadow-sm d-flex flex-column">
-                    <div class="look-product-image">
-                      <img src="images/skirt.jpg" alt="Fashion skirt">
-                      <button id="favorite-look-skirt" type="button" aria-label="Save asymmetrical-cut skirt to favorites" aria-pressed="false">♡</button>
-                    </div>
-                    <h4>ASYMMETRICAL-CUT SKIRT</h4>
-                    <p>19,990.00 KZT</p>
-                    <a id="order-look-skirt" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-skirt">Order</a>
-                  </article>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="look-section" id="casual-look">
-        <div class="row">
-          <div class="col-12 col-md-5">
-            <div class="look-main-image">
-              <img src="images/casual.jpg" alt="Casual outfit">
-            </div>
-          </div>
-          <div class="col-12 col-md-7">
-            <div class="look-products p-3 p-md-4">
-
-              <div class="look-products-header d-flex justify-content-between align-items-center mb-4">
-                <h3>GET THE LOOK</h3>
-                <span>PRODUCTS: 2</span>
-              </div>
-
-              <div class="look-products-grid row g-3 gy-4">
-                <div class="col-12 col-sm-6">
-                  <article id="look-trousers" data-price="18990" class="look-product shadow-sm d-flex flex-column">
-                    <div class="look-product-image">
-                      <img src="images/jeans.jpg" alt="Casual product">
-                      <button id="favorite-look-trousers" type="button" aria-label="Save milky-white trousers to favorites" aria-pressed="false">♡</button>
-                    </div>
-
-                    <h4>MILKY-WHITE TROUSERS</h4>
-                    <p>18,990.00 KZT</p>
-                    <a id="order-look-trousers" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-trousers">Order</a>
-                  </article>
-                </div>
-
-                <div class="col-12 col-sm-6">
-                  <article id="look-jacket" data-price="25990" class="look-product shadow-sm d-flex flex-column">
-                    <div class="look-product-image">
-                      <img src="images/jacket.jpg" alt="JACKET product">
-                      <button id="favorite-look-jacket" type="button" aria-label="Save jacket to favorites" aria-pressed="false">♡</button>
-                    </div>
-
-                    <h4>JACKET</h4>
-                    <p>25,990.00 KZT</p>
-                    <a id="order-look-jacket" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-jacket">Order</a>
-                  </article>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="look-section" id="cozy-look">
-        <div class="row">
-          <div class="col-12 col-md-5">
-            <div class="look-main-image">
-              <img src="images/cozy.jpg" alt="Cozy outfit">
-            </div>
-          </div>
-
-          <div class="col-12 col-md-7">
-            <div class="look-products p-3 p-md-4">
-
-
-              <div class="look-products-header d-flex justify-content-between align-items-center mb-4">
-                <h3>GET THE LOOK</h3>
-                <span>PRODUCTS: 1</span>
-              </div>
-
-              <div class="look-products-grid row g-3 gy-4">
-                <div class="col-12 col-sm-6">
-                  <article id="look-set" data-price="28990" class="look-product shadow-sm d-flex flex-column">
-                    <div class="look-product-image">
-                      <img src="images/sport.jpg" alt="SET product">
-                      <button id="favorite-look-set" type="button" aria-label="Save two-piece set to favorites" aria-pressed="false">♡</button>
-                    </div>
-
-                    <h4>TWO-PIECE SET</h4>
-                    <p>28,990.00 KZT</p>
-                    <a id="order-look-set" class="look-add-button btn btn-dark" href="order.html#order-form" data-product="look-set">Order</a>
-                  </article>
-                </div>
-
-              </div>
-            </div>
-          </div>
+        <div class="look-products-header d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fs-4 fw-bold mb-0">GET THE LOOK</h3>
+          <span class="small text-secondary">PRODUCTS: 2</span>
         </div>
 
-      </section>
+        <div class="look-products-grid row g-3 gy-4">
+          <div class="col-12 col-sm-6">
 
+          <article class="look-product shadow-sm d-flex flex-column">
+            <div class="look-product-image position-relative overflow-hidden bg-light w-100">
+              <img class="w-100 h-100 d-block object-fit-cover" src="images/long.jpg" alt="Brown asymmetric jumper">
+           <input type="checkbox" class="btn-check" id="fav-1" aria-label="Add to favorites">
+<label for="fav-1" class="btn btn-light rounded-0 border-0 p-0 position-absolute bottom-0 end-0 m-2 d-flex align-items-center justify-content-center lh-1">♡</label>
+            </div>
 
-      <section id="size-chart" class="p-3 p-md-5">
-
-        <h3>Size Chart</h3>
-
-        <div class="size-measurement row">
-
-          <!-- Size Chart -->
-          <div class="col-12 col-md-6 size-chart">
-
-            <table>
-              <caption>Instyle.zh2 t-shirt size chart (real measurements)</caption>
-
-              <thead>
-                <tr>
-                  <th scope="col">Size</th>
-                  <th scope="col">Chest</th>
-                  <th scope="col">Length</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <th scope="row">S</th>
-                  <td>88</td>
-                  <td>60</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">M</th>
-                  <td>92</td>
-                  <td>63</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">L</th>
-                  <td>96</td>
-                  <td>65</td>
-                </tr>
-              </tbody>
-
-            </table>
-
+            <h4 class="fs-6 fw-bold mx-2 mt-3 mb-1">ASYMMETRICAL NECKLINE SWEATER</h4>
+            <p class="small fw-semibold mx-2 mb-3">17,990.00 KZT</p>
+            <button id="add-sweater" class="btn btn-dark mx-2 mb-2" type="button">ADD</button>
+          </article>
           </div>
 
+            <div class="col-12 col-sm-6">
+          <article class="look-product shadow-sm d-flex flex-column">
+            <div class="look-product-image position-relative overflow-hidden bg-light w-100">
+             <img class="w-100 h-100 d-block object-fit-cover" src="images/skirt.jpg" alt="Fashion skirt">
+              <input type="checkbox" class="btn-check" id="fav-2" aria-label="Add to favorites">
+<label for="fav-2" class="btn btn-light rounded-0 border-0 p-0 position-absolute bottom-0 end-0 m-2 d-flex align-items-center justify-content-center lh-1">♡</label>
+            </div>
+            <h4 class="fs-6 fw-bold mx-2 mt-3 mb-1">ASYMMETRICAL-CUT SKIRT</h4>
+            <p class="small fw-semibold mx-2 mb-3">19,990.00 KZT</p>
+           <button id="add-skirt" class="btn btn-dark mx-2 mb-2" type="button">ADD</button>
+          </article>
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+    </section>
 
-          <!-- How to Measure -->
-          <div class="col-12 col-md-6 measure-guide">
+   <section class="look-section bg-white rounded-4 overflow-hidden mt-3 mt-md-4 mx-3 mx-md-5" id="casual-look">
+      <div class="row">
+  <div class="col-12 col-md-5">
+      <div class="look-main-image overflow-hidden">
+<img class="w-100 h-100 d-block object-fit-cover" src="images/casual.jpg" alt="Casual outfit">
+      </div>
+      </div>
+      <div class="col-12 col-md-7">
+     <div class="look-products p-3 p-md-4">
 
-            <h3>How to Measure Yourself Correctly</h3>
+        <div class="look-products-header d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fs-4 fw-bold mb-0">GET THE LOOK</h3>
+          <span class="small text-secondary">PRODUCTS: 2</span>
+        </div>
 
-            <img src="images/measure-yourself.png" alt="How to measure yourself correctly">
+        <div class="look-products-grid row g-3 gy-4">
+           <div class="col-12 col-sm-6">
+          <article class="look-product shadow-sm d-flex flex-column">
+            <div class="look-product-image position-relative overflow-hidden bg-light w-100">
+<img class="w-100 h-100 d-block object-fit-cover" src="images/jeans.jpg" alt="Casual product">
+           <input type="checkbox" class="btn-check" id="fav-3" aria-label="Add to favorites">
+<label for="fav-3" class="btn btn-light rounded-0 border-0 p-0 position-absolute bottom-0 end-0 m-2 d-flex align-items-center justify-content-center lh-1">♡</label>
+            </div>
 
+            <h4 class="fs-6 fw-bold mx-2 mt-3 mb-1">MILKY-WHITE TROUSERS</h4>
+            <p class="small fw-semibold mx-2 mb-3">18,990.00 KZT</p>
+           <button id="add-trousers" class="btn btn-dark mx-2 mb-2" type="button">ADD</button>
+          </article>
+          </div>
+
+         <div class="col-12 col-sm-6">
+         <article class="look-product shadow-sm d-flex flex-column">
+            <div class="look-product-image position-relative overflow-hidden bg-light w-100">
+             <img class="w-100 h-100 d-block object-fit-cover" src="images/jacket.jpg" alt="JACKET product">
+            <input type="checkbox" class="btn-check" id="fav-4" aria-label="Add to favorites">
+<label for="fav-4" class="btn btn-light rounded-0 border-0 p-0 position-absolute bottom-0 end-0 m-2 d-flex align-items-center justify-content-center lh-1">♡</label>
+            </div>
+
+            <h4 class="fs-6 fw-bold mx-2 mt-3 mb-1">JACKET</h4>
+            <p class="small fw-semibold mx-2 mb-3">25,990.00 KZT</p>
+            <button id="add-jacket" class="btn btn-dark mx-2 mb-2" type="button">ADD</button>
+          </article>
           </div>
 
         </div>
+      </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="look-section bg-white rounded-4 overflow-hidden mt-3 mt-md-4 mx-3 mx-md-5" id="cozy-look">
+   <div class="row">
+  <div class="col-12 col-md-5">
+      <div class="look-main-image overflow-hidden">
+        <img class="w-100 h-100 d-block object-fit-cover" src="images/cozy.jpg" alt="Cozy outfit">
+      </div>
+      </div>
+
+      <div class="col-12 col-md-7">
+      <div class="look-products p-3 p-md-4">
 
 
-        <!-- Fit Information -->
-        <div class="fit-information row mt-4 pt-3 border-top">
-          <div class="fit-item col-12 col-sm-6">
-            <h3>Oversize</h3>
-            <p>A loose cut, 1&ndash;2 sizes bigger than usual.</p>
+        <div class="look-products-header d-flex justify-content-between align-items-center mb-4">
+           <h3 class="fs-4 fw-bold mb-0">GET THE LOOK</h3>
+          <span class="small text-secondary">PRODUCTS: 1</span>
+        </div>
+
+        <div class="look-products-grid row g-3 gy-4">
+        <div class="col-12 col-sm-6">
+          <article class="look-product shadow-sm d-flex flex-column">
+            <div class="look-product-image position-relative overflow-hidden bg-light w-100">
+              <img class="w-100 h-100 d-block object-fit-cover" src="images/sport.jpg" alt="SET product">
+            <input type="checkbox" class="btn-check" id="fav-5" aria-label="Add to favorites">
+<label for="fav-5" class="btn btn-light rounded-0 border-0 p-0 position-absolute bottom-0 end-0 m-2 d-flex align-items-center justify-content-center lh-1">♡</label>
+            </div>
+
+            <h4 class="fs-6 fw-bold mx-2 mt-3 mb-1">TWO-PIECE SET</h4>
+            <p class="small fw-semibold mx-2 mb-3">28,990.00 KZT</p>
+           <button id="add-set" class="btn btn-dark mx-2 mb-2" type="button" disabled>ADD</button>
+           </article>
           </div>
 
-          <div class="fit-item col-12 col-sm-6">
-            <h3>Slim fit</h3>
-            <p>A fitted cut that follows the body's silhouette.</p>
-          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+    </section>
+
+    <div id="cart-message" class="hidden success alert alert-success mt-4" role="status"></div>
+    <p class="text-center mt-4">
+      Press ADD on any item, then finish on the Order page.
+      <a id="go-to-order" href="order.html" class="btn btn-outline-dark btn-sm ms-2">Go to Order</a>
+    </p>
+
+   <section id="size-chart" class="p-3 p-md-5">
+
+      <h3 class="mb-4 text-center text-md-start">Size Chart</h3>
+
+      <div class="size-measurement row align-items-start">
+
+  <!-- Size Chart -->
+  <div class="col-12 col-md-6 size-chart">
+
+          <table class="table table-bordered border-dark">
+            <caption class="caption-top">Instyle.zh2 t-shirt size chart (real measurements)</caption>
+
+            <thead>
+              <tr>
+                <th scope="col">Size</th>
+                <th scope="col">Chest</th>
+                <th scope="col">Length</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <th scope="row">S</th>
+                <td>88</td>
+                <td>60</td>
+              </tr>
+
+              <tr>
+                <th scope="row">M</th>
+                <td>92</td>
+                <td>63</td>
+              </tr>
+
+              <tr>
+                <th scope="row">L</th>
+                <td>96</td>
+                <td>65</td>
+              </tr>
+            </tbody>
+
+          </table>
 
         </div>
 
 
-        <!-- Additional Information -->
-        <div class="size-notes mt-4 mx-auto">
+       <!-- How to Measure -->
+<div class="col-12 col-md-6 measure-guide">
 
-          <p>
-            Sizes are given in <abbr title="centimeter">cm</abbr> and are real product
-            measurements, not conventional &ldquo;EU sizes&rdquo; &mdash; this makes it
-            easier to compare models, <abbr title="and so on">etc.</abbr>
-            The price tag already reflects the seasonal discount.
-          </p>
-
+          <h3 class="mb-3">How to Measure Yourself Correctly</h3>
+<img class="img-fluid" src="images/measure-yourself.png" alt="How to measure yourself correctly">
         </div>
 
-      </section>
-      <section class="lookbook-intro">
-        <h2>Lookbook</h2>
+      </div>
 
-        <div class="lookbook-intro-content row g-4 g-md-5 mt-3 mt-md-4 align-items-start">
-          <div class="col-12 col-md-5">
-            <img src="images/lkbk.jpg" alt="Lookbook fashion style">
-          </div>
-          <div class="col-12 col-md-7 lookbook-intro-text">
-
-            <p class="lead">
-              The instyle zh2 clothing store offers a wide range of clothing.
-              High‑quality clothing and reasonable prices. The store currently has a new autumn collection.
-              The main items are coats, jackets, leather jackets, as well as stylish cardigans and sweaters.
-              The entire product range is very well organised in the store, making it easy to find what you’re looking
-              for.</p>
-            <p>
-              The main materials are knitwear, tweed, corduroy, leather, and suit fabric. In addition to all this,
-              the store is full of accessories to complete your look.
-              Such as glasses, hats, handbags, scarves, socks, and so on. The store is offering good discounts on items
-              from the
-              previous collection.</p>
-            <p>
-              In addition to all this, I liked the atmosphere in the store itself - it’s calm and quiet, with a
-              beautiful
-              interior and concept.
-              The top sellers are <strong>the grey mini skirt and the shirt with an unusual style</strong> while the
-              <em>new
-                arrival of the season</em> is the autumn coat line.
-              Jump straight to the <a href="#size-chart">size chart.</a>
-            </p>
-          </div>
+      <!-- Fit Information -->
+    <div class="fit-information row mt-4 pt-3 border-top">
+  <div class="fit-item col-6">
+          <h3 class="mb-2">Oversize</h3>
+          <p class="mb-0">A loose cut, 1&ndash;2 sizes bigger than usual.</p>
         </div>
-      </section>
 
-      <section id="favorites-section" class="border rounded p-3" aria-labelledby="favorites-title">
-        <h2 id="favorites-title" class="h4">Your favorites</h2>
-        <p id="favorites-status" role="status">No items saved. Use the heart on a product to save it here.</p>
-        <div id="favorites-items" class="row g-3"></div>
-        <div id="favorites-error" class="alert alert-danger hidden" role="alert"></div>
-        <a id="favorites-order-link" class="btn btn-dark" href="order.html#order-form">Prepare an order</a>
-      </section>
-      <section id="product-request" aria-labelledby="request-title">
-        <h2 id="request-title">Prepare a product request</h2>
-        <p id="request-instructions">Enter the item, size and preferred color. The result area will show your request summary.
-          This form prepares a request on your device; it does not send a message to the store.
-          For an order, use the <a href="order.html#order-form">pickup order form</a>.</p>
-        <form id="request-form" action="lookbook.html" method="get" aria-describedby="request-instructions">
-          <fieldset class="border rounded p-2 p-sm-3">
-            <legend class="h5">Product preferences</legend>
-            <div class="mb-3">
-              <label class="form-label" for="request-item">Item name*</label>
-              <input class="form-control" id="request-item" name="item" required aria-describedby="request-item-error">
-              <span id="request-item-error" class="invalid-feedback">Enter an item name.</span>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="request-size">Size*</label>
-              <select class="form-select" id="request-size" name="size" required aria-describedby="request-size-error">
-                <option value="">Choose a size</option><option>S</option><option>M</option><option>L</option><option>One size</option>
-              </select>
-              <span id="request-size-error" class="invalid-feedback">Choose a size.</span>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="request-color">Preferred color</label>
-              <input class="form-control" id="request-color" name="color">
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="request-comment">Additional details</label>
-              <textarea class="form-control" id="request-comment" name="comment" rows="3"></textarea>
-            </div>
-            <div class="d-flex flex-column flex-sm-row gap-2">
-              <button id="request-submit" class="btn btn-dark" type="button">Prepare request</button>
-              <button id="request-reset" class="btn btn-outline-secondary" type="reset">Clear</button>
-            </div>
-          </fieldset>
-          <section id="request-result" class="border rounded p-2 p-sm-3" aria-labelledby="request-result-title">
-            <h3 id="request-result-title" class="h5">Request status</h3>
-            <p id="request-status" role="status">No request prepared.</p>
-            <div id="request-error" class="alert alert-danger hidden" role="alert"></div>
-            <div id="request-success" class="alert alert-success hidden" role="status"></div>
-            <div id="request-summary"></div>
-          </section>
-        </form>
-      </section>
-      <p>
-        See the full catalog on the
-        <a href="catalog.html">&ldquo;Catalog&rdquo;</a> page, or the official
-        Instagram&reg; of &laquo;Instyle.zh2&raquo; &mdash;
-        <a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">right here</a>
-        (opens in a new tab).
-      </p>
+  <div class="fit-item col-6">
+          <h3 class="mb-2">Slim fit</h3>
+          <p class="mb-0">A fitted cut that follows the body's silhouette.</p>
+        </div>
 
-      <p>
-        <small>
-          Check availability by phone &mdash; the in-store size run may differ
-          from what's on display.
-        </small>
-      </p>
-      <p>
-        <a href="#size-chart">&uarr; Back to the size chart</a>
-        &nbsp;|&nbsp;
-        <a href="index.html">&uarr; Back to Home</a>
-      </p>
+      </div>
+
+
+      <!-- Additional Information -->
+      <div class="size-notes small mt-4 mx-auto">
+
+        <p>
+          Sizes are given in <abbr title="centimeter">cm</abbr> and are real product
+          measurements, not conventional &ldquo;EU sizes&rdquo; &mdash; this makes it
+          easier to compare models, <abbr title="and so on">etc.</abbr>
+          The price tag already reflects the seasonal discount.
+        </p>
+
+      </div>
+
+        <section>
+      <h2 class="text-center text-md-start">Check availability</h2>
+      <form id="availability-form" method="post" action="lookbook.html" class="my-4 my-md-5">
+        <fieldset class="border border-light p-3 p-md-5">
+          <legend class="fs-4 fw-medium">Check availability</legend>
+
+          <div class="mb-3">
+            <label for="item-name" class="form-label">Item name</label>
+            <input type="text" id="item-name" name="item-name" class="form-control form-control-lg" placeholder="e.g. grey mini skirt" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="size-select" class="form-label">Size</label>
+            <select id="size-select" name="size-select" class="form-select form-select-lg">
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="color" class="form-label">Preferred color</label>
+            <input type="text" id="color" name="color" class="form-control form-control-lg" placeholder="e.g. grey">
+          </div>
+
+          <p class="mb-2">Notify me by:</p>
+          <div class="form-check form-check-inline">
+            <input type="radio" id="notify-email" name="notify" value="email" class="form-check-input">
+            <label for="notify-email" class="form-check-label">Email</label>
+          </div>
+          <div class="form-check form-check-inline mb-3">
+            <input type="radio" id="notify-phone" name="notify" value="phone" class="form-check-input">
+            <label for="notify-phone" class="form-check-label">Phone</label>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-7 mb-3">
+              <label for="customer-email" class="form-label">Your email</label>
+              <input type="email" id="customer-email" name="customer-email" class="form-control form-control-lg" required>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="comment" class="form-label">Comment</label>
+            <textarea id="comment" name="comment" class="form-control form-control-lg" rows="4" placeholder="Anything else you'd like to add"></textarea>
+          </div>
+
+          <p class="small text-muted mb-3" id="availability-note">After you send the request, the store will check this item and reply to you by the method you chose.</p>
+          <button type="submit" id="availability-submit" class="btn btn-dark px-4 py-3">Send request</button>
+          <button type="reset" id="availability-reset" class="btn btn-outline-dark btn-sm">Clear</button>
+        </fieldset>
+        <div id="availability-error" class="hidden error alert alert-danger mt-3" role="alert"></div>
+        <div id="availability-result" class="hidden success alert alert-success mt-3" role="status"></div>
+      </form>
+    </section>
+    <p>
+      See the full catalog on the
+      <a href="catalog.html">&ldquo;Catalog&rdquo;</a> page, or the official
+      Instagram&reg; of &laquo;Instyle.zh2&raquo; &mdash;
+      <a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">right here</a>
+      (opens in a new tab).
+    </p>
+
+    <p>
+      <small>
+        Check availability by phone &mdash; the in-store size run may differ
+        from what's on display.
+      </small>
+    </p>
+    <p class="d-flex flex-column flex-md-row gap-2">
+      <a href="#size-chart">&uarr; Back to the size chart</a>
+      <span class="d-none d-md-inline">|</span>
+      <a href="index.html">&uarr; Back to Home</a>
+    </p>
     </div>
   </main>
 

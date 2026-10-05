@@ -1,202 +1,57 @@
-.style-categories-section {
-  background: #c5c5c0;
-  border-radius: 20px;
-  padding: 16px;
-  margin: 0 12px;
-  overflow: hidden;
-}
-.style-categories {
-  background: #fff;
-  border-radius: 20px;
-  padding: 12px;
-  margin-top: 16px;
-}
-@media (min-width: 768px) {
-  .style-categories-section {
-    padding: 30px;
-    margin: 0 40px;
-  }
 
-  .style-categories {
-    padding: 20px;
-  }
-}
-.style-category-card {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  border-radius: 15px;
-}
-.style-category-card img {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s;
-}
+/* LOOKBOOK*/
+.style-categories-section { background-color: #c5c5c0; }
+.style-category-card img { aspect-ratio: 3 / 4; transition: transform 0.4s ease; }
+.style-category-card:hover img { transform: scale(1.06); }
+.style-category-card h3 { letter-spacing: 0.05em; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); overflow-wrap: break-word; }
 
-.style-category-card:hover img {
-  transform: scale(1.06);
-}
-.style-category-card h3 {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  margin: 0;
-  color: #fff;
-  text-transform: uppercase;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
-}
-.look-section {
-  background: #fff;
-  border-radius: 20px;
-  overflow: hidden;
-  margin: 16px 12px 0;
-}
-.look-main-image {
-  height: 320px;
-  overflow: hidden;
-}
-.look-main-image img,
-.look-product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.look-product-image {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-}
-.look-product-image button {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #fff;
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.look-product h4 {
-  margin: 12px 10px 4px;
-  font-size: 0.9rem;
-}
-.look-product p {
-  margin: 0 10px 12px;
-  font-weight: 600;
-}
-.look-add-button {
-  width: calc(100% - 20px);
-  margin: 0 10px 10px;
-}
-@media (min-width: 768px) {
-  .look-section {
-    margin: 30px 40px 0;
-  }
+.look-section::after { content: ""; display: block; border-bottom: 1px solid #ddd; margin-top: 30px; }
+.look-main-image { height: 550px; }
+.look-product-image { aspect-ratio: 3 / 4; }
+.look-product-image .btn { width: 32px; height: 32px; }
+.btn-check:checked + .btn-light { background-color: #000; color: #fff; }
+.look-product h4 { min-height: 42px; }
 
-  .look-main-image {
-    height: 550px;
-  }
-}
-.size-chart table,
-.rating-card table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.size-chart th,
-.size-chart td {
-  border: 1px solid #141414;
-  padding: 10px 14px;
-}
-.size-chart thead th {
-  background: #f9f6f6;
-}
-.size-chart tbody th {
-  background: #e5dcdc;
-}
-.page-hero {
-  position: relative;
-  overflow: hidden;
-  height: 260px;
-}
-.page-hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-}
-@media (min-width: 768px) {
-  .page-hero {
-    height: 420px;
-  }
-}
-.review-text-card {
-  border: 2px solid #000;
-  border-radius: 8px;
-  padding: 20px;
-}
-.review-head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.review-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #8b6f4e;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.review-stars-date {
-  color: #e8b923;
-}
-.rating-card table {
-  border: 2px solid #000;
-}
-.rating-card thead th {
-  background: #3e3b3b;
-  color: #fff;
-}
-.rating-card th,
-.rating-card td {
-  padding: 14px 20px;
-  text-align: left;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
-}
-.rating-card dl {
-  padding: 20px;
-  background: #f9f9f9;
-  border-left: 3px solid #000;
-}
-.review-steps {
-  list-style: none;
-  padding: 0;
-}
-.review-steps li {
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  padding: 20px;
-}
+.size-chart thead th { background-color: #f9f6f6; }
+.size-chart tbody th { background-color: #e5dcdc; }
+
+form .form-control, form .form-select { background-color: #f8f8f8; border-color: #ddd; }
+form .form-control:focus, form .form-select:focus { border-color: #999; box-shadow: none; }
+
+.lookbook-intro h2 { font-family: Georgia, "Times New Roman", serif; letter-spacing: 0.08em; }
+.lookbook-intro-content img { width: 260px; height: 250px; }
+
+/* REVIEWS */
+.page-hero { height: 260px; }
+@media (min-width: 768px) { .page-hero { height: 420px; } }
+.hero-overlay { background: rgba(0, 0, 0, 0.4); }
+.hero-eyebrow { letter-spacing: 2px; }
+.hero-title { font-family: Georgia, "Times New Roman", serif; line-height: 1.15; }
+.hero-subtitle { max-width: 480px; }
+
+.review-text-card { border: 2px solid #000; }
+.review-avatar { width: 36px; height: 36px; background: #8b6f4e; }
+.review-count { color: #888; }
+.review-stars-date { color: #e8b923; }
+.review-stars-date time { color: #888; }
+.review-body { color: #333; }
+
+.rating-card h3 { font-family: Georgia, "Times New Roman", serif; color: #363232; }
+.rating-card table { border: 2px solid #000; }
+.rating-card caption { color: #c2b9b9; }
+.rating-card thead th { background: #3e3b3b; color: #fff; }
+.rating-card th, .rating-card td { padding: 16px 20px; }
+.rating-card td { color: #5c5c5c; }
+.rating-card dl { background: #f9f9f9; border-left: 3px solid #000; }
+.rating-card dd { color: #555; }
+
+.review-steps { counter-reset: step-counter; }
+.review-steps li { counter-increment: step-counter; background: #f5f5f5; border: 1px solid rgba(0, 0, 0, 0.1); padding: 24px 20px 20px; color: #333; }
+.review-steps li::before { content: counter(step-counter) "."; display: block; font-family: Georgia, "Times New Roman", serif; font-size: 28px; font-weight: 700; color: #000; margin-bottom: 8px; }
+
+/* STATES for JavaScript later: nothing uses them yet, JS will only switch these classes on and off */
+.hidden { display: none; }
+.active { font-weight: 700; }
+.selected { outline: 2px solid #000; outline-offset: 2px; }
+.error { color: #842029; border-color: #dc3545; }
+.success { color: #0f5132; border-color: #198754; }
