@@ -128,6 +128,46 @@ const products = [
     category: 'accessories',
     sizes: ['One size'],
     image: 'images/access4.jpg'
+  },
+  {
+    id: 'lookbook-sweater',
+    name: 'Asymmetrical neckline sweater',
+    price: 17990,
+    category: 'tops',
+    sizes: ['S', 'M', 'L'],
+    image: 'images/long.jpg'
+  },
+  {
+    id: 'lookbook-skirt',
+    name: 'Asymmetrical-cut skirt',
+    price: 19990,
+    category: 'bottoms',
+    sizes: ['S', 'M', 'L'],
+    image: 'images/skirt.jpg'
+  },
+  {
+    id: 'lookbook-trousers',
+    name: 'Milky-white trousers',
+    price: 18990,
+    category: 'bottoms',
+    sizes: ['S', 'M', 'L'],
+    image: 'images/jeans.jpg'
+  },
+  {
+    id: 'lookbook-jacket',
+    name: 'Jacket',
+    price: 25990,
+    category: 'outerwear',
+    sizes: ['S', 'M', 'L'],
+    image: 'images/jacket.jpg'
+  },
+  {
+    id: 'lookbook-set',
+    name: 'Two-piece set',
+    price: 28990,
+    category: 'tops',
+    sizes: ['S', 'M', 'L'],
+    image: 'images/sport.jpg'
   }
 ];
 function findProductById(items, productId) {
@@ -513,3 +553,70 @@ window.addEventListener('storage', (event) => {
     updateCartNavigation(loadCart(products).items);
   }
 });
+
+// Inline validation shared by the page scripts; all messages are DOM text.
+const inlineFormMessages = new WeakMap();
+let inlineMessageNumber = 0;
+function clearInlineFieldError(field) {
+  const message = inlineFormMessages.get(field);
+  field.classList.remove('error', 'is-invalid');
+  field.removeAttribute('aria-invalid');
+  if (message) { message.textContent = ''; message.hidden = true; message.classList.add('d-none'); }
+}
+function prepareInlineForm(form) {
+  form.noValidate = true;
+  function edit(event) {
+    if (!event.target.matches('input, select, textarea')) return;
+    event.target.setCustomValidity('');
+    clearInlineFieldError(event.target);
+    if (event.target.type === 'radio') {
+      [...form.elements].filter(field => field.name === event.target.name).forEach(clearInlineFieldError);
+    }
+  }
+  form.addEventListener('input', edit);
+  form.addEventListener('change', edit);
+  form.addEventListener('reset', () => {
+    [...form.elements].filter(field => field.willValidate).forEach(field => {
+      field.setCustomValidity(''); clearInlineFieldError(field);
+    });
+  });
+}
+function validateInlineForm(form, focus = true) {
+  let first = null;
+  for (const field of form.elements) {
+    if (!field.willValidate) continue;
+    clearInlineFieldError(field);
+    let text = '';
+    if (!field.validity.valid) {
+      if (field.validity.customError) text = field.validationMessage;
+      else if (field.validity.valueMissing) {
+        if (field.tagName === 'SELECT') text = /size/i.test(field.id + ' ' + field.getAttribute('aria-label')) ? 'Choose a size.' : 'Choose an option.';
+        else if (field.type === 'radio') text = 'Choose a notification method.';
+        else if (field.type === 'email') text = 'Enter your email.';
+        else if (field.type === 'tel') text = 'Enter your phone number.';
+        else text = 'Complete this field.';
+      } else if (field.type === 'email') text = 'Enter a valid email address.';
+      else if (field.type === 'number') text = 'Enter a number within the allowed range.';
+      else text = field.validationMessage;
+    }
+    if (!text) continue;
+    let message = inlineFormMessages.get(field);
+    if (!message) {
+      message = document.createElement('span');
+      message.id = 'inline-field-error-' + (++inlineMessageNumber);
+      message.classList.add('text-danger', 'small', 'd-block', 'mt-1');
+      message.setAttribute('aria-live', 'polite');
+      field.after(message);
+      const described = field.getAttribute('aria-describedby');
+      field.setAttribute('aria-describedby', [described, message.id].filter(Boolean).join(' '));
+      inlineFormMessages.set(field, message);
+    }
+    message.textContent = text; message.hidden = false;
+    // Bootstrap d-block has !important; use the existing hidden class as well.
+    message.classList.remove('hidden', 'd-none');
+    field.classList.add('is-invalid'); field.setAttribute('aria-invalid', 'true');
+    if (!first) first = field;
+  }
+  if (first && focus) first.focus();
+  return first === null;
+}
