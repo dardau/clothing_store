@@ -404,3 +404,112 @@ function loadCart(items) {
     };
   }
 }
+const CART_URL = 'catalog.html?view=cart';
+
+const isCartView =
+  document.body.classList.contains('catalog-page') &&
+  new URLSearchParams(window.location.search).get('view') === 'cart';
+
+// Обновляет число товаров рядом с иконкой.
+function updateCartNavigation(items = cart) {
+  const link = document.querySelector('#nav-cart-link');
+  const counter = document.querySelector('#nav-cart-count');
+
+  if (link === null || counter === null) {
+    return;
+  }
+
+  const quantity = calculateCartQuantity(items);
+
+  counter.textContent = quantity > 99 ? '99+' : String(quantity);
+
+  link.setAttribute(
+    'aria-label',
+    'Shopping cart: ' + quantity + ' items'
+  );
+}
+
+// Создаёт иконку корзины в навигации.
+function createCartNavigation() {
+  const toggle = document.querySelector('.site-nav-toggle');
+  const navigation = document.querySelector('.site-nav-links');
+
+  if (toggle === null || navigation === null) {
+    return;
+  }
+
+  const link = document.createElement('a');
+  link.id = 'nav-cart-link';
+  link.href = CART_URL;
+
+  link.classList.add(
+    'btn', 'text-dark', 'd-inline-flex', 'align-items-center',
+    'gap-1', 'p-2', 'ms-auto', 'me-2', 'me-lg-0',
+    'ms-lg-3', 'order-lg-2', 'flex-shrink-0'
+  );
+
+  // Рисуем иконку сумки.
+  const svgNamespace = 'http://www.w3.org/2000/svg';
+  const icon = document.createElementNS(svgNamespace, 'svg');
+
+  icon.setAttribute('viewBox', '0 0 24 24');
+  icon.setAttribute('width', '24');
+  icon.setAttribute('height', '24');
+  icon.setAttribute('fill', 'none');
+  icon.setAttribute('stroke', 'currentColor');
+  icon.setAttribute('stroke-width', '1.5');
+  icon.setAttribute('stroke-linecap', 'round');
+  icon.setAttribute('stroke-linejoin', 'round');
+  icon.setAttribute('aria-hidden', 'true');
+  icon.setAttribute('focusable', 'false');
+
+  const shape = document.createElementNS(svgNamespace, 'path');
+
+  shape.setAttribute(
+    'd',
+    'M6 7h12l1 14H5L6 7ZM9 7V5a3 3 0 0 1 6 0v2'
+  );
+
+  icon.append(shape);
+
+  const counter = document.createElement('span');
+  counter.id = 'nav-cart-count';
+  counter.classList.add('badge', 'text-bg-dark', 'rounded-pill');
+  counter.setAttribute('aria-hidden', 'true');
+
+  link.append(icon, counter);
+
+  navigation.classList.add('order-lg-1');
+  toggle.before(link);
+
+  if (isCartView) {
+    navigation.querySelectorAll('[aria-current="page"]').forEach((item) => {
+      item.removeAttribute('aria-current');
+      item.classList.remove('active');
+    });
+
+    link.setAttribute('aria-current', 'page');
+  }
+
+  updateCartNavigation();
+}
+
+createCartNavigation();
+
+// Старые ссылки тоже ведут на отдельный экран корзины.
+document.querySelectorAll('a[href="#cart"], a[href="catalog.html#cart"]')
+  .forEach((link) => {
+    link.href = CART_URL;
+  });
+
+// Обновляем счётчик при возвращении на страницу.
+window.addEventListener('pageshow', () => {
+  updateCartNavigation(loadCart(products).items);
+});
+
+// Обновляем счётчик, если корзина изменилась в другой вкладке.
+window.addEventListener('storage', (event) => {
+  if (event.key === 'instyle-cart-v1' || event.key === null) {
+    updateCartNavigation(loadCart(products).items);
+  }
+});
