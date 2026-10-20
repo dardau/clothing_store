@@ -10,7 +10,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/readiness.css">
   <link rel="stylesheet" href="css/zhansaya.css">
   <title>Create Account — Instyle.zh2</title>
 </head>
@@ -23,53 +22,57 @@
     <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
       <div class="container">
         <h1 class="navbar-brand mb-0">
-          <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
+          <a class="text-dark text-decoration-none" href="index.html">
+            Instyle.zh2
+          </a>
         </h1>
-
         <input type="checkbox" id="navigation-toggle" class="site-nav-toggle visually-hidden d-lg-none"
-          aria-label="Show navigation" aria-controls="main-navigation">
+          aria-label="Show navigation" aria-controls="catalogNavigation">
 
         <label for="navigation-toggle" class="navbar-toggler bg-transparent">
           <span class="navbar-toggler-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Toggle navigation</span>
         </label>
 
-
-        <div class="navbar-collapse site-nav-links" id="main-navigation">
+        <div class="navbar-collapse site-nav-links" id="catalogNavigation">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="catalog.html">Catalog</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="lookbook.html">Lookbook</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="order.html">Order</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="about.html">About Us</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="reviews.html">Reviews</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="contacts.html">Contacts</a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link active" href="login.html" aria-current="page">Login</a>
+              <a class="nav-link active" href="login.html" aria-current="page">
+                Login
+              </a>
             </li>
           </ul>
 
-          <div class="d-lg-none border-top pt-3 mt-3">
-            <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2" target="_blank"
-              rel="noopener noreferrer">Instagram</a>
-            <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
-            <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
-          </div>
         </div>
+
       </div>
     </nav>
   </header>
@@ -80,9 +83,7 @@
         <img src="images/loginimg.jpg" alt="Fashion inspiration from Instyle.zh2" class="img-fluid w-100 rounded">
       </figure>
 
-      <p id="account-data-note" class="col-12 small">Profile information is intended for use on this device only.
-        This website does not send account details to a server. Use a password made only for this local profile.</p>
-      <form id="registration-form" class="login-form col-12 col-md-8 col-lg-7" action="login.html" method="post">
+      <form id="registration-form" class="login-form col-12 col-md-8 col-lg-7" action="#" method="post">
 
         <fieldset class="border-0 p-0 m-0">
           <legend class="h3 fw-normal mb-3">
@@ -90,7 +91,8 @@
           </legend>
 
           <p class="text-body-secondary mb-4">
-            Prepare your visitor profile on this device. No staff account or approval is required.
+            To create your Instyle.zh2 account, we need a little more
+            information about you.
           </p>
 
           <!-- Bootstrap form grid: one column below 768px,
@@ -200,7 +202,7 @@
                   aria-describedby="acc-agree-error" required>
 
                 <label class="form-check-label small" for="acc-agree">
-                  I understand the <a href="#account-data-note">local profile data notice</a>*
+                  I agree to the processing of my personal data*
                 </label>
 
                 <span id="acc-agree-error" class="invalid-feedback">
@@ -265,7 +267,7 @@
         Already have an Instyle.zh2 account? Enter your details below.
       </p>
 
-      <form id="signin-form" action="login.html" method="post">
+      <form id="signin-form" action="#" method="post">
         <p class="mb-3">
           <label class="form-label" for="signin-email">
             Email
@@ -339,17 +341,31 @@
     </section>
   </main>
 
-  <footer class="site-footer text-center border-top py-4 px-2 px-sm-4">
-    <p>Address: 5/5 Ryskulov Street, Office 3, Astana &mdash; Phone:
-      <a href="tel:+77012540203">+7 (701) 254 02 03</a></p>
+  <footer class="px-2 px-sm-4">
+    <p>Address: 5/5 Ryskulov Street, Office 3, Astana &mdash; Phone: <a href="tel:+77012540203">+7
+        (701) 254 02 03</a>
+    </p>
     <nav aria-label="Contact links" class="my-3">
-      <ul class="list-unstyled d-flex flex-column flex-sm-row flex-wrap justify-content-center gap-2 gap-sm-4 mb-0">
-        <li><a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="mailto:zhan.ideas@mail.ru">Email us</a></li>
-        <li><a href="tel:+77012540203">Call us</a></li>
+      <ul class="list-unstyled d-flex flex-column flex-sm-row
+             flex-wrap justify-content-center gap-2 gap-sm-4 mb-0">
+        <li>
+          <a class="link-dark" href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">
+            Instagram
+          </a>
+        </li>
+        <li>
+          <a class="link-dark" href="mailto:zhan.ideas@mail.ru">
+            Email us
+          </a>
+        </li>
+        <li>
+          <a class="link-dark" href="tel:+77012540203">
+            Call us
+          </a>
+        </li>
       </ul>
     </nav>
-    <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
+    <p>&copy; 2026 Instyle.zh2. All rights reserved</p>
   </footer>
 </body>
 

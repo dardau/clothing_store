@@ -12,7 +12,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/readiness.css">
+  <script src="js/main.js" defer></script>
+  <script src="js/catalog.js" defer></script>
   <link rel="stylesheet" href="css/zhansaya.css">
 </head>
 
@@ -28,53 +29,56 @@
     <nav class="navbar navbar-expand-lg py-3" aria-label="Main navigation">
       <div class="container">
         <h1 class="navbar-brand mb-0">
-          <a class="text-dark text-decoration-none" href="index.html">Instyle.zh2</a>
+          <a class="text-dark text-decoration-none" href="index.html">
+            Instyle.zh2
+          </a>
         </h1>
-
         <input type="checkbox" id="navigation-toggle" class="site-nav-toggle visually-hidden d-lg-none"
-          aria-label="Show navigation" aria-controls="main-navigation">
+          aria-label="Show navigation" aria-controls="catalogNavigation">
 
         <label for="navigation-toggle" class="navbar-toggler bg-transparent">
           <span class="navbar-toggler-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Toggle navigation</span>
         </label>
 
-
-        <div class="navbar-collapse site-nav-links" id="main-navigation">
+        <div class="navbar-collapse site-nav-links" id="catalogNavigation">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home</a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link active" href="catalog.html" aria-current="page">Catalog</a>
+              <a class="nav-link active" href="catalog.html" aria-current="page">
+                Catalog
+              </a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="lookbook.html">Lookbook</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="order.html">Order</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="about.html">About Us</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="reviews.html">Reviews</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="contacts.html">Contacts</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="login.html">Login</a>
             </li>
           </ul>
-
-          <div class="d-lg-none border-top pt-3 mt-3">
-            <a class="d-block mb-2 text-dark" href="https://www.instagram.com/instyle.zh2" target="_blank"
-              rel="noopener noreferrer">Instagram</a>
-            <a class="d-block mb-2 text-dark" href="mailto:zhan.ideas@mail.ru">Email us</a>
-            <a class="d-block mb-2 text-dark" href="tel:+77012540203">Call us</a>
-          </div>
         </div>
+
       </div>
     </nav>
   </header>
@@ -170,70 +174,180 @@
           Because the store is small, it's worth double-checking the price, size, and
           current availability of an item before deciding on it — stock can shift
           quickly, and something popular might already be gone by the time you decide.
-          For product advice, you can contact the store. The website pickup-order path is available
-          through each product's Order link and does not require a separate conversation.
+          The simplest way to confirm all of this is to message the store on WhatsApp
+          directly rather than relying only on what's shown here.
         </p>
       </section>
 
       <!-- Bootstrap Cards: adapted to our product photos, prices and sizes.
      Existing figure and figcaption elements are preserved.
      Card widths are controlled by the responsive grid. -->
+      <section id="cart" class="border rounded shadow-sm p-2 p-sm-4 my-4" aria-labelledby="cart-title">
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+          <h3 id="cart-title" class="h4 mb-0">Your cart</h3>
+          <span class="badge text-bg-dark text-wrap">
+            Items: <span id="cart-count">0</span>
+          </span>
+        </div>
+
+        <p id="cart-empty" class="text-body-secondary">
+          Your cart is empty. Browse the products below.
+        </p>
+
+        <ul id="cart-items" class="list-unstyled mb-0"></ul>
+
+        <!-- JavaScript will copy this template for each cart item.
+       Size options will be filtered using the product's data-sizes. -->
+        <template id="cart-item-template">
+          <li class="border-top py-3">
+            <div class="d-flex flex-column flex-sm-row justify-content-between gap-3">
+              <div class="flex-grow-1">
+                <h4 class="h6 cart-item-name"></h4>
+
+                <label class="d-block mb-2">
+                  <span class="small d-block mb-1">Size</span>
+                  <select class="form-select form-select-sm cart-item-size" required>
+                    <option value="" selected>Choose a size</option>
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                    <option value="one-size">One size</option>
+                  </select>
+                  <span class="invalid-feedback">
+                    Choose an available size.
+                  </span>
+                </label>
+
+                <p class="small mb-0">
+                  Unit price:
+                  <span class="cart-item-price"></span> KZT
+                </p>
+              </div>
+
+              <div>
+                <label class="d-block">
+                  <span class="small d-block mb-1">Quantity</span>
+                  <input class="form-control cart-item-quantity" type="number" min="1" step="1" value="1" required>
+                  <span class="invalid-feedback">
+                    Enter a whole number of at least 1.
+                  </span>
+                </label>
+
+                <button class="btn btn-outline-dark btn-sm text-wrap mt-2 cart-item-remove" type="button">
+                  Remove
+                </button>
+              </div>
+            </div>
+
+            <p class="fw-bold mt-3 mb-0">
+              Subtotal:
+              <span class="cart-item-subtotal"></span> KZT
+            </p>
+          </li>
+        </template>
+
+        <div id="cart-summary" class="border-top pt-3 mt-3" hidden>
+          <p class="fw-bold">
+            Total: <span id="cart-total">0</span> KZT
+          </p>
+
+          <div class="d-flex flex-column flex-sm-row gap-2">
+            <a id="cart-checkout" class="btn btn-dark text-wrap" href="order.html#order-form">
+              Proceed to order
+            </a>
+
+            <button id="cart-clear" class="btn btn-outline-dark text-wrap" type="button">
+              Clear cart
+            </button>
+          </div>
+        </div>
+
+        <p id="cart-status" class="small text-body-secondary mt-3 mb-0" role="status"></p>
+
+        <div id="cart-error" class="alert alert-danger mt-3 mb-0" role="alert" hidden></div>
+      </section>
+
       <section id="tops" class="my-5">
         <h3 class="h4 fw-normal border-bottom pb-2 mb-4">Tops</h3>
+
         <ul class="product-grid row g-2 g-md-4 list-unstyled mt-3 mb-5">
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/tops1.jpg"
                 alt="Long-sleeve top paired with a lightweight top made of semi-sheer fabric">
-              <figcaption class="card-body p-2 p-md-3 small">
-                Long-sleeve top paired with a lightweight top made of semi-sheer fabric &mdash; 12.000kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-tops-1" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order layered long-sleeve top">
-                  Order
-                </a>
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
+                Long-sleeve top paired with a lightweight top made of semi-sheer fabric
+                &mdash; 12.000kzt&nbsp;
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-tops-1" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="tops-1" data-product-name="Layered long-sleeve top" data-price="12000"
+                  data-sizes="s,m,l" aria-label="Add to cart: layered long-sleeve top">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/tops2.jpg"
                 alt="Long-sleeve top with ribbons">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Long-sleeve top with ribbons &mdash; 12.500kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-tops-2" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap"
-                  aria-label="Order layered long-sleeve top with ribbons">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-tops-2" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="tops-2" data-product-name="Long-sleeve top with ribbons" data-price="12500"
+                  data-sizes="s,m,l" aria-label="Add to cart: long-sleeve top with ribbons">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/tops3.jpg"
                 alt="Warm sweater in a soft turquoise color">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Warm sweater in a soft turquoise color &mdash; 9.000kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-tops-3" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order turquoise sweater">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-tops-3" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="tops-3" data-product-name="Turquoise sweater" data-price="9000" data-sizes="s,m,l"
+                  aria-label="Add to cart: turquoise sweater">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/tops4.jpg" alt="Denim shirt">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Denim shirt &mdash; 18.000kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-tops-4" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order denim shirt">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-tops-4" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="tops-4" data-product-name="Denim shirt" data-price="18000" data-sizes="s,m,l"
+                  aria-label="Add to cart: denim shirt">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
@@ -242,60 +356,84 @@
 
       <section id="bottoms" class="my-5">
         <h3 class="h4 fw-normal border-bottom pb-2 mb-4">Bottoms</h3>
+
         <ul class="product-grid row g-2 g-md-4 list-unstyled mt-3 mb-5">
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/bottoms1.jpg"
                 alt="Denim bermuda shorts">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Denim bermuda shorts &mdash; 18.000kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-bottoms-1" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order denim bermuda shorts">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-bottoms-1" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="bottoms-1" data-product-name="Denim bermuda shorts" data-price="18000"
+                  data-sizes="s,m,l" aria-label="Add to cart: denim bermuda shorts">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/bottoms2.jpg"
                 alt="Light-colored jeans">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Light-colored jeans &mdash; 20.500kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-bottoms-2" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order light-colored jeans">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-bottoms-2" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="bottoms-2" data-product-name="Light-colored jeans" data-price="20500"
+                  data-sizes="s,m,l" aria-label="Add to cart: light-colored jeans">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/bottoms3.jpg"
                 alt="Oversized joggers with an elastic waistband">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Oversized joggers with an elastic waistband &mdash; 13.000kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-bottoms-3" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order oversized joggers">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-bottoms-3" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="bottoms-3" data-product-name="Oversized joggers" data-price="13000"
+                  data-sizes="s,m,l" aria-label="Add to cart: oversized joggers">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/bottoms4.jpg"
                 alt="White lace skirt">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 White lace skirt &mdash; 12.500kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-bottoms-4" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order white lace skirt">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-bottoms-4" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="bottoms-4" data-product-name="White lace skirt" data-price="12500" data-sizes="s,m,l"
+                  aria-label="Add to cart: white lace skirt">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
@@ -304,63 +442,87 @@
 
       <section id="outerwear" class="my-5">
         <h3 class="h4 fw-normal border-bottom pb-2 mb-4">Outerwear</h3>
+
         <ul class="product-grid row g-2 g-md-4 list-unstyled mt-3 mb-5">
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
-              <span class="badge text-bg-dark position-absolute top-0 end-0 m-2 z-1">New</span>
+              <span class="badge text-bg-dark position-absolute top-0 end-0 m-2 z-1">
+                New
+              </span>
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/outerwear1.jpg"
                 alt="Black jacket made of soft eco-leather">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Black oversized jacket in soft eco-leather &mdash; 42.000&nbsp;&#8376;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-outerwear-1" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap"
-                  aria-label="Order black oversized eco-leather jacket">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-outerwear-1" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="outerwear-1" data-product-name="Black oversized eco-leather jacket"
+                  data-price="42000" data-sizes="s,m,l" aria-label="Add to cart: black oversized eco-leather jacket">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/outerwear2.jpg"
                 alt="Black bomber jacket in soft eco-leather">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Black bomber jacket in soft eco-leather &mdash; 36.000&nbsp;&#8376;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-outerwear-2" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap"
-                  aria-label="Order black eco-leather bomber jacket">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-outerwear-2" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="outerwear-2" data-product-name="Black eco-leather bomber jacket" data-price="36000"
+                  data-sizes="s,m,l" aria-label="Add to cart: black eco-leather bomber jacket">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/outerwear3.jpg"
                 alt="Faux suede jacket with patch pockets">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Faux suede jacket with patch pockets &mdash; 39.500&nbsp;&#8376;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-outerwear-3" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order faux suede jacket">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-outerwear-3" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="outerwear-3" data-product-name="Faux suede jacket" data-price="39500"
+                  data-sizes="s,m,l" aria-label="Add to cart: faux suede jacket">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/outerwear4.jpg"
                 alt="Oversized belted coat">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Oversized belted coat &mdash; 42.000&nbsp;&#8376;
-                <span class="d-block mt-2 small text-body-secondary">Sizes: S · M · L</span>
-                <a id="order-outerwear-4" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order oversized belted coat">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  Sizes: S · M · L
+                </span>
+
+                <button id="add-outerwear-4" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="outerwear-4" data-product-name="Oversized belted coat" data-price="42000"
+                  data-sizes="s,m,l" aria-label="Add to cart: oversized belted coat">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
@@ -369,60 +531,83 @@
 
       <section id="accessories" class="my-5">
         <h3 class="h4 fw-normal border-bottom pb-2 mb-4">Accessories</h3>
+
         <ul class="product-grid row g-2 g-md-4 list-unstyled mt-3 mb-5">
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/access1.jpg" alt="Striped tie">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Striped tie &mdash; 4.000kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">One size</span>
-                <a id="order-accessories-1" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order striped tie">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  One size
+                </span>
+
+                <button id="add-accessories-1" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="accessories-1" data-product-name="Striped tie" data-price="4000"
+                  data-sizes="one-size" aria-label="Add to cart: striped tie">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/access2.jpg"
                 alt="Spacious beige eco-leather bag">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Spacious beige eco-leather bag &mdash; 15.000kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">One size</span>
-                <a id="order-accessories-2" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order beige eco-leather bag">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  One size
+                </span>
+
+                <button id="add-accessories-2" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="accessories-2" data-product-name="Beige eco-leather bag" data-price="15000"
+                  data-sizes="one-size" aria-label="Add to cart: beige eco-leather bag">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/access3.jpg"
                 alt="Stylish pendant with a black stone">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Stylish pendant with a black stone &mdash; 6.500kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">One size</span>
-                <a id="order-accessories-3" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap" aria-label="Order black-stone pendant">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  One size
+                </span>
+
+                <button id="add-accessories-3" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="accessories-3" data-product-name="Black-stone pendant" data-price="6500"
+                  data-sizes="one-size" aria-label="Add to cart: black-stone pendant">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
+
           <li class="product-card col-12 col-sm-6 col-lg-3">
             <figure class="card h-100 mb-0 border-0 shadow-sm overflow-hidden">
               <img class="card-img-top w-100 object-fit-cover rounded-0" src="images/access4.jpg"
                 alt="Small bag made of mixed materials">
-              <figcaption class="card-body p-2 p-md-3 small">
+
+              <figcaption class="card-body d-flex flex-column p-2 p-md-3 small">
                 Small bag made of mixed materials &mdash; 11.000kzt&nbsp;
-                <span class="d-block mt-2 small text-body-secondary">One size</span>
-                <a id="order-accessories-4" href="order.html#order-form"
-                  class="btn btn-outline-dark btn-sm d-block mt-3 text-wrap"
-                  aria-label="Order small mixed-material bag">
-                  Order
-                </a>
+                <span class="d-block mt-2 mb-3 small text-body-secondary">
+                  One size
+                </span>
+
+                <button id="add-accessories-4" type="button" class="btn btn-outline-dark btn-sm w-100 mt-auto text-wrap"
+                  data-product-id="accessories-4" data-product-name="Small mixed-material bag" data-price="11000"
+                  data-sizes="one-size" aria-label="Add to cart: small mixed-material bag">
+                  Add to cart
+                </button>
               </figcaption>
             </figure>
           </li>
@@ -530,9 +715,9 @@
           <ol class="ps-3 ps-sm-4">
             <li>Check the latest photos on the official Instagram <abbr title="official brand account">profile</abbr>.
             </li>
-            <li>Choose a product and size from the catalog.</li>
+            <li>Confirm size and availability via WhatsApp.</li>
             <li>
-              Open the order form, review your summary and total, then use the order status area for the result.
+              Go to the order page to reserve an item.
             </li>
           </ol>
           <p class="mt-3 mb-4">
@@ -579,6 +764,9 @@
       <p class="catalog-back-links d-flex flex-column flex-sm-row
           justify-content-center justify-content-md-start
           gap-3 text-center text-md-start border-top pt-3 mt-4">
+        <a id="view-cart" class="btn btn-outline-dark btn-sm text-wrap" href="#cart">
+          View cart
+        </a>
         <a class="btn btn-outline-secondary btn-sm" href="#categories">
           &uparrow; Back to categories
         </a>
@@ -589,14 +777,26 @@
     </div><!-- End of the catalog content container -->
   </main>
 
-  <footer class="site-footer text-center border-top py-4 px-2 px-sm-4">
-    <p>Address: 5/5 Ryskulov Street, Office 3, Astana &mdash; Phone:
-      <a href="tel:+77012540203">+7 (701) 254 02 03</a></p>
+  <footer class="px-2 px-sm-4">
+    <p>Address: Ryskulov St. 5/5, office 3, Astana &mdash; Phone: <a href="tel:+77012540203">+7 701 254 02 03</a></p>
     <nav aria-label="Contact links" class="my-3">
-      <ul class="list-unstyled d-flex flex-column flex-sm-row flex-wrap justify-content-center gap-2 gap-sm-4 mb-0">
-        <li><a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="mailto:zhan.ideas@mail.ru">Email us</a></li>
-        <li><a href="tel:+77012540203">Call us</a></li>
+      <ul class="list-unstyled d-flex flex-column flex-sm-row
+             flex-wrap justify-content-center gap-2 gap-sm-4 mb-0">
+        <li>
+          <a class="link-dark" href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">
+            Instagram
+          </a>
+        </li>
+        <li>
+          <a class="link-dark" href="mailto:zhan.ideas@mail.ru">
+            Email us
+          </a>
+        </li>
+        <li>
+          <a class="link-dark" href="tel:+77012540203">
+            Call us
+          </a>
+        </li>
       </ul>
     </nav>
     <p>&copy; 2026 Instyle.zh2. All rights reserved.</p>
