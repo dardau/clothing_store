@@ -33,3 +33,82 @@ See [Assignment 4/5 checklist](assignment-4-5-checklist.md) for file and line re
 The `midterm` tag exists. The current branch already contains substantial HTML/CSS changes after that tag. The correction of six locally broken About tags was essential to restore valid page structure and receives no assignment credit. The Order, About and Home changes in this work add only two script references to HTML and no CSS rules. The `assignment-4` and `assignment-5` tags label project snapshots; they do not certify that the remaining pages, freeze history or individual contribution rules are satisfied.
 
 The assignment text forbids AI-generated code. The AI log records assistance in the Order, About and Home implementation; students must review the work and follow the course's authorship rule before using it for submission.
+
+## Lookbook and Reviews JavaScript compliance review (2026-10-22)
+
+Baseline: tag `midterm` (`9c4d016`). The integrated team baseline is `origin/main` at `6a202a3`.
+Only the Lookbook/Reviews feature changes are proposed for this series;
+Catalog, Contacts and Login changes are separate team work.
+
+- Removed this feature's appended rules from `css/alina.css`. The team's
+  committed stylesheet is preserved exactly; it is not reset to midterm.
+- Size panels now use Bootstrap 5 utilities already available through the
+  midterm CDN: absolute positioning, constrained height, scrolling and a white
+  background with opacity. Custom blur and animation are intentionally removed.
+  Close controls and form buttons remain opaque. No inline styles, CSS generation
+  or `element.style` are used.
+- Long review text uses Bootstrap `text-break` / `text-wrap`, without new CSS.
+- Lookbook and Reviews HTML retain the team's HEAD markup and add script tags
+  only. Enabling the Cozy ADD button, removing duplicate review forms/headings,
+  and updating explanatory text happen through DOM operations at startup.
+- The extra closing `</form>` already present in the team's Lookbook source is
+  left untouched: browsers discard it during parsing. A DOM operation cannot
+  remove an unmatched source tag which never becomes a node.
+- Random Look renders through one reusable DOM function. It chooses a separate
+  top and bottom, excludes sets, avoids the previous pair when alternatives
+  exist, validates both sizes inline, and persists both products atomically via
+  `instyle-cart-v1`. Favorites use the existing `instyle-favorites-v1` functions.
+- Reviews and drafts are local to the browser and are not posted to 2GIS.
+  User text is assigned through `textContent`. Availability checks are validation
+  demos only and do not send messages to the shop.
+
+### Existing team differences from midterm (not reverted)
+
+The team's HEAD already changes `css/alina.css`, Lookbook and Reviews layout,
+Catalog markup and Order markup compared with midterm. These historical changes
+are outside this feature cleanup. In particular the committed alina.css rewrite
+and non-script HTML differences remain baseline compliance issues. The review
+also found pre-existing duplicate review forms/IDs and an unmatched Lookbook
+closing form tag. Runtime duplicate removal fixes the live DOM, not raw HTML
+source validation. Historical assignment restrictions are documented separately from the runtime
+feature behavior.
+
+### Manual verification
+
+Serve the project over HTTP and use a single browser origin. In Lookbook choose
+sizes for individual items or an entire look; inspect the cart in Catalog and
+then Order, and reload. Check favorites in Catalog. Generate Random Look twice,
+validate missing sizes, add both items and close with the cross or Escape.
+In Reviews submit invalid and valid values, restore a draft after reload, toggle
+Helpful and delete your own review. Confirm a single live review form and no
+uncaught console errors. Storage failure must not report a successful cart save.
+
+### Verification results for this cleanup
+
+Chrome headless completed 26 interaction assertions: Cozy enabled at runtime,
+size validation and persistence, picker close/Escape and keyboard focus return,
+favorites persistence, both Random Look size errors, complete-look cart save,
+regeneration and Escape, availability field errors, Catalog and Order restore,
+reload counter, duplicate form removal, draft restore, review validation,
+literal user markup, review restore, Helpful and deletion.
+The extended run used same-origin iframe documents with external CDN assets and
+initial images omitted to avoid network waits. It validates JavaScript behavior,
+not responsive appearance or full visual equivalence. A normal-page headless run
+also completed the core cart/reviews flow. Syntax and static compliance checks
+passed; CSS matches team HEAD exactly and feature HTML changes are script tags
+only relative to the pre-existing working copy.
+
+### Feature commit boundaries
+
+1. Shared feature hunks only: five Lookbook products in `main.js`, plus reusable
+   inline validation. Preserve the team's shared navigation/cart prerequisite
+   separately; do not stage all of `main.js` indiscriminately.
+2. `lookbook.js` and the Lookbook script includes: size selection, complete looks,
+   shared favorites/cart, Random Look, size helper and availability validation.
+3. `reviews.js`, Reviews script includes and this documentation: DOM cleanup,
+   local review/draft storage, preview, validation, Helpful and deletion.
+
+The shared favorites and cart navigation prerequisites are already available
+in origin/main (`6a202a3`). This series is based on that version and does not
+repeat team Catalog, Contacts, Login or Order changes. No CSS file belongs in
+this series.
