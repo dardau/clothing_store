@@ -1,78 +1,33 @@
-# Instyle.zh2 — Midterm Project
+# Instyle.zh2 — clothing store demo
 
-The same clothing-store website developed since Assignment 1, for Introduction to Web Technologies.
-The documented boutique is at 5/5 Ryskulov Street, Office 3, Astana; opening hours are 11:00–21:00 daily.
+Open `index.html` through a local web server. The site uses Bootstrap from a CDN and stores the cart in this browser's `localStorage`. It has no backend. Submitting the Order form creates a demonstration summary only; it sends no data and creates no real order or payment.
 
-## Open the website
+## Functionality Plan — Assignments 4 and 5
 
-Open `index.html` in a browser. Bootstrap CSS is loaded from its CDN, so an internet connection is needed.
-No JavaScript, server or database is included. At this stage forms and their result states are prepared;
-submission buttons do not yet generate results. Later JavaScript will update the existing elements.
+Assignment 4 covers data, calculations and validation. Assignment 5 connects those functions to visible controls and updates the DOM. The `assignment-4` and `assignment-5` Git tags must point to reviewed versions of the entire project, not individual pages.
 
-## Page list
+| Responsibility | Assignment 4: logic | Assignment 5: visible behavior | Owner |
+|---|---|---|---|
+| Shared cart | Product data, size checks, cart totals, quantity changes, persistence | Cart badge on every page; add, edit, remove and clear in Catalog | Zhansaya (shared function) |
+| Catalog | Search, category filter and price sort | Search and filter controls, product cards and cart actions | Zhansaya |
+| Account | Registration and sign-in validation | Field feedback and local profile states | Zhansaya |
+| Order | Cart summary, empty state, form validation, date comparison and demo number | Item list, errors, focus, totals, reset and demo confirmation | Dariya |
+| About | Filter store answers by text | Search field, result count, empty result and links | Dariya |
+| Home | Choose a product from the shared array | Product card, size selection and add-to-cart action | Shared page; Dariya implemented this feature |
+| Lookbook and Reviews | Team must identify and document two substantial functions | Team must verify their page actions | Alina — evidence still needed |
 
-| Page | Purpose | Original responsibility |
-|---|---|---|
-| index.html | Home and links to the collection | Shared |
-| catalog.html | Product photos, prices, sizes and order links | Zhansaya |
-| lookbook.html | Styled outfits, favorites area, size chart and product-request form | Alina |
-| order.html | Pickup-order form, summary, total and result areas | Dariya |
-| about.html | Store information, photographs and ordering instructions | Dariya |
-| reviews.html | Customer reviews and ratings | Alina |
-| contacts.html | Address, opening hours, contact links and directions | Zhansaya |
-| login.html | Local visitor registration, sign-in and profile states | Zhansaya |
+The featured product is chosen at random from the shared catalog. It does not imply a discount or stock guarantee. If the array is empty, Home shows an explanatory message. About describes three physical store locations, while this website's demo order path shows pickup at **5/5 Ryskulov Street, Office 3, Astana** only; no delivery is arranged by the site.
 
-All pages have the same main navigation and footer. Bootstrap provides the grid, responsive columns,
-buttons, form controls and alerts. `css/base.css` provides shared design; the personal stylesheets
-contain page corrections. `css/readiness.css` prepares shared states and narrow-screen corrections;
-`css/information.css` handles About and Contacts details.
+## Visitor path
 
-## Three visitor journeys
+1. Choose a product and size on Home or in Catalog.
+2. Open the cart badge to review items, quantities, subtotals and total.
+3. Continue to Order. Empty carts disable submission.
+4. Enter a name, email, matching confirmation email, phone, pickup date, and agreement. The date must be today or later.
+5. Correct any highlighted fields. A valid form shows the items, total and a random `DEMO-` reference. Clear form to prepare another demo summary.
 
-### 1. Find the address and plan a visit
+## Submission evidence and remaining work
 
-- Start: Home (`index.html`).
-- Steps: choose Contacts in the navigation; read Address and opening hours; read Getting here.
-- End: the visitor has the full address and daily opening hours. Open in 2GIS is an optional external map.
+See [Assignment 4/5 checklist](assignment-4-5-checklist.md) for file and line references, observed browser outcomes and unresolved submission gates. See [AI log](ai-log.md) for assistance history. Each student must provide genuine commits across at least three days, with four substantive commits each; Git history must not be fabricated.
 
-### 2. Choose a product and prepare a pickup order
-
-- Start: Catalog (`catalog.html`), or Lookbook (`lookbook.html`).
-- Steps: compare product photographs and prices; use Order to reach `order.html#order-form`;
-  choose the product, size and quantity; enter contact details and an optional pickup date;
-  read the local data notice; review the existing summary and total area; use Submit order.
-- End: the prepared Order status, success and error containers are the destination for the result.
-  The HTML/CSS stage does not react to submission yet, as permitted by the brief.
-  Future JavaScript will prepare the result locally; no staff approval, online payment or server is required.
-  Pickup instructions are already present on the page.
-
-### 3. Prepare a visitor profile and continue shopping
-
-- Start: About (`about.html`).
-- Steps: read about the store; choose Login in the navigation; read the local profile data notice;
-  fill the registration form; use Create account; use the existing Sign in section;
-  continue from the prepared profile panel to Catalog, or use Sign out.
-- End: registration and sign-in status areas, a profile panel and a sign-out button are already built.
-  Future JavaScript will update those states on the same visitor's device; no admin or employee flow exists.
-  At this stage the profile panel is hidden and submission buttons have no behavior.
-
-## JavaScript preparation
-
-- Every form, input, select, textarea and button has a unique lowercase English id.
-- Order: product `data-price` values, summary fields, date/field errors and result containers.
-- Lookbook: product ids, favorite buttons with `aria-pressed`, an empty favorites list,
-  Order links with `data-product`, request fields, errors and summary/result containers.
-- Account: registration/sign-in feedback, field errors, profile fields and sign-out control.
-- Shared states: `hidden`, `active`, `selected`, `error`, `success`, and Bootstrap validation/alert classes.
-- Hidden and empty dynamic containers are deliberate future result destinations, not empty pages.
-
-## Quality checks and submission
-
-See `quality-pass.md` for actual findings, fixes, completed source checks and outstanding team/browser checks.
-See `ai-log.md` for assistance history. Photographs must be confirmed as the team's own work; see `images/README.md`.
-Existing screenshots predate these edits. Capture every final page at phone and desktop width (16 images total).
-
-The repository already has a `midterm` tag at `9c4d016`. These local corrections are newer than that snapshot.
-The tag has not been rewritten. After the real browser/team quality pass and final review, commit the accepted
-version and agree on the correct freeze snapshot before submission. Do not add handwritten HTML/CSS after that freeze.
-Every student must retain their own genuine commits across at least four different days and understand all pages.
+The `midterm` tag exists. The current branch already contains substantial HTML/CSS changes after that tag, so the project's freeze rule needs a team review before either assignment completion tag can truthfully mark a ready version. The changes in this pass add only two script references to HTML and no CSS rules.

@@ -38,7 +38,9 @@ function validateOrder(values, today) {
 
   if (values.badDate) {
     errors.date = 'Enter a complete, valid date.';
-  } else if (values.date !== '') {
+  } else if (values.date === '') {
+    errors.date = 'Choose a pickup date.';
+  } else {
     const date = new Date(values.date + 'T00:00:00');
 
     if (
@@ -63,6 +65,10 @@ const orderSubmit = document.querySelector('#order-submit');
 const pickupDate = document.querySelector('#pickup-date');
 const orderError = document.querySelector('#order-error');
 const orderSuccess = document.querySelector('#order-success');
+
+pickupDate.required = true;
+document.querySelector('label[for="pickup-date"]').textContent =
+  'Desired pickup date*';
 
 // Создаём поле подтверждения email.
 const confirmGroup = document.createElement('p');
@@ -394,7 +400,7 @@ orderForm.addEventListener('reset', () => {
 
 document.querySelector('#order-instructions').textContent =
   'Review your cart and complete the required fields. ' +
-  'The pickup date is optional; choose today or a future date. ' +
+  'Choose today or a future pickup date. ' +
   'Submitting creates a demonstration summary only. ' +
   'No order is sent to the store.';
 
