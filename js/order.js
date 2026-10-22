@@ -158,6 +158,12 @@ function renderOrderSummary() {
     row.querySelector('.order-item-quantity').textContent =
       item.quantity;
 
+    const unitPrice = document.createElement('p');
+    unitPrice.classList.add('small', 'mb-1');
+    unitPrice.textContent =
+      'Unit price: ' + product.price.toLocaleString('en-US') + ' KZT';
+    row.querySelector('.order-item-subtotal').closest('p').before(unitPrice);
+
     row.querySelector('.order-item-subtotal').textContent =
       calculateSubtotal(
         product.price,

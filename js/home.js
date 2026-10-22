@@ -64,6 +64,10 @@ if (homeFeaturedProduct === null) {
 
   addButton.addEventListener('click', () => {
     const latestCart = loadCart(products);
+    if (latestCart.message !== '') {
+      feedback.textContent = latestCart.message + ' Reload the page before adding an item.';
+      return;
+    }
     cart.splice(0, cart.length, ...latestCart.items);
     const previousCart = cart.map((item) => ({ ...item }));
     const result = addToCart(
@@ -76,7 +80,11 @@ if (homeFeaturedProduct === null) {
     }
     updateCartNavigation();
     feedback.replaceChildren();
-    feedback.append(document.createTextNode(result.message + ' '));
+    feedback.append(document.createTextNode(
+      result.success
+        ? homeFeaturedProduct.name + ' (' + sizeSelect.value + ') added to cart. '
+        : result.message + ' '
+    ));
     if (result.success) {
       const viewCart = document.createElement('a');
       viewCart.href = CART_URL;

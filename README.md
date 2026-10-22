@@ -6,15 +6,15 @@ Open `index.html` through a local web server. The site uses Bootstrap from a CDN
 
 Assignment 4 covers data, calculations and validation. Assignment 5 connects those functions to visible controls and updates the DOM. The `assignment-4` and `assignment-5` Git tags must point to reviewed versions of the entire project, not individual pages.
 
-| Responsibility | Assignment 4: logic | Assignment 5: visible behavior | Owner |
-|---|---|---|---|
-| Shared cart | Product data, size checks, cart totals, quantity changes, persistence | Cart badge on every page; add, edit, remove and clear in Catalog | Zhansaya (shared function) |
-| Catalog | Search, category filter and price sort | Search and filter controls, product cards and cart actions | Zhansaya |
-| Account | Registration and sign-in validation | Field feedback and local profile states | Zhansaya |
-| Order | Cart summary, empty state, form validation, date comparison and demo number | Item list, errors, focus, totals, reset and demo confirmation | Dariya |
-| About | Filter store answers by text | Search field, result count, empty result and links | Dariya |
-| Home | Choose a product from the shared array | Product card, size selection and add-to-cart action | Shared page; Dariya implemented this feature |
-| Lookbook and Reviews | Team must identify and document two substantial functions | Team must verify their page actions | Alina — evidence still needed |
+| Page / scope | Visitor goal | Assignment 4 logic and Assignment 5 action | Expected result | Responsible student |
+|---|---|---|---|---|
+| Site-wide cart | Keep chosen products while navigating | Validate sizes, calculate and persist cart; show shared badge | Accurate item count on every page | Zhansaya |
+| Catalog | Find, choose and edit products | Search, category filter, price sort; add, update, remove and clear | Matching count, empty state, accurate totals and checkout path | Zhansaya |
+| Login | Check details before a demo profile | Validate registration and sign-in fields; show password checklist | Specific feedback without claiming real authentication | Zhansaya |
+| Order | Prepare a demo pickup summary | Calculate cart totals, validate six fields and create a random reference; render errors and confirmation | Clear invalid states or itemized demo summary with no-server notice | Dariya |
+| About | Find store and pickup information | Filter answer data; render results, count, reset and links | Relevant answer or useful no-results path | Dariya |
+| Home | Start shopping from a featured item | Choose an item from the common array; select size and add it | Updated cart and direct route to review it | Shared page; Dariya's area |
+| Lookbook and Reviews | Explore looks and submit feedback | Planned feature ownership and implementation need team confirmation | Complete actions on both pages | Alina — pending |
 
 The featured product is chosen at random from the shared catalog. It does not imply a discount or stock guarantee. If the array is empty, Home shows an explanatory message. About describes three physical store locations, while this website's demo order path shows pickup at **5/5 Ryskulov Street, Office 3, Astana** only; no delivery is arranged by the site.
 
@@ -30,4 +30,6 @@ The featured product is chosen at random from the shared catalog. It does not im
 
 See [Assignment 4/5 checklist](assignment-4-5-checklist.md) for file and line references, observed browser outcomes and unresolved submission gates. See [AI log](ai-log.md) for assistance history. Each student must provide genuine commits across at least three days, with four substantive commits each; Git history must not be fabricated.
 
-The `midterm` tag exists. The current branch already contains substantial HTML/CSS changes after that tag, so the project's freeze rule needs a team review before either assignment completion tag can truthfully mark a ready version. The changes in this pass add only two script references to HTML and no CSS rules.
+The `midterm` tag exists. The current branch already contains substantial HTML/CSS changes after that tag. The correction of six locally broken About tags was essential to restore valid page structure and receives no assignment credit. The Order, About and Home changes in this work add only two script references to HTML and no CSS rules. The `assignment-4` and `assignment-5` tags label project snapshots; they do not certify that the remaining pages, freeze history or individual contribution rules are satisfied.
+
+The assignment text forbids AI-generated code. The AI log records assistance in the Order, About and Home implementation; students must review the work and follow the course's authorship rule before using it for submission.

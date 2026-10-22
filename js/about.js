@@ -84,6 +84,11 @@ search.type = 'search';
 search.classList.add('form-control', 'mb-2');
 search.placeholder = 'Try pickup, hours, size or delivery';
 
+const resetSearch = document.createElement('button');
+resetSearch.type = 'button';
+resetSearch.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'mb-2');
+resetSearch.textContent = 'Show all answers';
+
 const count = document.createElement('p');
 count.classList.add('small', 'text-body-secondary');
 count.setAttribute('role', 'status');
@@ -99,7 +104,11 @@ function renderAboutAnswers() {
   if (matches.length === 0) {
     const empty = document.createElement('li');
     empty.classList.add('col-12');
-    empty.textContent = 'No match. Try another word or open Contacts.';
+    empty.append(document.createTextNode('No match. Try another word or '));
+    const contactsLink = document.createElement('a');
+    contactsLink.href = 'contacts.html';
+    contactsLink.textContent = 'open Contacts';
+    empty.append(contactsLink, document.createTextNode('.'));
     results.append(empty);
     return;
   }
@@ -125,6 +134,11 @@ function renderAboutAnswers() {
 }
 
 search.addEventListener('input', renderAboutAnswers);
-guide.append(heading, label, search, count, results);
+resetSearch.addEventListener('click', () => {
+  search.value = '';
+  renderAboutAnswers();
+  search.focus();
+});
+guide.append(heading, label, search, resetSearch, count, results);
 document.querySelector('#store-details').after(guide);
 renderAboutAnswers();
