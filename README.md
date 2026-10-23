@@ -48,12 +48,9 @@ Catalog, Contacts and Login changes are separate team work.
   Close controls and form buttons remain opaque. No inline styles, CSS generation
   or `element.style` are used.
 - Long review text uses Bootstrap `text-break` / `text-wrap`, without new CSS.
-- Lookbook and Reviews HTML retain the team's HEAD markup and add script tags
-  only. Enabling the Cozy ADD button, removing duplicate review forms/headings,
-  and updating explanatory text happen through DOM operations at startup.
-- The extra closing `</form>` already present in the team's Lookbook source is
-  left untouched: browsers discard it during parsing. A DOM operation cannot
-  remove an unmatched source tag which never becomes a node.
+- Lookbook and Reviews retain the team's layout, with the essential source HTML
+  corrections documented below. Enabling the Cozy ADD button and updating
+  explanatory text still happen through DOM operations at startup.
 - Random Look renders through one reusable DOM function. It chooses a separate
   top and bottom, excludes sets, avoids the previous pair when alternatives
   exist, validates both sizes inline, and persists both products atomically via
@@ -69,9 +66,32 @@ Catalog markup and Order markup compared with midterm. These historical changes
 are outside this feature cleanup. In particular the committed alina.css rewrite
 and non-script HTML differences remain baseline compliance issues. The review
 also found pre-existing duplicate review forms/IDs and an unmatched Lookbook
-closing form tag. Runtime duplicate removal fixes the live DOM, not raw HTML
-source validation. Historical assignment restrictions are documented separately from the runtime
+closing form tag; these are now corrected in source as documented below.
+Historical assignment restrictions are documented separately from the runtime
 feature behavior.
+
+### Essential midterm corrections
+
+These are corrections to pre-existing midterm HTML errors, not assessed assignment
+features:
+
+- `reviews.html` contained three identical review forms with duplicate IDs.
+  Kept the first original `review-form` and its heading, removed the two repeated
+  forms and their headings, and retained the deferred `js/reviews.js` include.
+  The script now selects the single `#review-form` directly; only its obsolete
+  duplicate-form/heading removal logic was deleted.
+- `lookbook.html` contained an unmatched `</form>` after the availability section.
+  Removed that extra closing tag. The `availability-form` still closes directly
+  after its result messages, inside its own section; forms are not nested.
+
+Removing duplicates through JavaScript only changes the live DOM after parsing;
+validation of the original HTML still sees repeated IDs. Browsers discard an
+unmatched closing form tag during error recovery, so it never becomes a DOM node
+that JavaScript could remove. Valid source requires editing the HTML itself.
+
+New browser reviews display the saved ISO creation timestamp as local date and
+time. Creation time is assigned only on submission and reused after reload.
+Legacy date-only records retain date-only output, without an invented time.
 
 ### Manual verification
 
@@ -89,14 +109,28 @@ Chrome headless completed 26 interaction assertions: Cozy enabled at runtime,
 size validation and persistence, picker close/Escape and keyboard focus return,
 favorites persistence, both Random Look size errors, complete-look cart save,
 regeneration and Escape, availability field errors, Catalog and Order restore,
-reload counter, duplicate form removal, draft restore, review validation,
+reload counter, runtime duplicate form removal (before the source corrections),
+draft restore, review validation,
 literal user markup, review restore, Helpful and deletion.
 The extended run used same-origin iframe documents with external CDN assets and
 initial images omitted to avoid network waits. It validates JavaScript behavior,
 not responsive appearance or full visual equivalence. A normal-page headless run
 also completed the core cart/reviews flow. Syntax and static compliance checks
-passed; CSS matches team HEAD exactly and feature HTML changes are script tags
-only relative to the pre-existing working copy.
+passed; at the time of that run, CSS matched team HEAD exactly and feature HTML
+changes were script tags only. The subsequent essential source corrections are
+documented above.
+
+### Essential corrections verification (2026-10-23)
+
+Source checks passed for both pages: all IDs are unique, each page has one form,
+and there are no nested forms or unmatched form tags. `node --check js/reviews.js`
+passed. Chrome headless passed 14 assertions, including real form submission,
+stored creation time, date/time display, an actual page reload after a delay,
+legacy date-only records, unchanged original dates, Helpful rerender, runtime
+IDs and availability form ownership. No uncaught JavaScript errors were reported.
+The browser run used a separate test profile and local HTTP server; external CDN
+assets and images were omitted to avoid network waits. This checks behavior and
+form structure, not visual appearance.
 
 ### Feature commit boundaries
 
@@ -105,7 +139,7 @@ only relative to the pre-existing working copy.
    separately; do not stage all of `main.js` indiscriminately.
 2. `lookbook.js` and the Lookbook script includes: size selection, complete looks,
    shared favorites/cart, Random Look, size helper and availability validation.
-3. `reviews.js`, Reviews script includes and this documentation: DOM cleanup,
+3. `reviews.js`, Reviews script includes and this documentation: essential source corrections,
    local review/draft storage, preview, validation, Helpful and deletion.
 
 The shared favorites and cart navigation prerequisites are already available

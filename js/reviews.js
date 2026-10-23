@@ -4,13 +4,7 @@
   const DRAFT = 'instyle-review-draft-v1';
   const VOTES = 'instyle-review-helpful-v1';
   const list = document.querySelector('#review-list');
-  const forms = [...document.querySelectorAll('form[id="review-form"]')];
-  const form = forms[0];
-  forms.slice(1).forEach(duplicate => {
-    const heading = duplicate.previousElementSibling;
-    if (heading?.tagName === 'H3' && heading.textContent.trim() === 'Write a review') heading.remove();
-    duplicate.remove();
-  });
+  const form = document.querySelector('#review-form');
   form.querySelector('#review-note').textContent = 'New reviews are saved only in this browser and are not published on 2GIS.';
   const name = form.querySelector('#review-name');
   const rating = form.querySelector('#review-rating');
@@ -88,6 +82,13 @@
     previewText.textContent = text.value || 'Your review will appear here.';
     if (save) draftStatus.textContent = write(DRAFT, { name: name.value, rating: rating.value, text: text.value }) ? 'Draft saved in this browser.' : 'Draft could not be saved.';
   }
+  function formatReviewDate(date) {
+    const created = new Date(date);
+    // Date-only records have no known creation time; keep their calendar date.
+    return /^\d{4}-\d{2}-\d{2}$/.test(date)
+      ? created.toLocaleDateString('en-GB', { timeZone: 'UTC' })
+      : created.toLocaleString('en-GB');
+  }
   function render() {
     const shown = [...originals, ...own].sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
     list.replaceChildren();
@@ -99,7 +100,7 @@
         const card = document.createElement('article'); card.classList.add('review-text-card', 'rounded-2', 'p-3', 'h-100');
         const heading = document.createElement('h3'); heading.classList.add('text-break'); heading.textContent = review.name;
         const stars = document.createElement('p'); stars.classList.add('review-stars-date', 'small');
-        stars.textContent = '★'.repeat(review.rating) + ' · ' + new Date(review.date).toLocaleDateString('en-GB');
+        stars.textContent = '★'.repeat(review.rating) + ' · ' + formatReviewDate(review.date);
         const body = document.createElement('p'); body.classList.add('small', 'text-break', 'text-wrap'); body.textContent = review.text;
         const badge = document.createElement('p'); badge.classList.add('small', 'text-secondary'); badge.textContent = 'Your review · saved only in this browser';
         card.append(heading, stars, body, badge); column.append(card);
