@@ -1,11 +1,10 @@
 'use strict';
-
-(() => {
-  document.querySelector('#add-set').disabled = false;
+// Полная jQuery 3.7.1 поддерживает эффекты; ready ждёт готовности элементов страницы.
+$(function () {
+  $('#add-set').prop('disabled', false);
   const message = document.querySelector('#cart-message');
   function announce(text) {
-    message.classList.remove('hidden');
-    message.textContent = text;
+    $('#cart-message').removeClass('hidden').text(text);
   }
   // Save a complete candidate first so an outfit is never added partially.
   function commit(selections) {
@@ -30,90 +29,90 @@
     if (text !== undefined) element.textContent = text;
     return element;
   }
-  const panelClosers = new Map();
-  function compactSizePanel(panel, trigger, closePanel) {
-    prepareInlineForm(panel);
-    panel.classList.add('position-absolute', 'top-0', 'start-0', 'w-100',
-      'mh-100', 'overflow-auto', 'bg-white', 'bg-opacity-75', 'border', 'rounded', 'p-2', 'm-0', 'z-3');
-    const header = node('div', ['d-flex', 'align-items-center', 'justify-content-between', 'gap-2', 'small', 'mb-2']);
-    const title = node('span', ['fw-semibold'], 'Select size');
-    title.id = panel.id + '-title';
-    panel.setAttribute('aria-labelledby', title.id);
-    const close = node('button', ['btn', 'btn-light', 'btn-sm', 'position-static', 'flex-shrink-0', 'border', 'border-dark', 'fs-5', 'lh-1'], '\u00d7');
-    close.type = 'button'; close.title = 'Close size selection (Escape)';
-    close.setAttribute('aria-label', 'Close size selection');
-    close.addEventListener('click', closePanel);
-    header.append(title, close); panel.prepend(header);
-    panelClosers.set(panel, { trigger, closePanel });
-  }
-  document.addEventListener('keydown', event => {
-    if (event.key !== 'Escape') return;
-    const visible = [...panelClosers].filter(([panel]) => panel.isConnected && !panel.hidden);
-    if (!visible.length) return;
-    event.preventDefault();
-    // Also handles panels opened together while focus stays on Add entire look.
-    const active = visible.find(([panel, entry]) => panel.contains(document.activeElement) || entry.trigger === document.activeElement) || visible[0];
-    visible.forEach(([panel]) => {
-      panel.hidden = true;
-      panelClosers.get(panel).trigger.setAttribute('aria-expanded', 'false');
-    });
-    active[1].closePanel();
-  });
-  const pickers = new Map();
-  for (const article of document.querySelectorAll('.look-product')) {
-    const add = article.querySelector('button');
-    const product = findProductById(products, 'lookbook-' + add.id.replace('add-', ''));
-    const heart = article.querySelector('.btn-check');
-    const label = article.querySelector('label');
-    heart.remove(); label.replaceWith(createFavoriteButton(product));
-    const panel = document.createElement('form');
-    panel.id = 'picker-' + product.id;
-    panel.hidden = true;
-    const sizeLabel = node('label', ['form-label', 'd-block', 'small', 'mb-1'], 'Size');
-    const size = node('select', ['form-select', 'form-select-sm']);
-    size.id = 'lookbook-size-' + product.id; size.name = size.id; size.required = true;
-    sizeLabel.htmlFor = size.id;
-    size.append(new Option('Choose size', ''));
-    for (const value of product.sizes) size.append(new Option(value, value));
-    size.setAttribute('aria-label', 'Size for ' + product.name);
-    const submit = node('button', ['btn', 'btn-dark', 'btn-sm', 'position-static', 'w-100', 'h-auto', 'mt-2'], 'Add to cart');
-    submit.type = 'submit'; panel.append(sizeLabel, size, submit);
-    add.setAttribute('aria-controls', panel.id);
-    add.setAttribute('aria-expanded', 'false');
-    function open() { panel.hidden = false; add.setAttribute('aria-expanded', 'true'); }
-    function closePanel() {
-      panel.hidden = true;
-      add.setAttribute('aria-expanded', 'false');
-      add.focus({ preventScroll: true });
+
+  // .find(), .append(), .on() заменяют поиск, создание узлов и addEventListener.
+  // Работа с панелью стала понятнее; проверка и доступность требуют прежнего объёма кода.
+  $('.look-product').each(function () {
+    const article = $(this);
+    const add = article.find('button').first();
+    const product = findProductById(products, 'lookbook-' + add.attr('id').replace('add-', ''));
+    article.find('.btn-check').remove();
+    article.find('label').replaceWith(createFavoriteButton(product));
+    const panel = $('<form>').attr({ id: 'picker-' + product.id, novalidate: true })
+      .addClass('position-absolute top-0 start-0 w-100 mh-100 overflow-auto bg-white bg-opacity-75 border rounded p-2 m-0 z-3');
+    const title = $('<span>').attr('id', panel.attr('id') + '-title').addClass('fw-semibold').text('Select size');
+    const close = $('<button>').attr({ type: 'button', 'aria-label': 'Close size selection' })
+      .addClass('btn btn-light btn-sm position-static border border-dark fs-5 lh-1').text('×');
+    panel.attr('aria-labelledby', title.attr('id'));
+    panel.append($('<div>').addClass('d-flex align-items-center justify-content-between gap-2 small mb-2').append(title, close));
+    const size = $('<select>').attr({ id: 'lookbook-size-' + product.id, required: true, 'aria-label': 'Size for ' + product.name })
+      .addClass('form-select form-select-sm').append($('<option>').val('').text('Choose size'));
+    for (const value of product.sizes) size.append($('<option>').val(value).text(value));
+    panel.append($('<label>').attr('for', size.attr('id')).addClass('form-label d-block small mb-1').text('Size'), size,
+      $('<button>').attr('type', 'submit').addClass('btn btn-dark btn-sm position-static w-100 h-auto mt-2').text('Add to cart'));
+    // find ищет контейнер фото, append вставляет панель, end возвращает article.
+    article.find('.look-product-image').append(panel).end().addClass('position-relative');
+    panel.hide();
+    add.attr({ 'aria-controls': panel.attr('id'), 'aria-expanded': 'false' });
+    function validSize() {
+      const valid = product.sizes.includes(size.val());
+      showJqueryError(size, valid ? '' : 'Choose a size.');
+      return valid;
     }
-    compactSizePanel(panel, add, closePanel);
-    add.addEventListener('click', () => {
-      if (panel.hidden) { open(); size.focus({ preventScroll: true }); }
-      else closePanel();
+    function open(focus) {
+      add.attr('aria-expanded', 'true');
+      panel.stop(true, true).fadeIn(200, function () { if (focus !== false) size.trigger('focus'); });
+    }
+    function closePanel() {
+      add.attr('aria-expanded', 'false');
+      panel.stop(true, true).fadeOut(200, function () { add.trigger('focus'); });
+    }
+    add.on('click', function () {
+      if ($(this).attr('aria-expanded') === 'true') closePanel();
+      else open();
     });
-    panel.addEventListener('submit', event => {
+    close.on('click', closePanel);
+    size.on('change', validSize);
+    panel.on('submit', function (event) {
+      // preventDefault отменяет переход/отправку формы: корзина хранится в браузере.
       event.preventDefault();
-      if (validateInlineForm(panel)) commit([[product.id, size.value, 1]]);
+      if (validSize()) commit([[product.id, size.val(), 1]]);
+      else size.trigger('focus');
     });
-    article.querySelector('.look-product-image').append(panel);
-    pickers.set(article, { panel, open, size, product });
-  }
-  for (const section of document.querySelectorAll('.look-section')) {
-    const button = document.createElement('button');
-    button.type = 'button'; button.classList.add('btn', 'btn-outline-dark', 'mt-3');
-    button.textContent = 'Add entire look';
-    section.querySelector('.look-products').append(button);
-    button.addEventListener('click', () => {
-      const selections = [...section.querySelectorAll('.look-product')].map(article => pickers.get(article));
-      selections.forEach(picker => picker.open());
-      const invalid = selections.filter(picker => !validateInlineForm(picker.panel, false));
-      if (invalid.length) {
-        invalid[0].panel.querySelector('[aria-invalid="true"]').focus();
-        return;
-      }
-      commit(selections.map(picker => [picker.product.id, picker.size.value, 1]));
+    article.data('picker', { product: product, open: open, close: closePanel, size: size, valid: validSize });
+  });
+  $(document).on('keydown', function (event) {
+    if (event.key !== 'Escape') return;
+    const opened = $('.look-product button[aria-expanded="true"]');
+    if (!opened.length) return;
+    event.preventDefault();
+    // Сначала закрываем остальные панели, последней — панель с текущим фокусом.
+    let active = opened.first().closest('.look-product');
+    $('.look-product').each(function () {
+      if ($(this).find(':focus').length) active = $(this);
     });
-  }
+    opened.each(function () {
+      const article = $(this).closest('.look-product');
+      if (!article.is(active)) article.data('picker').close();
+    });
+    active.data('picker').close();
+  });
+  $('.look-section').each(function () {
+    const section = $(this);
+    $('<button>').attr('type', 'button').addClass('btn btn-outline-dark mt-3').text('Add entire look')
+      .appendTo(section.find('.look-products')).on('click', function () {
+        const selections = [];
+        let firstInvalid = null;
+        section.find('.look-product').each(function () {
+          const picker = $(this).data('picker');
+          picker.open(false);
+          if (!picker.valid() && !firstInvalid) firstInvalid = picker.size;
+          selections.push([picker.product.id, picker.size.val(), 1]);
+        });
+        if (firstInvalid) firstInvalid.trigger('focus');
+        else commit(selections);
+      });
+  });
   // Random Look uses only existing page/Bootstrap classes and DOM nodes.
   function chooseRandomLook(items, previous = []) {
     const eligible = items.filter(item =>
@@ -232,7 +231,7 @@
   function refreshHearts() {
     const saved = readFavorites(); favoriteIds = saved.ids;
     document.querySelectorAll('.look-product').forEach(article => {
-      const { product } = pickers.get(article);
+      const product = $(article).data('picker').product;
       const button = article.querySelector('[id^="favorite-"]');
       const active = favoriteIds.includes(product.id);
       button.textContent = active ? '♥' : '♡';
@@ -267,54 +266,5 @@
       ? 'Table guide: ' + row.cells[0].textContent + ' — chest ' + row.cells[1].textContent + ' cm, length ' + row.cells[2].textContent + ' cm. Confirm fit with the store.'
       : 'Outside this table. Ask the store for measurements.';
   });
-  const form = document.querySelector('#availability-form');
-  const availabilityResult = document.querySelector('#availability-result');
-  availabilityResult.classList.remove('hidden');
-  availabilityResult.classList.add('d-none');
-  const email = form.querySelector('#customer-email');
-  const phoneGroup = document.createElement('div');
-  phoneGroup.classList.add('mb-3');
-  const phoneLabel = node('label', ['form-label'], 'Your phone'); phoneLabel.htmlFor = 'customer-phone';
-  const phone = node('input', ['form-control']); phone.id = 'customer-phone'; phone.type = 'tel'; phone.autocomplete = 'tel';
-  phoneGroup.append(phoneLabel, phone); email.closest('.row').after(phoneGroup);
-  form.querySelector('#color').maxLength = 60;
-  form.querySelector('#comment').maxLength = 1000;
-  form.querySelector('#item-name').maxLength = 100;
-  const radios = [...form.querySelectorAll('[name="notify"]')];
-  radios[0].required = true;
-  function contactMode() {
-    email.required = radios[0].checked;
-    phone.required = radios[1].checked;
-  }
-  radios.forEach(radio => radio.addEventListener('change', () => {
-    contactMode();
-    email.setCustomValidity('');
-    phone.setCustomValidity('');
-    availabilityResult.classList.add('d-none');
-  }));
-  contactMode();
-  document.querySelector('#availability-note').textContent = 'Demo validation only. No request is sent and availability is not confirmed. Contact the store directly.';
-  document.querySelector('#availability-submit').textContent = 'Check details';
-  prepareInlineForm(form);
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    contactMode();
-    const item = form.querySelector('#item-name');
-    item.setCustomValidity(item.value.trim().length >= 2 && item.value.trim().length <= 100 ? '' : 'Enter an item name of 2–100 characters.');
-    email.value = email.value.trim();
-    phone.setCustomValidity(!phone.required || (/^\+?[\d\s()-]+$/.test(phone.value) && phone.value.replace(/\D/g, '').length >= 10 && phone.value.replace(/\D/g, '').length <= 15) ? '' : 'Enter a phone number with 10–15 digits.');
-    const valid = validateInlineForm(form);
-    const result = document.querySelector('#availability-result');
-    result.classList.toggle('d-none', !valid);
-    result.textContent = valid ? 'Details are valid. Nothing was sent to the store. Please contact the store to check availability.' : '';
-  });
-  form.addEventListener('input', event => {
-    event.target.setCustomValidity('');
-    availabilityResult.classList.add('d-none');
-  });
-  form.addEventListener('reset', () => {
-    form.querySelectorAll('input').forEach(input => input.setCustomValidity(''));
-    availabilityResult.classList.add('d-none');
-    setTimeout(contactMode, 0);
-  });
-})();
+
+});
