@@ -23,3 +23,5 @@
 
 
 | 31.10.2026 | Lookbook / Reviews, помощь OpenAI Codex | Переписать три существующие функции на jQuery 3.7.1, сохранить дизайн и общую корзину, без commit/push | AI реализовал панели размеров, общий createReviewCard и делегирование Helpful/удаления, jQuery-валидацию наличия; сохранил localStorage-ключи, черновик, предпросмотр, Random Look и избранное. Добавлены архив прежнего кода и соответствие требованиям в README. Программные сценарии jsdom с jQuery прошли; синтаксис JS проверен. Реальный браузер, CDN, визуальные эффекты и ширины 375/768/desktop не проверялись. Commit/push и подделка дат не выполнялись. |
+
+| 31.10.2026 | Zhansaya | Explain and complete Assignment 6 only on my Catalog, Contacts and Login pages | AI first changed Order by mistake, then restored Order and moved the implementation to the three pages requested. Rewrote catalog cards/cart/filter interactions, contact-hours/address-copy behavior, and registration/sign-in validation in jQuery; saved the previous three scripts in unlinked `js/old-js-version.js`; added the jQuery CDN includes and README note. No browser runtime/console verification or commits were performed. |

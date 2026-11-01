@@ -26,6 +26,16 @@ The featured product is chosen at random from the shared catalog. It does not im
 4. Enter a name, email, matching confirmation email, phone, pickup date, and agreement. The date must be today or later.
 5. Correct any highlighted fields. A valid form shows the items, total and a random `DEMO-` reference. Clear form to prepare another demo summary.
 
+## Assignment 6 — jQuery on Zhansaya's pages
+
+The Assignment 6 work is scoped to `catalog.html`, `contacts.html` and `login.html`. Each page loads jQuery 3.7.1 before its own scripts. The prior plain-JavaScript versions of these page scripts are preserved in `js/old-js-version.js`; that comparison file is not linked from any page. The Order page and other teammates' pages are unchanged.
+
+Catalog product cards and cart rows are now generated from JavaScript arrays with jQuery `.append()`. Product cards are not written into the HTML, and the old cart `<template>` has been removed. Search, category, sort and favorites filters update the product list; delegated handlers manage size pickers created after their parent.
+
+Contacts updates the store-hours status and adds an address-copy button with a manual-copy fallback. Login validates the registration and sign-in demos field by field, keeps the browser's required/type checks, updates password guidance as the visitor types, and shows local-only success/error feedback. No real account or server submission is created.
+
+The rewritten features use jQuery selectors, traversal, `.on()`, effects, and existing Bootstrap classes; no CSS rules were added. Browser runtime/console verification and Assignment 6 commits remain to be done by the student.
+
 ## Submission evidence and remaining work
 
 See [Assignment 4/5 checklist](assignment-4-5-checklist.md) for file and line references, observed browser outcomes and unresolved submission gates. See [AI log](ai-log.md) for assistance history. Each student must provide genuine commits across at least three days, with four substantive commits each; Git history must not be fabricated.

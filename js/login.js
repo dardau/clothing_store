@@ -1,585 +1,429 @@
 'use strict';
 
-// Требования к паролю.
-const passwordRules = [
-    {
-        text: 'At least 8 characters',
-        pattern: /^[\s\S]{8,}$/
-    },
-    {
-        text: 'An uppercase letter (A–Z)',
-        pattern: /[A-Z]/
-    },
-    {
-        text: 'A lowercase letter (a–z)',
-        pattern: /[a-z]/
-    },
-    {
-        text: 'A number (0–9)',
-        pattern: /[0-9]/
-    },
-    {
-        text: 'A special character, for example ! or @',
-        pattern: /[^A-Za-z0-9\s]/
-    }
-];
+// jQuery 3.7.1 is loaded before this file. Ready wrapper keeps all account-page code in one place.
+$(function () {
+  const passwordRules = [
+    { text: 'At least 8 characters', pattern: /^[\s\S]{8,}$/ },
+    { text: 'An uppercase letter (A–Z)', pattern: /[A-Z]/ },
+    { text: 'A lowercase letter (a–z)', pattern: /[a-z]/ },
+    { text: 'A number (0–9)', pattern: /[0-9]/ },
+    { text: 'A special character, for example ! or @', pattern: /[^A-Za-z0-9\s]/ }
+  ];
 
-// Позже используем эту функцию при отправке формы.
-function isStrongPassword(value) {
+  function isStrongPassword(value) {
     return passwordRules.every((rule) => rule.pattern.test(value));
-}
+  }
 
-// Добавляет кнопку Show / Hide password.
-function addPasswordToggle(input) {
-    const button = document.createElement('button');
+  // The former version used createElement, insertAfter and addEventListener.
+  // These generated buttons now use jQuery creation and .on(); the result is shorter and easier to follow.
+  function addPasswordToggle(id) {
+    const $input = $('#' + id);
+    if (!$input.length) return;
 
-    const fieldName = document.querySelector(
-        'label[for="' + input.id + '"]'
-    ).textContent.trim();
-
-    button.type = 'button';
-
-    button.classList.add(
-        'btn',
-        'btn-outline-secondary',
-        'btn-sm',
-        'mt-2',
-        'text-wrap'
-    );
-
-    button.setAttribute('aria-controls', input.id);
+    const fieldName = $('label[for="' + id + '"]').text().trim();
+    const $button = $('<button>')
+      .attr({ type: 'button', 'aria-controls': id })
+      .addClass('btn btn-outline-secondary btn-sm mt-2 text-wrap')
+      .insertAfter($input);
 
     function updateButton() {
-        const action = input.type === 'password' ? 'Show' : 'Hide';
-
-        button.textContent = action + ' password';
-
-        button.setAttribute(
-            'aria-label',
-            action + ' password: ' + fieldName
-        );
+      const action = $input.prop('type') === 'password' ? 'Show' : 'Hide';
+      $button
+        .text(action + ' password')
+        .attr('aria-label', action + ' password: ' + fieldName);
     }
 
-    button.addEventListener('click', () => {
-        input.type = input.type === 'password' ? 'text' : 'password';
-        updateButton();
+    $button.on('click', function () {
+      const $clicked = $(this);
+      $input.prop('type', $input.prop('type') === 'password' ? 'text' : 'password');
+      $clicked.text($input.prop('type') === 'password' ? 'Show password' : 'Hide password');
+      updateButton();
     });
 
-    // После очистки формы снова скрываем пароль.
-    input.form.addEventListener('reset', () => {
-        input.type = 'password';
+    $input.closest('form').on('reset', function () {
+      window.setTimeout(function () {
+        $input.prop('type', 'password');
         updateButton();
+      }, 0);
     });
 
-    input.after(button);
     updateButton();
-}
+  }
 
-// Добавляет список требований под полем пароля.
-function addPasswordChecklist(input) {
-    const list = document.createElement('ul');
+  $.each(['acc-password', 'acc-password-confirm', 'signin-password'], function (_, id) {
+    addPasswordToggle(id);
+  });
 
-    list.id = input.id + '-checklist';
-    list.classList.add('list-unstyled', 'small', 'mt-2', 'mb-0');
+  // Build the existing size control from code so no new hand-written HTML or CSS is needed.
+  const $oldSize = $('#acc-size');
+  if ($oldSize.length) {
+    const $sizeSelect = $('<select>')
+      .attr({ id: 'acc-size', name: 'acc-size', 'aria-describedby': 'acc-size-error' })
+      .addClass('form-select');
+    $.each(['', 'S', 'M', 'L'], function (_, size) {
+      $sizeSelect.append(
+        $('<option>').val(size).text(size === '' ? 'Choose a size (optional)' : size)
+      );
+    });
+    $oldSize.replaceWith($sizeSelect);
+    $('#acc-size-error').text('Choose S, M or L, or leave the size unselected.');
+  }
 
-    const items = [];
+  const $password = $('#acc-password');
+  if ($password.length) {
+    const checklistId = 'acc-password-checklist';
+    const $checklist = $('<ul>')
+      .attr('id', checklistId)
+      .addClass('list-unstyled small mt-2 mb-0');
 
-    for (const rule of passwordRules) {
-        const item = document.createElement('li');
+    $.each(passwordRules, function () {
+      $checklist.append($('<li>'));
+    });
+    $password.parent().append($checklist);
 
-        list.append(item);
-        items.push({ item, rule });
-    }
-
-    // Связываем поле со списком, сохраняя связь с сообщением ошибки.
-    const description = input.getAttribute('aria-describedby') || '';
-
-    input.setAttribute(
-        'aria-describedby',
-        (description + ' ' + list.id).trim()
-    );
-
-    input.parentElement.append(list);
+    const descriptions = ($password.attr('aria-describedby') || '').split(/\s+/).filter(Boolean);
+    if (!descriptions.includes(checklistId)) descriptions.push(checklistId);
+    $password.attr('aria-describedby', descriptions.join(' '));
 
     function updateChecklist() {
-        for (const { item, rule } of items) {
-            const passed = rule.pattern.test(input.value);
-
-            item.textContent =
-                (passed ? '✓ Met: ' : '○ Needed: ') + rule.text;
-
-            item.classList.toggle('text-success', passed);
-            item.classList.toggle('text-body-secondary', !passed);
-        }
+      $checklist.find('li').each(function (index) {
+        const passed = passwordRules[index].pattern.test(String($password.val() || ''));
+        $(this)
+          .text((passed ? '✓ Met: ' : '○ Needed: ') + passwordRules[index].text)
+          .toggleClass('text-success', passed)
+          .toggleClass('text-body-secondary', !passed);
+      });
     }
 
-    input.addEventListener('input', updateChecklist);
-    input.addEventListener('change', updateChecklist);
-    window.addEventListener('pageshow', updateChecklist);
-
-    input.form.addEventListener('reset', () => {
-        // Ждём, пока браузер очистит поля формы.
-        queueMicrotask(updateChecklist);
+    $password.on('input change', updateChecklist);
+    $(window).on('pageshow', updateChecklist);
+    $password.closest('form').on('reset', function () {
+      window.setTimeout(updateChecklist, 0);
     });
-
     updateChecklist();
-}
+  }
 
-// Кнопки показа для всех трёх полей пароля.
-for (const id of [
-    'acc-password',
-    'acc-password-confirm',
-    'signin-password'
-]) {
-    addPasswordToggle(document.getElementById(id));
-}
+  // Registration checks replace getElementById/value/classList updates with jQuery selectors, .val(), .prop(), .text() and class methods; the field-feedback code is shorter than the previous DOM version.
+  function showAccountFieldError($field, message) {
+    const errorId = $field.attr('id') + '-error';
+    let $feedback = $field.attr('id') === 'acc-agree'
+      ? $field.parent().find('.invalid-feedback').first()
+      : $field.siblings('.invalid-feedback').first();
 
-// Список требований нужен под новым паролем при регистрации.
-addPasswordChecklist(document.getElementById('acc-password'));
-// Возвращает текст ошибки или пустую строку.
-function getRegistrationError(input) {
-    const value = input.value.trim();
+    if (!$feedback.length) {
+      $feedback = $('<span>').attr('id', errorId).addClass('invalid-feedback').insertAfter($field);
+      const describedBy = ($field.attr('aria-describedby') || '').trim();
+      $field.attr('aria-describedby', (describedBy + ' ' + errorId).trim());
+    }
 
-    switch (input.id) {
+    const hasError = message !== '';
+    const value = String($field.val() || '').trim();
+    $feedback.text(message).toggleClass('d-block', hasError);
+    $field
+      .toggleClass('is-invalid', hasError)
+      .toggleClass('is-valid', !hasError && value !== '')
+      .attr('aria-invalid', String(hasError));
+
+    return !hasError;
+  }
+
+  const $registrationForm = $('#registration-form');
+  if ($registrationForm.length) {
+    const $registrationStatus = $('#registration-status');
+    const $registrationError = $('#registration-error').prop('hidden', false).addClass('d-none');
+    const $registrationSuccess = $('#registration-success').prop('hidden', false).addClass('d-none');
+    const registrationIds = [
+      'acc-name', 'acc-email', 'acc-phone', 'acc-password',
+      'acc-password-confirm', 'acc-birthdate', 'acc-size', 'acc-agree'
+    ];
+    const registrationFields = registrationIds.map((id) => $('#' + id));
+    let attemptedRegistration = false;
+    let nativeInvalidBatch = false;
+    let preserveRegistrationSuccess = false;
+
+    $('#registration-note').text(
+      'Front-end demo: use sample details. No data is sent to a server, and no real account is created.'
+    );
+
+    function getRegistrationError($field) {
+      const id = $field.attr('id');
+      const value = String($field.val() || '').trim();
+
+      switch (id) {
         case 'acc-name':
-            return value === '' ? 'Enter your full name.' : '';
-
+          return value === '' ? 'Enter your full name.' : '';
         case 'acc-email':
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-                ? ''
-                : 'Enter a valid email, for example name@example.com.';
-
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+            ? '' : 'Enter a valid email, for example name@example.com.';
         case 'acc-phone': {
-            const digits = value.replace(/\D/g, '');
-
-            return /^\+?[0-9 ()-]+$/.test(value) &&
-                digits.length >= 10 && digits.length <= 15
-                ? ''
-                : 'Enter a phone number containing 10–15 digits.';
+          const digits = value.replace(/\D/g, '');
+          return /^\+?[0-9 ()-]+$/.test(value) && digits.length >= 10 && digits.length <= 15
+            ? '' : 'Enter a phone number containing 10–15 digits.';
         }
-
         case 'acc-password':
-            return isStrongPassword(input.value)
-                ? ''
-                : 'Meet all five password requirements below.';
-
+          return isStrongPassword(String($field.val() || ''))
+            ? '' : 'Meet all five password requirements below.';
         case 'acc-password-confirm':
-            if (input.value === '') return 'Repeat your password.';
-
-            return input.value === document.getElementById('acc-password').value
-                ? ''
-                : 'Passwords must match exactly.';
-
+          if (String($field.val() || '') === '') return 'Repeat your password.';
+          return $field.val() === $password.val() ? '' : 'Passwords must match exactly.';
         case 'acc-birthdate': {
-            if (input.validity.badInput) return 'Enter a valid date.';
-            if (value === '') return '';
-
-            const now = new Date();
-
-            const today = Date.UTC(
-                now.getFullYear(),
-                now.getMonth(),
-                now.getDate()
-            );
-
-            return Number.isFinite(input.valueAsNumber) &&
-                input.valueAsNumber <= today
-                ? ''
-                : 'Choose a date of birth that is not in the future.';
+          if ($field.prop('validity').badInput) return 'Enter a valid date.';
+          if (value === '') return '';
+          const now = new Date();
+          const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+          return Number.isFinite($field.prop('valueAsNumber')) && $field.prop('valueAsNumber') <= today
+            ? '' : 'Choose a date of birth that is not in the future.';
         }
-
         case 'acc-size':
-            return value === '' || ['S', 'M', 'L'].includes(value)
-                ? ''
-                : 'Choose S, M or L, or leave the size unselected.';
-
+          return value === '' || ['S', 'M', 'L'].includes(value)
+            ? '' : 'Choose S, M or L, or leave the size unselected.';
         case 'acc-agree':
-            return input.checked
-                ? ''
-                : 'Confirm your agreement to continue.';
-
+          // .prop('checked') reads the checkbox's current state; .attr('checked') only reads its initial HTML value.
+          return $field.prop('checked') ? '' : 'Confirm your agreement to continue.';
         default:
-            return '';
-    }
-}
-
-// Показывает ошибку рядом с полем.
-function showAccountFieldError(input, message) {
-    const errorId = input.id + '-error';
-    let error = document.getElementById(errorId);
-
-    // У даты рождения пока нет блока ошибки — создаём его.
-    if (error === null) {
-        error = document.createElement('span');
-        error.id = errorId;
-        error.classList.add('invalid-feedback');
-
-        input.after(error);
-
-        const description = input.getAttribute('aria-describedby') || '';
-
-        input.setAttribute(
-            'aria-describedby',
-            (description + ' ' + errorId).trim()
-        );
-    }
-
-    const valid = message === '';
-
-    error.textContent = message;
-
-    input.classList.toggle('is-invalid', !valid);
-    input.classList.toggle('is-valid', valid && input.value !== '');
-
-    input.setAttribute('aria-invalid', String(!valid));
-
-    return valid;
-}
-
-// Подключает поведение формы регистрации.
-function setupRegistration() {
-    const form = document.getElementById('registration-form');
-    const status = document.getElementById('registration-status');
-    const errorBox = document.getElementById('registration-error');
-    const successBox = document.getElementById('registration-success');
-
-    const fields = [
-        'acc-name',
-        'acc-email',
-        'acc-phone',
-        'acc-password',
-        'acc-password-confirm',
-        'acc-birthdate',
-        'acc-size',
-        'acc-agree'
-    ].map((id) => document.getElementById(id));
-
-    let attempted = false;
-
-    // Показываем собственные сообщения вместо всплывающих подсказок браузера.
-    form.noValidate = true;
-
-    document.getElementById('registration-note').textContent =
-        'Front-end demo: use sample details. No data is sent to a server, ' +
-        'and no real account is created.';
-
-    for (const box of [errorBox, successBox]) {
-        box.classList.add('d-none');
-        box.removeAttribute('hidden');
-    }
-
-    function clearResult() {
-        errorBox.classList.add('d-none');
-        successBox.classList.add('d-none');
-
-        errorBox.textContent = '';
-        successBox.textContent = '';
-    }
-
-    form.addEventListener('submit', (event) => {
-        // Останавливаем настоящую отправку формы.
-        event.preventDefault();
-
-        attempted = true;
-        clearResult();
-
-        let firstInvalid = null;
-
-        for (const field of fields) {
-            const valid = showAccountFieldError(
-                field,
-                getRegistrationError(field)
-            );
-
-            if (!valid && firstInvalid === null) {
-                firstInvalid = field;
-            }
-        }
-
-        if (firstInvalid !== null) {
-            status.textContent = 'The form needs corrections.';
-
-            errorBox.textContent =
-                'Correct the marked fields and try again.';
-
-            errorBox.classList.remove('d-none');
-
-            // Переводим курсор в первое неправильное поле.
-            firstInvalid.focus();
-            return;
-        }
-
-        const valueOf = (id) =>
-            document.getElementById(id).value.trim();
-
-        const referral = document.getElementById('acc-referral');
-
-        const contact = form.querySelector(
-            'input[name="acc-contact"]:checked'
-        );
-
-        // В итоговый список пароль не добавляем.
-        const summary = [
-            ['Name', valueOf('acc-name')],
-            ['Email', valueOf('acc-email')],
-            ['Phone', valueOf('acc-phone')],
-            ['Date of birth', valueOf('acc-birthdate') || 'Not provided'],
-            ['Clothing size', valueOf('acc-size') || 'Not provided'],
-            ['Heard about us', referral.selectedOptions[0].textContent],
-            ['Preferred contact', contact.value === 'email' ? 'Email' : 'Phone'],
-            ['Notes', valueOf('acc-notes') || 'None']
-        ];
-
-        const notice = document.createElement('p');
-
-        notice.textContent =
-            'Demo validation passed. No data was sent to a server ' +
-            'and no real account was created.';
-
-        const details = document.createElement('dl');
-        details.classList.add('mb-0');
-
-        for (const [label, value] of summary) {
-            const term = document.createElement('dt');
-            const description = document.createElement('dd');
-
-            term.textContent = label;
-            description.textContent = value;
-
-            details.append(term, description);
-        }
-
-        successBox.append(notice, details);
-        successBox.classList.remove('d-none');
-
-        status.textContent =
-            'Demo validation complete. Review your details below.';
-    });
-
-    // Кнопка и Enter запускают обработчик submit выше.
-    document.getElementById('registration-submit').type = 'submit';
-
-    function handleEdit(event) {
-        // После изменения данных предыдущий результат уже не актуален.
-        if (
-            !successBox.classList.contains('d-none') ||
-            !errorBox.classList.contains('d-none')
-        ) {
-            clearResult();
-
-            status.textContent =
-                'Details changed. Submit again to check the form.';
-        }
-
-        if (
-            fields.includes(event.target) &&
-            (
-                attempted ||
-                event.target.classList.contains('is-invalid') ||
-                event.target.classList.contains('is-valid')
-            )
-        ) {
-            showAccountFieldError(
-                event.target,
-                getRegistrationError(event.target)
-            );
-        }
-
-        // Если изменился первый пароль, заново проверяем его повтор.
-        const confirmation = document.getElementById('acc-password-confirm');
-
-        if (
-            event.target.id === 'acc-password' &&
-            (attempted || confirmation.value !== '')
-        ) {
-            showAccountFieldError(
-                confirmation,
-                getRegistrationError(confirmation)
-            );
-        }
-    }
-
-    form.addEventListener('input', handleEdit);
-    form.addEventListener('change', handleEdit);
-
-    form.addEventListener('reset', () => {
-        attempted = false;
-        clearResult();
-
-        status.textContent = 'The form has been cleared.';
-
-        for (const field of fields) {
-            field.classList.remove('is-valid', 'is-invalid');
-            field.removeAttribute('aria-invalid');
-
-            const error = document.getElementById(field.id + '-error');
-
-            if (error !== null) {
-                error.textContent = '';
-            }
-        }
-    });
-}
-function setupClothingSize() {
-  const oldInput = document.getElementById('acc-size');
-  const select = document.createElement('select');
-
-  // Сохраняем связь с подписью и сообщением ошибки.
-  select.id = oldInput.id;
-  select.name = oldInput.name;
-
-  select.classList.add('form-select');
-  select.setAttribute('aria-describedby', 'acc-size-error');
-
-  for (const size of ['', 'S', 'M', 'L']) {
-    const option = document.createElement('option');
-
-    option.value = size;
-    option.textContent =
-      size === '' ? 'Choose a size (optional)' : size;
-
-    select.append(option);
-  }
-
-  oldInput.replaceWith(select);
-
-  document.getElementById('acc-size-error').textContent =
-    'Choose S, M or L, or leave the size unselected.';
-}
-
-// Сначала создаём новый select, затем подключаем проверку формы.
-setupClothingSize();
-setupRegistration();
-function getSigninError(input) {
-  if (input.id === 'signin-email') {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())
-      ? ''
-      : 'Enter a valid email address.';
-  }
-
-  if (input.id === 'signin-password') {
-    return input.value.trim() === ''
-      ? 'Enter your password.'
-      : '';
-  }
-
-  return '';
-}
-
-function setupSignIn() {
-  const form = document.getElementById('signin-form');
-  const email = document.getElementById('signin-email');
-  const password = document.getElementById('signin-password');
-  const status = document.getElementById('signin-status');
-  const errorBox = document.getElementById('signin-error');
-  const successBox = document.getElementById('signin-success');
-
-  // Здесь ссылки на поля, а не сохранённые пароли.
-  const fields = [email, password];
-
-  let attempted = false;
-  form.noValidate = true;
-
-  document.querySelector('#signin > p').textContent =
-    'Try the sign-in form with sample details.';
-
-  document.getElementById('signin-note').textContent =
-    'Front-end demo: only the email format and password presence are checked. ' +
-    'No data is sent to a server and no user is authenticated.';
-
-  for (const box of [errorBox, successBox]) {
-    box.classList.add('d-none');
-    box.removeAttribute('hidden');
-  }
-
-  status.textContent = 'The demo form has not been checked yet.';
-
-  function clearResult() {
-    errorBox.classList.add('d-none');
-    successBox.classList.add('d-none');
-
-    errorBox.textContent = '';
-    successBox.textContent = '';
-  }
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    attempted = true;
-    clearResult();
-
-    let firstInvalid = null;
-
-    for (const field of fields) {
-      const valid = showAccountFieldError(
-        field,
-        getSigninError(field)
-      );
-
-      if (!valid && firstInvalid === null) {
-        firstInvalid = field;
+          return '';
       }
     }
 
-    if (firstInvalid !== null) {
-      status.textContent = 'The form needs corrections.';
-
-      errorBox.textContent =
-        'Correct the marked fields and try again.';
-
-      errorBox.classList.remove('d-none');
-      firstInvalid.focus();
-      return;
+    function validateRegistration() {
+      let $firstInvalid = $();
+      $.each(registrationFields, function (_, $field) {
+        const valid = showAccountFieldError($field, getRegistrationError($field));
+        if (!valid && !$firstInvalid.length) $firstInvalid = $field;
+      });
+      return $firstInvalid;
     }
 
-    // Показываем только email и сообщение о демонстрации.
-    successBox.textContent =
-      'Demo validation passed for ' + email.value.trim() +
-      '. No data was sent to a server and no user was authenticated.';
-
-    successBox.classList.remove('d-none');
-    status.textContent = 'Demo validation complete.';
-  });
-
-  function handleEdit(event) {
-    if (!fields.includes(event.target)) return;
-
-    if (
-      !successBox.classList.contains('d-none') ||
-      !errorBox.classList.contains('d-none')
-    ) {
-      clearResult();
-
-      status.textContent =
-        'Details changed. Submit again to check the form.';
+    function hideResult($box) {
+      $box.stop(true, true).fadeOut(120, function () {
+        $(this).addClass('d-none');
+      });
     }
 
-    if (attempted) {
-      showAccountFieldError(
-        event.target,
-        getSigninError(event.target)
+    function showResult($box) {
+      // The alert uses an existing Bootstrap class; fadeIn makes validation feedback visible after submit.
+      $box.stop(true, true).prop('hidden', false).removeClass('d-none').hide().fadeIn(180);
+    }
+
+    function clearRegistrationResults() {
+      hideResult($registrationError);
+      hideResult($registrationSuccess);
+    }
+
+    function showNativeInvalidFields() {
+      if (nativeInvalidBatch) return;
+      nativeInvalidBatch = true;
+      attemptedRegistration = true;
+      clearRegistrationResults();
+      const $firstInvalid = validateRegistration();
+      $registrationStatus.text('The form needs corrections.');
+      $registrationError.text('Correct the marked fields and try again.');
+      showResult($registrationError);
+      if ($firstInvalid.length) $firstInvalid.trigger('focus');
+      window.setTimeout(function () { nativeInvalidBatch = false; }, 0);
+    }
+
+    // Keep native required/type checks enabled. Client checks still explain each field; a server must repeat them because browser checks can be bypassed.
+    $registrationForm.find(':input').on('invalid', function (event) {
+      event.preventDefault();
+      showNativeInvalidFields();
+    });
+    $('#registration-submit').prop('type', 'submit');
+
+    $registrationForm.on('submit', function (event) {
+      // Without preventDefault(), action="#" reloads the page instead of showing this local demo result.
+      event.preventDefault();
+      attemptedRegistration = true;
+      clearRegistrationResults();
+      const $firstInvalid = validateRegistration();
+
+      if ($firstInvalid.length) {
+        $registrationStatus.text('The form needs corrections.');
+        $registrationError.text('Correct the marked fields and try again.');
+        showResult($registrationError);
+        $firstInvalid.trigger('focus');
+        return;
+      }
+
+      const contactMethod = $registrationForm.find('input[name="acc-contact"]:checked').val() || 'email';
+      const summary = [
+        ['Name', String($('#acc-name').val() || '').trim()],
+        ['Email', String($('#acc-email').val() || '').trim()],
+        ['Phone', String($('#acc-phone').val() || '').trim()],
+        ['Date of birth', String($('#acc-birthdate').val() || '').trim() || 'Not provided'],
+        ['Clothing size', String($('#acc-size').val() || '').trim() || 'Not provided'],
+        ['Heard about us', $('#acc-referral').find('option:selected').text()],
+        ['Preferred contact', contactMethod === 'email' ? 'Email' : 'Phone'],
+        ['Notes', String($('#acc-notes').val() || '').trim() || 'None']
+      ];
+      const $notice = $('<p>').addClass('mb-3').html(
+        '<strong>Demo validation passed.</strong> No data was sent to a server and no real account was created.'
       );
+      // .html() parses this fixed, trusted label; visitor input is always inserted with .text() so it stays literal text.
+      const $details = $('<dl>').addClass('mb-0');
+      $.each(summary, function (_, pair) {
+        $details.append($('<dt>').text(pair[0]), $('<dd>').text(pair[1]));
+      });
+      $registrationSuccess.empty().append($notice, $details);
+      showResult($registrationSuccess);
+      $registrationStatus.text('Demo validation complete. Review your details below.');
+      preserveRegistrationSuccess = true;
+      $registrationForm.trigger('reset');
+      preserveRegistrationSuccess = false;
+    });
+
+    function handleRegistrationEdit(event) {
+      const $edited = $(this);
+      const id = $edited.attr('id');
+      if (!registrationIds.includes(id)) return;
+
+      if (!$registrationError.hasClass('d-none') || !$registrationSuccess.hasClass('d-none')) {
+        clearRegistrationResults();
+        $registrationStatus.text('Details changed. Submit again to check the form.');
+      }
+
+      if (attemptedRegistration || $edited.hasClass('is-invalid') || $edited.hasClass('is-valid')) {
+        showAccountFieldError($edited, getRegistrationError($edited));
+      }
+      if (id === 'acc-password' && (attemptedRegistration || $('#acc-password-confirm').val() !== '')) {
+        showAccountFieldError($('#acc-password-confirm'), getRegistrationError($('#acc-password-confirm')));
+      }
     }
+
+    $registrationForm.on('input change', ':input', handleRegistrationEdit);
+    $registrationForm.on('reset', function () {
+      const preserveSuccess = preserveRegistrationSuccess;
+      attemptedRegistration = false;
+      nativeInvalidBatch = false;
+      if (!preserveSuccess) {
+        clearRegistrationResults();
+        $registrationStatus.text('The form has been cleared.');
+      } else {
+        hideResult($registrationError);
+      }
+      window.setTimeout(function () {
+        $.each(registrationFields, function (_, $field) {
+          $field.removeClass('is-valid is-invalid').removeAttr('aria-invalid');
+          $field.siblings('.invalid-feedback').text('').removeClass('d-block');
+          if ($field.attr('id') === 'acc-agree') $field.parent().find('.invalid-feedback').text('').removeClass('d-block');
+        });
+        if (!preserveSuccess) $registrationSuccess.empty();
+      }, 0);
+    });
   }
 
-  form.addEventListener('input', handleEdit);
-  form.addEventListener('change', handleEdit);
+  const $signinForm = $('#signin-form');
+  if ($signinForm.length) {
+    const $email = $('#signin-email');
+    const $signinPassword = $('#signin-password');
+    const $signinStatus = $('#signin-status');
+    const $signinError = $('#signin-error').prop('hidden', false).addClass('d-none');
+    const $signinSuccess = $('#signin-success').prop('hidden', false).addClass('d-none');
+    let attemptedSignin = false;
+    let nativeSigninBatch = false;
+    let preserveSigninSuccess = false;
 
-  form.addEventListener('reset', () => {
-    attempted = false;
-    clearResult();
+    $('#signin > p').first().text('Try the sign-in form with sample details.');
+    $('#signin-note').text(
+      'Front-end demo: only the email format and password presence are checked. No data is sent to a server and no user is authenticated.'
+    );
+    $signinStatus.text('The demo form has not been checked yet.');
 
-    status.textContent = 'The form has been cleared.';
-
-    for (const field of fields) {
-      field.classList.remove('is-valid', 'is-invalid');
-      field.removeAttribute('aria-invalid');
-
-      document.getElementById(field.id + '-error').textContent = '';
+    function getSigninError($field) {
+      const value = String($field.val() || '');
+      if ($field.attr('id') === 'signin-email') {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
+          ? '' : 'Enter a valid email address.';
+      }
+      return value.trim() === '' ? 'Enter your password.' : '';
     }
-  });
 
-  document.getElementById('signin-submit').type = 'submit';
-}
+    function validateSignin() {
+      let $firstInvalid = $();
+      [$email, $signinPassword].forEach(function ($field) {
+        const valid = showAccountFieldError($field, getSigninError($field));
+        if (!valid && !$firstInvalid.length) $firstInvalid = $field;
+      });
+      return $firstInvalid;
+    }
 
-setupSignIn();
+    function hideSigninResult($box) {
+      $box.stop(true, true).fadeOut(120, function () { $(this).addClass('d-none'); });
+    }
+    function showSigninResult($box) {
+      $box.stop(true, true).prop('hidden', false).removeClass('d-none').hide().fadeIn(180);
+    }
+    function clearSigninResults() {
+      hideSigninResult($signinError);
+      hideSigninResult($signinSuccess);
+    }
+
+    $signinForm.find(':input').on('invalid', function (event) {
+      event.preventDefault();
+      if (nativeSigninBatch) return;
+      nativeSigninBatch = true;
+      attemptedSignin = true;
+      clearSigninResults();
+      const $firstInvalid = validateSignin();
+      $signinStatus.text('The form needs corrections.');
+      $signinError.text('Correct the marked fields and try again.');
+      showSigninResult($signinError);
+      if ($firstInvalid.length) $firstInvalid.trigger('focus');
+      window.setTimeout(function () { nativeSigninBatch = false; }, 0);
+    });
+
+    $('#signin-submit').prop('type', 'submit');
+    $signinForm.on('submit', function (event) {
+      event.preventDefault();
+      attemptedSignin = true;
+      clearSigninResults();
+      const $firstInvalid = validateSignin();
+      if ($firstInvalid.length) {
+        $signinStatus.text('The form needs corrections.');
+        $signinError.text('Correct the marked fields and try again.');
+        showSigninResult($signinError);
+        $firstInvalid.trigger('focus');
+        return;
+      }
+
+      $signinSuccess.text(
+        'Demo validation passed for ' + String($email.val() || '').trim() +
+        '. No data was sent to a server and no user was authenticated.'
+      );
+      showSigninResult($signinSuccess);
+      $signinStatus.text('Demo validation complete.');
+      preserveSigninSuccess = true;
+      $signinForm.trigger('reset');
+      preserveSigninSuccess = false;
+    });
+
+    $signinForm.on('input change', ':input', function () {
+      const $edited = $(this);
+      if (![$email[0], $signinPassword[0]].includes(this)) return;
+      if (!$signinError.hasClass('d-none') || !$signinSuccess.hasClass('d-none')) {
+        clearSigninResults();
+        $signinStatus.text('Details changed. Submit again to check the form.');
+      }
+      if (attemptedSignin || $edited.hasClass('is-invalid') || $edited.hasClass('is-valid')) {
+        showAccountFieldError($edited, getSigninError($edited));
+      }
+    });
+
+    $signinForm.on('reset', function () {
+      const preserveSuccess = preserveSigninSuccess;
+      attemptedSignin = false;
+      nativeSigninBatch = false;
+      if (!preserveSuccess) {
+        clearSigninResults();
+        $signinStatus.text('The form has been cleared.');
+      } else {
+        hideSigninResult($signinError);
+      }
+      window.setTimeout(function () {
+        $signinForm.find('.is-valid, .is-invalid').removeClass('is-valid is-invalid').removeAttr('aria-invalid');
+        $signinForm.find('.invalid-feedback').text('').removeClass('d-block');
+        if (!preserveSuccess) $signinSuccess.empty();
+      }, 0);
+    });
+  }
+});

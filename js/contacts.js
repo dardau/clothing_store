@@ -1,146 +1,98 @@
 'use strict';
 
-// Проверяем указанное расписание по времени Астаны.
-function getStoreSchedule(date) {
-  const parts = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Asia/Almaty',
-    hour: '2-digit',
-    minute: '2-digit',
-    hourCycle: 'h23'
-  }).formatToParts(date);
+// jQuery 3.7.1 is loaded before this file. This ready wrapper waits until the contact card exists.
+$(function () {
+  const $card = $('.visit-section .card-body').first();
+  const $addressLine = $card.find('.fw-semibold').first();
+  if (!$card.length || !$addressLine.length) return;
 
-  const hour = Number(
-    parts.find((part) => part.type === 'hour').value
-  );
+  // This replaces querySelector, textContent and classList updates. The jQuery chain is longer, but keeps the status styling together.
+  const address = $addressLine.text().replace(/\s+/g, ' ').trim();
+  const $hoursStatus = $('<p>')
+    .addClass('small border rounded p-2 mt-3 mb-0')
+    .attr('role', 'status')
+    .insertAfter($addressLine);
 
-  const minute = Number(
-    parts.find((part) => part.type === 'minute').value
-  );
+  function getStoreSchedule(date) {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Almaty',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23'
+    }).formatToParts(date);
+    const hour = Number(parts.find((part) => part.type === 'hour').value);
+    const minute = Number(parts.find((part) => part.type === 'minute').value);
+    const minutes = hour * 60 + minute;
+    const isOpen = minutes >= 11 * 60 && minutes < 21 * 60;
+    const message = isOpen
+      ? 'According to listed hours: open until 21:00 today.'
+      : minutes < 11 * 60
+        ? 'According to listed hours: closed; opens today at 11:00.'
+        : 'According to listed hours: closed; opens tomorrow at 11:00.';
 
-  const minutes = hour * 60 + minute;
-
-  // С 11:00 включительно до 21:00.
-  const isOpen = minutes >= 11 * 60 && minutes < 21 * 60;
-
-  let message;
-
-  if (isOpen) {
-    message = 'According to listed hours: open until 21:00 today.';
-  } else if (minutes < 11 * 60) {
-    message = 'According to listed hours: closed; opens today at 11:00.';
-  } else {
-    message = 'According to listed hours: closed; opens tomorrow at 11:00.';
+    return { isOpen, message: message + ' Astana time.' };
   }
-
-  return {
-    isOpen,
-    message: message + ' Astana time.'
-  };
-}
-
-function setupContactDetails() {
-  const card = document.querySelector('.visit-section .card-body');
-  const addressLine = card.querySelector('.fw-semibold');
-
-  // Берём адрес из существующей карточки.
-  const address = addressLine.textContent
-    .replace(/\s+/g, ' ')
-    .trim();
-
-  // Создаём сообщение о расписании.
-  const hoursStatus = document.createElement('p');
-
-  hoursStatus.classList.add(
-    'small', 'border', 'rounded', 'p-2', 'mt-3', 'mb-0'
-  );
-
-  hoursStatus.setAttribute('role', 'status');
-  card.append(hoursStatus);
 
   function updateHours() {
     const schedule = getStoreSchedule(new Date());
-
-    if (hoursStatus.textContent !== schedule.message) {
-      hoursStatus.textContent = schedule.message;
-    }
-
-    hoursStatus.classList.toggle('text-success', schedule.isOpen);
-
-    hoursStatus.classList.toggle(
-      'text-body-secondary',
-      !schedule.isOpen
-    );
+    $hoursStatus
+      .text(schedule.message)
+      .toggleClass('text-success', schedule.isOpen)
+      .toggleClass('text-body-secondary', !schedule.isOpen);
   }
 
   updateHours();
-
-  // Обновляем каждую минуту и после возвращения на страницу.
   window.setInterval(updateHours, 60000);
-  window.addEventListener('pageshow', updateHours);
-
-  document.addEventListener('visibilitychange', () => {
+  $(window).on('pageshow', updateHours);
+  $(document).on('visibilitychange', function () {
     if (!document.hidden) updateHours();
   });
 
-  // Создаём кнопку копирования.
-  const copyButton = document.createElement('button');
+  const $copyButton = $('<button>')
+    .attr({ type: 'button', 'aria-controls': 'contact-copy-status' })
+    .addClass('btn btn-outline-dark btn-sm text-wrap')
+    .text('Copy address');
+  const $copyStatus = $('<p>')
+    .attr({ id: 'contact-copy-status', role: 'status' })
+    .addClass('small text-body-secondary mt-2 mb-3');
 
-  copyButton.type = 'button';
-  copyButton.textContent = 'Copy address';
+  $addressLine.removeClass('mb-4').addClass('mb-2').after($copyButton, $copyStatus);
 
-  copyButton.classList.add(
-    'btn', 'btn-outline-dark', 'btn-sm', 'text-wrap'
-  );
-
-  const copyStatus = document.createElement('p');
-
-  copyStatus.classList.add(
-    'small', 'text-body-secondary', 'mt-2', 'mb-3'
-  );
-
-  copyStatus.setAttribute('role', 'status');
-
-  addressLine.classList.replace('mb-4', 'mb-2');
-  addressLine.after(copyButton, copyStatus);
-
-  let manualCopy = null;
-
-  // Запасной вариант, если браузер запрещает автоматическое копирование.
+  let $manualCopy = $();
   function showManualCopy() {
-    if (manualCopy === null) {
-      manualCopy = document.createElement('div');
-      manualCopy.classList.add('mb-3');
+    if (!$manualCopy.length) {
+      const $label = $('<label>')
+        .attr('for', 'contact-address-copy')
+        .addClass('form-label small')
+        .text('Address to copy');
+      const $field = $('<textarea>')
+        .attr({ id: 'contact-address-copy', rows: 3, readonly: true })
+        .addClass('form-control')
+        .val(address);
+      $manualCopy = $('<div>').addClass('mb-3').hide().append($label, $field);
+      $copyStatus.after($manualCopy);
 
-      const label = document.createElement('label');
-
-      label.htmlFor = 'contact-address-copy';
-      label.textContent = 'Address to copy';
-      label.classList.add('form-label', 'small');
-
-      const field = document.createElement('textarea');
-
-      field.id = label.htmlFor;
-      field.classList.add('form-control');
-      field.value = address;
-      field.readOnly = true;
-      field.rows = 3;
-
-      manualCopy.append(label, field);
-      copyStatus.after(manualCopy);
+      // The field exists in the document now; slideDown reveals a manual fallback only when automatic copy is unavailable.
+      $manualCopy.slideDown(180, function () {
+        $field.trigger('focus');
+        $field[0].select();
+      });
     }
 
-    copyStatus.textContent =
-      'Automatic copying is unavailable. Copy the selected address manually.';
-
-    const field = manualCopy.querySelector('textarea');
-
-    field.focus();
-    field.select();
+    showCopyStatus('<strong>Automatic copying is unavailable.</strong> Copy the address below.');
   }
 
-  copyButton.addEventListener('click', async () => {
-    copyButton.disabled = true;
-    copyStatus.textContent = 'Copying address…';
+  function showCopyStatus(trustedMessageHtml) {
+    $copyStatus.stop(true, true).fadeOut(100, function () {
+      // This HTML is a fixed message authored in this script; visitor-provided text is inserted with .text() elsewhere.
+      $copyStatus.html(trustedMessageHtml).fadeIn(160);
+    });
+  }
+
+  $copyButton.on('click', async function () {
+    const $button = $(this);
+    $button.prop('disabled', true);
+    showCopyStatus('Copying address…');
 
     try {
       if (!window.isSecureContext || !navigator.clipboard?.writeText) {
@@ -149,19 +101,18 @@ function setupContactDetails() {
       }
 
       await navigator.clipboard.writeText(address);
+      showCopyStatus('<strong>Address copied.</strong>');
 
-      copyStatus.textContent = 'Address copied.';
-
-      if (manualCopy !== null) {
-        manualCopy.remove();
-        manualCopy = null;
+      if ($manualCopy.length) {
+        $manualCopy.stop(true, true).slideUp(140, function () {
+          $(this).remove();
+          $manualCopy = $();
+        });
       }
     } catch {
       showManualCopy();
     } finally {
-      copyButton.disabled = false;
+      $button.prop('disabled', false);
     }
   });
-}
-
-setupContactDetails();
+});

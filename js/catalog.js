@@ -1,439 +1,246 @@
+// Catalog browsing was rewritten with jQuery from the previous createElement,
+// classList, fragments and per-card addEventListener version. .append() and delegated .on() make generated cards clearer, though the builder is not shorter.
 'use strict';
 
+$(function () {
+const productCategories = ['tops', 'bottoms', 'outerwear', 'accessories'];
+
 function createProductCard(product) {
-    const card = document.createElement('li');
-    card.classList.add('product-card', 'col-12', 'col-sm-6', 'col-lg-3');
+    const $card = $('<li>')
+        .addClass('product-card col-12 col-sm-6 col-lg-3')
+        .attr('data-product-id', product.id);
+    const $figure = $('<figure>').addClass('card h-100 mb-0 border-0 rounded-0');
+    const $media = $('<div>').addClass('position-relative overflow-hidden');
 
-    const figure = document.createElement('figure');
-    figure.classList.add('card', 'h-100', 'mb-0', 'border-0', 'rounded-0');
+    // addClass applies the existing layout classes, attr sets the source/alt text, and prop enables lazy loading.
+    const $image = $('<img>')
+        .addClass('d-block w-100 object-fit-cover')
+        .attr({ src: product.image, alt: product.name })
+        .prop('loading', 'lazy');
 
-    // Фотография и панель размеров поверх неё.
-    const media = document.createElement('div');
-    media.classList.add('position-relative', 'overflow-hidden');
+    const $caption = $('<figcaption>').addClass('pt-2 pb-3');
+    const $details = $('<div>').addClass('d-flex align-items-start gap-2');
+    const $text = $('<div>').addClass('flex-grow-1');
+    const $name = $('<p>').addClass('small mb-1').text(product.name);
+    const $price = $('<p>')
+        .addClass('small mb-0')
+        .text(product.price.toLocaleString('en-US') + ' KZT');
 
-    const image = document.createElement('img');
-    image.classList.add('d-block', 'w-100', 'object-fit-cover');
-    image.src = product.image;
-    image.alt = product.name;
+    const $open = $('<button>')
+        .attr({
+            type: 'button',
+            'data-action': 'open-size',
+            'aria-label': 'Choose size for ' + product.name,
+            'aria-expanded': 'false',
+            'aria-controls': 'sizes-' + product.id
+        })
+        .addClass('btn btn-outline-dark p-2 flex-shrink-0')
+        .text('+');
 
-    const caption = document.createElement('figcaption');
-    caption.classList.add('pt-2', 'pb-3');
+    const $panel = $('<div>')
+        .attr({
+            id: 'sizes-' + product.id,
+            'data-role': 'size-panel',
+            role: 'group',
+            'aria-label': 'Choose size for ' + product.name
+        })
+        .addClass('position-absolute bottom-0 start-0 w-100 mh-100 bg-white border-top shadow-sm p-2 p-sm-3 overflow-auto d-none');
 
-    const details = document.createElement('div');
-    details.classList.add('d-flex', 'align-items-start', 'gap-2');
+    const $panelHeader = $('<div>').addClass('d-flex justify-content-between align-items-center gap-2 flex-shrink-0');
+    const $heading = $('<p>').addClass('small mb-0 fw-semibold text-uppercase').text('Select size');
+    const $close = $('<button>')
+        .attr({ type: 'button', 'data-action': 'close-size', 'aria-label': 'Close size selection' })
+        .addClass('btn btn-light btn-sm rounded-circle px-2 py-1 flex-shrink-0')
+        .text('×');
+    const $sizes = $('<div>').addClass('row g-2 flex-shrink-0');
 
-    const text = document.createElement('div');
-    text.classList.add('flex-grow-1');
-
-    const name = document.createElement('p');
-    name.classList.add('small', 'mb-1');
-    name.textContent = product.name;
-
-    const price = document.createElement('p');
-    price.classList.add('small', 'mb-0');
-    price.textContent = product.price.toLocaleString('en-US') + ' KZT';
-
-    // Плюс открывает размеры.
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.id = 'add-' + product.id;
-    button.classList.add('btn', 'btn-outline-dark', 'p-2', 'flex-shrink-0');
-    button.textContent = '+';
-    button.setAttribute('aria-label', 'Choose size for ' + product.name);
-    button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-controls', 'sizes-' + product.id);
-
-    const panel = document.createElement('div');
-    panel.id = 'sizes-' + product.id;
-    panel.classList.add(
-        'position-absolute', 'top-0', 'start-0', 'w-100', 'h-100',
-        'bg-white', 'border', 'p-2', 'overflow-auto',
-        'flex-column', 'gap-2', 'd-none'
-    );
-    panel.setAttribute('role', 'group');
-    panel.setAttribute('aria-label', 'Choose size for ' + product.name);
-
-    const closeButton = document.createElement('button');
-    closeButton.type = 'button';
-    closeButton.classList.add(
-        'btn', 'btn-outline-dark', 'btn-sm',
-        'align-self-end', 'flex-shrink-0'
-    );
-    closeButton.textContent = '×';
-    closeButton.setAttribute('aria-label', 'Close size selection');
-    panel.append(closeButton);
-
-    const heading = document.createElement('p');
-    heading.classList.add('small', 'mb-1', 'flex-shrink-0');
-    heading.textContent = 'Choose your size';
-    panel.append(heading);
-
-    // Сообщение после добавления.
-    const feedback = document.createElement('p');
-    feedback.classList.add('small', 'mb-0');
-    feedback.setAttribute('role', 'status');
-
-    const viewCart = document.createElement('a');
-    viewCart.href = CART_URL;
-    viewCart.classList.add(
-        'btn', 'btn-outline-dark', 'btn-sm', 'mt-2', 'd-none'
-    );
-    viewCart.textContent = 'View cart';
-
-    function setPickerOpen(isOpen) {
-        panel.classList.toggle('d-none', !isOpen);
-        panel.classList.toggle('d-flex', isOpen);
-        button.setAttribute('aria-expanded', String(isOpen));
-        button.textContent = isOpen ? '−' : '+';
-
-        if (isOpen) {
-            panel.querySelector('[data-size]').focus({ preventScroll: true });
-        } else {
-            button.focus({ preventScroll: true });
-        }
-    }
-
-    // Создаём кнопку для каждого доступного размера.
-    for (const size of product.sizes) {
-        const sizeButton = document.createElement('button');
-        sizeButton.type = 'button';
-        sizeButton.dataset.size = size;
-        sizeButton.classList.add(
-            'btn', 'btn-outline-dark', 'text-start',
-            'text-wrap', 'flex-shrink-0'
-        );
-        sizeButton.textContent = size;
-        sizeButton.setAttribute(
-            'aria-label',
-            'Add ' + product.name + ', size ' + size
-        );
-
-        sizeButton.addEventListener('click', () => {
-            const result = addToCart(products, cart, product.id, size, 1);
-
-            showCartMessage(result.message);
-            feedback.classList.add('mt-2');
-
-            if (!result.success) {
-                feedback.textContent = result.message;
-                return;
-            }
-
-            renderCart();
-
-            const savingError = document.querySelector('#cart-error').textContent;
-
-            feedback.textContent = savingError || (
-                'Added to cart · Size: ' + size +
-                ' · Total items: ' + calculateCartQuantity(cart)
-            );
-
-            viewCart.classList.remove('d-none');
-            setPickerOpen(false);
-        });
-
-        panel.append(sizeButton);
-    }
-
-    button.addEventListener('click', () => {
-        setPickerOpen(button.getAttribute('aria-expanded') === 'false');
+    // [data-size] is an attribute selector used later by the delegated click handler.
+    $.each(product.sizes, function (_, size) {
+        const $sizeButton = $('<button>')
+            .attr({
+                type: 'button',
+                'data-size': size,
+                'aria-label': 'Add ' + product.name + ', size ' + size
+            })
+            .addClass('btn btn-outline-dark w-100 py-2 rounded-0 text-wrap');
+        const $column = $('<div>').addClass(product.sizes.length === 1 ? 'col-12' : 'col-4');
+        $column.append($sizeButton.text(size));
+        $sizes.append($column);
     });
 
-    closeButton.addEventListener('click', () => {
-        setPickerOpen(false);
-    });
+    const $hint = $('<p>').addClass('small text-body-secondary mb-0 flex-shrink-0')
+        .text('Select a size to add it to your cart.');
+    $panelHeader.append($heading, $close);
+    $panel.append($panelHeader, $sizes, $hint);
 
-    // Панель можно закрыть клавишей Escape.
-    panel.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            event.preventDefault();
-            setPickerOpen(false);
-        }
-    });
+    const $feedback = $('<p>').addClass('small mb-0 product-feedback').attr('role', 'status');
+    const $viewCart = $('<a>')
+        .attr('href', CART_URL)
+        .addClass('btn btn-outline-dark btn-sm mt-2 d-none')
+        .text('View cart');
 
-    text.append(name, price);
-    details.append(text, button);
-    caption.append(details, feedback, viewCart);
-    media.append(image, createFavoriteButton(product), panel);
-    figure.append(media, caption);
-    card.append(figure);
-    styleSizePicker(card, product);
-
-    return card;
+    $text.append($name, $price);
+    $details.append($text, $open);
+    $caption.append($details, $feedback, $viewCart);
+    $media.append($image, createFavoriteButton(product), $panel);
+    $figure.append($media, $caption);
+    $card.append($figure);
+    return $card;
 }
 
-function renderProductList(items, listElement) {
-    const fragment = document.createDocumentFragment();
-
+function renderProductList(items, $list) {
+    // Empty the old result, then append each card created from the products array.
+    $list.empty();
     if (items.length === 0) {
-        const message = document.createElement('li');
-        message.classList.add('col-12', 'text-body-secondary');
-        message.textContent = 'No products found.';
-
-        fragment.append(message);
-    } else {
-        for (const product of items) {
-            const card = createProductCard(product);
-            fragment.append(card);
-        }
+        $list.append($('<li>').addClass('col-12 text-body-secondary').text('No products found.'));
+        return 0;
     }
 
-    listElement.replaceChildren(fragment);
-
+    $.each(items, function (_, product) {
+        $list.append(createProductCard(product));
+    });
     return items.length;
 }
 
-// Выводим товары в существующие разделы каталога.
-const productCategories = [
-    'tops',
-    'bottoms',
-    'outerwear',
-    'accessories'
-];
-
-for (const category of productCategories) {
-    const listElement = document.querySelector(
-        '#' + category + ' .product-grid'
-    );
-
-    if (listElement !== null) {
-        const categoryProducts = filterProducts(products, '', category);
-
-        renderProductList(categoryProducts, listElement);
-    }
-}
 function showCartMessage(message) {
-    document.querySelector('#cart-status').textContent = message;
+    $('#cart-status').text(message);
 }
 
 function renderCart() {
-    const list = document.querySelector('#cart-items');
-    const template = document.querySelector('#cart-item-template');
-    const fragment = document.createDocumentFragment();
+    const $list = $('#cart-items').empty();
 
-    for (let index = 0; index < cart.length; index += 1) {
-        const cartItem = cart[index];
+    $.each(cart, function (index, cartItem) {
         const product = findProductById(products, cartItem.productId);
+        const $row = $('<li>')
+            .addClass('border-top py-3')
+            .attr({ 'data-product-id': cartItem.productId, 'data-size': cartItem.size });
+        const $content = $('<div>').addClass('row g-3');
+        const $photoColumn = $('<div>').addClass('col-4 col-md-2');
+        const $photo = $('<img>')
+            .attr({ src: product.image, alt: '' })
+            .addClass('img-fluid w-100 rounded');
+        const $information = $('<div>').addClass('col-8 col-md-6');
+        const $name = $('<h4>').addClass('h6').text(product.name);
+        const $size = $('<p>').addClass('small mb-2').text('Size: ' + cartItem.size);
+        const $price = $('<p>').addClass('small mb-0')
+            .append('Unit price: ', $('<span>').text(product.price.toLocaleString('en-US')), ' KZT');
+        const $actions = $('<div>').addClass('col-12 col-md-4');
+        const $controls = $('<div>')
+            .attr({ role: 'group', 'aria-label': 'Quantity for ' + product.name + ', ' + cartItem.size })
+            .addClass('d-inline-flex align-items-center gap-2');
+        const $minus = $('<button>')
+            .attr({ type: 'button', id: 'cart-minus-' + index, 'data-quantity-change': '-1', 'aria-label': 'Decrease quantity' })
+            .addClass('btn btn-outline-dark btn-sm')
+            .prop('disabled', cartItem.quantity === 1)
+            .text('−');
+        const $count = $('<span>').text(cartItem.quantity);
+        const $plus = $('<button>')
+            .attr({ type: 'button', id: 'cart-plus-' + index, 'data-quantity-change': '1', 'aria-label': 'Increase quantity' })
+            .addClass('btn btn-outline-dark btn-sm')
+            .text('+');
+        const $remove = $('<button>')
+            .attr({ type: 'button', 'aria-label': 'Remove ' + product.name + ' ' + cartItem.size })
+            .addClass('btn btn-outline-dark btn-sm text-wrap mt-2 cart-item-remove')
+            .text('Remove');
+        const subtotal = calculateSubtotal(product.price, cartItem.quantity).toLocaleString('en-US');
+        const $subtotal = $('<p>').addClass('fw-bold mt-3 mb-0')
+            .append('Subtotal: ', $('<span>').text(subtotal), ' KZT');
 
-        const row = template.content.firstElementChild.cloneNode(true);
-        const content = row.firstElementChild;
-        const information = content.firstElementChild;
-        const actions = content.lastElementChild;
-
-        content.classList.remove(
-            'd-flex', 'flex-column', 'flex-sm-row',
-            'justify-content-between', 'gap-3'
-        );
-
-        content.classList.add('row', 'g-3');
-
-        information.classList.remove('flex-grow-1');
-        information.classList.add('col-8', 'col-md-6');
-
-        actions.classList.add('col-12', 'col-md-4');
-
-        const photoColumn = document.createElement('div');
-        photoColumn.classList.add('col-4', 'col-md-2');
-
-        const photo = document.createElement('img');
-        photo.src = product.image;
-        photo.alt = '';
-        photo.classList.add('img-fluid', 'w-100', 'rounded');
-
-        photoColumn.append(photo);
-        content.prepend(photoColumn);
-
-        row.querySelector('.cart-item-name').textContent = product.name;
-
-        row.querySelector('.cart-item-price').textContent =
-            product.price.toLocaleString('en-US');
-
-        row.querySelector('.cart-item-subtotal').textContent =
-            calculateSubtotal(
-                product.price,
-                cartItem.quantity
-            ).toLocaleString('en-US');
-
-        // Размер уже выбран в карточке товара.
-        const sizeText = document.createElement('p');
-        sizeText.classList.add('small', 'mb-2');
-        sizeText.textContent = 'Size: ' + cartItem.size;
-
-        row.querySelector('.cart-item-size')
-            .closest('label')
-            .replaceWith(sizeText);
-
-        // Компактный счётчик вместо поля Quantity.
-        const controls = document.createElement('div');
-        controls.classList.add(
-            'd-inline-flex', 'align-items-center', 'gap-2'
-        );
-        controls.setAttribute('role', 'group');
-        controls.setAttribute(
-            'aria-label',
-            'Quantity for ' + product.name + ', ' + cartItem.size
-        );
-
-        const minus = document.createElement('button');
-        minus.type = 'button';
-        minus.id = 'cart-minus-' + index;
-        minus.classList.add('btn', 'btn-outline-dark', 'btn-sm');
-        minus.textContent = '−';
-        minus.disabled = cartItem.quantity === 1;
-        minus.setAttribute('aria-label', 'Decrease quantity');
-
-        const count = document.createElement('span');
-        count.textContent = cartItem.quantity;
-
-        const plus = document.createElement('button');
-        plus.type = 'button';
-        plus.id = 'cart-plus-' + index;
-        plus.classList.add('btn', 'btn-outline-dark', 'btn-sm');
-        plus.textContent = '+';
-        plus.setAttribute('aria-label', 'Increase quantity');
-
-        function changeQuantity(change) {
-            const quantity = cartItem.quantity + change;
-
-            const result = updateCartQuantity(
-                cart,
-                cartItem.productId,
-                cartItem.size,
-                quantity
-            );
-
-            if (!result.success) {
-                showCartMessage(result.message);
-                return;
-            }
-
-            renderCart();
-
-            showCartMessage(
-                product.name + ', ' + cartItem.size + ': ' + quantity
-            );
-
-            // После перерисовки возвращаем фокус на доступную кнопку.
-            const prefix = change < 0 && quantity > 1
-                ? 'cart-minus-'
-                : 'cart-plus-';
-
-            document.getElementById(prefix + index)
-                .focus({ preventScroll: true });
-        }
-
-        minus.addEventListener('click', () => changeQuantity(-1));
-        plus.addEventListener('click', () => changeQuantity(1));
-
-        controls.append(minus, count, plus);
-
-        row.querySelector('.cart-item-quantity')
-            .closest('label')
-            .replaceWith(controls);
-
-        // Удаление позиции.
-        const removeButton = row.querySelector('.cart-item-remove');
-
-        removeButton.setAttribute(
-            'aria-label',
-            'Remove ' + product.name + ' ' + cartItem.size
-        );
-
-        removeButton.addEventListener('click', () => {
-            const result = removeFromCart(
-                cart,
-                cartItem.productId,
-                cartItem.size
-            );
-
-            renderCart();
-            showCartMessage(result.message);
-            focusCartTitle();
-        });
-
-        fragment.append(row);
-    }
-
-    list.replaceChildren(fragment);
+        $photoColumn.append($photo);
+        $information.append($name, $size, $price);
+        $controls.append($minus, $count, $plus);
+        $actions.append($controls, $('<div>').append($remove));
+        $content.append($photoColumn, $information, $actions);
+        $row.append($content, $subtotal);
+        $list.append($row);
+    });
 
     const isEmpty = cart.length === 0;
+    $('#cart-count').text(calculateCartQuantity(cart));
+    $('#cart-total').text(calculateCartTotal(products, cart).toLocaleString('en-US'));
+    $('#cart-empty').toggleClass('d-none', !isEmpty);
+    $('#cart-summary').prop('hidden', false).toggleClass('d-none', isEmpty);
 
-    document.querySelector('#cart-count').textContent =
-        calculateCartQuantity(cart);
-
-    document.querySelector('#cart-total').textContent =
-        calculateCartTotal(products, cart).toLocaleString('en-US');
-
-    document.querySelector('#cart-empty')
-        .classList.toggle('d-none', !isEmpty);
-
-    const summary = document.querySelector('#cart-summary');
-    summary.removeAttribute('hidden');
-    summary.classList.toggle('d-none', isEmpty);
-
-    const allSizesSelected = cart.every((item) => {
+    const allSizesSelected = cart.every(function (item) {
         const product = findProductById(products, item.productId);
         return product.sizes.includes(item.size);
     });
-
     const isSaved = saveCart(cart);
-
-    const storageError = document.querySelector('#cart-error');
-
-    storageError.removeAttribute('hidden');
-    storageError.classList.toggle('d-none', isSaved);
-
-    storageError.textContent = isSaved
-        ? ''
-        : 'Your cart could not be saved in this browser. Checkout is unavailable.';
+    $('#cart-error')
+        .prop('hidden', false)
+        .toggleClass('d-none', isSaved)
+        .text(isSaved ? '' : 'Your cart could not be saved in this browser. Checkout is unavailable.');
 
     setCheckoutAvailable(!isEmpty && allSizesSelected && isSaved);
     updateCartNavigation();
 }
 
-function setCheckoutAvailable(available) {
-    const checkout = document.querySelector('#cart-checkout');
+// Delegated handlers keep quantity and remove controls working after each array-based redraw.
+$('#cart-items').on('click', 'button[data-quantity-change]', function () {
+    const $button = $(this);
+    const $row = $button.closest('li[data-product-id]');
+    const productId = $row.attr('data-product-id');
+    const size = $row.attr('data-size');
+    const item = cart.find((entry) => entry.productId === productId && entry.size === size);
+    if (!item) return;
 
-    checkout.classList.toggle('disabled', !available);
-    checkout.setAttribute('aria-disabled', String(!available));
-
-    if (available) {
-        checkout.removeAttribute('tabindex');
-    } else {
-        checkout.setAttribute('tabindex', '-1');
+    const change = Number($button.attr('data-quantity-change'));
+    const quantity = item.quantity + change;
+    const result = updateCartQuantity(cart, productId, size, quantity);
+    if (!result.success) {
+        showCartMessage(result.message);
+        return;
     }
-}
 
-function focusCartTitle() {
-    const title = document.querySelector('#cart-title');
-    title.setAttribute('tabindex', '-1');
-    title.focus();
-}
+    const product = findProductById(products, productId);
+    const index = $row.index();
+    renderCart();
+    showCartMessage(product.name + ', ' + size + ': ' + quantity);
 
-document.querySelector('#cart-clear').addEventListener('click', () => {
-    const result = clearCart(cart);
+    const focusId = change < 0 && quantity > 1 ? 'cart-minus-' : 'cart-plus-';
+    $('#' + focusId + index).trigger('focus');
+});
 
+$('#cart-items').on('click', '.cart-item-remove', function () {
+    const $row = $(this).closest('li[data-product-id]');
+    const result = removeFromCart(cart, $row.attr('data-product-id'), $row.attr('data-size'));
     renderCart();
     showCartMessage(result.message);
     focusCartTitle();
 });
 
-document.querySelector('#cart-checkout').addEventListener('click', (event) => {
-    const checkout = event.currentTarget;
+function setCheckoutAvailable(available) {
+    const $checkout = $('#cart-checkout');
+    $checkout
+        .toggleClass('disabled', !available)
+        .attr('aria-disabled', String(!available));
+    if (available) $checkout.removeAttr('tabindex');
+    else $checkout.attr('tabindex', '-1');
+}
 
-    if (checkout.getAttribute('aria-disabled') === 'true') {
+function focusCartTitle() {
+    $('#cart-title').attr('tabindex', '-1').trigger('focus');
+}
+
+$('#cart-clear').on('click', function () {
+    const result = clearCart(cart);
+    renderCart();
+    showCartMessage(result.message);
+    focusCartTitle();
+});
+
+$('#cart-checkout').on('click', function (event) {
+    if ($(this).attr('aria-disabled') === 'true') {
         event.preventDefault();
         showCartMessage('Add products and select their sizes before ordering.');
     }
 });
 
-// Пояснение для посетителя.
-const sizeHint = document.createElement('p');
-sizeHint.classList.add('small', 'text-body-secondary', 'mb-3');
-sizeHint.textContent =
-    'Sizes are chosen in the catalog. Use − and + to change quantities.';
-
-document.querySelector('#cart-items').before(sizeHint);
+// Keep the cart hint in JavaScript; the list content itself is generated from the cart array.
+$('<p>')
+    .addClass('small text-body-secondary mb-3')
+    .text('Sizes are chosen in the catalog. Use − and + to change quantities.')
+    .insertBefore('#cart-items');
 
 // Начальное состояние корзины.
 renderCart();
@@ -441,39 +248,27 @@ if (loadedCart.message !== '') {
     showCartMessage(loadedCart.message);
 }
 function configureCartView() {
-    const cartSection = document.querySelector('#cart');
-
-    // В обычном каталоге полную корзину не показываем.
+    const $cartSection = $('#cart');
     if (!isCartView) {
-        cartSection.classList.add('d-none');
+        $cartSection.addClass('d-none');
         return;
     }
 
     document.title = 'Shopping cart — Instyle.zh2';
+    const $page = $('<div>').addClass('container py-4');
+    const $back = $('<a>')
+        .attr('href', 'catalog.html')
+        .addClass('btn btn-outline-dark text-wrap')
+        .text('← Continue shopping');
+    const $title = $('<h2>')
+        .attr({ id: 'cart-title', tabindex: '-1' })
+        .addClass('h3 mb-0')
+        .text('Your shopping cart');
 
-    const page = document.createElement('div');
-    page.classList.add('container', 'py-4');
-
-    const back = document.createElement('a');
-    back.href = 'catalog.html';
-    back.classList.add('btn', 'btn-outline-dark', 'text-wrap');
-    back.textContent = '← Continue shopping';
-
-    const oldTitle = document.querySelector('#cart-title');
-
-    const title = document.createElement('h2');
-    title.id = 'cart-title';
-    title.classList.add('h3', 'mb-0');
-    title.textContent = 'Your shopping cart';
-
-    oldTitle.replaceWith(title);
-
-    document.querySelector('#cart-empty').textContent =
-        'Your cart is empty. Choose Continue shopping to add products.';
-
-    // Переносим существующую корзину в отдельный экран.
-    page.append(back, cartSection);
-    document.querySelector('main').replaceChildren(page);
+    $('#cart-title').replaceWith($title);
+    $('#cart-empty').text('Your cart is empty. Choose Continue shopping to add products.');
+    $page.append($back, $cartSection);
+    $('main').empty().append($page);
 }
 
 // Загружаем актуальное содержимое после возвращения на страницу.
@@ -491,300 +286,230 @@ function refreshCatalogCart() {
 
 configureCartView();
 
-window.addEventListener('pageshow', (event) => {
-    if (event.persisted) {
+$(window).on('pageshow', (event) => {
+    if (event.originalEvent && event.originalEvent.persisted) {
         refreshCatalogCart();
     }
 });
 
-window.addEventListener('storage', (event) => {
-    if (event.key === 'instyle-cart-v1' || event.key === null) {
+$(window).on('storage', (event) => {
+    const storageEvent = event.originalEvent;
+    if (storageEvent && (storageEvent.key === 'instyle-cart-v1' || storageEvent.key === null)) {
         refreshCatalogCart();
     }
 });
 function setupCatalogControls() {
-    // На отдельном экране корзины поиск не нужен.
+    // The full cart view has its own list; catalog filters belong to the product page.
     if (isCartView) return;
 
-    const firstCategory = document.querySelector('#tops');
+    const $firstCategory = $('#tops');
+    if (!$firstCategory.length) return;
 
-    const section = document.createElement('section');
-    section.id = 'catalog-products';
-    section.classList.add('my-5');
-    section.setAttribute('aria-labelledby', 'catalog-products-title');
+    const $section = $('<section>')
+        .attr({ id: 'catalog-products', 'aria-labelledby': 'catalog-products-title' })
+        .addClass('my-5');
+    const $heading = $('<h2>')
+        .attr('id', 'catalog-products-title')
+        .addClass('h3 mb-4')
+        .prop('tabIndex', -1)
+        .text('Shop the collection');
+    const $form = $('<form>')
+        .attr({ id: 'catalog-search-form', role: 'search', 'aria-label': 'Find products' })
+        .addClass('row g-3 mb-3');
 
-    const heading = document.createElement('h2');
-    heading.id = 'catalog-products-title';
-    heading.classList.add('h3', 'mb-4');
-    heading.textContent = 'Shop the collection';
-    heading.tabIndex = -1;
-
-    const form = document.createElement('form');
-    form.classList.add('row', 'g-3', 'mb-3');
-    form.setAttribute('role', 'search');
-    form.setAttribute('aria-label', 'Find products');
-
-    // Создаёт поле вместе с подписью и колонкой Bootstrap.
     function createControl(tag, id, labelText, columns) {
-        const group = document.createElement('div');
-        group.classList.add(...columns);
-
-        const label = document.createElement('label');
-        label.htmlFor = id;
-        label.classList.add('form-label');
-        label.textContent = labelText;
-
-        const control = document.createElement(tag);
-        control.id = id;
-
-        control.classList.add(
-            tag === 'input' ? 'form-control' : 'form-select'
-        );
-
-        group.append(label, control);
-        form.append(group);
-
-        return control;
+        const $group = $('<div>').addClass(columns.join(' '));
+        const $label = $('<label>').attr('for', id).addClass('form-label').text(labelText);
+        const $control = $('<' + tag + '>')
+            .attr('id', id)
+            .addClass(tag === 'input' ? 'form-control' : 'form-select');
+        $group.append($label, $control);
+        $form.append($group);
+        return $control;
     }
 
-    // Добавляет варианты в выпадающий список.
-    function addOptions(select, options) {
-        for (const [value, text] of options) {
-            const option = document.createElement('option');
-            option.value = value;
-            option.textContent = text;
-            select.append(option);
-        }
+    function addOptions($select, options) {
+        $.each(options, function (_, option) {
+            $select.append($('<option>').val(option[0]).text(option[1]));
+        });
     }
 
-    const search = createControl(
-        'input',
-        'catalog-search',
-        'Search by name',
-        ['col-12', 'col-md-6']
-    );
-
-    search.type = 'search';
-    search.placeholder = 'For example: jacket';
-
-    const category = createControl(
-        'select',
-        'catalog-category',
-        'Category',
-        ['col-12', 'col-sm-6', 'col-md-3']
-    );
-
-    addOptions(category, [
-        ['all', 'All categories'],
-        ['tops', 'Tops'],
-        ['bottoms', 'Bottoms'],
-        ['outerwear', 'Outerwear'],
-        ['accessories', 'Accessories']
+    const $search = createControl('input', 'catalog-search', 'Search by name', ['col-12', 'col-md-6'])
+        .attr({ type: 'search', placeholder: 'For example: jacket', autocomplete: 'off' });
+    const $category = createControl('select', 'catalog-category', 'Category', ['col-12', 'col-sm-6', 'col-md-3']);
+    addOptions($category, [
+        ['all', 'All categories'], ['tops', 'Tops'], ['bottoms', 'Bottoms'],
+        ['outerwear', 'Outerwear'], ['accessories', 'Accessories']
     ]);
-
-    const sort = createControl(
-        'select',
-        'catalog-sort',
-        'Sort by',
-        ['col-12', 'col-sm-6', 'col-md-3']
-    );
-
-    addOptions(sort, [
-        ['default', 'Default order'],
-        ['price-asc', 'Price: low to high'],
+    const $sort = createControl('select', 'catalog-sort', 'Sort by', ['col-12', 'col-sm-6', 'col-md-3']);
+    addOptions($sort, [
+        ['default', 'Default order'], ['price-asc', 'Price: low to high'],
         ['price-desc', 'Price: high to low']
     ]);
 
-    const toolbar = document.createElement('div');
-    toolbar.classList.add(
-        'd-flex', 'flex-wrap', 'align-items-center',
-        'justify-content-between', 'gap-2', 'mb-3'
-    );
+    const $toolbar = $('<div>').addClass('d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3');
+    const $count = $('<p>').attr({ role: 'status', 'aria-atomic': 'true' })
+        .addClass('small text-body-secondary mb-0');
+    const $favoriteGroup = $('<div>').addClass('form-check mb-0');
+    const $favoriteInput = $('<input>')
+        .attr({ type: 'checkbox', id: 'favorites-only', 'aria-label': 'Show only saved products' })
+        .addClass('form-check-input');
+    const $favoriteLabel = $('<label>').attr('for', 'favorites-only').addClass('form-check-label');
+    const $favoriteMessage = $('<p>').attr('role', 'status')
+        .addClass('small text-body-secondary mb-3 d-none');
+    const $reset = $('<button>').attr('type', 'button')
+        .addClass('btn btn-outline-dark btn-sm text-wrap')
+        .text('Reset filters');
+    const $results = $('<ul>').addClass('product-grid row g-2 g-md-4 list-unstyled mb-5');
 
-    const count = document.createElement('p');
-    count.classList.add('small', 'text-body-secondary', 'mb-0');
-    count.setAttribute('role', 'status');
-    count.setAttribute('aria-atomic', 'true');
+    $favoriteGroup.append($favoriteInput, $favoriteLabel);
+    $toolbar.append($count, $favoriteGroup, $reset);
+    $section.append($heading, $form, $toolbar, $favoriteMessage, $results);
+    $firstCategory.before($section);
 
-    const reset = document.createElement('button');
-    reset.type = 'button';
-    reset.classList.add(
-        'btn', 'btn-outline-dark', 'btn-sm', 'text-wrap'
-    );
-    reset.textContent = 'Reset filters';
+    // Existing category lists are emptied and hidden; the cards now come only from the JavaScript array.
+    $.each(productCategories, function (_, categoryName) {
+        const $oldSection = $('#' + categoryName);
+        $oldSection.find('.product-grid').empty();
+        $oldSection.addClass('d-none');
+    });
 
-    const results = document.createElement('ul');
-    results.classList.add(
-        'product-grid', 'row', 'g-2',
-        'g-md-4', 'list-unstyled', 'mb-5'
-    );
-
-    const favoritesFilter = createFavoritesFilter(updateResults);
-
-    toolbar.append(count, favoritesFilter.group, reset);
-
-    section.append(
-        heading,
-        form,
-        toolbar,
-        favoritesFilter.message,
-        results
-    );
-
-    firstCategory.before(section);
-
-    // Заменяем старые списки одним общим списком результатов.
-    for (const categoryName of productCategories) {
-        const oldSection = document.getElementById(categoryName);
-
-        oldSection.querySelector('.product-grid').replaceChildren();
-        oldSection.classList.add('d-none');
+    function updateFavoritesLabel() {
+        $favoriteLabel.text('Only favorites (' + favoriteIds.length + ')');
+        $favoriteMessage
+            .text(favoritesMessage)
+            .toggleClass('d-none', favoritesMessage === '');
     }
 
     function updateResults() {
-        // Выбираем, среди каких товаров искать.
-        const source = favoritesFilter.input.checked
+        const onlyFavorites = $favoriteInput.prop('checked');
+        const source = onlyFavorites
             ? products.filter((product) => favoriteIds.includes(product.id))
             : products;
+        const filtered = filterProducts(source, String($search.val() || '').trim(), $category.val());
+        const sorted = sortProducts(filtered, $sort.val());
+        const amount = renderProductList(sorted, $results);
 
-        const filtered = filterProducts(
-            source,
-            search.value,
-            category.value
-        );
-
-        const sorted = sortProducts(filtered, sort.value);
-        const amount = renderProductList(sorted, results);
-
-        count.textContent =
+        $count.text(
             'Showing ' + amount + ' of ' + source.length +
-            (favoritesFilter.input.checked
-                ? ' saved products'
-                : ' products');
-
-        if (amount === 0) {
-            count.textContent +=
-                favoritesFilter.input.checked && favoriteIds.length === 0
+            (onlyFavorites ? ' saved products' : ' products') +
+            (amount === 0
+                ? onlyFavorites && favoriteIds.length === 0
                     ? '. Turn off Only favorites and use ♡ to save products.'
-                    : '. Change your search or reset the filters.';
-        }
-
-        favoritesFilter.update();
+                    : '. Change your search or reset the filters.'
+                : '')
+        );
+        updateFavoritesLabel();
     }
 
-    search.addEventListener('input', updateResults);
-    category.addEventListener('change', updateResults);
-    sort.addEventListener('change', updateResults);
+    // Delegation catches size controls in cards appended after this parent was created.
+    $section.on('click', 'button[data-action=\"open-size\"]', function () {
+        const $button = $(this);
+        const $panel = $button.closest('figure').find('[data-role=\"size-panel\"]');
+        $panel.removeClass('d-none').hide().stop(true, true).slideDown(180, function () {
+            $button.attr('aria-expanded', 'true').text('−');
+            $panel.find('[data-size]:first').trigger('focus');
+        });
+    });
 
-    // Enter применяет поиск без перезагрузки страницы.
-    form.addEventListener('submit', (event) => {
+    $section.on('click', 'button[data-action=\"close-size\"]', function () {
+        const $button = $(this);
+        const $panel = $button.closest('[data-role=\"size-panel\"]');
+        const $openButton = $button.closest('figure').find('button[data-action=\"open-size\"]');
+        $panel.stop(true, true).slideUp(180, function () {
+            $(this).addClass('d-none');
+            $openButton.attr('aria-expanded', 'false').text('+').trigger('focus');
+        });
+    });
+
+    $section.on('click', 'button[data-size]', function () {
+        const $button = $(this);
+        const $card = $button.closest('li.product-card');
+        const productId = $card.attr('data-product-id');
+        const size = $button.attr('data-size');
+        const result = addToCart(products, cart, productId, size, 1);
+        const $feedback = $card.find('.product-feedback').first();
+
+        showCartMessage(result.message);
+        if (!result.success) {
+            $feedback.text(result.message).addClass('mt-2');
+            return;
+        }
+
+        renderCart();
+        const savingError = $('#cart-error').text();
+        $feedback
+            .text(savingError || ('Added to cart · Size: ' + size + ' · Total items: ' + calculateCartQuantity(cart)))
+            .addClass('mt-2');
+        $card.find('a[href=\"' + CART_URL + '\"]').removeClass('d-none');
+
+        const $panel = $button.closest('[data-role=\"size-panel\"]');
+        $panel.stop(true, true).slideUp(180, function () {
+            $(this).addClass('d-none');
+            $card.find('button[data-action=\"open-size\"]').attr('aria-expanded', 'false').text('+').trigger('focus');
+        });
+    });
+
+    $section.on('keydown', '[data-role=\"size-panel\"]', function (event) {
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            $(this).find('button[data-action=\"close-size\"]').trigger('click');
+        }
+    });
+
+    $form.on('input', 'input', updateResults);
+    $form.on('change', 'select', updateResults);
+    $favoriteInput.on('change', function () {
+        favoritesMessage = '';
+        updateResults();
+    });
+    $form.on('submit', function (event) {
+        // Without preventDefault(), the search form submits to # and reloads the page.
         event.preventDefault();
         updateResults();
     });
 
-    reset.addEventListener('click', () => {
-        search.value = '';
-        category.value = 'all';
-        sort.value = 'default';
-
-        favoritesFilter.input.checked = false;
+    $reset.on('click', function () {
+        $search.val('');
+        $category.val('all');
+        $sort.val('default');
+        $favoriteInput.prop('checked', false);
         favoritesMessage = '';
-
         updateResults();
-        search.focus();
+        $search.trigger('focus');
     });
 
-    // Плитки категорий сверху тоже включают фильтр.
-    for (const categoryName of productCategories) {
-        document.querySelectorAll('a[href="#' + categoryName + '"]')
-            .forEach((link) => {
-                link.href = '#catalog-products';
+    // Filter selectors include id, class and attribute hooks; each category link is mapped to its filter.
+    $.each(productCategories, function (_, categoryName) {
+        $('a[href=\"#' + categoryName + '\"]').each(function () {
+            $(this)
+                .attr({ href: '#catalog-products', 'data-category': categoryName });
+        });
+    });
+    $('main').on('click', 'a[data-category][href=\"#catalog-products\"]', function () {
+        const $link = $(this);
+        $search.val('');
+        $category.val($link.attr('data-category'));
+        updateResults();
+        $heading.trigger('focus');
+    });
 
-                link.addEventListener('click', () => {
-                    search.value = '';
-                    category.value = categoryName;
-
-                    updateResults();
-                    heading.focus({ preventScroll: true });
-                });
-            });
-    }
+    $(document).on('favoriteschange', updateResults);
+    $(window).on('storage', function (event) {
+        const storageEvent = event.originalEvent;
+        if (storageEvent && (storageEvent.key === 'instyle-favorites-v1' || storageEvent.key === null)) {
+            const saved = readFavorites();
+            favoriteIds = saved.ids;
+            favoritesMessage = saved.message;
+            updateResults();
+        }
+    });
+    $(window).on('pageshow', function (event) {
+        if (event.originalEvent && event.originalEvent.persisted) updateResults();
+    });
 
     updateResults();
 }
 
 setupCatalogControls();
-function styleSizePicker(card, product) {
-    const panel = card.querySelector('#sizes-' + product.id);
-
-    // Компактная панель внизу фотографии.
-    panel.classList.remove('top-0', 'h-100', 'border');
-
-    panel.classList.add(
-        'bottom-0', 'mh-100', 'border-top',
-        'shadow-sm', 'p-sm-3'
-    );
-
-    const closeButton = panel.querySelector('button');
-
-    closeButton.classList.remove(
-        'btn-outline-dark',
-        'align-self-end'
-    );
-
-    closeButton.classList.add(
-        'btn-light', 'rounded-circle', 'px-2', 'py-1'
-    );
-
-    const heading = panel.querySelector('p');
-    heading.textContent = 'Select size';
-    heading.classList.remove('mb-1');
-
-    heading.classList.add(
-        'mb-0', 'fw-semibold', 'text-uppercase'
-    );
-
-    const header = document.createElement('div');
-
-    header.classList.add(
-        'd-flex', 'justify-content-between',
-        'align-items-center', 'gap-2', 'flex-shrink-0'
-    );
-
-    header.append(heading, closeButton);
-
-    const sizes = document.createElement('div');
-    sizes.classList.add('row', 'g-2', 'flex-shrink-0');
-
-    for (const sizeButton of panel.querySelectorAll('[data-size]')) {
-        sizeButton.classList.remove(
-            'text-start',
-            'flex-shrink-0'
-        );
-
-        sizeButton.classList.add(
-            'w-100', 'py-2', 'rounded-0'
-        );
-
-        const column = document.createElement('div');
-
-        column.classList.add(
-            product.sizes.length === 1 ? 'col-12' : 'col-4'
-        );
-
-        // Переносим кнопку вместе с её обработчиком нажатия.
-        column.append(sizeButton);
-        sizes.append(column);
-    }
-
-    const hint = document.createElement('p');
-
-    hint.classList.add(
-        'small', 'text-body-secondary',
-        'mb-0', 'flex-shrink-0'
-    );
-
-    hint.textContent = 'Select a size to add it to your cart.';
-
-    panel.replaceChildren(header, sizes, hint);
-}
+});
