@@ -269,11 +269,16 @@ function addToCart(items, cartItems, productId, size, quantity) {
   };
 }
 function updateCartQuantity(cartItems, productId, size, quantity) {
-  if (!Number.isInteger(quantity) || quantity < 1) {
+  if (!Number.isInteger(quantity) || quantity < 0) {
     return {
       success: false,
-      message: 'Enter a whole number of items, at least 1.'
+      message: 'Enter a whole number of items, 0 or more.'
     };
+  }
+
+  // Reaching zero means the same thing as removing the cart line.
+  if (quantity === 0) {
+    return removeFromCart(cartItems, productId, size);
   }
 
   for (const cartItem of cartItems) {

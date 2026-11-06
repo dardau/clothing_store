@@ -9,8 +9,10 @@ function createProductCard(product) {
     const $card = $('<li>')
         .addClass('product-card col-12 col-sm-6 col-lg-3')
         .attr('data-product-id', product.id);
-    const $figure = $('<figure>').addClass('card h-100 mb-0 border-0 rounded-0');
-    const $media = $('<div>').addClass('position-relative overflow-hidden');
+    const $figure = $('<figure>')
+        .addClass('card h-100 mb-0 border-0 rounded-0');
+    const $media = $('<div>')
+        .addClass('position-relative overflow-hidden');
 
     // addClass applies the existing layout classes, attr sets the source/alt text, and prop enables lazy loading.
     const $image = $('<img>')
@@ -106,6 +108,46 @@ function showCartMessage(message) {
     $('#cart-status').text(message);
 }
 
+// This returns all values needed by the cart display, so the discount rule is written once.
+function calculateCartDiscount(total) {
+    const threshold = 50000;
+    const rate = 0.05;
+
+    if (total >= threshold) {
+        const amount = total * rate;
+        return { amount: amount, finalTotal: total - amount, remaining: 0 };
+    }
+
+    return { amount: 0, finalTotal: total, remaining: threshold - total };
+}
+
+function updateCartDiscount(total, isEmpty) {
+    let $details = $('#cart-discount');
+    if (!$details.length) {
+        $details = $('<p>')
+            .attr({ id: 'cart-discount', role: 'status' })
+            .addClass('small text-body-secondary mb-3')
+            .insertAfter('#cart-summary .fw-bold:first');
+    }
+
+    const discount = calculateCartDiscount(total);
+    $('#cart-total').text(discount.finalTotal.toLocaleString('en-US'));
+
+    if (isEmpty) {
+        $details.addClass('d-none').text('');
+    } else if (discount.amount > 0) {
+        $details
+            .removeClass('d-none')
+            .text('5% discount applied: −' + discount.amount.toLocaleString('en-US') +
+                ' KZT. Original total: ' + total.toLocaleString('en-US') + ' KZT.');
+    } else {
+        $details
+            .removeClass('d-none')
+            .text('Add ' + discount.remaining.toLocaleString('en-US') +
+                ' KZT more to receive a 5% discount.');
+    }
+}
+
 function renderCart() {
     const $list = $('#cart-items').empty();
 
@@ -131,7 +173,6 @@ function renderCart() {
         const $minus = $('<button>')
             .attr({ type: 'button', id: 'cart-minus-' + index, 'data-quantity-change': '-1', 'aria-label': 'Decrease quantity' })
             .addClass('btn btn-outline-dark btn-sm')
-            .prop('disabled', cartItem.quantity === 1)
             .text('−');
         const $count = $('<span>').text(cartItem.quantity);
         const $plus = $('<button>')
@@ -156,8 +197,9 @@ function renderCart() {
     });
 
     const isEmpty = cart.length === 0;
+    const total = calculateCartTotal(products, cart);
     $('#cart-count').text(calculateCartQuantity(cart));
-    $('#cart-total').text(calculateCartTotal(products, cart).toLocaleString('en-US'));
+    updateCartDiscount(total, isEmpty);
     $('#cart-empty').toggleClass('d-none', !isEmpty);
     $('#cart-summary').prop('hidden', false).toggleClass('d-none', isEmpty);
 
@@ -189,6 +231,13 @@ $('#cart-items').on('click', 'button[data-quantity-change]', function () {
     const result = updateCartQuantity(cart, productId, size, quantity);
     if (!result.success) {
         showCartMessage(result.message);
+        return;
+    }
+
+    if (quantity === 0) {
+        renderCart();
+        showCartMessage(result.message);
+        focusCartTitle();
         return;
     }
 

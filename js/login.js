@@ -103,6 +103,27 @@ $(function () {
     updateChecklist();
   }
 
+  // The endterm freeze does not allow new hand-written page HTML. Build the extra
+  // confirmation field in code and reuse Bootstrap's existing form classes.
+  const $accountEmail = $('#acc-email');
+  if ($accountEmail.length && !$('#acc-email-confirm').length) {
+    const $confirmField = $('<input>')
+      .attr({
+        class: 'form-control', type: 'email', id: 'acc-email-confirm', name: 'acc-email-confirm',
+        autocomplete: 'email', placeholder: 'Repeat your email',
+        'aria-describedby': 'acc-email-confirm-error', required: true
+      });
+    const $confirmGroup = $('<p>')
+      .addClass('col-12 col-md-6 mb-0')
+      .append(
+        $('<label>').addClass('form-label').attr('for', 'acc-email-confirm').text('Confirm email*'),
+        $confirmField,
+        $('<span>').attr('id', 'acc-email-confirm-error').addClass('invalid-feedback')
+          .text('Enter the same email in both fields.')
+      );
+    $accountEmail.closest('p').after($confirmGroup);
+  }
+
   // Registration checks replace getElementById/value/classList updates with jQuery selectors, .val(), .prop(), .text() and class methods; the field-feedback code is shorter than the previous DOM version.
   function showAccountFieldError($field, message) {
     const errorId = $field.attr('id') + '-error';
@@ -133,7 +154,7 @@ $(function () {
     const $registrationError = $('#registration-error').prop('hidden', false).addClass('d-none');
     const $registrationSuccess = $('#registration-success').prop('hidden', false).addClass('d-none');
     const registrationIds = [
-      'acc-name', 'acc-email', 'acc-phone', 'acc-password',
+      'acc-name', 'acc-email', 'acc-email-confirm', 'acc-phone', 'acc-password',
       'acc-password-confirm', 'acc-birthdate', 'acc-size', 'acc-agree'
     ];
     const registrationFields = registrationIds.map((id) => $('#' + id));
@@ -155,6 +176,12 @@ $(function () {
         case 'acc-email':
           return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
             ? '' : 'Enter a valid email, for example name@example.com.';
+        case 'acc-email-confirm':
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            return 'Enter a valid email, for example name@example.com.';
+          }
+          return value.toLowerCase() === String($('#acc-email').val() || '').trim().toLowerCase()
+            ? '' : 'Email addresses must match.';
         case 'acc-phone': {
           const digits = value.replace(/\D/g, '');
           return /^\+?[0-9 ()-]+$/.test(value) && digits.length >= 10 && digits.length <= 15
@@ -287,6 +314,9 @@ $(function () {
       }
       if (id === 'acc-password' && (attemptedRegistration || $('#acc-password-confirm').val() !== '')) {
         showAccountFieldError($('#acc-password-confirm'), getRegistrationError($('#acc-password-confirm')));
+      }
+      if (id === 'acc-email' && (attemptedRegistration || $('#acc-email-confirm').val() !== '')) {
+        showAccountFieldError($('#acc-email-confirm'), getRegistrationError($('#acc-email-confirm')));
       }
     }
 

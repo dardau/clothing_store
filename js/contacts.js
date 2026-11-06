@@ -24,11 +24,16 @@ $(function () {
     const minute = Number(parts.find((part) => part.type === 'minute').value);
     const minutes = hour * 60 + minute;
     const isOpen = minutes >= 11 * 60 && minutes < 21 * 60;
+    const targetMinutes = isOpen ? 21 * 60 : minutes < 11 * 60 ? 11 * 60 : 35 * 60;
+    const difference = targetMinutes - minutes;
+    const hoursLeft = Math.floor(difference / 60);
+    const minutesLeft = difference % 60;
+    const countdown = hoursLeft + ' h ' + minutesLeft + ' min';
     const message = isOpen
-      ? 'According to listed hours: open until 21:00 today.'
+      ? 'Open now — closes in ' + countdown + '.'
       : minutes < 11 * 60
-        ? 'According to listed hours: closed; opens today at 11:00.'
-        : 'According to listed hours: closed; opens tomorrow at 11:00.';
+        ? 'Closed now — opens in ' + countdown + '.'
+        : 'Closed now — opens tomorrow in ' + countdown + '.';
 
     return { isOpen, message: message + ' Astana time.' };
   }
