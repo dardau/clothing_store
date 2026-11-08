@@ -36,6 +36,16 @@ Contacts updates the store-hours status and adds an address-copy button with a m
 
 The rewritten features use jQuery selectors, traversal, `.on()`, effects, and existing Bootstrap classes; no CSS rules were added. Browser runtime/console verification and Assignment 6 commits remain to be done by the student.
 
+## Endterm additions — Zhansaya
+
+These functions extend the previously defended Catalog, Contacts and Login work. They remain browser-only demonstrations: no customer data, payment or order is sent to a server.
+
+- **Catalog cart:** reducing a cart line from one item to zero removes that line automatically. A cart total of **50,000 KZT or more** receives a calculated 5% discount; below that threshold the cart states the remaining amount required. The original total, discount amount and final total update whenever the cart is rendered.
+- **Contacts:** the opening-hours status now includes a live countdown to the next opening or closing time in Astana. It recalculates every minute and when the visitor returns to the page.
+- **Login:** the registration demo creates a `Confirm email` field with jQuery and validates that it is a valid address matching the first email before the form can show its demo success summary.
+
+Zhansaya is responsible for these extensions in `js/catalog.js`, `js/contacts.js`, `js/login.js` and the shared cart-quantity rule in `js/main.js`.
+
 ## Submission evidence and remaining work
 
 See [Assignment 4/5 checklist](assignment-4-5-checklist.md) for file and line references, observed browser outcomes and unresolved submission gates. See [AI log](ai-log.md) for assistance history. Each student must provide genuine commits across at least three days, with four substantive commits each; Git history must not be fabricated.
