@@ -52,6 +52,10 @@ function validateOrder(values, today) {
     }
   }
 
+  if (values.comment.length > 1000) {
+    errors.comment = 'Keep the comment within 1000 characters.';
+  }
+
   if (!values.agree) {
     errors.agree = 'Confirm your agreement before submitting.';
   }
@@ -103,6 +107,12 @@ dateError.id = 'order-date-error';
 dateError.classList.add('invalid-feedback');
 pickupDate.after(dateError);
 
+const commentInput = document.querySelector('#comment');
+const commentError = document.createElement('span');
+commentError.id = 'order-comment-error';
+commentError.classList.add('invalid-feedback');
+commentInput.after(commentError);
+
 // Собираем проверяемые поля.
 const fields = {
   name: document.querySelector('#name'),
@@ -110,7 +120,8 @@ const fields = {
   confirm: confirmInput,
   phone: document.querySelector('#phone'),
   date: pickupDate,
-  agree: document.querySelector('#agree')
+  agree: document.querySelector('#agree'),
+  comment: commentInput
 };
 
 for (const [key, input] of Object.entries(fields)) {
@@ -120,6 +131,10 @@ for (const [key, input] of Object.entries(fields)) {
 const quantitySummary = document.createElement('p');
 quantitySummary.classList.add('small', 'fw-bold');
 document.querySelector('#order-items').after(quantitySummary);
+
+const discountSummary = document.createElement('p');
+discountSummary.classList.add('small', 'mb-2');
+quantitySummary.after(discountSummary);
 
 let demoComplete = false;
 let cartLoadError = '';
@@ -145,30 +160,39 @@ function updateDateSummary() {
 // Показываем товары и итоговую стоимость.
 function renderOrderSummary() {
   const list = document.querySelector('#order-items');
-  const template = document.querySelector('#order-item-template');
   const fragment = document.createDocumentFragment();
 
   for (const item of cart) {
     const product = findProductById(products, item.productId);
-    const row = template.content.firstElementChild.cloneNode(true);
-
-    row.querySelector('.order-item-name').textContent = product.name;
-    row.querySelector('.order-item-size').textContent = item.size;
-
-    row.querySelector('.order-item-quantity').textContent =
-      item.quantity;
-
-    const unitPrice = document.createElement('p');
-    unitPrice.classList.add('small', 'mb-1');
-    unitPrice.textContent =
-      'Unit price: ' + product.price.toLocaleString('en-US') + ' KZT';
-    row.querySelector('.order-item-subtotal').closest('p').before(unitPrice);
-
-    row.querySelector('.order-item-subtotal').textContent =
-      calculateSubtotal(
-        product.price,
-        item.quantity
-      ).toLocaleString('en-US');
+    const row = document.createElement('li');
+    row.classList.add('border-bottom', 'py-3');
+    row.dataset.productId = item.productId;
+    row.dataset.size = item.size;
+    const title = document.createElement('h5');
+    title.classList.add('h6');
+    title.textContent = product.name;
+    row.append(title);
+    for (const text of [
+      'Size: ' + item.size,
+      'Quantity: ' + item.quantity,
+      'Unit price: ' + product.price.toLocaleString('en-US') + ' KZT',
+      'Subtotal: ' + calculateSubtotal(product.price, item.quantity).toLocaleString('en-US') + ' KZT'
+    ]) {
+      const line = document.createElement('p');
+      line.classList.add('small', 'mb-1');
+      line.textContent = text;
+      row.append(line);
+    }
+    for (const action of ['less', 'more', 'remove']) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.action = action;
+      button.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'me-2');
+      button.textContent = action === 'less' ? '−' : action === 'more' ? '+' : 'Remove';
+      button.setAttribute('aria-label', action + ': ' + product.name + ', size ' + item.size);
+      button.disabled = action === 'less' && item.quantity === 1;
+      row.append(button);
+    }
 
     fragment.append(row);
   }
@@ -181,8 +205,16 @@ function renderOrderSummary() {
   quantitySummary.textContent =
     'Total items: ' + calculateCartQuantity(cart);
 
+  const subtotal = calculateCartTotal(products, cart);
+  const discount = calculateCartDiscount(subtotal);
+  discountSummary.classList.toggle('d-none', cart.length === 0);
+  discountSummary.textContent = discount.amount > 0
+    ? 'Original total: ' + subtotal.toLocaleString('en-US') +
+      ' KZT. 5% discount: −' + discount.amount.toLocaleString('en-US') + ' KZT.'
+    : 'Add ' + discount.remaining.toLocaleString('en-US') +
+      ' KZT more to receive a 5% discount.';
   document.querySelector('#summary-total').textContent =
-    calculateCartTotal(products, cart).toLocaleString('en-US');
+    discount.finalTotal.toLocaleString('en-US');
 
   updateDateSummary();
 }
@@ -312,7 +344,7 @@ orderForm.addEventListener('submit', (event) => {
 
   const values = readOrderValues();
 
-  for (const key of ['name', 'email', 'confirm', 'phone']) {
+  for (const key of ['name', 'email', 'confirm', 'phone', 'comment']) {
     fields[key].value = values[key];
   }
 
@@ -352,16 +384,18 @@ orderForm.addEventListener('submit', (event) => {
     'No real order or payment was created.'
   );
 
+  const subtotal = calculateCartTotal(products, cart);
+  const discount = calculateCartDiscount(subtotal);
   const summaryLines = [
     'Items: ' + chosenItems,
     'Collection: store pickup — 5/5 Ryskulov Street, Office 3, Astana.',
     'Preferred pickup date: ' + (values.date || 'Not selected'),
     'Total items: ' + calculateCartQuantity(cart),
-    'Total: ' +
-      calculateCartTotal(products, cart).toLocaleString('en-US') +
-      ' KZT',
+    'Original total: ' + subtotal.toLocaleString('en-US') + ' KZT',
+    'Discount: ' + discount.amount.toLocaleString('en-US') + ' KZT',
+    'Total: ' + discount.finalTotal.toLocaleString('en-US') + ' KZT',
     'Comment: ' +
-      (document.querySelector('#comment').value.trim() || 'None')
+      (values.comment || 'None')
   ];
 
   for (const line of summaryLines) {
@@ -371,6 +405,22 @@ orderForm.addEventListener('submit', (event) => {
 
     orderSuccess.append(paragraph);
   }
+
+  const download = document.createElement('button');
+  download.type = 'button';
+  download.classList.add('btn', 'btn-outline-dark', 'mt-2');
+  download.textContent = 'Download demo summary';
+  download.addEventListener('click', () => {
+    const text = 'Demo reference: ' + reference +
+      '\nNo real order or payment was created.\n\n' + summaryLines.join('\n');
+    const url = URL.createObjectURL(new Blob([text], {type: 'text/plain;charset=utf-8'}));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = reference + '.txt';
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+  orderSuccess.append(download);
 
   demoComplete = true;
   updateSubmitButton();
@@ -420,3 +470,44 @@ window.addEventListener('storage', (event) => {
 
 showMessage(orderSuccess, '');
 refreshOrderCart();
+
+// One parent handles buttons in every newly rendered cart row.
+document.querySelector('#order-items').addEventListener('click', (event) => {
+  const button = event.target.closest('button[data-action]');
+  if (!button) return;
+  const row = button.closest('li');
+  const productId = row.dataset.productId;
+  const size = row.dataset.size;
+  // Another tab may have changed this item since it was displayed.
+  if (refreshOrderCart() || cartLoadError !== '') {
+    showMessage(orderError, cartLoadError || 'Cart changed in another tab. Review it and try again.');
+    return;
+  }
+  const previous = cart.map(item => ({...item}));
+  const index = cart.findIndex(item => item.productId === productId && item.size === size);
+  if (index === -1) return;
+  const action = button.dataset.action;
+  if (action === 'remove') {
+    cart.splice(index, 1);
+  } else {
+    const quantity = cart[index].quantity + (action === 'more' ? 1 : -1);
+    if (!Number.isSafeInteger(quantity) || quantity < 1) return;
+    cart[index].quantity = quantity;
+  }
+  if (!saveCart(cart)) {
+    cart.splice(0, cart.length, ...previous);
+    showMessage(orderError, 'Could not save changes. Check browser storage settings.');
+    return;
+  }
+  demoComplete = false;
+  showMessage(orderSuccess, '');
+  renderOrderSummary();
+  updateSubmitButton();
+  updateCartNavigation();
+  orderStatus.textContent = cart.length ? 'Cart updated. Check the new total.' : 'Your cart is empty. Add products in the catalog.';
+  // Rendering replaced the clicked button, so restore keyboard focus.
+  const rows = document.querySelectorAll('#order-items li');
+  const nextRow = rows[Math.min(index, rows.length - 1)];
+  if (nextRow) nextRow.querySelector('button:not(:disabled)').focus();
+  else { orderStatus.tabIndex = -1; orderStatus.focus(); }
+});

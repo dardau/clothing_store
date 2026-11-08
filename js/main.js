@@ -222,6 +222,19 @@ function calculateCartTotal(items, cartItems) {
 
   return total;
 }
+// This returns all values needed by the cart display, so the discount rule is written once.
+function calculateCartDiscount(total) {
+    const threshold = 50000;
+    const rate = 0.05;
+
+    if (total >= threshold) {
+        const amount = total * rate;
+        return { amount: amount, finalTotal: total - amount, remaining: 0 };
+    }
+
+    return { amount: 0, finalTotal: total, remaining: threshold - total };
+}
+
 function addToCart(items, cartItems, productId, size, quantity) {
   const product = findProductById(items, productId);
 

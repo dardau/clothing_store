@@ -108,19 +108,6 @@ function showCartMessage(message) {
     $('#cart-status').text(message);
 }
 
-// This returns all values needed by the cart display, so the discount rule is written once.
-function calculateCartDiscount(total) {
-    const threshold = 50000;
-    const rate = 0.05;
-
-    if (total >= threshold) {
-        const amount = total * rate;
-        return { amount: amount, finalTotal: total - amount, remaining: 0 };
-    }
-
-    return { amount: 0, finalTotal: total, remaining: threshold - total };
-}
-
 function updateCartDiscount(total, isEmpty) {
     let $details = $('#cart-discount');
     if (!$details.length) {
