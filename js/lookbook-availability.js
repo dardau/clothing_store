@@ -47,6 +47,8 @@ $(function () {
   contactMode();
   form.on('input change', 'input, select, textarea', function () {
     contactMode();
+    // После редактирования прежнее подтверждение уже не относится к текущим данным.
+    result.stop(true, true).hide().text('');
     const field = $(this);
     if (field.hasClass('error')) showJqueryError(field, fieldMessage(field));
     // При смене способа связи повторно проверяем связанные ошибки.
@@ -69,12 +71,12 @@ $(function () {
     const summary = $('#item-name').val().trim() + ' · Size ' + $('#size-select').val().toUpperCase() + ' · ' + contact;
     // Проверку браузера можно обойти; реальный сервер обязан снова проверить все данные.
     form.trigger('reset');
-    result.text(summary + '. ' + demo).stop(true, true).slideDown(200);
+    result.text(summary + '. ' + demo).stop(true, true).hide().slideDown(200);
   });
   form.on('reset', function () {
     clearJqueryErrors(form);
-    result.stop(true, true).hide().text('');
+    result.stop(true, true).show().text('Form cleared. No data was sent.');
     // Событие reset приходит до восстановления начальных значений полей.
-    setTimeout(contactMode, 0);
+    setTimeout(function () { contactMode(); $('#item-name').trigger('focus'); }, 0);
   });
 });

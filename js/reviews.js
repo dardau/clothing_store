@@ -68,8 +68,7 @@ $(function () {
   const count = $('<p>').attr('id', 'review-character-count').addClass('small text-secondary').insertAfter(text);
   text.attr('aria-describedby', count.attr('id'));
   const preview = $('<article>').addClass('review-text-card rounded-2 p-3 mb-3').insertBefore('#review-submit');
-  // html используется только для постоянной доверенной разметки, без пользовательских значений.
-  preview.html('<h4>Review preview</h4>');
+  $('<h4>').text('Review preview').appendTo(preview);
   const previewName = $('<p>').appendTo(preview);
   const previewText = $('<p>').addClass('text-break text-wrap').appendTo(preview);
   const draftStatus = $('<p>').addClass('small text-secondary').attr('role', 'status').insertAfter(preview);
@@ -125,8 +124,46 @@ $(function () {
       .addClass('btn btn-outline-danger btn-sm').text('Delete my review').appendTo(actions);
     return column;
   }
+  // Поля поиска создаём через jQuery, не меняя HTML страницы.
+  const filters = $('<form>').addClass('row g-3 mb-3').attr('aria-label', 'Filter reviews').insertBefore(list);
+  const search = $('<input>').attr({ id: 'review-search', type: 'search', placeholder: 'Author or review text' }).addClass('form-control');
+  const score = $('<select>').attr('id', 'review-filter-rating').addClass('form-select')
+    .append($('<option>').val('').text('All ratings'));
+  for (let value = 1; value <= 5; value++) score.append($('<option>').val(value).text(value + '/5'));
+  filters.append(
+    $('<div>').addClass('col-12 col-md-6').append($('<label>').attr('for', 'review-search').addClass('form-label').text('Search reviews'), search),
+    $('<div>').addClass('col-12 col-md-6').append($('<label>').attr('for', 'review-filter-rating').addClass('form-label').text('Rating'), score),
+    $('<div>').addClass('col-12').append($('<button>').attr('type', 'reset').addClass('btn btn-outline-dark').text('Reset filters'))
+  );
+  const found = $('<p>').attr({ id: 'review-found-count', role: 'status' }).insertBefore(list);
+  const empty = $('<p>').addClass('alert alert-info').text('No reviews found. Try another search or reset the filters.').insertAfter(list);
+  filters.on('submit', function (event) { event.preventDefault(); render(); });
+  filters.on('input change', 'input, select', render);
+  filters.on('reset', function (event) {
+    event.preventDefault();
+    search.val('');
+    score.val('');
+    render();
+    search.trigger('focus');
+  });
+  // Отзыв должен подходить одновременно под текст поиска и выбранную оценку.
+  function matchesReview(review, query, selectedRating) {
+    const matchesText = (review.name + ' ' + review.text).toLowerCase().includes(query);
+    if (!matchesText) return false;
+    if (selectedRating === '') return true;
+    return review.rating === Number(selectedRating);
+  }
   function render() {
-    const shown = originals.concat(own).sort(function (a, b) { return Date.parse(b.date) - Date.parse(a.date); });
+    const query = search.val().trim().toLowerCase();
+    const selectedRating = score.val();
+    const shown = [];
+    // Исходные и свои отзывы проходят одну проверку и используют одну карточку.
+    for (const review of originals.concat(own)) {
+      if (matchesReview(review, query, selectedRating)) shown.push(review);
+    }
+    shown.sort(function (a, b) { return Date.parse(b.date) - Date.parse(a.date); });
+    found.text('Reviews found: ' + shown.length);
+    empty.toggleClass('d-none', shown.length > 0);
     list.empty();
     for (const review of shown) list.append(createReviewCard(review));
   }
@@ -151,7 +188,8 @@ $(function () {
     if (!write(KEY, next)) return;
     own = next;
     card.parent().stop(true, true).fadeOut(200, function () {
-      $(this).remove();
+      // После удаления заново применяем текущие фильтры и обновляем счётчик.
+      render();
       $('#review-name').trigger('focus');
     });
     status(result, 'Your review was deleted from this browser.');
