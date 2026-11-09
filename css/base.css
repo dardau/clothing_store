@@ -252,6 +252,10 @@ footer {
   Fixed positioning keeps the back-to-top control visible
   while the user scrolls through the page.
 */
+.btn[id^="favorite-"][aria-pressed="true"] {
+  color: #dc3545;
+}
+
 .back-to-top {
   position: fixed;
   right: 24px;

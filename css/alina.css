@@ -9,7 +9,7 @@
 .look-main-image { height: 550px; }
 .look-product-image { aspect-ratio: 3 / 4; }
 .look-product-image .btn { width: 32px; height: 32px; }
-.btn-check:checked + .btn-light { background-color: #000; color: #fff; }
+.btn-check:checked + .btn-light { color: #dc3545; }
 .look-product h4 { min-height: 42px; }
 
 .size-chart thead th { background-color: #f9f6f6; }

@@ -98,7 +98,8 @@ $(function () {
     panel.on("submit", function (event) {
       // preventDefault отменяет переход/отправку формы: корзина хранится в браузере.
       event.preventDefault();
-      if (validSize()) commit([{ productId: product.id, size: size.val(), quantity: 1 }]);
+      if (validSize())
+        commit([{ productId: product.id, size: size.val(), quantity: 1 }]);
       else size.trigger("focus");
     });
     article.data("picker", {
@@ -147,10 +148,13 @@ $(function () {
           } else {
             picker.open(false);
           }
-          selections.push({ productId: picker.product.id, size: picker.size.val(), quantity: 1 });
+          selections.push({
+            productId: picker.product.id,
+            size: picker.size.val(),
+            quantity: 1,
+          });
         });
         if (!firstInvalid) commit(selections);
       });
   });
-
 });
