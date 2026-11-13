@@ -32,3 +32,7 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
   .order-form { padding: 0.5rem !important; }
   .order-form .form-control, .order-form .form-select { min-width: 0; }
 }
+
+/* Home trends and the read-only order review. */
+.home-trend-image { aspect-ratio: 4 / 5; object-fit: cover; }
+.about-page a[target="_blank"]::after { content: none; }
