@@ -59,13 +59,14 @@ document.addEventListener("DOMContentLoaded", function () {
     button.type = "button";
     return button;
   }
-  const randomTrigger = randomButton("Random Look", [
+  const randomTrigger = randomButton("Generate look", [
     "btn",
     "btn-dark",
     "mt-3",
   ]);
-  const randomBlock = node("section", [
-    "bg-red",
+  const randomSection = node("section", [
+    "bg-light",
+    "border",
     "rounded-4",
     "p-3",
     "p-md-4",
@@ -73,14 +74,23 @@ document.addEventListener("DOMContentLoaded", function () {
     "mx-md-5",
     "mt-4",
   ]);
+  randomSection.setAttribute("aria-labelledby", "random-look-heading");
+  const randomHeading = node("h2", ["fs-3", "mb-2"], "Random Look");
+  randomHeading.id = "random-look-heading";
+  const randomDescription = node(
+    "p",
+    ["text-secondary", "mb-0"],
+    "Generate a random top and bottom, choose your sizes, and add the look to your cart.",
+  );
+  const randomBlock = node("div", ["mt-4", "pt-4", "border-top"]);
   randomBlock.id = "random-look-result";
   randomBlock.hidden = true;
   randomBlock.setAttribute("aria-labelledby", "random-look-title");
   randomTrigger.setAttribute("aria-controls", randomBlock.id);
   randomTrigger.setAttribute("aria-expanded", "false");
   const categories = document.querySelector(".style-categories-section");
-  categories.append(randomTrigger);
-  categories.after(randomBlock);
+  randomSection.append(randomHeading, randomDescription, randomTrigger, randomBlock);
+  categories.after(randomSection);
   let previousRandomPair = [];
   const money = (price) => price.toLocaleString("en-US") + " KZT";
   function closeRandomLook() {

@@ -1,5 +1,8 @@
 "use strict";
 $(function () {
+  $(".fit-information, .size-notes, #availability-section, #lookbook-catalog-note, #lookbook-availability-note").hide();
+  // Bootstrap's d-flex uses !important and would override jQuery's hide().
+  $("#lookbook-back-links").removeClass("d-flex").hide();
   $("#add-set").prop("disabled", false);
   // Сохранение общее, а сообщение здесь выводим через jQuery.
   function commit(selections) {

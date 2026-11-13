@@ -1,6 +1,25 @@
 ﻿'use strict';
 // Полная jQuery 3.7.1 содержит эффекты; ready ждёт готовности формы и списка.
 $(function () {
+  $('main > .container > p').filter(function () {
+    const content = $(this).text().trim();
+    return content.startsWith('The store actively maintains Instagram') ||
+      content.startsWith('All reviews can be seen');
+  }).hide();
+  $('main > .container > .text-muted > p').filter(function () {
+    return $(this).text().trim().startsWith("Reviews reflect customers' personal experience");
+  }).hide();
+  $('#rating-tabl > dl').hide();
+  // Bootstrap's d-flex uses !important and would override jQuery's hide().
+  $('main > .container > p').has('a[href="#rating-tabl"]')
+    .removeClass('d-flex').hide();
+  $('#rating-tabl > h3').filter(function () {
+    return ['Ratings by Category', 'How to Leave a Review'].includes($(this).text().trim());
+  }).hide().next('table, ol.review-steps').hide();
+  $('main p, main h3').filter(function () {
+    return $(this).text().trim() === 'Places to leave a review';
+  }).hide().next('ul').hide();
+
   const KEY = 'instyle-reviews-v1';
   const DRAFT = 'instyle-review-draft-v1';
   const VOTES = 'instyle-review-helpful-v1';
