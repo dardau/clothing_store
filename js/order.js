@@ -9,6 +9,15 @@ function localDateString(date = new Date()) {
   ].join('-');
 }
 
+// Ограничиваем число цифр, сохраняя привычное оформление номера.
+function limitPhoneDigits(value) {
+  let digits = 0;
+  return value.replace(/\d/g, (digit) => {
+    digits += 1;
+    return digits <= 11 ? digit : '';
+  });
+}
+
 // Проверяем значения формы и возвращаем ошибки.
 function validateOrder(values, today) {
   const errors = {};
@@ -29,11 +38,10 @@ function validateOrder(values, today) {
 
   if (
     !/^\+?[0-9\s()-]+$/.test(values.phone) ||
-    digits.length < 10 ||
-    digits.length > 15
+    digits.length !== 11
   ) {
     errors.phone =
-      'Enter 10–15 digits. Spaces, brackets, + and - are allowed.';
+      'Enter 11 digits, for example +7 700 000 00 00.';
   }
 
   if (values.badDate) {
@@ -124,6 +132,17 @@ const fields = {
   comment: commentInput
 };
 
+fields.phone.addEventListener('input', () => {
+  const position = fields.phone.selectionStart;
+  const value = fields.phone.value;
+  const limited = limitPhoneDigits(value);
+  if (limited !== value) {
+    fields.phone.value = limited;
+    const newPosition = limitPhoneDigits(value.slice(0, position)).length;
+    fields.phone.setSelectionRange(newPosition, newPosition);
+  }
+});
+
 for (const [key, input] of Object.entries(fields)) {
   input.setAttribute('aria-describedby', 'order-' + key + '-error');
 }
@@ -165,34 +184,26 @@ function renderOrderSummary() {
   for (const item of cart) {
     const product = findProductById(products, item.productId);
     const row = document.createElement('li');
-    row.classList.add('border-bottom', 'py-3');
-    row.dataset.productId = item.productId;
-    row.dataset.size = item.size;
+    row.className = 'order-review-item';
+    const image = document.createElement('img');
+    image.src = product.image;
+    image.alt = product.name;
+    image.className = 'order-review-image rounded';
+    const details = document.createElement('div');
     const title = document.createElement('h5');
-    title.classList.add('h6');
+    title.className = 'h6';
     title.textContent = product.name;
-    row.append(title);
-    for (const text of [
-      'Size: ' + item.size,
-      'Quantity: ' + item.quantity,
-      'Unit price: ' + product.price.toLocaleString('en-US') + ' KZT',
-      'Subtotal: ' + calculateSubtotal(product.price, item.quantity).toLocaleString('en-US') + ' KZT'
-    ]) {
-      const line = document.createElement('p');
-      line.classList.add('small', 'mb-1');
-      line.textContent = text;
-      row.append(line);
-    }
-    for (const action of ['less', 'more', 'remove']) {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.dataset.action = action;
-      button.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'me-2');
-      button.textContent = action === 'less' ? '−' : action === 'more' ? '+' : 'Remove';
-      button.setAttribute('aria-label', action + ': ' + product.name + ', size ' + item.size);
-      button.disabled = action === 'less' && item.quantity === 1;
-      row.append(button);
-    }
+    const options = document.createElement('p');
+    options.className = 'order-review-options';
+    options.textContent = 'Size: ' + item.size + ' · Qty: ' + item.quantity;
+    const price = document.createElement('p');
+    price.className = 'order-review-price';
+    price.textContent = product.price.toLocaleString('en-US') + ' KZT';
+    const priceLabel = document.createElement('span');
+    priceLabel.textContent = 'per item';
+    price.append(priceLabel);
+    details.append(title, options);
+    row.append(image, details, price);
 
     fragment.append(row);
   }
@@ -470,44 +481,3 @@ window.addEventListener('storage', (event) => {
 
 showMessage(orderSuccess, '');
 refreshOrderCart();
-
-// One parent handles buttons in every newly rendered cart row.
-document.querySelector('#order-items').addEventListener('click', (event) => {
-  const button = event.target.closest('button[data-action]');
-  if (!button) return;
-  const row = button.closest('li');
-  const productId = row.dataset.productId;
-  const size = row.dataset.size;
-  // Another tab may have changed this item since it was displayed.
-  if (refreshOrderCart() || cartLoadError !== '') {
-    showMessage(orderError, cartLoadError || 'Cart changed in another tab. Review it and try again.');
-    return;
-  }
-  const previous = cart.map(item => ({...item}));
-  const index = cart.findIndex(item => item.productId === productId && item.size === size);
-  if (index === -1) return;
-  const action = button.dataset.action;
-  if (action === 'remove') {
-    cart.splice(index, 1);
-  } else {
-    const quantity = cart[index].quantity + (action === 'more' ? 1 : -1);
-    if (!Number.isSafeInteger(quantity) || quantity < 1) return;
-    cart[index].quantity = quantity;
-  }
-  if (!saveCart(cart)) {
-    cart.splice(0, cart.length, ...previous);
-    showMessage(orderError, 'Could not save changes. Check browser storage settings.');
-    return;
-  }
-  demoComplete = false;
-  showMessage(orderSuccess, '');
-  renderOrderSummary();
-  updateSubmitButton();
-  updateCartNavigation();
-  orderStatus.textContent = cart.length ? 'Cart updated. Check the new total.' : 'Your cart is empty. Add products in the catalog.';
-  // Rendering replaced the clicked button, so restore keyboard focus.
-  const rows = document.querySelectorAll('#order-items li');
-  const nextRow = rows[Math.min(index, rows.length - 1)];
-  if (nextRow) nextRow.querySelector('button:not(:disabled)').focus();
-  else { orderStatus.tabIndex = -1; orderStatus.focus(); }
-});

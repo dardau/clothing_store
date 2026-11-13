@@ -1,7 +1,7 @@
 'use strict';
 
 // Keep the old descriptive text aligned with the demo pickup workflow.
-const aboutOrderIntro = document.querySelector('#lookbook-preview').previousElementSibling;
+const aboutOrderIntro = document.querySelector('#about-order-intro');
 aboutOrderIntro.replaceChildren(document.createTextNode(
   'New pieces arrive almost every week. Ask about sizing through WhatsApp or ' +
   'Instagram Direct. For this website demo, choose items in the catalog, ' +

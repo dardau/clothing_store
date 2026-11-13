@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/readiness.css">
   <link rel="stylesheet" href="css/information.css">
-  <link rel="stylesheet" href="css/dariya.css">
+  <link rel="stylesheet" href="css/dariya.css?v=20261113">
   <script src="js/main.js" defer></script>
   <script src="js/about.js" defer></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
@@ -143,95 +143,59 @@
         </figure>
       </section>
 
-      <p class="mb-5">
+      <p id="about-order-intro" class="mb-5">
         The assortment includes sweatshirts, dresses, trousers, bags, belts, glasses, and hats.
         New pieces arrive almost every week. Customers can ask about sizing and availability through
         WhatsApp or Instagram Direct for product advice. To prepare an order for pickup,
         <a href="order.html#order-form">choose a product and complete the order form</a>.
       </p>
 
-      <section class="row g-3 bg-light border rounded-3 p-3 p-lg-4 mt-0 mb-5" id="lookbook-preview">
-        <h3 class="col-12 h4 text-center mb-2">Lookbook</h3>
-        <div class="col-12">
-          <!-- Nested Bootstrap row keeps the three lookbook images responsive inside this column. -->
-          <div class="row g-3">
-            <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
-              <img class="about-lookbook-image img-fluid w-100 rounded" src="images/odezhda.png"
-                alt="Outfit from the current Instyle.zh2 collection">
-              <figcaption class="small text-body-secondary mt-2">Outfit from the current collection.</figcaption>
-            </figure>
-            <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
-              <img class="about-lookbook-image img-fluid w-100 rounded" src="images/odezhda01.png"
-                alt="Denim and knitwear outfit from Instyle.zh2">
-              <figcaption class="small text-body-secondary mt-2">Denim and knitwear from the boutique.</figcaption>
-            </figure>
-            <figure class="store-photo col-12 col-md-6 col-lg-4 mb-0">
-              <img class="about-lookbook-image img-fluid w-100 rounded" src="images/odezhda02.png"
-                alt="Bag, top and accessories from Instyle.zh2">
-              <figcaption class="small text-body-secondary mt-2">A top, bag and accessories from Instyle.zh2.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <p class="small text-uppercase fw-semibold text-body-secondary mb-2">
-        Here&rsquo;s what a customer shared with the store:
-      </p>
-      <blockquote class="testimonial border-start border-4 bg-light ps-4 py-3 my-4"
-        cite="https://www.instagram.com/instyle.zh2">
-        <p class="lead mb-3">
-          &ldquo;Thank you for the consultation, everything arrived the right size, the quality is amazing 👍👍👍&rdquo;
-          &mdash; from a conversation with a customer, published in the instyle.zh2
-          &ldquo;reviews&rdquo; highlight, &asymp; November 2025.
-        </p>
-        <figure class="testimonial-photo col-12 col-md-8 col-lg-6 mx-auto mb-0">
-          <img class="img-fluid w-100 rounded shadow-sm" src="images/otzyv.png"
-            alt="Screenshot of a customer review sent to Instyle.zh2">
-        </figure>
-      </blockquote>
 
       <p class="mb-4">
         As they describe themselves in the bio: <q>clothing at affordable prices</q>.
       </p>
 
-      <section id="store-details" class="bg-light border rounded-3 p-3 p-lg-4 mt-0 mb-5">
-        <header class="text-center text-md-start mb-4">
-          <p class="small text-uppercase fw-bold text-body-secondary mb-1">Store details</p>
-          <h3 class="h2 mb-0">Key Information</h3>
+      <section id="store-details" class="store-info mb-5" aria-labelledby="store-info-title">
+        <header class="store-info-header">
+          <div>
+            <p class="store-info-label">Visit Instyle.zh2 · Astana</p>
+            <h3 id="store-info-title">Key Information</h3>
+            <p class="store-info-intro">Three boutiques. Find the one closest to you.</p>
+          </div>
+          <div class="store-info-hours">
+            <span>Open every day</span>
+            <strong>11:00–21:00</strong>
+            <span>At all three locations</span>
+          </div>
         </header>
 
-        <!-- Bootstrap responsive Table component adapted to real store information. -->
-        <div class="table-responsive">
-          <table class="store-details-table table table-striped table-hover align-middle bg-white mb-4">
-            <caption class="caption-top fw-semibold">Real data about the Instyle.zh2 store</caption>
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">Parameter</th>
-                <th scope="col">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">City</th>
-                <td>Astana</td>
-              </tr>
-              <tr>
-                <th scope="row">Fulfillment</th>
-                <td>Website orders: pickup at 5/5 Ryskulov Street, Office 3, Astana</td>
-              </tr>
-              <tr>
-                <th scope="row">Instagram</th>
-                <td>
-                  <a href="https://www.instagram.com/instyle.zh2" target="_blank"
-                    rel="noopener noreferrer">instyle.zh2</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Opening hours</th>
-                <td>11:00–21:00, every day</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="store-location-grid">
+          <article class="store-location">
+            <p class="store-info-label">Respublika Avenue</p>
+            <h4>Respublika, 11</h4>
+            <p>11 Respublika Avenue<br>Astana</p>
+            <a class="store-location-link" href="https://2gis.kz/astana/firm/70000001032452316" target="_blank" rel="noopener noreferrer">View on 2GIS</a>
+          </article>
+          <article class="store-location">
+            <p class="store-info-label">Nexpo City</p>
+            <h4>Ryskulov, 5/5</h4>
+            <p>5/5 Turar Ryskulov Street<br>Nexpo City residential complex</p>
+            <span class="store-location-note">Demo pickup · Office 3</span>
+            <a class="store-location-link" href="https://2gis.kz/astana/search/%D0%90%D1%81%D1%82%D0%B0%D0%BD%D0%B0%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%A2%D1%83%D1%80%D0%B0%D1%80%D0%B0%20%D0%A0%D1%8B%D1%81%D0%BA%D1%83%D0%BB%D0%BE%D0%B2%D0%B0%205%2F5" target="_blank" rel="noopener noreferrer">View on 2GIS</a>
+          </article>
+          <article class="store-location">
+            <p class="store-info-label">Severnoye Siyanie</p>
+            <h4>Dostyk, 5</h4>
+            <p>5 Dostyk Street<br>Severnoye Siyanie residential complex</p>
+            <span class="store-location-note">Boutique B13 · 1st floor</span>
+            <a class="store-location-link" href="https://2gis.kz/astana/search/%D0%90%D1%81%D1%82%D0%B0%D0%BD%D0%B0%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%94%D0%BE%D1%81%D1%82%D1%8B%D0%BA%205" target="_blank" rel="noopener noreferrer">View on 2GIS</a>
+          </article>
+        </div>
+
+        <div class="store-info-contact">
+          <p><strong>Need help before visiting?</strong><br>Ask about sizes, availability and your visit.</p>
+          <a href="https://www.instagram.com/instyle.zh2" target="_blank" rel="noopener noreferrer">@instyle.zh2</a>
+          <a href="tel:+77012540203">+7 (701) 254 02 03</a>
         </div>
 
         <section class="row g-4 mt-0">
@@ -272,19 +236,7 @@
         </section>
       </section>
 
-      <p class="alert alert-secondary mt-0 mb-3" role="note">
-        Store profile &mdash; <a class="alert-link" href="https://www.instagram.com/instyle.zh2" target="_blank"
-          rel="noopener noreferrer">instagram.com/instyle.zh2</a>
-        (opens in a new tab). Have a question before ordering? Email us at
-        <a class="alert-link" href="mailto:zhan.ideas@mail.ru">zhan.ideas@mail.ru</a> or call
-        <a class="alert-link" href="tel:+77012540203">+7&nbsp;701&nbsp;254&nbsp;02&nbsp;03</a>.
-      </p>
 
-      <p class="d-flex flex-column flex-sm-row justify-content-center gap-2 mt-4 mb-0">
-        <a id="about-contacts-link" class="btn btn-outline-dark text-wrap" href="contacts.html#visit-title">Address and opening hours</a>
-        <a class="btn btn-outline-dark" href="#store-details">&uarr; Back to the info table</a>
-        <a class="btn btn-dark" href="index.html">&uarr; Back to Home</a>
-      </p>
     </div>
   </main>
 

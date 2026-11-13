@@ -15,7 +15,7 @@
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/dariya.css">
+  <link rel="stylesheet" href="css/dariya.css?v=20261113-compact">
   <script src="js/main.js" defer></script>
   <script src="js/order.js" defer></script>
 </head>
@@ -100,35 +100,6 @@
       </div>
     </section>
 
-    <div class="row g-4 align-items-center mb-5">
-      <div class="col-12 col-lg-7">
-        <p class="small text-uppercase fw-semibold text-body-secondary mb-2">
-          Customer feedback
-        </p>
-
-        <blockquote
-          class="order-testimonial position-relative bg-white border-top border-bottom p-4 p-lg-5 mb-0"
-          cite="https://www.instagram.com/instyle.zh2">
-          <p class="lead text-center mb-3">
-            &ldquo;Hello, I received the bag. I really liked it, thank you so much 🙏&rdquo;
-          </p>
-          <footer class="small text-center text-body-secondary text-uppercase p-0 border-0 bg-transparent">
-            Customer review · <cite>instyle.zh2 highlights</cite>, October 2025
-          </footer>
-        </blockquote>
-      </div>
-
-      <div class="col-12 col-lg-5">
-        <figure class="order-photo border rounded shadow-sm overflow-hidden mb-0">
-          <img class="img-fluid w-100 rounded-0" src="images/kassa.jpg"
-            alt="Checkout counter with bags, sunglasses and jewelry on display">
-          <figcaption class="small text-center text-uppercase p-3 bg-white">
-            The order desk in the store.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-
     <p class="lead mb-5">
       Contact us by email at
       <a href="mailto:zhan.ideas@mail.ru">zhan.ideas@mail.ru</a>
@@ -190,7 +161,7 @@
               <p class="col-12 mb-4">
                 <label class="form-label" for="phone">Phone*</label>
                 <input class="form-control" type="tel"
-                  id="phone" name="phone" autocomplete="tel"
+                  id="phone" name="phone" autocomplete="tel" inputmode="tel"
                   placeholder="+7 700 000 00 00"
                   aria-describedby="order-phone-error" required>
                 <span id="order-phone-error" class="invalid-feedback">
@@ -253,12 +224,13 @@
           </fieldset>
 
           <section id="order-summary"
-            class="border rounded bg-light p-2 p-sm-3 mt-4"
+            class="order-summary-panel mt-4"
             aria-labelledby="order-summary-title">
 
-            <h4 id="order-summary-title" class="h5 mb-3">
-              Order summary
-            </h4>
+            <div class="order-summary-heading">
+              <h4 id="order-summary-title">Order summary</h4>
+              <a href="catalog.html?view=cart">Edit cart</a>
+            </div>
 
             <p id="order-cart-empty" class="text-body-secondary">
               Your cart is empty. Add products in the catalog before ordering.
@@ -268,14 +240,7 @@
 
 
 
-            <p>
-              <a href="catalog.html#cart"
-                class="btn btn-outline-dark btn-sm text-wrap">
-                Back to cart
-              </a>
-            </p>
-
-            <dl class="mb-0">
+            <dl class="order-summary-facts">
               <dt>Collection</dt>
               <dd id="summary-fulfillment">
                 Store pickup — 5/5 Ryskulov Street, Office 3
@@ -284,7 +249,7 @@
               <dt>Preferred pickup date</dt>
               <dd id="summary-pickup-date">Not selected</dd>
 
-              <dt>Total item cost, KZT</dt>
+              <dt class="order-summary-total-label">Total, KZT</dt>
               <dd id="summary-total" class="mb-0">0</dd>
             </dl>
           </section>
