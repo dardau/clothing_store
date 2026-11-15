@@ -4,6 +4,31 @@
 
 $(function () {
 const productCategories = ['tops', 'bottoms', 'outerwear', 'accessories'];
+const subcategoriesByCategory = {
+    tops: [
+        ['long-sleeves', 'Long-sleeves'],
+        ['sweaters', 'Sweaters'],
+        ['shirts', 'Shirts'],
+        ['sets', 'Sets']
+    ],
+    bottoms: [
+        ['shorts', 'Shorts'],
+        ['jeans', 'Jeans'],
+        ['joggers', 'Joggers'],
+        ['skirts', 'Skirts'],
+        ['trousers', 'Trousers']
+    ],
+    outerwear: [
+        ['jackets', 'Jackets'],
+        ['bombers', 'Bombers'],
+        ['coats', 'Coats']
+    ],
+    accessories: [
+        ['ties', 'Ties'],
+        ['bags', 'Bags'],
+        ['pendants', 'Pendants']
+    ]
+};
 
 function createProductCard(product) {
     const $card = $('<li>')
@@ -372,12 +397,15 @@ function setupCatalogControls() {
 
     const $search = createControl('input', 'catalog-search', 'Search by name', ['col-12', 'col-md-6'])
         .attr({ type: 'search', placeholder: 'For example: jacket', autocomplete: 'off' });
-    const $category = createControl('select', 'catalog-category', 'Category', ['col-12', 'col-sm-6', 'col-md-3']);
+    const $category = createControl('select', 'catalog-category', 'Category', ['col-12', 'col-sm-6', 'col-md-2']);
     addOptions($category, [
         ['all', 'All categories'], ['tops', 'Tops'], ['bottoms', 'Bottoms'],
         ['outerwear', 'Outerwear'], ['accessories', 'Accessories']
     ]);
-    const $sort = createControl('select', 'catalog-sort', 'Sort by', ['col-12', 'col-sm-6', 'col-md-3']);
+    const $subcategory = createControl('select', 'catalog-subcategory', 'Subcategory', ['col-12', 'col-sm-6', 'col-md-2'])
+        .prop('disabled', true);
+    const $subcategoryGroup = $subcategory.parent().addClass('d-none');
+    const $sort = createControl('select', 'catalog-sort', 'Sort by', ['col-12', 'col-sm-6', 'col-md-2']);
     addOptions($sort, [
         ['default', 'Default order'], ['price-asc', 'Price: low to high'],
         ['price-desc', 'Price: high to low']
@@ -403,6 +431,34 @@ function setupCatalogControls() {
     $section.append($heading, $form, $toolbar, $favoriteMessage, $results);
     $firstCategory.before($section);
 
+    // Browsing by category is clearer than a separate name search on this small collection.
+    // Keep the original control in the DOM for the course history, but do not show it to visitors.
+    $search.parent().addClass('d-none');
+    $category.parent().removeClass('col-md-2').addClass('col-md-4');
+    $subcategoryGroup.removeClass('col-md-2').addClass('col-md-4');
+    $sort.parent().removeClass('col-md-2').addClass('col-md-4');
+
+    // These older explanatory sections duplicate the live catalog controls.
+    // They stay in the HTML for the course history, but are not shown to visitors.
+    const obsoleteHeadings = [
+        'What categories are available',
+        'How often the assortment is updated',
+        'What makes the store different',
+        'What to check before ordering'
+    ];
+    $('section.text-section').filter(function () {
+        return obsoleteHeadings.includes($(this).find('h3').first().text().trim());
+    }).addClass('d-none');
+    $('#categories, #price').addClass('d-none');
+    $('#price').next('p.text-body-secondary').addClass('d-none');
+    $('#price').nextAll('p.mb-4').first().addClass('d-none');
+    $('a[href="#categories"], a[href="#price"]').addClass('d-none').attr({
+        'aria-hidden': 'true',
+        tabindex: '-1'
+    });
+    $('a[href="#page-top"]').closest('p').addClass('d-none');
+    $('.catalog-back-links').addClass('d-none');
+
     // Existing category lists are emptied and hidden; the cards now come only from the JavaScript array.
     $.each(productCategories, function (_, categoryName) {
         const $oldSection = $('#' + categoryName);
@@ -417,12 +473,35 @@ function setupCatalogControls() {
             .toggleClass('d-none', favoritesMessage === '');
     }
 
+    function updateSubcategoryControl() {
+        const category = $category.val();
+        $subcategory.empty();
+
+        if (category === 'all') {
+            $subcategory
+                .append($('<option>').val('all').text('Choose a category first'))
+                .val('all')
+                .prop('disabled', true);
+            $subcategoryGroup.addClass('d-none');
+            return;
+        }
+
+        addOptions($subcategory, [['all', 'All ' + category + ' items']].concat(subcategoriesByCategory[category]));
+        $subcategory.val('all').prop('disabled', false);
+        $subcategoryGroup.removeClass('d-none');
+    }
+
     function updateResults() {
         const onlyFavorites = $favoriteInput.prop('checked');
         const source = onlyFavorites
             ? products.filter((product) => favoriteIds.includes(product.id))
             : products;
-        const filtered = filterProducts(source, String($search.val() || '').trim(), $category.val());
+        const filtered = filterProducts(
+            source,
+            String($search.val() || '').trim(),
+            $category.val(),
+            $subcategory.val()
+        );
         const sorted = sortProducts(filtered, $sort.val());
         const amount = renderProductList(sorted, $results);
 
@@ -494,7 +573,11 @@ function setupCatalogControls() {
     });
 
     $form.on('input', 'input', updateResults);
-    $form.on('change', 'select', updateResults);
+    $category.on('change', function () {
+        updateSubcategoryControl();
+        updateResults();
+    });
+    $subcategory.add($sort).on('change', updateResults);
     $favoriteInput.on('change', function () {
         favoritesMessage = '';
         updateResults();
@@ -508,6 +591,7 @@ function setupCatalogControls() {
     $reset.on('click', function () {
         $search.val('');
         $category.val('all');
+        updateSubcategoryControl();
         $sort.val('default');
         $favoriteInput.prop('checked', false);
         favoritesMessage = '';
@@ -526,6 +610,7 @@ function setupCatalogControls() {
         const $link = $(this);
         $search.val('');
         $category.val($link.attr('data-category'));
+        updateSubcategoryControl();
         updateResults();
         $heading.trigger('focus');
     });
@@ -544,6 +629,7 @@ function setupCatalogControls() {
         if (event.originalEvent && event.originalEvent.persisted) updateResults();
     });
 
+    updateSubcategoryControl();
     updateResults();
 }
 

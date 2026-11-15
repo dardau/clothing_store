@@ -120,4 +120,18 @@ $(function () {
       $button.prop('disabled', false);
     }
   });
+
+  // The page used to repeat the same address and contact instructions below the useful cards.
+  // Keep that coursework markup in the document, but remove the duplicate visitor-facing flow.
+  const $oldReachSection = $('#how-to-reach');
+  $oldReachSection.addClass('d-none');
+  $oldReachSection.next('p.small').addClass('d-none');
+  $oldReachSection.nextAll('figure').first().addClass('d-none');
+  $oldReachSection.nextAll('p.col-12').first().addClass('d-none');
+  $('#contact-info-title').closest('.row').addClass('d-none');
+  $('a[href="#how-to-reach"]').closest('.col-12').addClass('d-none');
+  $('nav[aria-label="Contacts page shortcuts"]').addClass('d-none');
+
+  // A heading is not an accessible button, so the old click-to-hide draft is deliberately removed.
+  // The primary contact cards remain visible and usable with both mouse and keyboard.
 });

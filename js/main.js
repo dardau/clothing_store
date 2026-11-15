@@ -6,6 +6,7 @@ const products = [
     name: 'Layered long-sleeve top',
     price: 12000,
     category: 'tops',
+    subcategory: 'long-sleeves',
     sizes: ['S', 'M', 'L'],
     image: 'images/tops1.jpg'
   },
@@ -14,6 +15,7 @@ const products = [
     name: 'Long-sleeve top with ribbons',
     price: 12500,
     category: 'tops',
+    subcategory: 'long-sleeves',
     sizes: ['S', 'M', 'L'],
     image: 'images/tops2.jpg'
   },
@@ -22,6 +24,7 @@ const products = [
     name: 'Turquoise sweater',
     price: 9000,
     category: 'tops',
+    subcategory: 'sweaters',
     sizes: ['S', 'M', 'L'],
     image: 'images/tops3.jpg'
   },
@@ -30,6 +33,7 @@ const products = [
     name: 'Denim shirt',
     price: 18000,
     category: 'tops',
+    subcategory: 'shirts',
     sizes: ['S', 'M', 'L'],
     image: 'images/tops4.jpg'
   },
@@ -38,6 +42,7 @@ const products = [
     name: 'Denim bermuda shorts',
     price: 18000,
     category: 'bottoms',
+    subcategory: 'shorts',
     sizes: ['S', 'M', 'L'],
     image: 'images/bottoms1.jpg'
   },
@@ -46,6 +51,7 @@ const products = [
     name: 'Light-colored jeans',
     price: 20500,
     category: 'bottoms',
+    subcategory: 'jeans',
     sizes: ['S', 'M', 'L'],
     image: 'images/bottoms2.jpg'
   },
@@ -54,6 +60,7 @@ const products = [
     name: 'Oversized joggers',
     price: 13000,
     category: 'bottoms',
+    subcategory: 'joggers',
     sizes: ['S', 'M', 'L'],
     image: 'images/bottoms3.jpg'
   },
@@ -62,6 +69,7 @@ const products = [
     name: 'White lace skirt',
     price: 12500,
     category: 'bottoms',
+    subcategory: 'skirts',
     sizes: ['S', 'M', 'L'],
     image: 'images/bottoms4.jpg'
   },
@@ -70,6 +78,7 @@ const products = [
     name: 'Black oversized eco-leather jacket',
     price: 42000,
     category: 'outerwear',
+    subcategory: 'jackets',
     sizes: ['S', 'M', 'L'],
     image: 'images/outerwear1.jpg'
   },
@@ -78,6 +87,7 @@ const products = [
     name: 'Black eco-leather bomber jacket',
     price: 36000,
     category: 'outerwear',
+    subcategory: 'bombers',
     sizes: ['S', 'M', 'L'],
     image: 'images/outerwear2.jpg'
   },
@@ -86,6 +96,7 @@ const products = [
     name: 'Faux suede jacket',
     price: 39500,
     category: 'outerwear',
+    subcategory: 'jackets',
     sizes: ['S', 'M', 'L'],
     image: 'images/outerwear3.jpg'
   },
@@ -94,6 +105,7 @@ const products = [
     name: 'Oversized belted coat',
     price: 42000,
     category: 'outerwear',
+    subcategory: 'coats',
     sizes: ['S', 'M', 'L'],
     image: 'images/outerwear4.jpg'
   },
@@ -102,6 +114,7 @@ const products = [
     name: 'Striped tie',
     price: 4000,
     category: 'accessories',
+    subcategory: 'ties',
     sizes: ['One size'],
     image: 'images/access1.jpg'
   },
@@ -110,6 +123,7 @@ const products = [
     name: 'Beige eco-leather bag',
     price: 15000,
     category: 'accessories',
+    subcategory: 'bags',
     sizes: ['One size'],
     image: 'images/access2.jpg'
   },
@@ -118,6 +132,7 @@ const products = [
     name: 'Black-stone pendant',
     price: 6500,
     category: 'accessories',
+    subcategory: 'pendants',
     sizes: ['One size'],
     image: 'images/access3.jpg'
   },
@@ -126,6 +141,7 @@ const products = [
     name: 'Small mixed-material bag',
     price: 11000,
     category: 'accessories',
+    subcategory: 'bags',
     sizes: ['One size'],
     image: 'images/access4.jpg'
   },
@@ -134,6 +150,7 @@ const products = [
     name: 'Asymmetrical neckline sweater',
     price: 17990,
     category: 'tops',
+    subcategory: 'sweaters',
     sizes: ['S', 'M', 'L'],
     image: 'images/long.jpg'
   },
@@ -142,6 +159,7 @@ const products = [
     name: 'Asymmetrical-cut skirt',
     price: 19990,
     category: 'bottoms',
+    subcategory: 'skirts',
     sizes: ['S', 'M', 'L'],
     image: 'images/skirt.jpg'
   },
@@ -150,6 +168,7 @@ const products = [
     name: 'Milky-white trousers',
     price: 18990,
     category: 'bottoms',
+    subcategory: 'trousers',
     sizes: ['S', 'M', 'L'],
     image: 'images/jeans.jpg'
   },
@@ -158,6 +177,7 @@ const products = [
     name: 'Jacket',
     price: 25990,
     category: 'outerwear',
+    subcategory: 'jackets',
     sizes: ['S', 'M', 'L'],
     image: 'images/jacket.jpg'
   },
@@ -166,6 +186,7 @@ const products = [
     name: 'Two-piece set',
     price: 28990,
     category: 'tops',
+    subcategory: 'sets',
     sizes: ['S', 'M', 'L'],
     image: 'images/sport.jpg'
   }
@@ -354,7 +375,7 @@ function calculateCartQuantity(cartItems) {
 
   return totalQuantity;
 }
-function filterProducts(items, searchText, category) {
+function filterProducts(items, searchText, category, subcategory) {
   const query = searchText.trim().toLowerCase();
   const results = [];
 
@@ -364,7 +385,10 @@ function filterProducts(items, searchText, category) {
     const matchesCategory =
       category === 'all' || product.category === category;
 
-    if (matchesSearch && matchesCategory) {
+    const matchesSubcategory =
+      subcategory === 'all' || product.subcategory === subcategory;
+
+    if (matchesSearch && matchesCategory && matchesSubcategory) {
       results.push(product);
     }
   }

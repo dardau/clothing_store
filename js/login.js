@@ -124,6 +124,81 @@ $(function () {
     $accountEmail.closest('p').after($confirmGroup);
   }
 
+  // This project has no server. These helpers complete the front-end account flow
+  // on this device only; a production shop must authenticate through a server.
+  const ACCOUNT_STORAGE_KEY = 'instyle-account-v1';
+  const SESSION_STORAGE_KEY = 'instyle-session-v1';
+  const $registrationForm = $('#registration-form');
+  const $registrationRow = $registrationForm.closest('.row');
+  const $signinSection = $('#signin');
+  const $accountPanel = $('#account-panel');
+
+  function readAccount() {
+    try {
+      const account = JSON.parse(localStorage.getItem(ACCOUNT_STORAGE_KEY) || 'null');
+      return account && account.name && account.email && account.password ? account : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveAccount(account) {
+    try {
+      localStorage.setItem(ACCOUNT_STORAGE_KEY, JSON.stringify(account));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function showSignin() {
+    $accountPanel.prop('hidden', true).addClass('d-none');
+    $registrationRow.addClass('d-none');
+    $signinSection.removeClass('d-none');
+  }
+
+  function showRegistration() {
+    $accountPanel.prop('hidden', true).addClass('d-none');
+    $signinSection.addClass('d-none');
+    $registrationRow.removeClass('d-none');
+    $('#acc-name').trigger('focus');
+  }
+
+  function showProfile(account) {
+    sessionStorage.setItem(SESSION_STORAGE_KEY, account.email);
+    $('#account-name').text(account.name);
+    $('#account-email').text(account.email);
+    $registrationRow.addClass('d-none');
+    $signinSection.addClass('d-none');
+    $accountPanel.prop('hidden', false).removeClass('d-none');
+  }
+
+  // The two forms are alternative steps, not two long forms on one page.
+  $signinSection.insertBefore($registrationRow);
+  $('#acc-birthdate, #acc-size, #acc-referral, #acc-notes').closest('p').addClass('d-none');
+  $('input[name="acc-contact"]').closest('.col-12').addClass('d-none');
+  $('#registration-error, #registration-success').insertBefore('#registration-note');
+  $('#signin-error, #signin-success').insertBefore('#signin-note');
+  $('#registration-status-title').closest('section').addClass('d-none');
+  $('#signin-status-title').closest('section').addClass('d-none');
+
+  const $createAccountLink = $('<button>')
+    .attr('type', 'button')
+    .addClass('btn btn-link p-0 mt-3')
+    .text('New to Instyle? Create an account')
+    .on('click', showRegistration);
+  $signinSection.append($createAccountLink);
+  $('a[href="#signin"]').on('click', function (event) {
+    event.preventDefault();
+    showSignin();
+    $('#signin-email').trigger('focus');
+  });
+  $('#signout-button').on('click', function () {
+    sessionStorage.removeItem(SESSION_STORAGE_KEY);
+    showSignin();
+    $('#signin-email').trigger('focus');
+  });
+
   // Registration checks replace getElementById/value/classList updates with jQuery selectors, .val(), .prop(), .text() and class methods; the field-feedback code is shorter than the previous DOM version.
   function showAccountFieldError($field, message) {
     const errorId = $field.attr('id') + '-error';
@@ -148,14 +223,13 @@ $(function () {
     return !hasError;
   }
 
-  const $registrationForm = $('#registration-form');
   if ($registrationForm.length) {
     const $registrationStatus = $('#registration-status');
     const $registrationError = $('#registration-error').prop('hidden', false).addClass('d-none');
     const $registrationSuccess = $('#registration-success').prop('hidden', false).addClass('d-none');
     const registrationIds = [
       'acc-name', 'acc-email', 'acc-email-confirm', 'acc-phone', 'acc-password',
-      'acc-password-confirm', 'acc-birthdate', 'acc-size', 'acc-agree'
+      'acc-password-confirm', 'acc-agree'
     ];
     const registrationFields = registrationIds.map((id) => $('#' + id));
     let attemptedRegistration = false;
@@ -163,7 +237,7 @@ $(function () {
     let preserveRegistrationSuccess = false;
 
     $('#registration-note').text(
-      'Front-end demo: use sample details. No data is sent to a server, and no real account is created.'
+      'Your profile is stored only in this browser for this front-end demo.'
     );
 
     function getRegistrationError($field) {
@@ -193,17 +267,6 @@ $(function () {
         case 'acc-password-confirm':
           if (String($field.val() || '') === '') return 'Repeat your password.';
           return $field.val() === $password.val() ? '' : 'Passwords must match exactly.';
-        case 'acc-birthdate': {
-          if ($field.prop('validity').badInput) return 'Enter a valid date.';
-          if (value === '') return '';
-          const now = new Date();
-          const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-          return Number.isFinite($field.prop('valueAsNumber')) && $field.prop('valueAsNumber') <= today
-            ? '' : 'Choose a date of birth that is not in the future.';
-        }
-        case 'acc-size':
-          return value === '' || ['S', 'M', 'L'].includes(value)
-            ? '' : 'Choose S, M or L, or leave the size unselected.';
         case 'acc-agree':
           // .prop('checked') reads the checkbox's current state; .attr('checked') only reads its initial HTML value.
           return $field.prop('checked') ? '' : 'Confirm your agreement to continue.';
@@ -272,31 +335,31 @@ $(function () {
         return;
       }
 
-      const contactMethod = $registrationForm.find('input[name="acc-contact"]:checked').val() || 'email';
-      const summary = [
-        ['Name', String($('#acc-name').val() || '').trim()],
-        ['Email', String($('#acc-email').val() || '').trim()],
-        ['Phone', String($('#acc-phone').val() || '').trim()],
-        ['Date of birth', String($('#acc-birthdate').val() || '').trim() || 'Not provided'],
-        ['Clothing size', String($('#acc-size').val() || '').trim() || 'Not provided'],
-        ['Heard about us', $('#acc-referral').find('option:selected').text()],
-        ['Preferred contact', contactMethod === 'email' ? 'Email' : 'Phone'],
-        ['Notes', String($('#acc-notes').val() || '').trim() || 'None']
-      ];
-      const $notice = $('<p>').addClass('mb-3').html(
-        '<strong>Demo validation passed.</strong> No data was sent to a server and no real account was created.'
-      );
-      // .html() parses this fixed, trusted label; visitor input is always inserted with .text() so it stays literal text.
-      const $details = $('<dl>').addClass('mb-0');
-      $.each(summary, function (_, pair) {
-        $details.append($('<dt>').text(pair[0]), $('<dd>').text(pair[1]));
-      });
-      $registrationSuccess.empty().append($notice, $details);
+      const account = {
+        name: String($('#acc-name').val() || '').trim(),
+        email: String($('#acc-email').val() || '').trim(),
+        phone: String($('#acc-phone').val() || '').trim(),
+        // Password storage in localStorage is for this front-end exercise only, never production.
+        password: String($('#acc-password').val() || '')
+      };
+
+      if (!saveAccount(account)) {
+        $registrationError.text('This browser could not save the account. Try again.');
+        showResult($registrationError);
+        return;
+      }
+
+      $registrationSuccess.text('Account created. You can now sign in with your email and password.');
       showResult($registrationSuccess);
-      $registrationStatus.text('Demo validation complete. Review your details below.');
+      $registrationStatus.text('Account created.');
       preserveRegistrationSuccess = true;
       $registrationForm.trigger('reset');
       preserveRegistrationSuccess = false;
+      window.setTimeout(function () {
+        showSignin();
+        $('#signin-email').val(account.email).trigger('focus');
+        $('#signin-success').text('Account created. Enter your password to sign in.').removeClass('d-none').show();
+      }, 220);
     });
 
     function handleRegistrationEdit(event) {
@@ -351,11 +414,10 @@ $(function () {
     const $signinSuccess = $('#signin-success').prop('hidden', false).addClass('d-none');
     let attemptedSignin = false;
     let nativeSigninBatch = false;
-    let preserveSigninSuccess = false;
 
-    $('#signin > p').first().text('Try the sign-in form with sample details.');
+    $('#signin > p').first().text('Sign in to view the profile saved on this device.');
     $('#signin-note').text(
-      'Front-end demo: only the email format and password presence are checked. No data is sent to a server and no user is authenticated.'
+      'This front-end demo stores one profile only in this browser.'
     );
     $signinStatus.text('The demo form has not been checked yet.');
 
@@ -416,15 +478,21 @@ $(function () {
         return;
       }
 
-      $signinSuccess.text(
-        'Demo validation passed for ' + String($email.val() || '').trim() +
-        '. No data was sent to a server and no user was authenticated.'
-      );
-      showSigninResult($signinSuccess);
-      $signinStatus.text('Demo validation complete.');
-      preserveSigninSuccess = true;
+      const account = readAccount();
+      const submittedEmail = String($email.val() || '').trim().toLowerCase();
+      const submittedPassword = String($signinPassword.val() || '');
+
+      if (!account || account.email.toLowerCase() !== submittedEmail || account.password !== submittedPassword) {
+        $signinError.text('Email or password does not match the account saved on this device.');
+        showSigninResult($signinError);
+        $signinStatus.text('The details do not match a saved account.');
+        $signinPassword.trigger('focus');
+        return;
+      }
+
+      $signinStatus.text('Signed in successfully.');
       $signinForm.trigger('reset');
-      preserveSigninSuccess = false;
+      showProfile(account);
     });
 
     $signinForm.on('input change', ':input', function () {
@@ -440,20 +508,23 @@ $(function () {
     });
 
     $signinForm.on('reset', function () {
-      const preserveSuccess = preserveSigninSuccess;
       attemptedSignin = false;
       nativeSigninBatch = false;
-      if (!preserveSuccess) {
-        clearSigninResults();
-        $signinStatus.text('The form has been cleared.');
-      } else {
-        hideSigninResult($signinError);
-      }
+      clearSigninResults();
+      $signinStatus.text('The form has been cleared.');
       window.setTimeout(function () {
         $signinForm.find('.is-valid, .is-invalid').removeClass('is-valid is-invalid').removeAttr('aria-invalid');
         $signinForm.find('.invalid-feedback').text('').removeClass('d-block');
-        if (!preserveSuccess) $signinSuccess.empty();
+        $signinSuccess.empty();
       }, 0);
     });
+  }
+
+  const savedAccount = readAccount();
+  const activeEmail = sessionStorage.getItem(SESSION_STORAGE_KEY);
+  if (savedAccount && activeEmail === savedAccount.email) {
+    showProfile(savedAccount);
+  } else {
+    showSignin();
   }
 });
