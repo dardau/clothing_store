@@ -69,6 +69,8 @@ $(function () {
     $('#acc-size-error').text('Choose S, M or L, or leave the size unselected.');
   }
 
+  setupKazakhstanPhoneInput($('#acc-phone')[0]);
+
   const $password = $('#acc-password');
   if ($password.length) {
     const checklistId = 'acc-password-checklist';
@@ -258,8 +260,8 @@ $(function () {
             ? '' : 'Email addresses must match.';
         case 'acc-phone': {
           const digits = value.replace(/\D/g, '');
-          return /^\+?[0-9 ()-]+$/.test(value) && digits.length >= 10 && digits.length <= 15
-            ? '' : 'Enter a phone number containing 10–15 digits.';
+          return digits.length === 11 && digits.startsWith('77')
+            ? '' : 'Enter the 9 remaining digits after +77.';
         }
         case 'acc-password':
           return isStrongPassword(String($field.val() || ''))

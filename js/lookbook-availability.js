@@ -11,6 +11,7 @@ $(function () {
   $('<div>').addClass('mb-3').append(
     $('<label>').attr('for', 'customer-phone').addClass('form-label').text('Your phone'), phone
   ).insertAfter(email.closest('.row'));
+  setupKazakhstanPhoneInput(phone[0]);
   $('#item-name').attr({ minlength: 2, maxlength: 100 });
   $('#color').attr('maxlength', 60);
   $('#comment').attr('maxlength', 1000);
@@ -36,8 +37,8 @@ $(function () {
     }
     if (id === 'customer-phone') {
       if (!value && field.prop('required')) return 'Enter your phone number.';
-      const digits = value.replace(/\D/g, '').length;
-      if (value && (!/^\+?[\d\s()-]+$/.test(value) || digits < 10 || digits > 15)) return 'Use 10–15 digits; only +, spaces, parentheses and hyphens are allowed.';
+      const digits = value.replace(/\D/g, '');
+      if (value && (digits.length !== 11 || !digits.startsWith('77'))) return 'Enter the 9 remaining digits after +77.';
     }
     const maximum = Number(field.attr('maxlength'));
     if (maximum && String(field.val()).length > maximum) return 'Use no more than ' + maximum + ' characters.';

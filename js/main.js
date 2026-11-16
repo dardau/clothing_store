@@ -200,6 +200,39 @@ function findProductById(items, productId) {
 
   return null;
 }
+
+// Kazakhstan phone fields always keep +77. Visitors only enter the remaining nine digits.
+function formatKazakhstanPhone(value) {
+  const digits = String(value || '').replace(/\D/g, '');
+  const localDigits = digits === '7'
+    ? ''
+    : digits.startsWith('77')
+      ? digits.slice(2, 11)
+      : digits.slice(0, 9);
+  return '+77' + localDigits;
+}
+
+function setupKazakhstanPhoneInput(input) {
+  if (!input) return;
+
+  input.inputMode = 'numeric';
+  input.maxLength = 12;
+  input.placeholder = '+77000000000';
+
+  function restorePrefix() {
+    input.value = formatKazakhstanPhone(input.value);
+  }
+
+  restorePrefix();
+  input.addEventListener('input', function () {
+    restorePrefix();
+    input.setSelectionRange(input.value.length, input.value.length);
+  });
+  input.addEventListener('focus', function () {
+    restorePrefix();
+  });
+}
+
 function calculateSubtotal(price, quantity) {
   if (
     !Number.isFinite(price) ||

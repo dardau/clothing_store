@@ -1,6 +1,8 @@
 // jQuery 3.7.1: store guide and expandable answers.
 $(function () {
   'use strict';
+  // Catalog and Order now contain the live shopping flow, so this old duplicate guide stays in the HTML but is hidden.
+  $('#about-legacy-info').addClass('d-none');
   const answers = [
   {
     title: 'Where are your stores located?',
@@ -33,7 +35,7 @@ $(function () {
   },
   {
     title: 'Is delivery or payment available here?',
-    answer: 'No. This website creates a demo pickup summary; it does not arrange delivery or payment.',
+    answer: 'Choose store pickup or courier delivery within Astana. The consultant confirms delivery time, cost and payment details by phone.',
     href: 'order.html#order-form',
     action: 'Read order details'
   },

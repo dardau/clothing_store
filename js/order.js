@@ -9,15 +9,6 @@ function localDateString(date = new Date()) {
   ].join('-');
 }
 
-// Ограничиваем число цифр, сохраняя привычное оформление номера.
-function limitPhoneDigits(value) {
-  let digits = 0;
-  return value.replace(/\d/g, (digit) => {
-    digits += 1;
-    return digits <= 11 ? digit : '';
-  });
-}
-
 // Проверяем значения формы и возвращаем ошибки.
 function validateOrder(values, today) {
   const errors = {};
@@ -26,28 +17,19 @@ function validateOrder(values, today) {
     errors.name = 'Enter your name.';
   }
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    errors.email = 'Enter a valid email, for example name@mail.com.';
-  }
-
-  if (values.confirm === '' || values.confirm !== values.email) {
-    errors.confirm = 'Enter the same email in both fields.';
-  }
-
   const digits = values.phone.replace(/\D/g, '');
 
-  if (
-    !/^\+?[0-9\s()-]+$/.test(values.phone) ||
-    digits.length !== 11
-  ) {
+  if (digits.length !== 11 || !digits.startsWith('77')) {
     errors.phone =
-      'Enter 11 digits, for example +7 700 000 00 00.';
+      'Enter the 9 remaining digits after +77.';
   }
 
   if (values.badDate) {
     errors.date = 'Enter a complete, valid date.';
   } else if (values.date === '') {
-    errors.date = 'Choose a pickup date.';
+    errors.date = values.fulfillment === 'courier'
+      ? 'Choose a delivery date.'
+      : 'Choose a pickup date.';
   } else {
     const date = new Date(values.date + 'T00:00:00');
 
@@ -64,6 +46,18 @@ function validateOrder(values, today) {
     errors.comment = 'Keep the comment within 1000 characters.';
   }
 
+  if (!['pickup', 'courier'].includes(values.fulfillment)) {
+    errors.fulfillment = 'Choose pickup or courier delivery.';
+  }
+
+  if (values.fulfillment === 'courier' && values.address.length < 8) {
+    errors.address = 'Enter your street, building and apartment number.';
+  }
+
+  if (values.fulfillment === 'courier' && values.time === '') {
+    errors.time = 'Choose a delivery time interval.';
+  }
+
   if (!values.agree) {
     errors.agree = 'Confirm your agreement before submitting.';
   }
@@ -78,36 +72,20 @@ const pickupDate = document.querySelector('#pickup-date');
 const orderError = document.querySelector('#order-error');
 const orderSuccess = document.querySelector('#order-success');
 
+// The form is the primary task on this page. Keep the longer help text available below it.
+const orderHelp = document.querySelector('#order-help');
+orderForm.closest('.row').after(orderHelp);
+orderHelp.classList.remove('mt-0');
+document.querySelector('#order-contact-note').classList.add('d-none');
+
 pickupDate.required = true;
 document.querySelector('label[for="pickup-date"]').textContent =
-  'Desired pickup date*';
+  'Preferred date*';
 
-// Создаём поле подтверждения email.
-const confirmGroup = document.createElement('p');
-confirmGroup.classList.add('col-12', 'col-md-6', 'mb-3');
-
-const confirmLabel = document.createElement('label');
-confirmLabel.classList.add('form-label');
-confirmLabel.htmlFor = 'email-confirm';
-confirmLabel.textContent = 'Confirm email*';
-
-const confirmInput = document.createElement('input');
-confirmInput.classList.add('form-control');
-confirmInput.type = 'email';
-confirmInput.id = 'email-confirm';
-confirmInput.name = 'email-confirm';
-confirmInput.required = true;
-confirmInput.autocomplete = 'off';
-
-const confirmError = document.createElement('span');
-confirmError.id = 'order-confirm-error';
-confirmError.classList.add('invalid-feedback');
-
-confirmGroup.append(confirmLabel, confirmInput, confirmError);
-
-document.querySelector('#email').closest('p').after(confirmGroup);
-document.querySelector('#name').closest('p')
-  .classList.remove('col-md-6');
+// Phone is the only required contact channel for this small-store order flow.
+const emailGroup = document.querySelector('#email').closest('p');
+emailGroup.classList.add('d-none');
+emailGroup.querySelector('#email').required = false;
 
 // Создаём место для ошибки даты.
 const dateError = document.createElement('span');
@@ -124,24 +102,55 @@ commentInput.after(commentError);
 // Собираем проверяемые поля.
 const fields = {
   name: document.querySelector('#name'),
-  email: document.querySelector('#email'),
-  confirm: confirmInput,
   phone: document.querySelector('#phone'),
   date: pickupDate,
+  address: document.querySelector('#courier-address'),
+  time: document.querySelector('#courier-time'),
   agree: document.querySelector('#agree'),
   comment: commentInput
 };
 
-fields.phone.addEventListener('input', () => {
-  const position = fields.phone.selectionStart;
-  const value = fields.phone.value;
-  const limited = limitPhoneDigits(value);
-  if (limited !== value) {
-    fields.phone.value = limited;
-    const newPosition = limitPhoneDigits(value.slice(0, position)).length;
-    fields.phone.setSelectionRange(newPosition, newPosition);
+setupKazakhstanPhoneInput(fields.phone);
+
+const pickupMethod = document.querySelector('#pickup-method');
+const courierMethod = document.querySelector('#courier-method');
+const pickupDetails = document.querySelector('#pickup-details');
+const courierDetails = document.querySelector('#courier-details');
+const dateGroup = document.querySelector('#date-group');
+
+function updateFulfillment() {
+  const courier = courierMethod.checked;
+  pickupDetails.classList.toggle('d-none', courier);
+  courierDetails.classList.toggle('d-none', !courier);
+  if (courier) {
+    courierDetails.prepend(dateGroup);
+  } else {
+    pickupDetails.querySelector('h4').after(dateGroup);
   }
-});
+  fields.address.required = courier;
+  fields.time.required = courier;
+  document.querySelector('label[for="pickup-date"]').textContent =
+    courier ? 'Preferred delivery date*' : 'Preferred pickup date*';
+  document.querySelector('#summary-fulfillment').textContent = courier
+    ? 'Courier delivery in Astana — address confirmed by phone'
+    : 'Store pickup — 5/5 Ryskulov Street, Office 3';
+
+  if (!courier) {
+    fields.address.value = '';
+    fields.time.value = '';
+    fields.address.classList.remove('is-valid', 'is-invalid');
+    fields.time.classList.remove('is-valid', 'is-invalid');
+    fields.address.removeAttribute('aria-invalid');
+    fields.time.removeAttribute('aria-invalid');
+    document.querySelector('#order-address-error').textContent = '';
+    document.querySelector('#order-time-error').textContent = '';
+  }
+
+  updateDateSummary();
+}
+
+pickupMethod.addEventListener('change', updateFulfillment);
+courierMethod.addEventListener('change', updateFulfillment);
 
 for (const [key, input] of Object.entries(fields)) {
   input.setAttribute('aria-describedby', 'order-' + key + '-error');
@@ -174,6 +183,9 @@ function updateSubmitButton() {
 function updateDateSummary() {
   document.querySelector('#summary-pickup-date').textContent =
     pickupDate.value || 'Not selected';
+  document.querySelector('#summary-delivery-time').textContent = courierMethod.checked
+    ? (fields.time.value || 'Not selected')
+    : 'Not needed for store pickup';
 }
 
 // Показываем товары и итоговую стоимость.
@@ -272,6 +284,7 @@ function readOrderValues() {
   }
 
   values.badDate = pickupDate.validity.badInput;
+  values.fulfillment = courierMethod.checked ? 'courier' : 'pickup';
 
   return values;
 }
@@ -304,12 +317,7 @@ function handleFormEdit(event) {
   for (const [key, input] of Object.entries(fields)) {
     if (
       input === event.target ||
-      input.classList.contains('is-invalid') ||
-      (
-        key === 'confirm' &&
-        event.target === fields.email &&
-        confirmInput.value !== ''
-      )
+      input.classList.contains('is-invalid')
     ) {
       showFieldError(key, errors[key] || '');
     }
@@ -355,7 +363,7 @@ orderForm.addEventListener('submit', (event) => {
 
   const values = readOrderValues();
 
-  for (const key of ['name', 'email', 'confirm', 'phone', 'comment']) {
+  for (const key of ['name', 'phone', 'address', 'comment']) {
     fields[key].value = values[key];
   }
 
@@ -399,8 +407,14 @@ orderForm.addEventListener('submit', (event) => {
   const discount = calculateCartDiscount(subtotal);
   const summaryLines = [
     'Items: ' + chosenItems,
-    'Collection: store pickup — 5/5 Ryskulov Street, Office 3, Astana.',
-    'Preferred pickup date: ' + (values.date || 'Not selected'),
+    values.fulfillment === 'courier'
+      ? 'Delivery: courier in Astana — ' + values.address
+      : 'Collection: store pickup — 5/5 Ryskulov Street, Office 3, Astana.',
+    'Preferred ' + (values.fulfillment === 'courier' ? 'delivery' : 'pickup') + ' date: ' +
+      (values.date || 'Not selected'),
+    values.fulfillment === 'courier'
+      ? 'Preferred delivery time: ' + values.time
+      : 'Delivery time: not needed for store pickup',
     'Total items: ' + calculateCartQuantity(cart),
     'Original total: ' + subtotal.toLocaleString('en-US') + ' KZT',
     'Discount: ' + discount.amount.toLocaleString('en-US') + ' KZT',
@@ -458,6 +472,8 @@ orderForm.addEventListener('reset', () => {
 
   // Ждём, пока браузер сбросит значения полей.
   setTimeout(() => {
+    fields.phone.dispatchEvent(new Event('input'));
+    updateFulfillment();
     updateDateSummary();
     updateSubmitButton();
 
@@ -467,7 +483,7 @@ orderForm.addEventListener('reset', () => {
 
 document.querySelector('#order-instructions').textContent =
   'Review your cart and complete the required fields. ' +
-  'Choose today or a future pickup date. ' +
+  'Choose pickup or courier delivery, then select today or a future date. ' +
   'Submitting creates a demonstration summary only. ' +
   'No order is sent to the store.';
 
@@ -480,4 +496,5 @@ window.addEventListener('storage', (event) => {
 });
 
 showMessage(orderSuccess, '');
+updateFulfillment();
 refreshOrderCart();
